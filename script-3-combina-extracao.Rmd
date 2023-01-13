@@ -212,6 +212,32 @@ write_xlsx(dados_incompletos3, "dados_incompletos_COM_isoforma.xlsx")
 
 ```
 
+As tabelas acima foram usadas para guiar o contato com autores. Depois que essa etapa já estava acontecendo, notamos que faltava incluir o artigo extraído como exemplo. Combinando tudo, re-exportei a tabela completa para ser usada na limpeza dos dados (e preencher respostas dos autores).
+
+```{r}
+Artigos.EXEMPLO = read.csv("Article-Grid view EXEMPLO.csv", encoding = "UTF-8")
+Figure_Table.EXEMPLO = read.csv("Figure_Table-Grid view EXEMPLO.csv", encoding = "UTF-8")
+Results.EXEMPLO = read.csv("Results-Grid view EXEMPLO.csv", encoding = "UTF-8")
+Protocol.EXEMPLO = read.csv("Protocol-Grid view EXEMPLO.csv", encoding = "UTF-8")
+
+Artigos.EXEMPLO = Artigos.EXEMPLO %>% rename(Article_ID = X.U.FEFF.Article_ID)
+Figure_Table.EXEMPLO = Figure_Table.EXEMPLO %>% rename(Fig_ID = X.U.FEFF.Fig_ID)
+Results.EXEMPLO = Results.EXEMPLO %>% rename(Results_ID = X.U.FEFF.Results_ID)
+Protocol.EXEMPLO = Protocol.EXEMPLO %>% rename(Protocol = X.U.FEFF.Protocol_ID)
+
+EXEMPLO = full_join(Artigos.EXEMPLO, Figure_Table.EXEMPLO, by = "Article_ID")
+EXEMPLO = EXEMPLO %>% select(-c("OBS.x", "Results.x", "OBS.y", "Results.y"))
+EXEMPLO = full_join(EXEMPLO, Results.EXEMPLO, by = "Fig_ID")
+EXEMPLO = full_join(EXEMPLO, Protocol.EXEMPLO, by = "Protocol")
+EXEMPLO = EXEMPLO %>% select(-c("Results_ID.y")) %>% rename(Results_ID = Results_ID.x)
+
+EXEMPLO = EXEMPLO %>% select(-c("Article_ID", "Fig_ID", "Results_ID", "Protocol", "Date_results", "Date"))
+
+dados_todos = bind_rows(dados_todos, EXEMPLO)
+
+write_xlsx(dados_todos, "dados_todos.xlsx")
+```
+
 Depois da limpeza, importamos de volta para análises.
 ```{r}
 ```
