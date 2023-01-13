@@ -1,0 +1,34 @@
+﻿Outcomes ID,Screening ID,Método,Figura,Grupos,Observações gerais da figura ou desfecho
+16,19,1.1 - Ensaio de redução de MTT e análogos,2a,CT vs. 0.1 Aß (µM),
+17,19,1.1 - Ensaio de redução de MTT e análogos,2a,CT vs. 0.5 Aß (µM),
+18,19,1.1 - Ensaio de redução de MTT e análogos,2a,CT vs. 1 Aß (µM),
+19,19,2.2 - Marcadores diretos de apoptose,2c,CT vs. 0.1 Aß (µM),gráfico caspase
+20,19,2.2 - Marcadores diretos de apoptose,2c,CT vs. 0.5 Aß (µM),gráfico caspase
+21,19,2.2 - Marcadores diretos de apoptose,2c,CT vs. 1 Aß (µM),gráfico caspase
+22,19,2.3 - Marcadores de morte celular (outros),2b,CT vs. 0.1 Aß (µM),gráfico Bcl-2
+23,19,2.3 - Marcadores de morte celular (outros),2b,CT vs. 0.5 Aß (µM),gráfico Bcl-2
+24,19,2.3 - Marcadores de morte celular (outros),2b,CT vs. 1 Aß (µM),gráfico Bcl-2
+25,19,2.3 - Marcadores de morte celular (outros),2b,CT vs. 0.1 Aß (µM),gráfico Bax
+26,19,2.3 - Marcadores de morte celular (outros),2b,CT vs. 0.5 Aß (µM),gráfico Bax
+27,19,2.3 - Marcadores de morte celular (outros),2b,CT vs. 1 Aß (µM),gráfico Bax
+28,19,1.1 - Ensaio de redução de MTT e análogos,3a,CT vs. Aß,
+29,19,2.3 - Marcadores de morte celular (outros),3b,CT vs. Aß,gráfico Bax
+30,19,2.3 - Marcadores de morte celular (outros),3b,CT vs. Aß,gráfico Bcl-2
+31,19,2.2 - Marcadores diretos de apoptose,3c,CT vs. Aß,gráfico caspase
+32,20,2.3 - Marcadores de morte celular (outros),1e,Without lyses vs.  Ø/Aß,Mean comet tail length (µm)
+35,20,2.3 - Marcadores de morte celular (outros),2b,Without lyses vs.  Ø/Aß,Mean comet tail length (µm)
+36,20,2.3 - Marcadores de morte celular (outros),2c,Without lyses vs.  Ø/Aß,Mean comet tail length (µm)
+37,20,2.3 - Marcadores de morte celular (outros),2d,Without lyses vs.  Ø/Aß,Mean comet tail length (µm)
+38,20,2.3 - Marcadores de morte celular (outros),2e,Without lyses vs.  Ø/Aß,Mean comet tail length (µm)
+39,20,2.3 - Marcadores de morte celular (outros),4b,Without lyses vs.  Ø/Aß,Mean comet tail length (µm)
+40,20,2.3 - Marcadores de morte celular (outros),4c,Without lyses vs.  Ø/Aß,Mean comet tail length (µm)
+41,20,2.3 - Marcadores de morte celular (outros),4d,Without lyses vs.  Ø/Aß,Mean comet tail length (µm)
+33,20,2.3 - Marcadores de morte celular (outros),4e,Without lyses vs.  Ø/Aß,Mean comet tail length (µm)
+42,23,1.1 - Ensaio de redução de MTT e análogos,1a,0 Aß 0.3 DMSO vs. 1 Aß 0.3 DMSO,
+43,23,1.1 - Ensaio de redução de MTT e análogos,1a,0 Aß 0.3 DMSO vs. 5 Aß 0.3 DMSO,
+44,23,1.1 - Ensaio de redução de MTT e análogos,1a,0 Aß 0.3 DMSO vs. 10 Aß 0.3 DMSO,
+45,23,1.1 - Ensaio de redução de MTT e análogos,1a,0 Aß 0.3 DMSO vs. 20 Aß 0.3 DMSO,
+46,23,1.1 - Ensaio de redução de MTT e análogos,1a,0 Aß 0.3 DMSO vs. 40 Aß 0.3 DMSO,
+47,23,1.1 - Ensaio de redução de MTT e análogos,1b,0 Aß 0 curcumin 0.3 DMSO vs. 20 Aß 0 curcumin 0.3 DMSO,
+48,,,,,
+34,,,,,

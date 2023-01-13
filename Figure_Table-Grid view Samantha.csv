@@ -1,0 +1,151 @@
+﻿Fig_ID,Article_ID,figure,dep_variable,control_name,treated_name,OBS,Results
+243,80,Fig. 4.,% cell viability,Control,Abeta,,215
+244,81,Fig. 5 (a),% cell viability,control (untreated cells),Abeta oligomer + 3j,Não é apresentada a barra do controle (células não tratadas) ,216
+245,81,Fig. 5 (b),% cell viability,control (untreated cells),Abeta fibril + 3j,Não é apresentada a barra do controle (células não tratadas),218
+246,82,Fig. 5 b,% cell viability,Control (-/-) ,Abeta (-/-),,219
+247,83,Fig. 1 c,Cell survival (%),0 Abeta1-42 uM, Abeta1-42 uM,,"220,221,222,223,224"
+248,83,Fig. 1 d,Cell survival (%),Abeta1-42 -/ DMDD uM -,Abeta1-42 +/ DMDD uM -,,225
+249,84,Fig. 1. (a),% of control,non-treated cells,Abeta (1-42),"O grafico NÃO mostra os valores correspondentes aos controles, em cada tempo, da curva temporal (células não tratadas) ",226
+250,84,Fig. 1. (a),% of control,non-treated cells,Abeta (1-42),"O grafico NÃO mostra os valores correspondentes aos controles, em cada tempo, da curva temporal (células não tratadas) ",227
+251,84,Fig. 1. (a),% of control,non-treated cells,Abeta (1-42),"O grafico NÃO mostra os valores correspondentes aos controles, em cada tempo, da curva temporal (células não tratadas) ",228
+252,84,Fig. 1. (a),% of control,non-treated cells,Abeta (1-42),"O grafico NÃO mostra os valores correspondentes aos controles, em cada tempo, da curva temporal (células não tratadas) ",229
+253,84,Fig. 1. (a),% of control,non-treated cells,Abeta (1-42),"O grafico NÃO mostra os valores correspondentes aos controles, em cada tempo, da curva temporal (células não tratadas) ",230
+254,85,Fig. 1,% of cell viability,Control,Beta-amyloid,,231
+255,85,Fig. 2,% of cell viability,Control,Beta-amyloid,,232
+256,86,Fig. 15,% cell viability,Control,Abeta,,233
+257,87,Fig. 2. C,% cell viability,Not informed,Abeta,"O grafico NÃO mostra a barra relativa ao ""controle""",234
+259,88,Fig. 2., Cell viability (ratio),DMSO,Abeta,,"235,236,237"
+260,89,FIGURE 3 (b), Cell viability (%) control,Control,BSBHp (uM) 0/Abeta40 (10 uM),,238
+263,91,Figure 4. C,Cell viability (% ),Control (-),Control (+),,248
+264,91,Figure S15.,Cell viability (% ),Control (-),Control (+),,249
+265,91,Figure S23.,Cell viability (% ),Control ,Abeta42,,250
+266,92,Figure 6.,Cell viability (% of control), Abeta1-42 (uM) - / Test compound (uM) -, Abeta1-42 (uM) + / Test compound (uM) -,,251
+267,93,Fig. 2,Cell viability (% of control),"Aß (10 µM) - 3,4,5-tri-CQA (uM) - ","Aß 10 µM (+) 3,4,5-tri-CQA (uM) -",,252
+268,94,Fig. 2.A,Cell viability (% ),HEPES,uM Abeta42,,"253,254"
+269,94,Fig. 2.C,Cell viability (% ),HEPES,uM Abeta42,,"255,256"
+270,94,Fig. 2.E,Cell viability (% ),HEPES,uM Abeta42,,"257,258"
+271,94,Fig. 2.G,Cell viability (% ),HEPES,uM Abeta42,,"259,260"
+272,95,Fig. 3.,Cell viability (% of control),Control, 20 μM Aβ40,,261
+273,96,"Figure 3
+",Cell viability (% of control),Control,Aβ,,262
+274,97,"Figure 3 (A)
+",% of survival ,Control,Aβ1-40,,263
+275,97,Figure 3 (B),% of survival ,Control,Pre-formed Aβ1-40 fibrils,,264
+276,98,Table 1,% Neuronal survival ,Control (Amyloid-β42-1),Control (Amyloid-β1-42),,265
+277,99,Fig. 2. A,Cell Viability (MTT reduction % of control),Aβ42(2uM) - / Rutin (uM) -,Aβ42(2uM) + / Rutin (uM) 0,,266
+278,100,Fig. 4. A,Cell Viability (MTT reduction % of control),Control,Aβ 0h,"O grafico NÃO mostra a barra relativa ao ""controle""",267
+279,100,Fig. 4. A,Cell Viability (MTT reduction % of control),Control,Aβ 12h,"O grafico NÃO mostra a barra relativa ao ""controle""",268
+280,101,Figure 5.,A490,Cells alone,Cells plus Abeta,,269
+281,102,"Fig. 4. A
+",Cell viability (% of control),Control,"Ab alone 0, 3, 5, 7, 10, 14, 21 time (days)","O grafico NÃO mostra a barra relativa ao ""controle""","270,271,272,273,274,275,276"
+282,103,"Figure 3.
+",Cell viability (%),Control,Aβ,"O grafico NÃO mostra a barra relativa ao ""controle""",277
+283,104,Table 2.,Cell Proliferaton,Control,AD Model,,"278,279,280,281"
+284,105,"Figure 4. 
+",Cell viability (%),Buffer,Aß1-42,,"282,283"
+285,106,Fig. 1 A,Relative cell viability (%),Control,Aß1-42 (uM),,"284,285,286,287,288"
+286,106,Fig. 1 B,Relative cell viability (%),Control,Aß1-42 (h),,"289,290,291,292"
+287,106,Fig. 4 a,,,,Experimento feito com Célula N2A transfectada ,
+289,106,Fig. 4 b,,,,Experimento feito com Célula N2A transfectada ,
+290,106,Fig. 5 a,Relative cell viability (%),Aß1-42 -/rh MANF (mg/ml) -,Aß1-42 +/rh MANF (mg/ml) -,,"293,294,295,296,297"
+291,107,Fig. 4. B,Cell viability (% of control),Control,"Ab alone 0, 3, 5, 7, 10, 14, 21 time (days)",Motivo da exclusão: os dados das comparações são os mesmos que os da Figura Fig. 4. A. Foram simplesmente replicados na figura  Fig. 4. B.,
+292,108,"Fig. 2. (a)
+
+",% of control,non-treated cells,Abeta (1-42),"Motivo da exclusão: experimentos em células de fibroblasto humano
+",
+293,110,Figure 4.,% of cytotoxicity,Ctrl (-),ß-amyloid Concentrations (uM),,"298,299,300,301,302,303,304"
+294,110,Figure 5.,% of cytotoxicity,Ctrl (-),ß-amyloid Concentrations (uM),,"305,306,307,308,309,310,311"
+295,110,Figure 6.,% of cytotoxicity,Ctrl (-),ß-amyloid,,312
+296,110,Figure 7.,% of cytotoxicity,Ctrl (-),ß-amyloid,,313
+297,111,"Figure 4
+","Viability [MTT assay, % of control]",CTRL,Aß1-42 [uM],,"314,315,316,317"
+298,111,"Figure 5 (a)
+","Viability [MTT assay, % of control]",DM,DM + Aß1-42 [5 uM],,318
+299,111,Figure 5 (c),"Viability [MTT assay, % of control]",DM,DM + Aß1-42 [5 uM],,319
+300,112,Figure 3.,Viable Cell Number (%),Control,Aß1-42 (uM),,"320,321,322,323,324,325,326,327,328,329,330"
+301,113,Fig. 1. B,Cell viability (%),Vehicle,200 nM Aß1-42,,"331,332,333,334,335,336,337"
+302,114,Figure 6.,MTT Reduction (%),Control,Incubation Time (day),,"338,339,340,341"
+303,114,Figure 7.,MTT Reduction (%),Control,no ER,,342
+304,115,Fig. 6. A,"Cell viability, % of vehicle",Controls (vehicle),(-) +Aß,,343
+305,115,Figure S10.,"Cell viability, % of vehicle",Controls (vehicle),(-) +Aß,,344
+306,115,Figure S11.,"Cell viability, % of vehicle",Controls (vehicle),(-) +Aß,,345
+307,116,Figure S1,MTT reduction % versus untreated cells ,Untreated,"uM Aß42, Time (hours)","The cells were treated with buffer only, or 10 or 25 μM oligomeric Aβ42  for 1, 5 and 24 h at 37◦C","346,347,348,349,350,351"
+308,117,"Figure 5.
+",Cell viability (%),Control,Pure Aß,,"352,353"
+309,118,Fig. 7.,Cell viability (%),Aß1-42(-)/2513-4169(-),Aß1-42(+)/2513-4169(-),,354
+310,119,Fig. 8.,Cell viability (% of control),Control,Aß1-42,,355
+311,120,Table 5.,Neuronal survival (% CCK-8 reduction),DMSO alone, μmol/L Aß (1–42),,"356,357,358"
+312,121,Figure 4.,Cell viability / % of control,Control,Aß42 [10 uM] +,,359
+313,121,Figure 6. d) ,Cell viability / % of control,Doxo -/Aß42 -/1 -/2 -/3 -,Doxo -/Aß42 +/1 -/2 -/3 -,,360
+314,122,Figure 3. C,Cell viability (% of control),CTL,Aß,,361
+315,124,Supplementary Figure 3. ,Cell viability (% of control),Control,20 uM Aß,,362
+316,125,Figure 4.,MTT reduction ability (per control),CT,Aß1-42,,363
+317,126,Figure S1. b,Relative Cell Viability (A.U) ,CTL,Aβ (5 μM),,364
+318,127,Fig. 3. E,Relative Cell Viability (%),Control,Aß,,365
+319,128,"Fig. 1. (B)
+",Cell survival (% of control),Control,Aβ (1 μM),,366
+320,129,"Fig. 2. (a), left graphic
+",Viability as percent of control ,No BA,μM BA,b-amyloid1-42 (BA),"367,368,369"
+321,130,Figure 8. A,Cell viability (%),Control,Aß1-42,,370
+322,131,Fig. 2 (A),Cell viability (% of control),Vehicle,Aß1-42,,371
+323,132,Figure 1. B,Cell viability (%),Aß -/EGCG (uM) 0,Aß +/EGCG (uM) 0,,372
+324,132,Figure 2. A,Cell viability (%),Vehicle,Aß,,373
+325,132,Figure S1. A,Cell viability (%),Vehicle,Aß1-42,,374
+326,133,"Table 2
+",Absorbance units ,Basal,+Aß,"A medida de absorbância do basal foi convertida para 100%, considerando assim como 100% de viabilidade. A medida de absorbância obtida com Abeta e as medidas dos desvios também sofreram ajuste em relação à medida basal...",375
+327,134,Fig. 4., % Cell viability ,Control,Aß,,376
+328,135,Figure 3.,Cell viability (%),Aß42 -/EGCG 0 (ug/ml)/ME0-W-F1 -,Aß42 +/EGCG 0 (ug/ml)/ME0-W-F1 -,"EGCG is a compound known to inhibit
+amyloid formation. It was used as a positive control. Porém, nessa comparaçao a concentração usada foi de 0 ug/ml",377
+329,135,Figure 3.,Cell viability (%),Aß42 -/EGCG -/ME0-W-F1 0 (ug/ml),Aß42 +/EGCG -/ME0-W-F1 0 (ug/ml),,378
+330,136,Fig. 8., % Cell viability ,Control,Aß42,,379
+331,137,Fig. 11. C, % Cell viability ,Control,Agg,"Agg =  refers to oligomer-treated cells in
+the absence of any peptide.",380
+332,138,FIGURE 4 B, % Cell viability ,Diluent,AßP40 Alone,,381
+333,139,Figure 2. A,Cell viability (% of control),Control,0 SLM (uM) / Aß42 (20 uM),,382
+334,140,Fig. 4.,Cell viability (% of control),Aß1-42 (20 uM) - /  Test Compound (uM) -,Aß1-42 (20 uM) + /  Test Compound (uM) -,,383
+335,141,Fig. 5 a, Viability (% of control),Abeta1-42 -/  RP-1 0,Abeta1-42 +/  RP-1 0,,384
+336,142,Fig. 1.,Cell viability (%),VC,Aß,,385
+337,143,Fig. 10. B,Cell viability (% of control),Ctr,5 uM ,,386
+338,144,Fig. (1). C,MTT reduction (% of untreated cells),Untreated,Aβ1- 42 species,"The lyophilized peptide  was dissolved in 100% hexafluoro-2- 
+isopropanol (HFIP) to 1.0 mM and the solvent was then 
+evaporated. To obtain Aβ1-42 oligomers, the peptide was resuspended in 50 mM NaOH at 1 mg/ml and diluted in PBS 
+to a final Aβ1-42 concentration of 25 μM. Then, the sample 
+was centrifuged at 22,000 × g for 30 min, the pellet was discarded and the supernatant was incubated at 25°C without agitation for 1 day to obtain A+ oligomers or for 4 days to obtain A- oligomers. Ladiwala fibrils were obtained, 
+with the same procedure, at a final concentration of 50 μM after 1 day of incubation. The preparation of amyloid 
+β-derived diffusible ligands (ADDLs) was assessed by dissolving an aliquot of the peptide in anhydrous dimethyl sulfoxide (DMSO) to 5 mM and then diluting in ice-cold F-12 medium to a final concentration of 100 μM. This solution 
+was then incubated at 4°C for 1 day and then centrifuged at 
+14,000 × g for 10 min. Finally, Lambert fibrils were prepared by dissolving the peptide in DMSO to 5mM and then diluting in 10 mM HCl to a final concentration of 100 μM. 
+The sample was incubated at 37°C without agitation for 1 
+day ","387,388,389,390,391"
+339,144,Fig. (4). A,MTT reduction (% of untreated cells),Untreated,Aβ1- 42 species,"The lyophilized peptide  was dissolved in 100% hexafluoro-2- 
+isopropanol (HFIP) to 1.0 mM and the solvent was then 
+evaporated. To obtain Aβ1-42 oligomers, the peptide was resuspended in 50 mM NaOH at 1 mg/ml and diluted in PBS 
+to a final Aβ1-42 concentration of 25 μM. Then, the sample 
+was centrifuged at 22,000 × g for 30 min, the pellet was discarded and the supernatant was incubated at 25°C without agitation for 1 day to obtain A+ oligomers or for 4 days to obtain A- oligomers. Ladiwala fibrils were obtained, 
+with the same procedure, at a final concentration of 50 μM after 1 day of incubation. The preparation of amyloid 
+β-derived diffusible ligands (ADDLs) was assessed by dissolving an aliquot of the peptide in anhydrous dimethyl sulfoxide (DMSO) to 5 mM and then diluting in ice-cold F-12 medium to a final concentration of 100 μM. This solution 
+was then incubated at 4°C for 1 day and then centrifuged at 
+14,000 × g for 10 min. Finally, Lambert fibrils were prepared by dissolving the peptide in DMSO to 5mM and then diluting in 10 mM HCl to a final concentration of 100 μM. 
+The sample was incubated at 37°C without agitation for 1 
+day ","392,393,394,395"
+340,144,Fig. (5). C,MTT reduction (% of untreated cells),Untreated,Toxic Oligomers,"The lyophilized peptide  was dissolved in 100% hexafluoro-2- 
+isopropanol (HFIP) to 1.0 mM and the solvent was then 
+evaporated. To obtain Aβ1-42 oligomers, the peptide was resuspended in 50 mM NaOH at 1 mg/ml and diluted in PBS 
+to a final Aβ1-42 concentration of 25 μM. Then, the sample 
+was centrifuged at 22,000 × g for 30 min, the pellet was discarded and the supernatant was incubated at 25°C without agitation for 1 day to obtain A+ oligomers. 
+The preparation of amyloid β-derived diffusible ligands (ADDLs) was assessed by dissolving an aliquot of the peptide in anhydrous dimethyl sulfoxide (DMSO) to 5 mM and then diluting in ice-cold F-12 medium to a final concentration of 100 μM. This solution 
+was then incubated at 4°C for 1 day and then centrifuged at 
+14,000 × g for 10 min. ","396,397"
+341,144,Fig. (6). C,MTT reduction (% of untreated cells),Untreated,Toxic Fibrils,"The lyophilized peptide  was dissolved in 100% hexafluoro-2- 
+isopropanol (HFIP) to 1.0 mM and the solvent was then 
+evaporated. To obtain Ladiwala fibrils, the peptide was resuspended in 50 mM NaOH at 1 mg/ml and diluted in PBS 
+to a final Aβ1-42 concentration of 50 μM. Then, the sample 
+was centrifuged at 22,000 × g for 30 min, the pellet was discarded and the supernatant was incubated at 25°C without agitation for 1 day. Finally, Lambert fibrils were prepared by dissolving the peptide in DMSO to 5mM and then diluting in 10 mM HCl to a final concentration of 100 μM. The sample was incubated at 37°C without agitation for 1 
+day ","398,399"
+342,112,Figure 3.,Viable Cell Number (%),Control,Aß1-42 (uM),,"400,401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,420,419,421"
+343,112,Figure 4.,Viable Cell Number (%),No addition,SE (%),1o gráfico da esquerda para a direita,422
+344,112,Figure 4.,Viable Cell Number (%),No addition,SE (%),3o gráfico  da esquerda para a direita,423
+345,112,Figure 4.,Viable Cell Number (%),No addition,EGCG  (uM),4o gráfico  da esquerda para a direita,424
+346,112,Figure 4.,Viable Cell Number (%),No addition,Resveratrol  (uM),5o gráfico  da esquerda para a direita,425
+347,112,Figure 2. C,Viable Cell Number (%),Control,Aß1-42 (uM),Gráfico a esquerda ,"426,427,428,429,430,431,432,433,434,435,436,437,438,439,440,441,442,443,444,445,446,447,448,449,450,451,452,453,454,455,456,457,458"
+348,112,Figure 2. C,Viable Cell Number (%),Control,Aß1-42 (uM),Gráfico a direita,"459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502"

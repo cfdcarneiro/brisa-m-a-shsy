@@ -1,0 +1,442 @@
+﻿Outcomes ID,Screening ID,Método,Figura,Grupos,Observações gerais da figura ou desfecho
+16,18,1.1 - Ensaio de redução de MTT e análogos,3b,Control vs. 0 Chemicals (1a e 2a barras),
+17,19,1.4 - Viabilidade celular (outros),1F,Control vs. 5uM Abeta1-42 (1o e 2o quadrado vazado),Viabilidade medida pelo ensaio CCK-8 (baseado na atividade da desidrogenase em células vivas)
+18,19,1.4 - Viabilidade celular (outros),1F,Control vs. 10uM Abeta1-42 (1o e 3o quadrado vazado),Viabilidade medida pelo ensaio CCK-8 (baseado na atividade da desidrogenase em células vivas)
+19,19,1.4 - Viabilidade celular (outros),1F,Control vs. 25uM Abeta1-42 (1o e 4o quadrado vazado),Viabilidade medida pelo ensaio CCK-8 (baseado na atividade da desidrogenase em células vivas)
+20,36,1.1 - Ensaio de redução de MTT e análogos,2a,"Control vs. 0,1uM Abeta1-42 (1a e 2a barras)",
+21,36,1.1 - Ensaio de redução de MTT e análogos,2a,"Control vs. 0,25uM Abeta1-42 (1a e 3a barras)",
+22,36,1.1 - Ensaio de redução de MTT e análogos,2a,Control vs. 1uM Abeta1-42 (1a e 4a barras),
+23,36,1.1 - Ensaio de redução de MTT e análogos,2a,Control vs. 5uM Abeta1-42 (1a e 5a barras),
+24,36,1.1 - Ensaio de redução de MTT e análogos,2a,Control vs. 10uM Abeta1-42 (1a e 6a barras),
+25,36,1.1 - Ensaio de redução de MTT e análogos,2a,Control vs. 15uM Abeta1-42 (1a e 7a barras),
+26,39,3.1 - Níveis de espécies reativas de oxigênio,4,"Control vs. 0,5uM Abeta1-40 (2a e 1a barras)",
+27,40,1.1 - Ensaio de redução de MTT e análogos,2 SUPPLEMENTARY FIGURE,"Control vs. 0,5uM Abeta1-40 (1a e 3a barras)",
+28,40,1.1 - Ensaio de redução de MTT e análogos,2 SUPPLEMENTARY FIGURE,"Control vs. 0,5uM Abeta1-42 (1a e 5a barras)",
+29,47,1.1 - Ensaio de redução de MTT e análogos,3(F),Control vs. 10uM Abeta1-40 (1a barra),
+30,47,1.1 - Ensaio de redução de MTT e análogos,S5,Buffer(10uM) vs. 0h 10uM Abeta1-40 (2a e 4a barras),Figura do Material suplementar
+31,47,1.1 - Ensaio de redução de MTT e análogos,S5,Buffer(10uM) vs. 4h 10uM Abeta1-40 (2a e 6a barras),Figura do Material suplementar
+32,47,1.1 - Ensaio de redução de MTT e análogos,S5,Buffer(10uM) vs. 12h 10uM Abeta1-40 (2a e 8a barras),Figura do Material suplementar
+33,47,1.1 - Ensaio de redução de MTT e análogos,S5,Buffer(10uM) vs. 24h 10uM Abeta1-40 (2a e 10a barras),Figura do Material suplementar
+34,47,1.1 - Ensaio de redução de MTT e análogos,S5,Buffer(40uM) vs. 0h 40uM Abeta1-40 (3a e 5a barras),Figura do Material suplementar
+35,47,1.1 - Ensaio de redução de MTT e análogos,S5,Buffer(40uM) vs. 4h 40uM Abeta1-40 (3a e 7a barras),Figura do Material suplementar
+36,47,1.1 - Ensaio de redução de MTT e análogos,S5,Buffer(40uM) vs. 12h 40uM Abeta1-40 (3a e 9a barras),Figura do Material suplementar
+37,47,1.1 - Ensaio de redução de MTT e análogos,S5,Buffer(40uM) vs. 24h 40uM Abeta1-40 (3a e 11a barras),Figura do Material suplementar
+38,52,1.1 - Ensaio de redução de MTT e análogos,1C,,Concentration–response curves of compounds incubated with 10 µM Αβ1–42 for 24 h on SHSY5Y cells using MTT colorimetric assay (cell viability level for 10 µM Αβ1–42 was 10%).
+39,58,1.1 - Ensaio de redução de MTT e análogos,2,Control vs. 2uM Abeta 1-40 (1a e 2a barras),
+40,58,1.1 - Ensaio de redução de MTT e análogos,2,Control vs. 2uM Abeta 1-42 (1a e 4a barras),
+41,59,1.1 - Ensaio de redução de MTT e análogos,6,Control vs. 1uM Abeta 1-42 (1a e 5a barras),"Não consegui acessar as figuras do material suplementar...Pela leitura dos resultados, cujas figuras encontram-se no material suplementar, afirmo que elas não compreendem as medidas de toxicidade que nos interessam   "
+42,62,1.1 - Ensaio de redução de MTT e análogos,3E,Control vs. 5uM Abeta 1-40 (1a e 2a barras),
+43,64,1.1 - Ensaio de redução de MTT e análogos,6F,Control vs. 5uM Abeta 1-42 (1a e 2a barras),
+44,68,1.1 - Ensaio de redução de MTT e análogos,3,Control vs. 1uM Abeta 1-42 (16a e 1a barras),
+45,68,1.1 - Ensaio de redução de MTT e análogos,3,Control vs. 5uM Abeta 1-42 (16a e 4a barras),
+46,68,1.1 - Ensaio de redução de MTT e análogos,3,Control vs. 10uM Abeta 1-42 (16a e 7a barras),
+47,68,1.1 - Ensaio de redução de MTT e análogos,3,Control vs. 20uM Abeta 1-42 (16a e 10a barras),
+48,68,1.1 - Ensaio de redução de MTT e análogos,3,Control vs. 50uM Abeta 1-42 (16a e 13a barras),
+49,70,1.4 - Viabilidade celular (outros),3,Control vs. 5uM Abeta 1-42 (1a e 9a barras),"Viabilidade celular medida por ""ATP luminescence 
+assay"""
+50,70,1.4 - Viabilidade celular (outros),3,Control vs. 5uM Abeta 1-42 (2a e 10a barras),
+51,70,3.2 - Dano ao potencial de membrana mitocondrial,6,Control vs. 5uM Abeta 1-42 (1a e 7a barras),
+52,70,3.2 - Dano ao potencial de membrana mitocondrial,6,Control vs. 5uM Abeta 1-42 (2a e 8a barras),
+53,71,1.1 - Ensaio de redução de MTT e análogos,S2,Control (Eixo da ordenada) vs. 10uM Abeta 1-42 (1a barra),Figura do Material suplementar
+54,71,1.1 - Ensaio de redução de MTT e análogos,S2,Control (Eixo da ordenada) vs. 20uM Abeta 1-42 (2a barra),Figura do Material suplementar
+55,71,1.1 - Ensaio de redução de MTT e análogos,S2,Control (Eixo da ordenada) vs. 30uM Abeta 1-42 (3a barra),Figura do Material suplementar
+56,71,1.1 - Ensaio de redução de MTT e análogos,S2,Control (Eixo da ordenada) vs. 40uM Abeta 1-42 (4a barra),Figura do Material suplementar
+57,71,1.1 - Ensaio de redução de MTT e análogos,S2,Control (Eixo da ordenada) vs. 50uM Abeta 1-42 (5a barra),Figura do Material suplementar
+58,71,1.1 - Ensaio de redução de MTT e análogos,6,Control (Eixo da ordenada) vs. 40uM Abeta 1-42 (1a barra),
+59,72,1.1 - Ensaio de redução de MTT e análogos,1,"Control (Eixo da ordenada, 1o círculo fechado) vs. 1,5uM Abeta 1-42 (2o circulo fechado)",WST-8
+60,72,1.1 - Ensaio de redução de MTT e análogos,1,"Control (Eixo da ordenada, 1o círculo fechado) vs. 10uM Abeta 1-42 (3o circulo fechado)",WST-8
+61,72,1.1 - Ensaio de redução de MTT e análogos,1,"Control (Eixo da ordenada, 1o círculo fechado) vs. 12,5uM ? Abeta 1-42 (4o circulo fechado)",WST-8
+62,72,1.1 - Ensaio de redução de MTT e análogos,1,"Control (Eixo da ordenada, 1o círculo fechado) vs. 15uM Abeta 1-42 (5o circulo fechado)",WST-8
+63,72,1.1 - Ensaio de redução de MTT e análogos,1,"Control (Eixo da ordenada, 1o círculo fechado) vs. 20uM Abeta 1-42 (6o circulo fechado)",WST-8
+64,72,1.1 - Ensaio de redução de MTT e análogos,3,Control (Eixo da ordenada) vs. 20uM Abeta 1-42 (1o circulo fechado),WST-8
+65,72,3.1 - Níveis de espécies reativas de oxigênio,4A,Control vs. 20uM Abeta 1-42 (1a e 2a barras),The generation of superoxide anions was determined by means ofthe nitroblue tetrazolium (NBT) assay
+66,72,3.1 - Níveis de espécies reativas de oxigênio,4B,Control vs. 20uM Abeta 1-42 (1a e 2a barras),"The production of hydroxyl radicals by SH-SY5Y cells was evaluated using the deoxyribose assay,"
+67,72,2.3 - Marcadores de morte celular (outros),5,Control vs. 20uM Abeta 1-42 (1a e 2a barras),The Cell Death Detection ELISA Kit was used to quantify DNA fragmentation in SH-SY5Y cells undergoing apoptosis
+68,73,1.1 - Ensaio de redução de MTT e análogos,6,"Control (Eixo da ordenada) vs. 0,2uM Abeta 1-42 (seta no eixo da ordenada)",
+69,73,3.1 - Níveis de espécies reativas de oxigênio,6,"Control ? vs. 0,2uM Abeta 1-42 (seta no eixo da ordenada)",Não identifiquei o controle nesse experimento..
+70,73,2.1 - Indicadores diretos de morte,8,"Control (Eixo da ordenada) vs. 0,2uM Abeta 1-42 (1a barra)",Apoptotic cell population
+71,73,2.2 - Marcadores diretos de apoptose,11,"Control (quadro superior esquerdo) vs. 0,2uM Abeta 1-42 (quadro superior direito))",Induction of caspase-3 using CaspGLOW Red Active Caspase-3 Staining Kit
+72,75,1.1 - Ensaio de redução de MTT e análogos,2D,Control vs. 20uM Abeta 1-42 (1a e 2a barras),
+73,75,1.1 - Ensaio de redução de MTT e análogos,2E,Control vs. 20uM Abeta 1-42 (6a e 1a barras),
+74,78,1.1 - Ensaio de redução de MTT e análogos,1,Control vs. 30uM Abeta 1-42 (1a e 2a barras),
+75,78,1.4 - Viabilidade celular (outros),3,Control vs. 30uM Abeta 1-42 (1a e 2a barras),Dosagem de Ca2+ intracelular
+76,80,1.1 - Ensaio de redução de MTT e análogos,S1,Control vs. 1uM Abeta 1-42 (1a e 2a barras),Figura do Material suplementar
+77,80,1.1 - Ensaio de redução de MTT e análogos,S1,Control vs. 5uM Abeta 1-42 (1a e 3a barras),Figura do Material suplementar
+78,80,1.1 - Ensaio de redução de MTT e análogos,S1,Control vs. 15uM Abeta 1-42 (1a e 3a barras),Figura do Material suplementar
+79,80,1.1 - Ensaio de redução de MTT e análogos,S1,Control vs. 20uM Abeta 1-42 (1a e 3a barras),Figura do Material suplementar
+80,80,1.1 - Ensaio de redução de MTT e análogos,Table S1,Control vs. 20uM Abeta 1-42 (1a e 2a linhas),Tabela do Material suplementar
+81,81,2.3 - Marcadores de morte celular (outros),9C,Control vs. 5uM Abeta 1-42 (1a e 2a barras),Fluorescent intercalator 7-Aminoactinomycin D. Fluorescent DNA dye for apoptosis & flow cytometry studies
+82,82,3.1 - Níveis de espécies reativas de oxigênio,2,Control vs. 10uM Abeta 1-42 (1a e 9a barras) ,undifferentiated cells
+83,82,3.1 - Níveis de espécies reativas de oxigênio,2,Control vs. 10uM Abeta 1-42 (2a e 10a barras) ,differentiated cells
+84,82,3.4 - Estresse oxidativo (outros),3,Control vs. 10uM Abeta 1-42 (1a e 9a barras) ,Níveis aumentados de espécies reativas de Nitrogênio; undifferentiated cells
+85,82,3.4 - Estresse oxidativo (outros),3,Control vs. 10uM Abeta 1-42 (2a e 10a barras) ,Níveis aumentados de espécies reativas de Nitrogênio; Differentiated cells
+86,82,3.4 - Estresse oxidativo (outros),4,Control vs. 10uM Abeta 1-42 (1a e 9a barras) ,% de mudança nos níveis extracelulares de NO; undifferentiated cells
+87,82,3.4 - Estresse oxidativo (outros),4,Control vs. 10uM Abeta 1-42 (2a e 10a barras) ,% de mudança nos níveis extracelulares de NO; Differentiated cells
+88,82,3.3 - Produtos de estresse oxidativo,7,Control vs. 10uM Abeta 1-42 (1a e 9a barras) ,MDA content; undifferentiated cells
+89,82,3.3 - Produtos de estresse oxidativo,7,Control vs. 10uM Abeta 1-42 (2a e 10a barras) ,MDA content; Differentiated cells
+90,82,3.3 - Produtos de estresse oxidativo,8,Control vs. 10uM Abeta 1-42 (1a e 9a barras) ,Carbonyl content; undifferentiated cells
+91,82,3.3 - Produtos de estresse oxidativo,8,Control vs. 10uM Abeta 1-42 (2a e 10a barras) ,Carbonyl content; differentiated cells
+92,82,3.3 - Produtos de estresse oxidativo,9,Control vs. 10uM Abeta 1-42 (1a e 9a barras) ,AP sites in DNA; undifferentiated cells
+93,82,3.3 - Produtos de estresse oxidativo,9,Control vs. 10uM Abeta 1-42 (2a e 10a barras) ,AP sites in DNA; differentiated cells
+94,82,3.3 - Produtos de estresse oxidativo,10,Control vs. 10uM Abeta 1-42 (1a e 9a barras) ,8-OHG content in RNA; undifferentiated cells
+95,82,3.3 - Produtos de estresse oxidativo,10,Control vs. 10uM Abeta 1-42 (2a e 10a barras) ,8-OHG content in RNA; differentiated cells
+96,84,1.1 - Ensaio de redução de MTT e análogos,9B,Control vs. 2uM Abeta 1-42 (1a e 2a barras) ,Resultado expresso como % mitochondrial activity
+97,85,2.2 - Marcadores diretos de apoptose,5C,Control vs. 0.5uM Abeta 1-42 (1a e 2a barras) 0 hour,Níveis de caspase-3 ativada
+98,85,2.2 - Marcadores diretos de apoptose,5D,Control vs. 0.5uM Abeta 1-42 (1a e 2a barras) 0.3 hour,Níveis de caspase-3 ativada
+99,85,2.2 - Marcadores diretos de apoptose,5E,Control vs. 0.5uM Abeta 1-42 (1a e 2a barras) 4 hour,Níveis de caspase-3 ativada
+100,85,2.2 - Marcadores diretos de apoptose,5F,Control vs. 0.5uM Abeta 1-42 (1a e 2a barras) 7 hour,Níveis de caspase-3 ativada
+101,86,1.1 - Ensaio de redução de MTT e análogos,"2B lower panel, gráfico à esquerda",Control (Eixo da ordenada) vs. 1 uM Abeta 1-42 monomérico (2o quadrado preto) ,24 horas
+102,86,1.1 - Ensaio de redução de MTT e análogos,"2B lower panel, gráfico à esquerda",Control (Eixo da ordenada) vs. 1 uM Abeta 1-42 agregado (3o quadrado preto) ,24 horas
+103,86,1.1 - Ensaio de redução de MTT e análogos,"2B lower panel, gráfico central",Control (Eixo da ordenada) vs. 1 uM Abeta 1-42 monomérico (2o quadrado preto) ,48 horas
+104,86,1.1 - Ensaio de redução de MTT e análogos,"2B lower panel, gráfico central",Control (Eixo da ordenada) vs. 1 uM Abeta 1-42 agregado (3o quadrado preto),48 horas
+105,86,1.1 - Ensaio de redução de MTT e análogos,"2B lower panel, gráfico à direita",Control (Eixo da ordenada) vs. 1 uM Abeta 1-42 monomérico (2o quadrado preto) ,72 horas
+106,86,1.1 - Ensaio de redução de MTT e análogos,"2B lower panel, gráfico à direita",Control (Eixo da ordenada) vs. 1 uM Abeta 1-42 agregado (3o quadrado preto),72 horas
+107,86,3.1 - Níveis de espécies reativas de oxigênio,2C gráfico superior,Control vs. 1uM Abeta 1-42 monomérico (1a e 5a barras) ,24 hour; ROS (fold change)
+108,86,3.1 - Níveis de espécies reativas de oxigênio,2C gráfico superior,Control vs. 1uM Abeta 1-42 agregado (1a e 7a barras) ,24 hour; ROS (fold change)
+109,86,3.1 - Níveis de espécies reativas de oxigênio,2C gráfico inferior,Control vs. 1uM Abeta 1-42 monomérico (1a e 5a barras) ,72 hour; ROS (fold change)
+110,86,3.1 - Níveis de espécies reativas de oxigênio,2C gráfico inferior,Control vs. 1uM Abeta 1-42 agregado (1a e 7a barras) ,72 hour; ROS (fold change)
+111,86,3.2 - Dano ao potencial de membrana mitocondrial,S8; gráfico à esquerda,Control vs. 1 uM Abeta 1-42 monomérico (1o e 2o quadrados pretos) ,24 hour; Fold change in mito/lyso signal
+112,86,3.2 - Dano ao potencial de membrana mitocondrial,S8; gráfico à esquerda,Control vs. 1 uM Abeta 1-42 agregado (1o e 3o quadrados pretos),24 hour; Fold change in mito/lyso signal
+113,86,3.2 - Dano ao potencial de membrana mitocondrial,S8; gráfico à esquerda,Control vs. 1 uM Abeta 1-42 monomérico (4o e 5o quadrados pretos) ,48 hour; Fold change in mito/lyso signal
+114,86,3.2 - Dano ao potencial de membrana mitocondrial,S8; gráfico à esquerda,Control vs. 1 uM Abeta 1-42 agregado (4o e 6o quadrados pretos),48 hour; Fold change in mito/lyso signal
+115,86,3.2 - Dano ao potencial de membrana mitocondrial,S8; gráfico à esquerda,Control vs. 1 uM Abeta 1-42 monomérico (7o e 8o quadrados pretos),72 hour; Fold change in mito/lyso signal
+116,86,3.2 - Dano ao potencial de membrana mitocondrial,S8; gráfico à esquerda,Control vs. 1 uM Abeta 1-42 agregado (7o e 9o quadrados pretos),72 hour; Fold change in mito/lyso signal
+117,88,3.1 - Níveis de espécies reativas de oxigênio,5A,Control vs. 10uM ? Abeta 1-42 (1o e 2o gráficos à esqueda),Resultado a partir de  citometria de fluxo. Não estava descrita a concentração de abeta utilizada neste experimento...
+118,90,1.1 - Ensaio de redução de MTT e análogos,8A,Control vs. 10uM Abeta 1-42 (1a e 2a barras) ,
+119,90,1.1 - Ensaio de redução de MTT e análogos,8A,Control vs. 20uM Abeta 1-42 (1a e 3a barras) ,
+120,90,1.1 - Ensaio de redução de MTT e análogos,8A,Control vs. 30uM Abeta 1-42 (1a e 4a barras) ,
+121,90,1.1 - Ensaio de redução de MTT e análogos,8B,Control vs. 30uM Abeta 1-42 (1a e 2a barras) ,
+122,90,1.1 - Ensaio de redução de MTT e análogos,9,Control vs. 30uM Abeta 1-42 (1a e 2a barras) ,
+123,92,1.1 - Ensaio de redução de MTT e análogos,2A,Control (Eixo da ordenada) vs. 0.02 uM Abeta 1-42 monomérico (1a barra),
+124,92,1.1 - Ensaio de redução de MTT e análogos,2A,Control (Eixo da ordenada) vs. 0.2 uM Abeta 1-42 monomérico (2a barra),
+125,92,1.1 - Ensaio de redução de MTT e análogos,2A,Control (Eixo da ordenada) vs. 2 uM Abeta 1-42 monomérico (3a barra),
+126,92,1.1 - Ensaio de redução de MTT e análogos,2B,Control (Eixo da ordenada) vs. 0.02 uM Abeta 1-42 oligomérico (1a barra),
+127,92,1.1 - Ensaio de redução de MTT e análogos,2B,Control (Eixo da ordenada) vs. 0.2 uM Abeta 1-42 oligomérico (2a barra),
+128,92,1.1 - Ensaio de redução de MTT e análogos,2B,Control (Eixo da ordenada) vs. 2 uM Abeta 1-42 oligomérico (3a barra),
+129,92,1.2 - Ensaio de liberação de LDH,2C,Control (Eixo da ordenada) vs. 0.02 uM Abeta 1-42 monomérico (1a barra),
+130,92,1.2 - Ensaio de liberação de LDH,2C,Control (Eixo da ordenada) vs. 0.2 uM Abeta 1-42 monomérico (2a barra),
+131,92,1.2 - Ensaio de liberação de LDH,2C,Control (Eixo da ordenada) vs. 2 uM Abeta 1-42 monomérico (3a barra),
+132,92,1.2 - Ensaio de liberação de LDH,2D,Control (Eixo da ordenada) vs. 0.02 uM Abeta 1-42 oligomérico (1a barra),
+133,92,1.2 - Ensaio de liberação de LDH,2D,Control (Eixo da ordenada) vs. 0.2 uM Abeta 1-42 oligomérico (2a barra),
+134,92,1.2 - Ensaio de liberação de LDH,2D,Control (Eixo da ordenada) vs. 2 uM Abeta 1-42 oligomérico (3a barra),
+135,94,1.1 - Ensaio de redução de MTT e análogos,4A,Control (Eixo da ordenada) vs. 10 uM Abeta 1-42 0h (1a barra),0h
+136,94,1.1 - Ensaio de redução de MTT e análogos,4A,Control (Eixo da ordenada) vs. 10 uM Abeta 1-42 12h (5a barra),12h
+137,97,1.1 - Ensaio de redução de MTT e análogos,9,Control vs. 25uM Abeta 1-42 (1a e 2a barras) ,
+138,97,3.3 - Produtos de estresse oxidativo,11A,Control vs. 25uM Abeta 1-42 (1a e 2a barras) ,MDA (nM/mg protein)
+139,98,1.3 - Trypam blue exclusion test,1A,Control vs. 1uM Abeta 1-42 (1a e 2a barras) ,
+140,98,1.3 - Trypam blue exclusion test,1A,Control vs. 5uM Abeta 1-42 (1a e 3a barras) ,
+141,98,1.3 - Trypam blue exclusion test,1A,Control vs. 10uM Abeta 1-42 (1a e 4a barras) ,
+142,98,1.3 - Trypam blue exclusion test,1A,Control vs. 20uM Abeta 1-42 (1a e 5a barras) ,
+143,98,1.3 - Trypam blue exclusion test,1A,Control vs. 50uM Abeta 1-42 (1a e 6a barras) ,
+144,98,1.3 - Trypam blue exclusion test,2B,Control vs. 5uM Abeta 1-42 (1a e 4a barras) ,
+145,98,1.3 - Trypam blue exclusion test,2B,Control vs. 10uM Abeta 1-42 (1a e 7a barras) ,
+146,98,1.3 - Trypam blue exclusion test,2B,Control vs. 20uM Abeta 1-42 (1a e 10a barras) ,
+147,98,2.2 - Marcadores diretos de apoptose,2D,Control vs. 20uM Abeta 1-42 (1a e 3a barras) ,DNA fragmentation by TUNEL
+148,98,1.3 - Trypam blue exclusion test,5A,Control vs. 20uM Abeta 1-42 (1a e 2a barras) ,
+149,98,2.2 - Marcadores diretos de apoptose,5B,Control vs. 20uM Abeta 1-42 (1a e 2a barras) ,TUNEL positive
+150,98,1.3 - Trypam blue exclusion test,6B,Control vs. 20uM Abeta 1-42 (1a e 2a barras) ,
+151,98,2.2 - Marcadores diretos de apoptose,3A,Control vs. 20uM Abeta 1-42 (1a e 3a barras) ,"Externalization of
+membrane PS in SH-SY5Y cells"
+152,98,2.2 - Marcadores diretos de apoptose,7B,Control vs. 20uM Abeta 1-42 (1a e 3a barras) ,TUNEL
+153,98,1.3 - Trypam blue exclusion test,7B,Control vs. 20uM Abeta 1-42 (2a e 4a barras) ,
+154,99,1.4 - Viabilidade celular (outros),4,Control vs. 100uM Abeta 1-40 2h* (1o e 2o losangos cinza). *Tempo de agregação de Aβ antes da adição às células,"Stain cells with 7-AAD (a membrane impermeant nucleic acid dye) and annexin-PE (which binds to phosphatidylserine on the outside of
+apoptotic cells).  Analyzed using flow cytometer."
+155,99,1.4 - Viabilidade celular (outros),4,Control vs. 100uM Abeta 1-40 4h* (1o e 3o losangos cinza). *Tempo de agregação de Aβ antes da adição às células,"Stain cells with 7-AAD (a membrane impermeant nucleic acid dye) and annexin-PE (which binds to phosphatidylserine on the outside of
+apoptotic cells).  Analyzed using flow cytometer."
+156,99,1.4 - Viabilidade celular (outros),4,Control vs. 100uM Abeta 1-40 8h* (1o e 4o losangos cinza). *Tempo de agregação de Aβ antes da adição às células,"Stain cells with 7-AAD (a membrane impermeant nucleic acid dye) and annexin-PE (which binds to phosphatidylserine on the outside of
+apoptotic cells).  Analyzed using flow cytometer."
+157,99,1.4 - Viabilidade celular (outros),4,Control vs. 100uM Abeta 1-40 24h* (1o e 5o losangos cinza). *Tempo de agregação de Aβ antes da adição às células,"Stain cells with 7-AAD (a membrane impermeant nucleic acid dye) and annexin-PE (which binds to phosphatidylserine on the outside of
+apoptotic cells).  Analyzed using flow cytometer."
+158,100,1.2 - Ensaio de liberação de LDH,1A,Control vs. 1.25uM Abeta 1-42 (1a e 2a barras) ,Valor bruto de absorbância a 492 nm
+159,100,1.2 - Ensaio de liberação de LDH,1A,Control vs. 2.5uM Abeta 1-42 (1a e 3a barras) ,Valor bruto de absorbância a 492 nm
+160,100,1.2 - Ensaio de liberação de LDH,1A,Control vs. 5uM Abeta 1-42 (1a e 4a barras) ,Valor bruto de absorbância a 492 nm
+161,100,1.2 - Ensaio de liberação de LDH,1A,Control vs. 10uM Abeta 1-42 (1a e 5a barras) ,Valor bruto de absorbância a 492 nm
+162,100,1.1 - Ensaio de redução de MTT e análogos,1B,Control vs. 1.25uM Abeta 1-42 (1a e 2a barras) ,Cell proliferation data from the WST-1 analysis. Valor bruto de absorbância a 450 nm
+163,100,1.1 - Ensaio de redução de MTT e análogos,1B,Control vs. 2.5uM Abeta 1-42 (1a e 3a barras) ,Cell proliferation data from the WST-1 analysis. Valor bruto de absorbância a 450 nm
+164,100,1.1 - Ensaio de redução de MTT e análogos,1B,Control vs. 5uM Abeta 1-42 (1a e 4a barras) ,Cell proliferation data from the WST-1 analysis. Valor bruto de absorbância a 450 nm
+165,100,1.1 - Ensaio de redução de MTT e análogos,1B,Control vs. 10uM Abeta 1-42 (1a e 5a barras) ,Cell proliferation data from the WST-1 analysis. Valor bruto de absorbância a 450 nm
+166,100,1.2 - Ensaio de liberação de LDH,1C,Control vs. 10uM Abeta 1-42 (1a e 2a barras) ,Valor bruto de absorbância a 492 nm
+167,101,2.2 - Marcadores diretos de apoptose,2B,Control vs. 10uM Abeta 1-42 (1a e 2a barras) ,Apoptotic rate (%)
+168,101,1.1 - Ensaio de redução de MTT e análogos,2C,Control vs. 10uM Abeta 1-42 (1a e 2a barras) ,Cell viability using CCK-8
+169,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 1ug/ml Abeta1-40 fresh (1a barra),% MTT Reduction
+170,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 1ug/ml Abeta1-40 aged (2a barra),% MTT Reduction
+171,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 1ug/ml  Abeta1-42 fresh (3a barra),% MTT Reduction
+172,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 1ug/ml  Abeta1-42 aged (4a barra),% MTT Reduction
+173,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 10ug/ml  Abeta1-40 fresh (5a barra),% MTT Reduction
+174,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 10ug/ml  Abeta1-40 aged (6a barra),% MTT Reduction
+175,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 10ug/ml  Abeta1-42 fresh (7a barra),% MTT Reduction
+176,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 10ug/ml  Abeta1-42 aged (8a barra),% MTT Reduction
+177,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 50ug/ml  Abeta1-40 fresh (9a barra),% MTT Reduction
+178,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 50ug/ml  Abeta1-40 aged (10a barra),% MTT Reduction
+179,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 50ug/ml  Abeta1-42 fresh (11a barra),% MTT Reduction
+180,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 50ug/ml  Abeta1-42 aged (12a barra),% MTT Reduction
+181,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 100ug/ml  Abeta1-40 fresh (13a barra),% MTT Reduction
+182,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 100ug/ml  Abeta1-40 aged (14a barra),% MTT Reduction
+183,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 100ug/ml  Abeta1-42 fresh (15a barra),% MTT Reduction
+184,102,1.1 - Ensaio de redução de MTT e análogos,5,Control (Eixo da ordenada) vs. 100ug/ml  Abeta1-42 aged (16a barra),% MTT Reduction
+185,103,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 1uM Abeta 1-42 comercial (1a e 2a barras) ,
+186,103,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 1uM Abeta 1-42 recombinante (1a e 3a barras) ,
+187,103,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 3uM Abeta 1-42 comercial (1a e 4a barras) ,
+188,103,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 3uM Abeta 1-42 recombinante (1a e 5a barras) ,
+189,103,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 5uM Abeta 1-42 comercial (1a e 6a barras) ,
+190,103,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 5uM Abeta 1-42 recombinante (1a e 7a barras) ,
+191,103,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 10uM Abeta 1-42 comercial (1a e 8a barras) ,
+192,103,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 10uM Abeta 1-42 recombinante (1a e 9a barras) ,
+193,103,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 20uM Abeta 1-42 comercial (1a e 10a barras) ,
+194,103,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 20uM Abeta 1-42 recombinante (1a e 11a barras) ,
+195,103,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 50uM Abeta 1-42 comercial (1a e 12a barras) ,
+196,103,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 50uM Abeta 1-42 recombinante (1a e 13a barras) ,
+197,109,1.1 - Ensaio de redução de MTT e análogos,1B,Control vs. 50uM Abeta 1-42 (1a e 3a barras),
+198,109,1.1 - Ensaio de redução de MTT e análogos,1B,Control vs. 50uM Abeta 1-42 (2a e 4a barras),
+199,109,3.1 - Níveis de espécies reativas de oxigênio,2,Control vs. 50uM Abeta 1-42 (1a e 2a barras),"The ROS-sensitive 
+dye, H2DCF-DA foi usada na medida. Medida expressa como RFU (relative fluorescence units)"
+200,110,1.1 - Ensaio de redução de MTT e análogos,3A,"Control vs. 1uM Abeta 1-42, 24h (1a e 2a barras)",
+201,110,1.1 - Ensaio de redução de MTT e análogos,3A,"Control vs. 5uM Abeta 1-42, 24h (1a e 3a barras)",
+202,110,1.1 - Ensaio de redução de MTT e análogos,3A,"Control vs. 10uM Abeta 1-42, 24h (1a e 4a barras)",
+203,110,1.1 - Ensaio de redução de MTT e análogos,3B,"Control vs. 10uM Abeta 1-42, 6h (1a e 2a barras)",
+204,110,1.1 - Ensaio de redução de MTT e análogos,3B,"Control vs. 10uM Abeta 1-42, 12h (1a e 3a barras)",
+205,110,1.1 - Ensaio de redução de MTT e análogos,3B,"Control vs. 10uM Abeta 1-42, 24h (1a e 4a barras)",
+206,110,1.1 - Ensaio de redução de MTT e análogos,3B,"Control vs. 10uM Abeta 1-42, 48h (1a e 5a barras)",
+207,110,1.1 - Ensaio de redução de MTT e análogos,4A,"Control vs. 10uM Abeta 1-42, 24h (1a e 2a barras)",
+208,110,1.2 - Ensaio de liberação de LDH,4B,"Control vs. 10uM Abeta 1-42, 24h (1a e 2a barras)",
+209,110,2.2 - Marcadores diretos de apoptose,5,"Control vs. 10uM Abeta 1-42, 24h (1a e 2a barras)",Cells stained with DNA-specific fluorochrome PI
+210,110,3.1 - Níveis de espécies reativas de oxigênio,6,"Control vs. 10uM Abeta 1-42, 24h (1a e 2a barras)",Medida dada pela intensidade de fluorescência do Dihydroethidium (DHE) 
+211,111,2.2 - Marcadores diretos de apoptose,3D,"Control vs. 20uM Abeta 1-42, 30min (1a e 2a barras)",Caspase-3 activity
+212,111,2.2 - Marcadores diretos de apoptose,3D,"Control vs. 20uM Abeta 1-42, 2h (1a e 3a barras)",Caspase-3 activity
+213,111,2.2 - Marcadores diretos de apoptose,3D,"Control vs. 20uM Abeta 1-42, 4h (1a e 4a barras)",Caspase-3 activity
+214,111,2.2 - Marcadores diretos de apoptose,3D,"Control vs. 20uM Abeta 1-42, 8h (1a e 5a barras)",Caspase-3 activity
+215,112,1.1 - Ensaio de redução de MTT e análogos,1A,"Sham vs. 20uM Abeta 1-42, 24h (1a e 3a barras)",Viabilidade usando kit CCK-8
+216,112,2.2 - Marcadores diretos de apoptose,1B,"Sham vs. 20uM Abeta 1-42, 24h (1a e 3a barras)",Apoptotic cells (%). AnnexinVFITC apoptosis detection kit. Amostras analisadas por citometria de fluxo
+217,112,3.1 - Níveis de espécies reativas de oxigênio,2A,"Sham vs. 20uM Abeta 1-42, 24h (1a e 3a barras)",via adição de DCFH-DA. ROS level (RLU/ug protein)
+218,112,3.3 - Produtos de estresse oxidativo,2E,"Sham vs. 20uM Abeta 1-42, 24h (1a e 3a barras)",MDA level (nmol/mg protein)
+219,113,1.1 - Ensaio de redução de MTT e análogos,2A,"Control vs. 1 uM Abeta 1-42 oligomérico, 24h (1a e 2a barras)",
+220,113,1.1 - Ensaio de redução de MTT e análogos,2B,"Control vs. 1 uM Abeta 1-42 oligomérico, 24h (1a e 2a barras)",
+221,113,1.4 - Viabilidade celular (outros),2C,Control (Eixo da ordenada) vs. 2.5uM Abeta oligomérico (seta oligomers),"Fluorescence was calculated as the ratio (F/F) of the change in fluorescence
+(F) divided by zero time fluorescence before treatment (F). Image"
+222,114,1.1 - Ensaio de redução de MTT e análogos,8,"Control vs. 10 uM Abeta 1-42 oligomérico, 4h (1a e 2a barras)",MTT
+223,118,1.1 - Ensaio de redução de MTT e análogos,2A,"Control vs. 1uM Abeta 1-42 oligomérico, 24 h (1a e 2a barras)",
+224,118,1.1 - Ensaio de redução de MTT e análogos,2A,"Control vs. 2.5uM Abeta 1-42 oligomérico, 24 h (1a e 3a barras)",
+225,118,1.1 - Ensaio de redução de MTT e análogos,2A,"Control vs. 5uM Abeta 1-42 oligomérico, 24 h (1a e 4a barras)",
+226,118,1.1 - Ensaio de redução de MTT e análogos,2A,"Control vs. 10uM Abeta 1-42 oligomérico, 24 h (1a e 5a barras)",
+227,118,1.1 - Ensaio de redução de MTT e análogos,2A,"Control vs. 20uM Abeta 1-42 oligomérico, 24 h (1a e 6a barras)",
+228,118,1.1 - Ensaio de redução de MTT e análogos,2C,"Control vs. 5uM Abeta 1-42 oligomérico, 24 h (1a e 3a barras)",
+229,118,2.2 - Marcadores diretos de apoptose,3B,"Control vs. 5uM Abeta 1-42 oligomérico, 24 h (1a e 2a barras)",TUNEL
+230,118,2.2 - Marcadores diretos de apoptose,9B,"Control vs. 5uM Abeta 1-42 oligomérico, 24 h (1a e 2a barras)",Atividade da caspase-3/7
+231,118,3.2 - Dano ao potencial de membrana mitocondrial,10A,"Control vs. 5uM Abeta 1-42 oligomérico, 24 h (1a e 2a barras)",JC1
+232,119,1.1 - Ensaio de redução de MTT e análogos,6A,"Control vs. 10uM Abeta 1-42, 48 h (1a e 4a barras)",
+233,119,1.1 - Ensaio de redução de MTT e análogos,6B,"Control vs. 10uM Abeta 1-42 seeds, 48 h (1a e 4a barras)",
+234,121,1.1 - Ensaio de redução de MTT e análogos,3B,"Control vs. 80uM Abeta 1-42, 24 h (1a e 2a barras)",WST-1 assay 
+235,122,1.1 - Ensaio de redução de MTT e análogos,1 (gráfico inferior),"Control vs. 2uM Abeta 1-40, aged, 48 h (1a e 2a barras)",
+236,123,1.1 - Ensaio de redução de MTT e análogos,5A,"Control (Eixo da ordenada) vs. 5uM Abeta 1-40, 6 h (2a barra)","The viability values were
+calculated by comparison to cells treated with a volume of H2O equal to
+the protein added."
+237,123,1.1 - Ensaio de redução de MTT e análogos,5A,"Control (Eixo da ordenada) vs. 5uM Abeta 1-42, 6 h (4a barra)","The viability values were
+calculated by comparison to cells treated with a volume of H2O equal to
+the protein added."
+238,123,1.1 - Ensaio de redução de MTT e análogos,5A,"Control (Eixo da ordenada) vs. 5uM Abeta 1-40, 24 h (2a barra)","The viability values were
+calculated by comparison to cells treated with a volume of H2O equal to
+the protein added."
+239,123,1.1 - Ensaio de redução de MTT e análogos,5A,"Control (Eixo da ordenada) vs. 5uM Abeta 1-42, 24 h (4a barra)","The viability values were
+calculated by comparison to cells treated with a volume of H2O equal to
+the protein added."
+240,125,2.2 - Marcadores diretos de apoptose,1B,"Control (Eixo da ordenada) vs. 20uM Abeta 1-42, 4 h (1a barra)",Caspase 3 activity (% of control)
+241,125,2.2 - Marcadores diretos de apoptose,2,"Control (Eixo da ordenada) vs. 20uM Abeta 1-42, 4 h (1a barra)",Caspase 3 activity (% of control)
+242,126,1.2 - Ensaio de liberação de LDH,6,"Control vs. 100nM Abeta 1-42*, 10 dias (1a e 2a barras) ",*Chronic (10 days) larger aggregates of Ab-exposure (100 nM monomeric Ab equivalent). Controle: tratamento com abeta scramble
+243,128,1.1 - Ensaio de redução de MTT e análogos,7A,"Control (Eixo da ordenada) vs. solution of amyloid fibrils Abeta 1-40, 24 h (1a barra)",Cell viability (%)
+244,128,1.1 - Ensaio de redução de MTT e análogos,7A,"Control (Eixo da ordenada) vs. solution of amyloid fibrils Abeta 1-40, 48 h (2a barra)",Cell viability (%)
+245,128,1.2 - Ensaio de liberação de LDH,7B,"Control (Eixo da ordenada) vs. solution of amyloid fibrils Abeta 1-40, 24 h (1a barra)",Cell viability (%)
+246,128,1.2 - Ensaio de liberação de LDH,7B,"Control (Eixo da ordenada) vs. solution of amyloid fibrils Abeta 1-40, 48 h (2a barra)",Cell viability (%)
+247,128,1.1 - Ensaio de redução de MTT e análogos,S13A (Material suplementar),"Control (Eixo da ordenada) vs. protein solution of Abeta 1-40, 24 h (1a barra)",Cell viability (%)
+248,128,1.1 - Ensaio de redução de MTT e análogos,S13A (Material suplementar),"Control (Eixo da ordenada) vs. protein solution of Abeta 1-40, 48 h (2a barra)",Cell viability (%)
+249,128,1.2 - Ensaio de liberação de LDH,S13B (Material suplementar),"Control (Eixo da ordenada) vs. protein solution of  Abeta 1-40, 24 h (1a barra)",Cell viability (%)
+250,128,1.2 - Ensaio de liberação de LDH,S13B (Material suplementar),"Control (Eixo da ordenada) vs. protein solution of  Abeta 1-40, 48 h (2a barra)",Cell viability (%)
+251,129,1.1 - Ensaio de redução de MTT e análogos,8,"Control vs. 20 uM Abeta 1-42, 24 h (1a e 2a barras)",Cell viability (% of control)
+252,130,1.4 - Viabilidade celular (outros),6,"Control vs. 20 uM Abeta 1-42, 24 h (1a e 2a barras)",Cell viability measured using an Alamar Blue assay.
+253,130,1.4 - Viabilidade celular (outros),S4 Material suplementar,"Control vs. 10 uM Abeta 1-42, 24 h (1a e 2a barras)",Cell viability measured using an Alamar Blue assay.
+254,130,1.4 - Viabilidade celular (outros),S4 Material suplementar,"Control vs. 20 uM Abeta 1-42, 24 h (1a e 3a barras)",Cell viability measured using an Alamar Blue assay.
+255,130,1.4 - Viabilidade celular (outros),S4 Material suplementar,"Control vs. 30 uM Abeta 1-42, 24 h (1a e 4a barras)",Cell viability measured using an Alamar Blue assay.
+256,130,1.4 - Viabilidade celular (outros),S4 Material suplementar,"Control vs. 40 uM Abeta 1-42, 24 h (1a e 5a barras)",Cell viability measured using an Alamar Blue assay.
+257,132,1.2 - Ensaio de liberação de LDH,4,"Control (Eixo da ordenada) vs. 5 uM Abeta 1-42 oligomérico, 0 h (1a barra)",LDH release (% control). Controle: células tratadas com triton X100
+258,132,1.2 - Ensaio de liberação de LDH,4,"Control (Eixo da ordenada) vs. 5 uM Abeta 1-42 oligomérico, 3 h (2a barra)",LDH release (% control). Controle: células tratadas com triton X100
+259,132,1.2 - Ensaio de liberação de LDH,4,"Control (Eixo da ordenada) vs. 5 uM Abeta 1-42 oligomérico, 6 h (3a barra)",LDH release (% control). Controle: células tratadas com triton X100
+260,132,1.2 - Ensaio de liberação de LDH,4,"Control (Eixo da ordenada) vs. 5 uM Abeta 1-42 oligomérico, 24 h (4a barra)",LDH release (% control). Controle: células tratadas com triton X100
+261,132,1.2 - Ensaio de liberação de LDH,4,"Control (Eixo da ordenada) vs. 5 uM Abeta 1-42 monomérico, 24 h (5a barra)",LDH release (% control). Controle: células tratadas com triton X100
+262,133,1.1 - Ensaio de redução de MTT e análogos,1b,"Control (Eixo da ordenada) vs. 10 uM Abeta 1-42 oligomérico, 48 h (1a barra)",MTS. Resultado: X-fold over control
+263,133,3.3 - Produtos de estresse oxidativo,5A,"Control vs. 10 uM Abeta 1-42 oligomérico, 48 h (1a e 2a barras)",4-HNE
+264,133,3.3 - Produtos de estresse oxidativo,5A,"Control vs. 10 uM Abeta 1-42 oligomérico, 48 h (4a e 5a barras)",4-HNE
+265,135,1.1 - Ensaio de redução de MTT e análogos,5a,"Control vs. 10 uM Abeta 1-42, 24 h (1a e 2a barras)",
+266,136,1.1 - Ensaio de redução de MTT e análogos,3A,"Control vs. 10 uM Abeta 1-40 fibrils, 24 h (1a e 2a barras)",
+267,140,1.1 - Ensaio de redução de MTT e análogos,7a,"Control (Eixo da ordenada) vs. 10 uM Abeta 1-42, 1 h (1o círculo preto)",
+268,140,1.1 - Ensaio de redução de MTT e análogos,7a,"Control (Eixo da ordenada) vs. 10 uM Abeta 1-42, 2 h (2o círculo preto)",
+269,140,1.1 - Ensaio de redução de MTT e análogos,7a,"Control (Eixo da ordenada) vs. 10 uM Abeta 1-42, 5 h (3o círculo preto)",
+270,140,1.1 - Ensaio de redução de MTT e análogos,7a,"Control (Eixo da ordenada) vs. 10 uM Abeta 1-42, 10 h (4o círculo preto)",
+271,140,1.1 - Ensaio de redução de MTT e análogos,7a,"Control (Eixo da ordenada) vs. 10 uM Abeta 1-42, 10 h (5o círculo preto)",
+272,140,2.3 - Marcadores de morte celular (outros),7b,"Control (Eixo da ordenada) vs. 10 uM Abeta 1-42, 1 h (1o círculo preto)",In vitro determination of apoptosis characteristic mono- and oligo-nucleosomes usando Cell Death Detection ELISAPLUS kit 
+273,140,2.3 - Marcadores de morte celular (outros),7b,"Control (Eixo da ordenada) vs. 10 uM Abeta 1-42, 5 h (2o círculo preto)",In vitro determination of apoptosis characteristic mono- and oligo-nucleosomes usando Cell Death Detection ELISAPLUS kit 
+274,140,2.3 - Marcadores de morte celular (outros),7b,"Control (Eixo da ordenada) vs. 10 uM Abeta 1-42, 24 h (3o círculo preto)",In vitro determination of apoptosis characteristic mono- and oligo-nucleosomes usando Cell Death Detection ELISAPLUS kit 
+275,140,1.1 - Ensaio de redução de MTT e análogos,9b,"Control vs. 10 uM Abeta 1-42, 5 h (1a e 2a barras)",
+276,140,1.1 - Ensaio de redução de MTT e análogos,10b,"Control vs. 10 uM Abeta 1-42, 24 h (1a e 2a barras)",Cell viability (ratio to controls)
+277,140,1.1 - Ensaio de redução de MTT e análogos,10c,"Control vs. 10 uM Abeta 1-42, 24 h (1a e 2a barras)",Cell viability (ratio to controls)
+278,140,1.1 - Ensaio de redução de MTT e análogos,10d,"Control vs. 10 uM Abeta 1-42, 24 h (1a e 2a barras)",Cell viability (ratio to controls)
+279,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 0"" (1o quadrado e 1o triangulo invertido pretos)", Fluo-4 AM
+280,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 15"" (2o quadrado e 2o triangulo invertido pretos)", Fluo-4 AM
+281,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 30"" (3o quadrado e 3o triangulo invertido pretos)", Fluo-4 AM
+282,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 45"" (4o quadrado e 4o triangulo invertido pretos)", Fluo-4 AM
+283,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 60"" (5o quadrado e 5o triangulo invertido pretos)", Fluo-4 AM
+284,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 1'15"" (6o quadrado e 6o triangulo invertido pretos)", Fluo-4 AM
+285,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 1'30"" (7o quadrado e 7o triangulo invertido pretos)", Fluo-4 AM
+286,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 1'45"" (8o quadrado e 8o triangulo invertido pretos)", Fluo-4 AM
+287,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 2' (9o quadrado e 9o triangulo invertido pretos)", Fluo-4 AM
+288,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 2'15"" (10o quadrado e 10o triangulo invertido pretos)", Fluo-4 AM
+289,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 2'30"" (11o quadrado e 11o triangulo invertido pretos)", Fluo-4 AM
+290,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 2'45"" (12o quadrado e 12o triangulo invertido pretos)", Fluo-4 AM
+291,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 3' (13o quadrado e 13o triangulo invertido pretos)", Fluo-4 AM
+292,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 3'15"" (14o quadrado e 14o triangulo invertido pretos)", Fluo-4 AM
+293,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 3'30"" (15o quadrado e 15o triangulo invertido pretos)", Fluo-4 AM
+294,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 3'45"" (16o quadrado e 16o triangulo invertido pretos)", Fluo-4 AM
+295,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 4' (17o quadrado e 17o triangulo invertido pretos)", Fluo-4 AM
+296,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 4'15"" (18o quadrado e 18o triangulo invertido pretos)", Fluo-4 AM
+297,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 4'30"" (19o quadrado e 19o triangulo invertido pretos)", Fluo-4 AM
+298,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 4'45"" (20o quadrado e 20o triangulo invertido pretos)", Fluo-4 AM
+299,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 5' (21o quadrado e 21o triangulo invertido pretos)", Fluo-4 AM
+300,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 5'15"" (22o quadrado e 22o triangulo invertido pretos)", Fluo-4 AM
+301,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 5'30"" (23o quadrado e 23o triangulo invertido pretos)", Fluo-4 AM
+302,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 5'45"" (24o quadrado e 24o triangulo invertido pretos)", Fluo-4 AM
+303,141,1.4 - Viabilidade celular (outros),7b,"Control vs. 10 uM Abeta 1-42 oligomers, 6' (25o quadrado e 25o triangulo invertido pretos)", Fluo-4 AM
+304,141,1.4 - Viabilidade celular (outros),7c,"Control vs. 10 uM Abeta 1-42 oligomers, 6' (3a e 4a barras)",Responses of Fluo-4 were quantitated by measuring the area under the curve (AUC) value
+305,141,3.1 - Níveis de espécies reativas de oxigênio,7d,"Control vs. 10 uM Abeta 1-42 oligomers, 3 h (3a e 4a barras)",Measured by DCF fluorescence
+306,145,1.1 - Ensaio de redução de MTT e análogos,2A,Control vs. 2.5 uM Abeta 1-42 oligomerico (1a e 3a barras),WST-1 activity (% of control)
+307,145,3.2 - Dano ao potencial de membrana mitocondrial,2B,Control vs. 2.5 uM Abeta 1-42 oligomerico (1a e 3a barras),JC-1 red/green fluorescence ratio
+308,145,3.1 - Níveis de espécies reativas de oxigênio,2C,"Control vs. 2.5 uM Abeta 1-42 oligomerico, 12 h (1a e 3a barras)",ROS formation was detected by using the oxidant sensitive probe DCFH-DA
+309,145,3.4 - Estresse oxidativo (outros),2D,"Control vs. 2.5 uM Abeta 1-42 oligomerico, 24 h (1a e 2a barras)",nmole ATP per mg of mitochondrial protein
+310,145,1.3 - Trypam blue exclusion test,3,Control vs. 2.5 uM Abeta 1-42 oligomerico (1a e 2a barras),
+311,147,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 25 uM Abeta 1-42 fibrils (1a e 2a barras),
+312,148,1.1 - Ensaio de redução de MTT e análogos,8,"Control vs. 20 uM Abeta 1-42 aggregated, 3 days (1a e 2a barras)",
+313,152,1.1 - Ensaio de redução de MTT e análogos,5,"Control vs. 10 uM Abeta 1-42 , 24 h (1a e 2a barras)",
+314,155,1.4 - Viabilidade celular (outros),7,"Control (eixo da ordenada) vs. 25 uM Abeta 1-40 ""W-fibrils"", 24 h  (1a barra)",The viability of human SHSY-5Y was determined by the calcein-AM assay 
+315,155,1.4 - Viabilidade celular (outros),7,"Control (eixo da ordenada) vs. 25 uM Abeta 1-40 ""M-fibrils"", 24 h  (2a barra)",The viability of human SHSY-5Y was determined by the calcein-AM assay 
+316,155,1.4 - Viabilidade celular (outros),7,"Control (eixo da ordenada) vs. 25 uM Abeta 1-40 ""D-fibrils"", 24 h  (3a barra)",The viability of human SHSY-5Y was determined by the calcein-AM assay 
+317,158,1.1 - Ensaio de redução de MTT e análogos,5B,"Control vs. 1 uM Abeta 1-42, 24h (1a e 4a barras)",
+318,158,1.1 - Ensaio de redução de MTT e análogos,5B,"Control vs. 10 uM Abeta 1-42, 24h (1a e 7a barras)",
+319,162,1.1 - Ensaio de redução de MTT e análogos,4a,"Control vs. 10 uM Abeta 1-42, 48h (1a e 2a barras)",MTS
+320,164,1.1 - Ensaio de redução de MTT e análogos,1A,"Control vs. 1 uM Abeta 1-42, 20 h (1a e 2a barras)",MTT
+321,164,1.1 - Ensaio de redução de MTT e análogos,1A,"Control vs. 2.5 uM Abeta 1-42, 20 h (1a e 3a barras)",MTT
+322,164,1.1 - Ensaio de redução de MTT e análogos,1A,"Control vs. 5 uM Abeta 1-42, 20 h (1a e 4a barras)",MTT
+323,164,1.1 - Ensaio de redução de MTT e análogos,1A,"Control vs. 10 uM Abeta 1-42, 20 h (1a e 5a barras)",MTT
+324,164,1.1 - Ensaio de redução de MTT e análogos,1B,"Control vs. 2.5 uM Abeta 1-42, 20 h (1a e 2a barras)",MTT
+325,164,1.1 - Ensaio de redução de MTT e análogos,1C,Control vs. 2.5 uM Abeta 1-42 (1a e 2a barras),MTT
+326,164,2.2 - Marcadores diretos de apoptose,2A,"Control vs. 1 uM Abeta 1-42, 20 h (1a e 2a barras)","Atividade de caspase-3 determined
+fluorometrically using the synthetic peptide substrate"
+327,164,2.2 - Marcadores diretos de apoptose,2A,"Control vs. 2.5 uM Abeta 1-42, 20 h (1a e 3a barras)","Atividade de caspase-3 determined
+fluorometrically using the synthetic peptide substrate"
+328,164,2.2 - Marcadores diretos de apoptose,2A,"Control vs. 5 uM Abeta 1-42, 20 h (1a e 4a barras)","Atividade de caspase-3 determined
+fluorometrically using the synthetic peptide substrate"
+329,164,2.2 - Marcadores diretos de apoptose,2A,"Control vs. 10 uM Abeta 1-42, 20 h (1a e 5a barras)","Atividade de caspase-3 determined
+fluorometrically using the synthetic peptide substrate"
+330,164,2.2 - Marcadores diretos de apoptose,2B,"Control vs. 2.5 uM Abeta 1-42, 20 h (1a e 2a barras)","Atividade de caspase-3 determined
+fluorometrically using the synthetic peptide substrate"
+331,164,2.2 - Marcadores diretos de apoptose,2C,"Control vs. 1 uM Abeta 1-42, 20 h (1a e 2a barras)","Atividade de caspase-9 determined
+fluorometrically using the synthetic peptide substrate"
+332,164,2.2 - Marcadores diretos de apoptose,2C,"Control vs. 2.5 uM Abeta 1-42, 20 h (1a e 3a barras)","Atividade de caspase-9 determined
+fluorometrically using the synthetic peptide substrate"
+333,164,2.2 - Marcadores diretos de apoptose,2C,"Control vs. 5 uM Abeta 1-42, 20 h (1a e 4a barras)","Atividade de caspase-9 determined
+fluorometrically using the synthetic peptide substrate"
+334,164,2.2 - Marcadores diretos de apoptose,2C,"Control vs. 10 uM Abeta 1-42, 20 h (1a e 5a barras)","Atividade de caspase-9 determined
+fluorometrically using the synthetic peptide substrate"
+335,164,2.2 - Marcadores diretos de apoptose,2D,"Control vs. 2.5 uM Abeta 1-42, 20 h (1a e 2a barras)","Atividade de caspase-9 determined
+fluorometrically using the synthetic peptide substrate"
+336,164,3.1 - Níveis de espécies reativas de oxigênio,3A,"Control vs. 1 uM Abeta 1-42, 1 h (1a e 2a barras)","ROS generation was evaluated using
+CM-H2DCFDA"
+337,164,3.1 - Níveis de espécies reativas de oxigênio,3A,"Control vs. 2.5 uM Abeta 1-42, 1 h (1a e 3a barras)",ROS generation was evaluated using CM-H2DCFDA
+338,164,3.1 - Níveis de espécies reativas de oxigênio,3A,"Control vs. 5 uM Abeta 1-42, 1 h (1a e 4a barras)",ROS generation was evaluated using CM-H2DCFDA
+339,164,3.1 - Níveis de espécies reativas de oxigênio,3A,"Control vs. 10 uM Abeta 1-42, 1 h (1a e 5a barras)",ROS generation was evaluated using CM-H2DCFDA
+340,164,3.1 - Níveis de espécies reativas de oxigênio,3B,"Control vs. 2.5 uM Abeta 1-42, 1 h (1a e 2a barras)",ROS generation was evaluated using CM-H2DCFDA
+341,164,2.2 - Marcadores diretos de apoptose,6C,"Control vs. 2.5 uM Abeta 1-42, 20 h (1a e 2a barras)","Cytochrome c levels in cytosolic fractions
+was evaluated using a detection kit"
+342,167,1.1 - Ensaio de redução de MTT e análogos,Table 1,"Control vs. 1 uM Abeta 1-42, 24 h ((1a coluna, 1a linha) e (1a coluna, 3a linha)",MTT
+343,168,1.1 - Ensaio de redução de MTT e análogos,Table 1,"Control vs. 0.5 uM Abeta 1-42, 24 h ((2a coluna, 1a linha) ","MTT, Cell viability (% of control)"
+344,170,1.1 - Ensaio de redução de MTT e análogos,1A,"None vs. 1 uM Abeta ?, 24 h (1a e 2a barras)","MTT, Cell viability (% of none)"
+345,170,1.1 - Ensaio de redução de MTT e análogos,1A,"None vs. 2 uM Abeta ?, 24 h (1a e 3a barras)","MTT, Cell viability (% of none)"
+346,170,1.1 - Ensaio de redução de MTT e análogos,1A,"None  vs. 5 uM Abeta ?, 24 h (1a e 4a barras)","MTT, Cell viability (% of none)"
+347,170,1.1 - Ensaio de redução de MTT e análogos,1B,"None  vs. 5 uM Abeta ?, 24 h (1a e 2a barras)","MTT, Cell viability (% of none)"
+348,170,3.1 - Níveis de espécies reativas de oxigênio,1C,"None  vs. 5 uM Abeta ?, 24 h (1a e 2a barras)","Intracellular ROS, % of none. DCF"
+349,170,3.1 - Níveis de espécies reativas de oxigênio,1D,"None  vs. 5 uM Abeta ?, 24 h (1a e 2a barras)","Mitochondrial ROS, % of none. MitoSox Red"
+350,170,3.2 - Dano ao potencial de membrana mitocondrial,2B,"None  vs. 5 uM Abeta ?, 24 h (1a e 2a barras)","Relative fluorescence ratio, red/green. 5 of None; JC1
+"
+351,170,3.4 - Estresse oxidativo (outros),"2D, gráfico canto direito superior",None  vs. 5 uM Abeta ? (1a e 2a barras),ATP production
+352,170,2.2 - Marcadores diretos de apoptose,3bii,"None  vs. 5 uM Abeta ?, 24 h (1a e 2a barras)",caspase-3/actin density ratio
+353,170,2.2 - Marcadores diretos de apoptose,3biii,"None  vs. 5 uM Abeta ?, 24 h (1a e 2a barras)",cleaved-caspase-3/actin density ratio
+354,171,1.1 - Ensaio de redução de MTT e análogos,2B,"Control vs. 90 nM Abeta 1-42, oligomer (5a e 1a barras)",% iMTT (relative to control). iMTT=Tween 20-insoluble MTT Formazan.
+355,171,1.1 - Ensaio de redução de MTT e análogos,2B,"Control vs. 0.5 uM Abeta 1-42, monomer (5a e 2a barras)",% iMTT (relative to control). iMTT=Tween 20-insoluble MTT Formazan.
+356,171,1.1 - Ensaio de redução de MTT e análogos,2B,"Control vs. 0.5 uM Abeta 1-42, fibril (5a e 3a barras)",% iMTT (relative to control). iMTT=Tween 20-insoluble MTT Formazan.
+357,171,1.1 - Ensaio de redução de MTT e análogos,3A,"Control vs. 6(?) nM Abeta 1-42, synthetic oligomers (1o e 2o open circles)",% iMTT (relative to control).
+358,171,1.1 - Ensaio de redução de MTT e análogos,3A,"Control vs. 12(?) nM Abeta 1-42, synthetic oligomers (1o e 3o open circles)",% iMTT (relative to control).
+359,171,1.1 - Ensaio de redução de MTT e análogos,3A,"Control vs. 24(?) nM Abeta 1-42, synthetic oligomers (1o e 4o open circles)",% iMTT (relative to control).
+360,171,1.1 - Ensaio de redução de MTT e análogos,3A,"Control vs. 46(?) nM Abeta 1-42, synthetic oligomers (1o e 5o open circles)",% iMTT (relative to control).
+361,171,1.1 - Ensaio de redução de MTT e análogos,3A,"Control vs. 6(?) nM Abeta 1-42, biological oligomers (1o e 2o closed squares)",% iMTT (relative to control).
+362,171,1.1 - Ensaio de redução de MTT e análogos,3A,"Control vs. 12(?) nM Abeta 1-42, biological oligomers (1o e 3o closed squares)",% iMTT (relative to control).
+363,171,1.1 - Ensaio de redução de MTT e análogos,3A,"Control vs. 24(?) nM Abeta 1-42, biological oligomers (1o e 4o closed squares)",% iMTT (relative to control).
+364,171,1.1 - Ensaio de redução de MTT e análogos,3A,"Control vs. 46(?) nM Abeta 1-42, biological oligomers (1o e 5o closed squares)",% iMTT (relative to control).
+365,171,1.1 - Ensaio de redução de MTT e análogos,4,"Control vs. 30 nM Abeta 1-42, oligomer (1a e 2a barras)",% iMTT (relative to control).
+366,171,1.1 - Ensaio de redução de MTT e análogos,4,"Control vs. 30 nM Abeta 1-42, monomer (1a e 3a barras)",% iMTT (relative to control).
+367,171,1.1 - Ensaio de redução de MTT e análogos,4,Control vs. 30 nM Abeta 1-42 oligomer + 30 nM Abeta 1-42 monomer (1a e 4a barras),% iMTT (relative to control).
+368,173,1.1 - Ensaio de redução de MTT e análogos,2C,"Control vs. 10 uM Abeta 1-42, 24 h (1a e 2a barras)",MTT
+369,173,2.2 - Marcadores diretos de apoptose,2E,"Control vs. 10 uM Abeta 1-42, 24 h (1a e 2a barras)","annexin V-FITC
+assay. The apoptosis of cells was detected by flow cytometry. "
+370,182,1.1 - Ensaio de redução de MTT e análogos,1A,"Control (eixo da ordenada) vs. 1 uM Abeta 1-42 ""undifferentiated cells"" (1a barra)",MTT
+371,182,1.1 - Ensaio de redução de MTT e análogos,1A,"Control (eixo da ordenada) vs. 5 uM Abeta 1-42 ""undifferentiated cells"" (3a barra)",MTT
+372,182,1.1 - Ensaio de redução de MTT e análogos,1A,"Control (eixo da ordenada) vs. 10 uM Abeta 1-42 ""undifferentiated cells"" (5a barra)",MTT
+373,182,1.1 - Ensaio de redução de MTT e análogos,1A,"Control (eixo da ordenada) vs. 15 uM Abeta 1-42 ""undifferentiated cells"" (7a barra)",MTT
+374,182,1.1 - Ensaio de redução de MTT e análogos,1A,"Control (eixo da ordenada) vs. 1 uM Abeta 1-42 ""differentiated cells"" (2a barra)",MTT
+375,182,1.1 - Ensaio de redução de MTT e análogos,1A,"Control (eixo da ordenada) vs. 5 uM Abeta 1-42 ""differentiated cells"" (4a barra)",MTT
+376,182,1.1 - Ensaio de redução de MTT e análogos,1A,"Control (eixo da ordenada) vs. 10 uM Abeta 1-42 ""differentiated cells"" (6a barra)",MTT
+377,182,1.1 - Ensaio de redução de MTT e análogos,1A,"Control (eixo da ordenada) vs. 15 uM Abeta 1-42 ""differentiated cells"" (8a barra)",MTT
+378,182,1.1 - Ensaio de redução de MTT e análogos,2A,"Control (eixo da ordenada) vs. 10 uM Abeta 1-42 ""undifferentiated cells"", 48 h (1a barra)",MTT
+379,182,1.1 - Ensaio de redução de MTT e análogos,2A,"Control (eixo da ordenada) vs. 10 uM Abeta 1-42 ""undifferentiated cells"", preincubated for 24 h (2a barra)",MTT
+380,182,2.3 - Marcadores de morte celular (outros),4,"Control vs. 10 uM Abeta 1-42, 48 h (setas, 1o e 2o histogramas)",Apoptosis was determined by flow cytometry
+381,183,1.1 - Ensaio de redução de MTT e análogos,1,Control vs. 10 uM Abeta 1-42 (1a e 2a barras),MTT
+382,170,2.2 - Marcadores diretos de apoptose,3C,"None  vs. 5 uM Abeta ?, 24 h (1a e 2a barras)",Caspase-3 activity
+383,101,2.2 - Marcadores diretos de apoptose,3B,"Control  vs.  1 uM Abeta 1-42, 24 h (1a e 2a barras)",TUNEL
+384,101,1.1 - Ensaio de redução de MTT e análogos,3C,"Control  vs.  1 uM Abeta 1-42, 24 h (1a e 2a barras)",Cell viability using CCK-8
+385,101,2.2 - Marcadores diretos de apoptose,3D,"Control  vs.  1 uM Abeta 1-42, 24 h (5a e 6a barras)","Cleaved 
+caspase-3"
+386,101,2.2 - Marcadores diretos de apoptose,3D,"Control  vs.  1 uM Abeta 1-42, 24 h (13a e 14a barras)","Cleaved 
+caspase-9"
+387,118,2.2 - Marcadores diretos de apoptose,9A,"Control vs. 5uM Abeta 1-42 oligomérico, 24 h (1a e 2a barras)","Grafico ao lado do western blotting. Ratio of cleaved caspase-3/beta actina
+"
+388,118,2.2 - Marcadores diretos de apoptose,9A,"Control vs. 5uM Abeta 1-42 oligomérico, 24 h (1a e 2a barras)",1o grafico abaixo do western blotting. Ratio of cytochrome C/COX IV. Mitochondrial fraction
+389,118,2.2 - Marcadores diretos de apoptose,9A,"Control vs. 5uM Abeta 1-42 oligomérico, 24 h (1a e 2a barras)",2o grafico abaixo do western blotting. Ratio of cytochrome C/beta actin. Cytosolic fraction
+390,118,2.2 - Marcadores diretos de apoptose,9A,"Control vs. 5uM Abeta 1-42 oligomérico, 24 h (1a e 2a barras)",3o grafico abaixo do western blotting. Ratio of caspase-9/beta actin. 
+391,118,2.2 - Marcadores diretos de apoptose,9A,"Control vs. 5uM Abeta 1-42 oligomérico, 24 h (1a e 2a barras)",4o grafico abaixo do western blotting. Ratio of cleaved caspase-9/beta actin. 
+392,118,3.4 - Estresse oxidativo (outros),10B,"Control vs. 5uM Abeta 1-42 oligomérico, 24 h (1a e 2a barras)",ATP content (fold change)
+393,186,1.1 - Ensaio de redução de MTT e análogos,2A (Left panel),"Control vs. 0.1uM Abeta 1-42monomérico, 24 h (1a e 2a barras)",WST
+394,186,1.1 - Ensaio de redução de MTT e análogos,2A  (Left panel),"Control vs. 1uM Abeta 1-42monomérico, 24 h (1a e 3a barras)",WST
+395,186,1.1 - Ensaio de redução de MTT e análogos,2A  (Left panel),"Control vs. 10uM Abeta 1-42monomérico, 24 h (1a e 4a barras)",WST
+396,186,1.1 - Ensaio de redução de MTT e análogos,2A  (Central panel),"Control vs. 0.1uM Abeta 1-42oligomérico, 24 h (1a e 2a barras)",WST
+397,186,1.1 - Ensaio de redução de MTT e análogos,2A  (Central panel),"Control vs. 1uM Abeta 1-42oligomérico, 24 h (1a e 3a barras)",WST
+398,186,1.1 - Ensaio de redução de MTT e análogos,2A  (Central panel),"Control vs. 10uM Abeta 1-42oligomérico, 24 h (1a e 4a barras)",WST
+399,186,1.1 - Ensaio de redução de MTT e análogos,2A (Right panel),"Control vs. 0.1uM Abeta 1-42fibillar, 24 h (1a e 2a barras)",WST
+400,186,1.1 - Ensaio de redução de MTT e análogos,2A (Right panel),"Control vs. 1uM Abeta 1-42fibillar, 24 h (1a e 3a barras)",WST
+401,186,1.1 - Ensaio de redução de MTT e análogos,2A (Right panel),"Control vs. 10uM Abeta 1-42fibillar, 24 h (1a e 4a barras)",WST
+402,187,1.1 - Ensaio de redução de MTT e análogos,7B,"Control vs. 5uM Abeta 1-42,Monomérico, 24 h (1a e 2a barras)",MTT
+403,188,1.1 - Ensaio de redução de MTT e análogos,4,"Control vs. 5uM Abeta 1-42pre-aggregated, 48 h (1a e 2a barras)",MTS
+404,188,3.1 - Níveis de espécies reativas de oxigênio,5A,"Control vs. 5uM Abeta 1-42pre-aggregated, 6 h (1a e 2a barras)","ROS levels were measured by flow cytometry using a 
+fluorescent CellROX probe"
+405,188,2.2 - Marcadores diretos de apoptose,5B,"Control vs. 5uM Abeta 1-42pre-aggregated, 24 h (1a e 2a barras)",Caspase-3/7 activity
+406,188,2.2 - Marcadores diretos de apoptose,5C,"Control vs. 5uM Abeta 1-42pre-aggregated, 24 h (1a e 2a barras)", Annexin-FITC Apoptosis Detection Kit
+407,189,1.1 - Ensaio de redução de MTT e análogos,1C,"Control (eixo da ordenada) vs. 0,01uM Abeta 1-42,oligomérico, 24 h ( (1o e 2o closed circles)","MTT (a confirmar as concentrações de abeta usadas jogando no app GsYs.. No artigo menciona de 0,01 a 10 uM.. "
+408,189,1.1 - Ensaio de redução de MTT e análogos,1C,"Control (eixo da ordenada) vs. 0,05uM Abeta 1-42,oligomérico, 24 h ( (1o e 3o closed circles)","MTT (a confirmar as concentrações de abeta usadas jogando no app GsYs.. No artigo menciona de 0,01 a 10 uM.."
+409,189,1.1 - Ensaio de redução de MTT e análogos,1C,"Control (eixo da ordenada) vs. 0,1uM Abeta 1-42,oligomérico, 24 h ( (1o e 4o closed circles)","MTT (a confirmar as concentrações de abeta usadas jogando no app GsYs.. No artigo menciona de 0,01 a 10 uM.."
+410,189,1.1 - Ensaio de redução de MTT e análogos,1C,"Control (eixo da ordenada) vs. 0,3uM Abeta 1-42,oligomérico, 24 h ( (1o e 5o closed circles)","MTT (a confirmar as concentrações de abeta usadas jogando no app GsYs.. No artigo menciona de 0,01 a 10 uM.."
+411,189,1.1 - Ensaio de redução de MTT e análogos,1C,"Control (eixo da ordenada) vs. 0,5uM Abeta 1-42,oligomérico, 24 h ( (1o e 6o closed circles)","MTT (a confirmar as concentrações de abeta usadas jogando no app GsYs.. No artigo menciona de 0,01 a 10 uM.."
+412,189,1.1 - Ensaio de redução de MTT e análogos,1C,"Control (eixo da ordenada) vs. 1uM Abeta 1-42,oligomérico, 24 h ( (1o e 7o closed circles)","MTT (a confirmar as concentrações de abeta usadas jogando no app GsYs.. No artigo menciona de 0,01 a 10 uM.."
+413,189,1.1 - Ensaio de redução de MTT e análogos,1C,"Control (eixo da ordenada) vs. 3uM Abeta 1-42,oligomérico, 24 h ( (1o e 8o closed circles)","MTT (a confirmar as concentrações de abeta usadas jogando no app GsYs.. No artigo menciona de 0,01 a 10 uM.."
+414,189,1.1 - Ensaio de redução de MTT e análogos,1C,"Control (eixo da ordenada) vs. 5uM Abeta 1-42,oligomérico, 24 h ( (1o e 9o closed circles)","MTT (a confirmar as concentrações de abeta usadas jogando no app GsYs.. No artigo menciona de 0,01 a 10 uM.."
+415,189,1.1 - Ensaio de redução de MTT e análogos,1C,"Control (eixo da ordenada) vs. 10uM Abeta 1-42,oligomérico, 24 h ( (1o e 10o closed circles)","MTT (a confirmar as concentrações de abeta usadas jogando no app GsYs.. No artigo menciona de 0,01 a 10 uM.."
+416,189,1.1 - Ensaio de redução de MTT e análogos,2B,"Control vs. 0.3uM Abeta 1-42oligomeric, 24 h (1a e 2a barras)",MTT
+417,189,1.1 - Ensaio de redução de MTT e análogos,2B,"Control vs. 0.5uM Abeta 1-42oligomeric, 24 h (1a e 4a barras)",MTT
+418,189,1.1 - Ensaio de redução de MTT e análogos,2B,"Control vs. 1uM Abeta 1-42oligomeric, 24 h (1a e 6a barras)",MTT
+419,189,1.1 - Ensaio de redução de MTT e análogos,2B,"Control vs. 5uM Abeta 1-42oligomeric, 24 h (1a e 8a barras)",MTT
+420,189,1.1 - Ensaio de redução de MTT e análogos,2B,"Control vs. 10uM Abeta 1-42oligomeric, 24 h (1a e 10a barras)",MTT
+421,189,1.1 - Ensaio de redução de MTT e análogos,2C,"Control vs. 5uM Abeta 1-42oligomeric, 24 h (1a e 2a barras)",MTT
+422,189,1.1 - Ensaio de redução de MTT e análogos,3B,"Control vs. 5uM Abeta 1-42oligomeric, 24 h (1a e 4a barras)",MTT

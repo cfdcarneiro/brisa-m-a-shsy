@@ -1,0 +1,124 @@
+---
+title: "Análise de exclusões"
+author: "Clarissa F. D. Carneiro"
+date: "07/10/2022"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+```
+
+```{r, include=FALSE}
+library(dplyr)
+library(readxl)
+library(ggplot2)
+library(knitr)
+```
+
+Para montar o fluxograma como indicado pela guideline PRISMA, precisamos dos números de inclusão em cada etapa assim como os números por motivo de exclusão em cada etapa.
+
+Começando pelo abstract screening -
+Artigos avaliados (após exclusão de duplicatas):
+```{r}
+rayyan_data = read.csv("./20220727-rayyanexport/articles.csv", sep=",")
+nrow(rayyan_data)
+```
+
+Artigos incluídos:
+```{r}
+included = rayyan_data %>% filter(grepl(paste("Included"), notes)|grepl(paste("Maybe"), notes))
+nrow(included)
+```
+
+Artigos excluídos:
+```{r}
+nrow(rayyan_data) - nrow(included)
+
+excluded = rayyan_data %>% filter(!grepl(paste("Included"), notes))
+excluded = excluded %>% filter(!grepl(paste("Maybe"), notes))
+excluded = excluded %>% select(c("key", "notes"))
+nrow(excluded)
+```
+
+Depois, passando para o full text screening - 
+Artigos avaliados:
+```{r}
+full_text_list = read_xlsx("full_text_screening_final.xlsx")
+nrow(full_text_list)
+```
+
+```{r}
+full_text_data = read.csv2("full_text_screening_data.csv")
+```
+
+Artigos incluídos:
+```{r}
+included_ft = full_text_data %>% filter(Status=="Incluído") 
+
+nrow(included_ft %>% distinct(rayyan.key))
+```
+Artigos excluídos:
+```{r}
+excluded_ft = full_text_data %>% filter(Status=="Excluído") 
+nrow(excluded_ft %>% distinct(rayyan.key))
+```
+
+Sem decisão (ainda):
+```{r}
+nrow(full_text_list) - nrow(included_ft %>% distinct(rayyan.key)) - nrow(excluded_ft %>% distinct(rayyan.key))
+```
+Nao tem nenhum artigo sem motivo de exclusao na lista, entao parece nao ter sido avaliado. No flowchart vou colocar como tendo sido excluido no abstract screening.
+
+Motivos de exclusão:
+```{r}
+kable(excluded_ft %>% count(Motivo.para.exclusão))
+```
+
+
+Como mais de uma comparação pode existir por artigo, queremos o número de comparações incluídas:
+```{r}
+nrow(included_ft)
+```
+
+Queremos também os números de inclusão por tipo de outcome:
+```{r}
+kable(included_ft %>% count(Método))
+```
+
+Podemos também ver a distribuição de comparações por artigo:
+```{r}
+comp.por.artigo = included_ft %>% count(rayyan.key)
+
+#ggplot(comp.por.artigo, aes(x = n)) +
+#  geom_histogram(binwidth = 1, color = "black", fill = "white") +
+#  theme_classic() +
+#  scale_x_continuous(n.breaks = 10, name = "número de comparações") +
+#  scale_y_continuous(n.breaks = 20, name = "número de artigos")
+
+ggplot(comp.por.artigo %>% filter(n < 90), aes(x = n)) +
+  geom_histogram(binwidth = 1, color = "black", fill = "white") +
+  theme_classic() +
+  scale_x_continuous(n.breaks = 10, name = "número de comparações", limits = c(0,40)) +
+  scale_y_continuous(n.breaks = 20, name = "número de artigos") +
+  labs(title = "Comparações por artigo (todos os métodos)", caption = "OBS: 1 artigo com 98 comparações foi cortado do gráfico para melhor visualização")
+```
+
+Como nós decidimos manter apenas as comparações do item 1.1 por enquanto, o número de artigos incluídos é:
+```{r}
+comp_1.1 = included_ft %>% filter(Método =="1.1 - Ensaio de redução de MTT e análogos")
+
+nrow(comp_1.1 %>% distinct(rayyan.key))
+```
+
+Podemos também ter um gráfico semelhante, mas só para essas comparações:
+```{r}
+comp1.1.por.artigo = comp_1.1 %>% count(rayyan.key)
+
+ggplot(comp1.1.por.artigo, aes(x = n)) +
+  geom_histogram(binwidth = 1, color = "black", fill = "white") +
+  theme_classic() +
+  scale_x_continuous(n.breaks = 12, name = "número de comparações") +
+  scale_y_continuous(n.breaks = 15, name = "número de artigos") +
+  labs(title = "Comparações por artigo (MTT e análogos)")
+```

@@ -1,0 +1,78 @@
+---
+title: "Combinando todos os resultados do full-text screening"
+author: "Clarissa F. D. Carneiro"
+date: "07/10/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r packages}
+library(dplyr)
+library(ggplot2)
+library(readxl)
+library(knitr)
+```
+
+Exportei do Airtable as abas de artigos e outcomes de todos os revisores no dia 07-10-2022. 
+
+Importei pro R e juntei todas em um único banco de dados.
+```{r}
+Artigos.Adriano = read.csv("Artigos-Grid view Adriano.csv", encoding = "UTF-8")
+Artigos.AnaPaula = read.csv("Artigos-Grid view Ana Paula.csv", encoding = "UTF-8")
+Artigos.Antonio = read.csv("Artigos-Grid view Antonio.csv", encoding = "UTF-8")
+Artigos.Clarissa = read.csv("Artigos-Grid view Clarissa.csv", encoding = "UTF-8")
+Artigos.Giovanna = read.csv("Artigos-Grid view Giovanna.csv", encoding = "UTF-8")
+Artigos.Giulia = read.csv("Artigos-Grid view Giulia.csv", encoding = "UTF-8")
+Artigos.Glaucia = read.csv("Artigos-Grid view Glaucia.csv", encoding = "UTF-8")
+Artigos.NathaliaF = read.csv("Artigos-Grid view Nathalia F.csv", encoding = "UTF-8")
+Artigos.NathaliaP = read.csv("Artigos-Grid view Nathalia P.csv", encoding = "UTF-8")
+Artigos.Samantha = read.csv("Artigos-Grid view Samantha.csv", encoding = "UTF-8")
+Outcomes.Adriano = read.csv("Outcomes-Grid view Adriano.csv", encoding = "UTF-8")
+Outcomes.AnaPaula = read.csv("Outcomes-Grid view Ana Paula.csv", encoding = "UTF-8")
+Outcomes.Antonio = read.csv("Outcomes-Grid view Antonio.csv", encoding = "UTF-8")
+Outcomes.Clarissa = read.csv("Outcomes-Grid view Clarissa.csv", encoding = "UTF-8")
+Outcomes.Giovanna = read.csv("Outcomes-Grid view Giovanna.csv", encoding = "UTF-8")
+Outcomes.Giulia = read.csv("Outcomes-Grid view Giulia.csv", encoding = "UTF-8")
+Outcomes.Glaucia = read.csv("Outcomes-Grid view Glaucia.csv", encoding = "UTF-8")
+Outcomes.NathaliaF = read.csv("Outcomes-Grid view Nathalia F.csv", encoding = "UTF-8")
+Outcomes.NathaliaP = read.csv("Outcomes-Grid view Nathalia P.csv", encoding = "UTF-8")
+Outcomes.Samantha = read.csv("Outcomes-Grid view Samantha.csv", encoding = "UTF-8")
+```
+```{r}
+Artigos.Adriano = Artigos.Adriano %>% rename(Screening.ID = X.U.FEFF.Screening.ID)
+Artigos.AnaPaula = Artigos.AnaPaula %>% rename(Screening.ID = X.U.FEFF.Screening.ID)
+Artigos.Antonio = Artigos.Antonio %>% rename(Screening.ID = X.U.FEFF.Screening.ID)
+Artigos.Clarissa = Artigos.Clarissa %>% rename(Screening.ID = X.U.FEFF.Screening.ID)
+Artigos.Giovanna = Artigos.Giovanna %>% rename(Screening.ID = X.U.FEFF.Screening.ID)
+Artigos.Giulia = Artigos.Giulia %>% rename(Screening.ID = X.U.FEFF.Screening.ID)
+Artigos.Glaucia = Artigos.Glaucia %>% rename(Screening.ID = X.U.FEFF.Screening.ID)
+Artigos.NathaliaF = Artigos.NathaliaF %>% rename(Screening.ID = X.U.FEFF.Screening.ID)
+Artigos.NathaliaP = Artigos.NathaliaP %>% rename(Screening.ID = X.U.FEFF.Screening.ID)
+Artigos.Samantha = Artigos.Samantha %>% rename(Screening.ID = X.U.FEFF.Screening.ID)
+```
+```{r}
+Adriano = full_join(Artigos.Adriano, Outcomes.Adriano, by = "Screening.ID")
+AnaPaula = full_join(Artigos.AnaPaula, Outcomes.AnaPaula, by = "Screening.ID")
+Antonio = full_join(Artigos.Antonio, Outcomes.Antonio, by = "Screening.ID")
+Clarissa = full_join(Artigos.Clarissa, Outcomes.Clarissa, by = "Screening.ID")
+Giovanna = full_join(Artigos.Giovanna, Outcomes.Giovanna, by = "Screening.ID")
+Giulia = full_join(Artigos.Giulia, Outcomes.Giulia, by = "Screening.ID")
+Glaucia = full_join(Artigos.Glaucia, Outcomes.Glaucia, by = "Screening.ID")
+NathaliaF = full_join(Artigos.NathaliaF, Outcomes.NathaliaF, by = "Screening.ID")
+NathaliaP = full_join(Artigos.NathaliaP, Outcomes.NathaliaP, by = "Screening.ID")
+Samantha = full_join(Artigos.Samantha, Outcomes.Samantha, by = "Screening.ID")
+```
+```{r}
+artigos_completos = bind_rows(Artigos.Adriano, Artigos.AnaPaula, Artigos.Antonio, Artigos.Clarissa, Artigos.Giovanna, Artigos.Giulia, Artigos.Glaucia, Artigos.NathaliaF, Artigos.NathaliaP, Artigos.Samantha)
+dados_completos = bind_rows(Adriano, AnaPaula, Antonio, Clarissa, Giovanna, Giulia, Glaucia, NathaliaF, NathaliaP, Samantha)
+artigos_completos[artigos_completos=="Nathalia Réges Pinheiro"] = "Nathalia Pinheiro"
+```
+
+Antes de adicionar os artigos não necessariamente avaliados, exportei os dados completos para análises futuras.
+```{r}
+write.csv2(dados_completos, file = "full_text_screening_data.csv")
+```
+
