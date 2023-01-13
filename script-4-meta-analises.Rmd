@@ -15,6 +15,7 @@ library(tidyverse)
 library(metafor)
 library(metaviz)
 library(glmulti)
+library(knitr)
 ```
 
 Depois da limpeza, importamos de volta para análises.
@@ -23,9 +24,11 @@ Depois da limpeza, importamos de volta para análises.
 dados_limpos = read_xlsx("dados_todos.xlsx")
 ```
 
-Para análises, precisamos da média e n dos dois grupos e da variacao no tratado, seja SEM, SD ou Unclear.
+Para análises, precisamos da média e n dos dois grupos e da variacao no tratado, seja SEM, SD ou Unclear. Também precisamos excluir casos em que a sequencia de abeta nao esteja clara.
 ```{r}
 dados_completos = dados_limpos %>% filter(control_mean!=0&!is.na(control_mean)&treated_mean!=0&!is.na(treated_mean)&control_n!=0&!is.na(control_n)&treated_n!=0&!is.na(treated_n)&treated_variation!=0&!is.na(treated_variation))
+
+dados_completos = dados_completos %>% filter(Abeta_sequence!="Not informed") %>% filter(Abeta_sequence!="not reported") %>% filter(!is.na(Abeta_sequence))
 ```
 
 Para montar um fluxograma:
