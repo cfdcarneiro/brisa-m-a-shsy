@@ -21,7 +21,7 @@ library(knitr)
 Depois da limpeza, importamos de volta para análises.
 ```{r}
 #dados_limpos = read_xlsx("dados_todos_limpos.xlsx")
-dados_limpos = read_xlsx("dados_todos.xlsx")
+dados_limpos = read_xlsx("dados_extracao+autores.xlsx")
 ```
 
 Para análises, precisamos da média e n dos dois grupos e da variacao no tratado, seja SEM, SD ou Unclear. Também precisamos excluir casos em que a sequencia de abeta nao esteja clara.
@@ -88,6 +88,9 @@ kable(bottom.vi)
 Por enquanto, removemos comparacoes com variancia igual ou maior que 1000.
 ```{r}
 dados_meta_smd = dados_meta_smd %>% filter(vi<1000)
+meta1 = rma(yi=yi, vi=vi, data = dados_meta_smd, measure = "SMD", method = "REML", slab = rayyan.key)
+summary(meta1)
+confint(meta1)
 ```
 
 Acho que vale conferir pelo menos os 4 maiores valores de vi, mas talvez mesmo os outros ainda ficam algumas ordens de grandeza acima dos menores valores.
@@ -610,4 +613,104 @@ article_level = data.frame(
 )
 
 kable(article_level, digits = 1)
+```
+
+Experiment-level info
+
+Assay
+```{r}
+assay = dados_completos %>% count(Assay)
+```
+
+Cell line
+```{r}
+csource = dados_completos %>% count(Cell_source)
+cbank = dados_completos %>% count(Cell_bank)
+cauthent = dados_completos %>% count(Cell_authentication)
+cmyco = dados_completos %>% count(Cell_mycoplasma)
+```
+
+Treatment
+```{r}
+control = dados_completos %>% count(Control_description)
+a_seq = dados_completos %>% count(Abeta_sequence)
+a_orig = dados_completos %>% count(Abeta_origin)
+a_spec = dados_completos %>% count(Abeta_species)
+a_aggr = dados_completos %>% count(Abeta_aggregation)
+a_exp = dados_completos %>% count(Single_exposure)
+```
+
+```{r}
+dados_completos %>% summarise(mean(Duration_hours, na.rm = T))
+dados_completos %>% summarise(sd(Duration_hours, na.rm = T))
+dados_completos %>% summarise(median(Duration_hours, na.rm = T))
+dados_completos %>% summarise(min(Duration_hours, na.rm = T))
+dados_completos %>% summarise(max(Duration_hours, na.rm = T))
+
+ggplot(dados_completos, aes(x=Duration_hours)) + 
+  geom_histogram(binwidth = 1, color="black", fill = "white") +
+  theme_classic() +
+  scale_y_continuous(n.breaks = 10) +
+  scale_x_continuous(n.breaks = 10)
+```
+
+```{r}
+dados_completos %>% summarise(mean(Concentration_uM, na.rm = T))
+dados_completos %>% summarise(sd(Concentration_uM, na.rm = T))
+dados_completos %>% summarise(median(Concentration_uM, na.rm = T))
+dados_completos %>% summarise(min(Concentration_uM, na.rm = T))
+dados_completos %>% summarise(max(Concentration_uM, na.rm = T))
+
+ggplot(dados_completos, aes(x=Concentration_uM)) + 
+  geom_histogram(binwidth = 1, color="black", fill = "white") +
+  theme_classic() +
+  scale_y_continuous(n.breaks = 10) +
+  scale_x_continuous(n.breaks = 10)
+```
+
+Diferenciacao
+```{r}
+dif = dados_completos %>% count(Diferentiation_method)
+```
+
+
+Reporting
+```{r}
+experiment_level = data.frame(
+  Feature=c("Describes cell source", 
+            "Describes cell authentication", 
+            "Describes mycoplasma testing", 
+            "Control group is clear",
+            "Describes Abeta sequence",
+            "Describes Abeta origin",
+            "Describes Abeta species",
+            "Describes Abeta aggregation",
+            "Has single exposure",
+            "Describes duration of Abeta exposure",
+            "Describes concentration of Abeta"),
+  Count = c(as.numeric(csource[2,2]+csource[1,2]), 
+            as.numeric(cauthent[2,2]), 
+            as.numeric(cmyco[2,2]), 
+            as.numeric(control[3,2]),
+            sum(!is.na(dados_completos$Abeta_sequence)),
+            as.numeric(a_orig[3,2]),
+            as.numeric(a_spec[3,2]),
+            as.numeric(a_aggr[4,2]),
+            as.numeric(a_exp[2,2]),
+            sum(!is.na(dados_completos$Duration_hours)),
+            sum(!is.na(dados_completos$Concentration_uM))),
+  Percent = c(as.numeric(csource[2,2]+csource[1,2])*100/nrow(dados_completos), 
+            as.numeric(cauthent[2,2])*100/nrow(dados_completos), 
+            as.numeric(cmyco[2,2])*100/nrow(dados_completos), 
+            as.numeric(control[3,2])*100/nrow(dados_completos),
+            sum(!is.na(dados_completos$Abeta_sequence))*100/nrow(dados_completos),
+            as.numeric(a_orig[3,2])*100/nrow(dados_completos),
+            as.numeric(a_spec[3,2])*100/nrow(dados_completos),
+            as.numeric(a_aggr[4,2])*100/nrow(dados_completos),
+            as.numeric(a_exp[2,2])*100/nrow(dados_completos),
+            sum(!is.na(dados_completos$Duration_hours))*100/nrow(dados_completos),
+            sum(!is.na(dados_completos$Concentration_uM))*100/nrow(dados_completos))
+)
+
+kable(experiment_level, digits = 1)
 ```
