@@ -35,6 +35,12 @@ Para montar um fluxograma:
 Número de comparações extraídas = `r nrow(dados_limpos)`
 Número de comparações excluídas por falta de dados = `r nrow(dados_limpos)-nrow(dados_completos)`
 
+Outras limpezas:
+```{r}
+dados_completos[dados_completos=="WST-1"] = "WST"
+dados_completos[dados_completos=="WST-8"] = "WST"
+```
+
 Calculei SDs a partir de SEMs (se estava 'unclear', considerei SEM).
 ```{r}
 dados_completos = dados_completos %>% mutate(control_sd = 
@@ -63,6 +69,8 @@ dados_meta_smd = rbind(dados_two_sample_smd, dados_one_sample_smd)
 dados_meta_smd = dados_meta_smd %>% mutate(Comparison.ID = 1:nrow(dados_meta_smd))
 ```
 
+
+
 Meta-análise (2-level SMD)
 ```{r}
 meta1 = rma(yi=yi, vi=vi, data = dados_meta_smd, measure = "SMD", method = "REML", slab = rayyan.key)
@@ -79,11 +87,53 @@ summary(dados_meta_smd$treated_n)
 
 summary(dados_meta_smd$vi)
 
-top.vi = dados_meta_smd %>% arrange(-vi) %>% select(c("vi")) %>% slice(1:10)
+top.vi = dados_meta_smd %>% arrange(-vi) %>% select(c("rayyan.key", "yi", "vi")) %>% slice(1:10)
 kable(top.vi)
-bottom.vi = dados_meta_smd %>% arrange(vi) %>% select(c("vi")) %>% slice(1:10)
+bottom.vi = dados_meta_smd %>% arrange(vi) %>% select(c("rayyan.key", "yi", "vi")) %>% slice(1:10)
 kable(bottom.vi)
 ```
+
+Além desses casos, observamos também outras comparacoes com tamanhos de efeito muito extremos. Devemos conferir esses outliers, comecando pelos mais extremos. Dependendo de quantos erros encontrarmos, decidimos até que threshold deveríamos conferir todas as extracoes. 
+```{r}
+menor.100 = dados_meta_smd %>% filter(yi <= -100) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
+kable(menor.100)
+
+menor.50 = dados_meta_smd %>% filter(yi <= -50) %>% filter(yi > -100) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
+kable(menor.50)
+
+menor.20 = dados_meta_smd %>% filter(yi <= -20) %>% filter(yi > -50) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
+kable(menor.20)
+
+menor.10 = dados_meta_smd %>% filter(yi <= -10) %>% filter(yi > -20) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
+kable(menor.10)
+```
+
+Comparacoes com g menor ou igual a -100: `r nrow(menor.100)`
+Comparacoes com g menor ou igual a -50 (e maior que -100): `r nrow(menor.50)`
+Comparacoes com g menor ou igual a -20 (e maior que -50): `r nrow(menor.20)`
+Comparacoes com g menor ou igual a -10 (e maior que -20): `r nrow(menor.10)`
+
+Para decidir os bins de variancia, podemos olhar pra distribuicao dos valores:
+
+```{r}
+ggplot(dados_meta_smd %>% filter(vi<1000), aes(x = vi)) + 
+  geom_histogram(binwidth = 1) + 
+  theme_classic()
+
+maior.1000 = dados_meta_smd %>% filter(vi>=1000)
+maior.500 = dados_meta_smd %>% filter(vi>=500) %>% filter(vi<1000)
+maior.100 = dados_meta_smd %>% filter(vi>=100) %>% filter(vi<500)
+maior.50 = dados_meta_smd %>% filter(vi>=50) %>% filter(vi<100)
+maior.10 = dados_meta_smd %>% filter(vi>=10) %>% filter(vi<50)
+
+```
+
+Comparacoes com vi maior ou igual a 1000: `r nrow(maior.1000)`
+Comparacoes com vi maior ou igual a 500 (e menor que 1000): `r nrow(maior.500)`
+Comparacoes com vi maior ou igual a 100 (e menor que 500): `r nrow(maior.100)`
+Comparacoes com vi maior ou igual a 50 (e menor que 100): `r nrow(maior.50)`
+Comparacoes com vi maior ou igual a 10 (e menor que 50): `r nrow(maior.10)`
+
 
 Por enquanto, removemos comparacoes com variancia igual ou maior que 1000.
 ```{r}
@@ -385,7 +435,7 @@ meta_assay = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random 
 meta_assay
 ```
 
-Aggregation bubble plot
+Assay bubble plot
 ```{r}
 ggplot(dados_meta_smd, aes(x = Assay, y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
