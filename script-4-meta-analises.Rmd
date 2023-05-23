@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = F)
 ```
 
 ```{r}
@@ -20,8 +20,7 @@ library(knitr)
 
 Depois da limpeza, importamos de volta para análises.
 ```{r}
-#dados_limpos = read_xlsx("dados_todos_limpos.xlsx")
-dados_limpos = read_xlsx("dados_extracao+autores.xlsx")
+dados_limpos = read_xlsx("dados_limpos.xlsx")
 ```
 
 Para análises, precisamos da média e n dos dois grupos e da variacao no tratado, seja SEM, SD ou Unclear. Também precisamos excluir casos em que a sequencia de abeta nao esteja clara.
@@ -39,6 +38,7 @@ Outras limpezas:
 ```{r}
 dados_completos[dados_completos=="WST-1"] = "WST"
 dados_completos[dados_completos=="WST-8"] = "WST"
+dados_completos$Duration_hours = as.numeric(dados_completos$Duration_hours)
 ```
 
 Calculei SDs a partir de SEMs (se estava 'unclear', considerei SEM).
@@ -66,7 +66,7 @@ dados_one_sample_smd = escalc(measure = "SMD", m1i = as.numeric(treated_mean), m
 
 dados_meta_smd = rbind(dados_two_sample_smd, dados_one_sample_smd)
 
-dados_meta_smd = dados_meta_smd %>% mutate(Comparison.ID = 1:nrow(dados_meta_smd))
+dados_meta_smd = dados_meta_smd %>% mutate(Comparison_ID = 1:nrow(dados_meta_smd))
 ```
 
 
@@ -134,7 +134,23 @@ Comparacoes com vi maior ou igual a 100 (e menor que 500): `r nrow(maior.100)`
 Comparacoes com vi maior ou igual a 50 (e menor que 100): `r nrow(maior.50)`
 Comparacoes com vi maior ou igual a 10 (e menor que 50): `r nrow(maior.10)`
 
+```{r}
+#first round of double checking
+selected.ES = dados_meta_smd %>% filter(yi <= -50)
 
+selected.Var = dados_meta_smd %>% filter(vi>=100)
+
+lista_double_checking = bind_rows(selected.ES, selected.Var, .id = "motivo")
+
+writexl::write_xlsx(lista_double_checking, "lista_outliers.xlsx")
+
+selected.concent = dados_meta_smd %>% filter(Concentration_uM >100) %>% select(c("rayyan.key", "Comparison_ID"))
+writexl::write_xlsx(selected.concent, "lista_concentracao.xlsx")
+
+selected.duration = dados_meta_smd %>% filter(Duration_hours>72) %>% select(c("rayyan.key", "Comparison_ID"))
+writexl::write_xlsx(selected.duration, "lista_duracao.xlsx")
+
+```
 Por enquanto, removemos comparacoes com variancia igual ou maior que 1000.
 ```{r}
 dados_meta_smd = dados_meta_smd %>% filter(vi<1000)
@@ -154,9 +170,9 @@ Forest plot (SMD)
 
 Meta-análise (3-level SMD)
 ```{r}
-dados_meta_smd = dados_meta_smd %>% mutate(Comparison.ID = 1:nrow(dados_meta_smd))
+#dados_meta_smd = dados_meta_smd %>% mutate(Comparison_ID = 1:nrow(dados_meta_smd))
 
-meta_3l = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison.ID)
+meta_3l = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID)
 meta_3l
 #confint(meta_3l)
 ```
@@ -330,7 +346,7 @@ Meta-regressions (3-level)
 
 Differentiation
 ```{r}
-meta_differentiation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison.ID, mods = ~relevel(factor(dados_meta_smd$Diferentiation_method), ref="No differentiation"))
+meta_differentiation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Diferentiation_method), ref="No differentiation"))
 
 meta_differentiation
 ```
@@ -349,7 +365,7 @@ ggplot(dados_meta_smd, aes(x = Diferentiation_method, y=yi, size = 1/sqrt(vi))) 
 
 Diff. duration
 ```{r}
-meta_difduration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison.ID, mods = ~dados_meta_smd$Diferentiation_duration_days)
+meta_difduration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~dados_meta_smd$Diferentiation_duration_days)
 
 meta_difduration
 ```
@@ -369,7 +385,7 @@ ggplot(dados_meta_smd, aes(x = Diferentiation_duration_days, y=yi, size = 1/sqrt
 
 Aggregation
 ```{r}
-meta_aggregation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison.ID, mods = ~relevel(factor(dados_meta_smd$Abeta_aggregation), ref="Unclear"))
+meta_aggregation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Abeta_aggregation), ref="Unclear"))
 
 meta_aggregation
 ```
@@ -390,7 +406,7 @@ Abeta concentration
 ```{r}
 dados_meta_smd_max2500 = dados_meta_smd %>% filter(Concentration_uM<2500)
 
-meta_concent = rma.mv(yi=yi, V=vi, data = dados_meta_smd_max2500, method = "REML", random = ~1|rayyan.key/Comparison.ID, mods = ~dados_meta_smd_max2500$Concentration_uM)
+meta_concent = rma.mv(yi=yi, V=vi, data = dados_meta_smd_max2500, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~dados_meta_smd_max2500$Concentration_uM)
 
 meta_concent
 ```
@@ -410,14 +426,14 @@ ggplot(dados_meta_smd_max2500, aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi)
 
 Abeta duration of exposure
 ```{r}
-meta_duration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison.ID, mods = ~dados_meta_smd$Duration_hours)
+meta_duration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_smd$Duration_hours))
 
 meta_duration
 ```
 
 Abeta duration bubble plot
 ```{r}
-ggplot(dados_meta_smd, aes(x = Duration_hours, y=yi, size = 1/sqrt(vi))) + 
+ggplot(dados_meta_smd, aes(x = as.numeric(Duration_hours), y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 1, stroke = 1) + 
   labs(y = "Hedge's g", x = "Abeta duration of exposure (hours)") + 
   theme_classic() + 
@@ -430,7 +446,7 @@ ggplot(dados_meta_smd, aes(x = Duration_hours, y=yi, size = 1/sqrt(vi))) +
 
 Assay
 ```{r}
-meta_assay = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison.ID, mods = ~relevel(factor(dados_meta_smd$Assay), ref="MTT"))
+meta_assay = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Assay), ref="MTT"))
 
 meta_assay
 ```
@@ -447,7 +463,24 @@ ggplot(dados_meta_smd, aes(x = Assay, y=yi, size = 1/sqrt(vi))) +
   geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
 ```
 
-(aqui ainda falta a análise por densidade celular, falta limpar/organizar os dados)
+Cell density
+```{r}
+meta_density = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_smd$Cell_density))
+
+meta_density
+```
+Cell density bubble plot
+```{r}
+ggplot(dados_meta_smd, aes(x = as.numeric(Cell_density), y=yi, size = 1/sqrt(vi))) + 
+  geom_point(shape = 1, stroke = 1) + 
+  labs(y = "Hedge's g", x = "Cell density (log10 scale)") + 
+  theme_classic() + 
+  scale_size_continuous(guide = "none") + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(n.breaks = 7) + 
+  scale_x_continuous(trans = "log10") + 
+  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+```
 
 Multivariate Meta-regressions (3-level)
 
@@ -455,7 +488,7 @@ Multivariate Meta-regressions (3-level)
 
 ```{r mv-functions}
 rma.mv.glmulti <- function(formula, data, ...)
-   rma.mv(formula, vi, data=data, method="ML", random = ~1|rayyan.key/Comparison.ID, verbose = FALSE, ...)
+   rma.mv(formula, vi, data=data, method="ML", random = ~1|rayyan.key/Comparison_ID, verbose = FALSE, ...)
 ```
 
 Functions to decompose R2 (3-level)
@@ -490,13 +523,13 @@ all_model_comparisons_3a = function (comparison_list) {
     } else {
       # Se tem preditores, usa a fÃ³rmula que vem da outra funÃ§Ã£o
       m0f = as.formula(m0s)
-      m0 = rma.mv(yi, vi, random = ~1|rayyan.key/Comparison.ID, mods = m0f, data=dat, method="ML", control = list(maxiter = 3000))
+      m0 = rma.mv(yi, vi, random = ~1|rayyan.key/Comparison_ID, mods = m0f, data=dat, method="ML", control = list(maxiter = 3000))
     }
     
     m1f = as.formula(m1s)
-    m1 = rma.mv(yi, vi, random = ~1|rayyan.key/Comparison.ID, mods = m1f, data=dat, method="ML", control = list(maxiter = 3000))
+    m1 = rma.mv(yi, vi, random = ~1|rayyan.key/Comparison_ID, mods = m1f, data=dat, method="ML", control = list(maxiter = 3000))
    
-    m2 = rma.mv(yi=yi, V=vi, data = dat, method = "REML", random = ~1|rayyan.key/Comparison.ID, control = list(maxiter = 3000)) 
+    m2 = rma.mv(yi=yi, V=vi, data = dat, method = "REML", random = ~1|rayyan.key/Comparison_ID, control = list(maxiter = 3000)) 
     
     reduced_model_size = length(all.vars(m1f)) - 1
     
@@ -527,18 +560,15 @@ get_R2_for_all_predictors_3a = function (todos_preditores) {
 }
 ```
 
-
-**obs! revisar depois para adicionar cell density
-
 Como a gente só pode usar as comparacoes que tenham a descricao completa de todas as variáveis testadas, precisamos filtrar os dadose conferir se seguimos com N suficiente.
 ```{r}
 dados_uteis <- dados_meta_smd
-dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Assay", "Diferentiation_duration_days", "Concentration_uM", "Duration_hours")], 1, anyNA),]
+dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Assay", "Diferentiation_duration_days", "Concentration_uM", "Duration_hours", "Cell_density")], 1, anyNA),]
 ```
 Considering all pre-registered variables, we'd have `r nrow(dados_uteis)` experiments available (i.e. `r nrow(dados_meta_smd)-nrow(dados_uteis)` exclusions due to missing data). As we have 7 variables, we should have at least 70 comparisons - so can use all of them now. There are `r 2^7` possible models.
 
 ```{r}
-multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Assay + Diferentiation_duration_days + Concentration_uM + Duration_hours, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^6), plotty = F)
+multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Assay + Diferentiation_duration_days + Concentration_uM + Duration_hours + Cell_density, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^7), plotty = F)
 ```
 ```{r}
 print(multi_meta_reg)
@@ -547,65 +577,67 @@ print(multi_meta_reg)
 Decomposing R2 for the best model:
 ```{r}
 dat = dados_uteis
-meus_preditores = c("Diferentiation_duration_days", "Duration_hours")
+meus_preditores = c("Diferentiation_duration_days", "Concentration_uM", "Duration_hours", "Cell_density")
 melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
 
 melhor_modelo.summary = melhor_modelo$summary 
 
-melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
-melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[1]], btt = 2)$QMp
-melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[1]], btt = 3)$QMp
+#revisar!!!
+#melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+#melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[1]], btt = 2)$QMp
+#melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[1]], btt = 3)$QMp
 ```
 
 Resultados:
 ```{r}
-multi_meta_reg@objects[[1]]
+#multi_meta_reg@objects[[1]]
 
-melhor_modelo.summary %>% select(1,3,4)
+#melhor_modelo.summary %>% select(1,3,4)
 ```
 
 ## excluindo outliers de concentracao de abeta:
 
 Como a gente só pode usar as comparacoes que tenham a descricao completa de todas as variáveis testadas, precisamos filtrar os dadose conferir se seguimos com N suficiente.
 ```{r}
-dados_uteis <- dados_meta_smd_max2500
-dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Assay", "Diferentiation_duration_days", "Concentration_uM", "Duration_hours")], 1, anyNA),]
+#dados_uteis <- dados_meta_smd_max2500
+#dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Assay", "Diferentiation_duration_days", "Concentration_uM", "Duration_hours")], 1, anyNA),]
 ```
 Considering all pre-registered variables, we'd have `r nrow(dados_uteis)` experiments available (i.e. `r nrow(dados_meta_smd_max2500)-nrow(dados_uteis)` exclusions due to missing data). As we have 7 variables, we should have at least 70 comparisons - so can use all of them now. There are `r 2^7` possible models.
 
 ```{r}
-multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Assay + Diferentiation_duration_days + Concentration_uM + Duration_hours, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^6), plotty = F)
+#multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Assay + Diferentiation_duration_days + Concentration_uM + Duration_hours, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^6), plotty = F)
 ```
 ```{r}
-print(multi_meta_reg)
+#print(multi_meta_reg)
 ```
 
 Decomposing R2 for the best model:
 ```{r}
-dat = dados_uteis
-meus_preditores = c("Diferentiation_duration_days", "Duration_hours")
-melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
+#dat = dados_uteis
+#meus_preditores = c("Diferentiation_duration_days", "Duration_hours")
+#melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
 
-melhor_modelo.summary = melhor_modelo$summary 
+#melhor_modelo.summary = melhor_modelo$summary 
 
-melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
-melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[1]], btt = 2)$QMp
-melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[1]], btt = 3)$QMp
+#melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+#melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[1]], btt = 2)$QMp
+#melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[1]], btt = 3)$QMp
 ```
 
 Resultados:
 ```{r}
-multi_meta_reg@objects[[1]]
+#multi_meta_reg@objects[[1]]
 
-melhor_modelo.summary %>% select(1,3,4)
+#melhor_modelo.summary %>% select(1,3,4)
 ```
+
 ### Controle de qualidade dos dados
 
 Revisor como moderador
 ```{r}
 dados_meta_smd %>% count(Created.By)
 
-meta_revisor = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison.ID, mods = ~relevel(factor(dados_meta_smd$Created.By), ref = "Adriano Sebollela"))
+meta_revisor = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Created.By), ref = "Adriano Sebollela"))
 
 meta_revisor
 
@@ -670,24 +702,52 @@ Experiment-level info
 Assay
 ```{r}
 assay = dados_completos %>% count(Assay)
+kable(assay %>% arrange(-n), digits = 1)
 ```
 
 Cell line
 ```{r}
 csource = dados_completos %>% count(Cell_source)
-cbank = dados_completos %>% count(Cell_bank)
+kable(csource %>% arrange(-n), digits = 1)
+
+cbank = dados_completos %>% filter(Cell_source=="Cell bank") %>% count(Cell_bank)
+kable(cbank %>% arrange(-n), digits = 1)
+
 cauthent = dados_completos %>% count(Cell_authentication)
+kable(cauthent %>% arrange(-n), digits = 1)
+
 cmyco = dados_completos %>% count(Cell_mycoplasma)
+kable(cmyco %>% arrange(-n), digits = 1)
+
+cserum = dados_completos %>% count(Serum_type)
+kable(cserum %>% arrange(-n), digits = 1)
+
+cserumconc = dados_completos %>% count(Serum_concentration)
+kable(cserumconc %>% arrange(-n), digits = 1)
+
+#adicionar meio de cultura e suplementos
 ```
 
 Treatment
 ```{r}
 control = dados_completos %>% count(Control_description)
+kable(control %>% arrange(-n), digits = 1)
+
 a_seq = dados_completos %>% count(Abeta_sequence)
+kable(a_seq %>% arrange(-n), digits = 1)
+
 a_orig = dados_completos %>% count(Abeta_origin)
+kable(a_orig %>% arrange(-n), digits = 1)
+
 a_spec = dados_completos %>% count(Abeta_species)
+kable(a_spec %>% arrange(-n), digits = 1)
+
 a_aggr = dados_completos %>% count(Abeta_aggregation)
+kable(a_aggr %>% arrange(-n), digits = 1)
+
 a_exp = dados_completos %>% count(Single_exposure)
+kable(a_exp %>% arrange(-n), digits = 1)
+
 ```
 
 ```{r}
@@ -721,6 +781,9 @@ ggplot(dados_completos, aes(x=Concentration_uM)) +
 Diferenciacao
 ```{r}
 dif = dados_completos %>% count(Diferentiation_method)
+kable(dif %>% arrange(-n), digits = 1)
+
+#adicionar meio de cultura, suplementos, soro e concentracao
 ```
 
 
