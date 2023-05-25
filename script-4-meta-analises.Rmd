@@ -18,7 +18,7 @@ library(glmulti)
 library(knitr)
 ```
 
-Depois da limpeza, importamos de volta para análises.
+Depois da limpeza, importamos dados de volta para análises.
 ```{r}
 dados_limpos = read_xlsx("dados_limpos.xlsx")
 ```
@@ -51,7 +51,7 @@ dados_completos = dados_completos %>% mutate(treated_sd =
 
 ```
 
-Para usar SMD, precisamos do SD dos dois grupos necessariamente - decidimos considerar sd do controle igual ao tratado (que vai ser igual ao pooled), pelo menos até Olavo revisar artigos sobre o assunto.
+Para usar SMD, precisamos do SD dos dois grupos necessariamente - decidimos considerar sd do controle igual ao tratado (que vai ser igual ao pooled).
 
 ```{r}
 dados_two_sample = dados_completos %>% filter(!is.na(control_sd)) %>% filter(control_sd!=0)
@@ -69,7 +69,7 @@ dados_meta_smd = rbind(dados_two_sample_smd, dados_one_sample_smd)
 dados_meta_smd = dados_meta_smd %>% mutate(Comparison_ID = 1:nrow(dados_meta_smd))
 ```
 
-
+# Meta-análise 2-level
 
 Meta-análise (2-level SMD)
 ```{r}
@@ -77,6 +77,8 @@ meta1 = rma(yi=yi, vi=vi, data = dados_meta_smd, measure = "SMD", method = "REML
 summary(meta1)
 #confint(meta1)
 ```
+
+## OBS: Outliers e limpezas adicionais
 
 Sobre o alerta "Ratio of largest to smallest sampling variance extremely large. May not be able to obtain stable results.", ver essa discussao: https://stat.ethz.ch/pipermail/r-sig-meta-analysis/2019-February/001426.html
 Podemos conferir a distribuicao de sample sizes e de vi para ver onde pode estar o problema:
@@ -93,7 +95,7 @@ bottom.vi = dados_meta_smd %>% arrange(vi) %>% select(c("rayyan.key", "yi", "vi"
 kable(bottom.vi)
 ```
 
-Além desses casos, observamos também outras comparacoes com tamanhos de efeito muito extremos. Devemos conferir esses outliers, comecando pelos mais extremos. Dependendo de quantos erros encontrarmos, decidimos até que threshold deveríamos conferir todas as extracoes. 
+Além desses casos, observamos também outras comparacoes com tamanhos de efeito muito extremos. Decidimos conferir esses outliers, comecando pelos mais extremos. Dependendo de quantos erros encontrarmos, decidir até que threshold deveríamos conferir todas as extracoes. 
 ```{r}
 menor.100 = dados_meta_smd %>% filter(yi <= -100) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
 kable(menor.100)
@@ -136,6 +138,8 @@ Comparacoes com vi maior ou igual a 10 (e menor que 50): `r nrow(maior.10)`
 
 ```{r}
 #first round of double checking
+#based on dataset 20230512_dados_limpos
+
 selected.ES = dados_meta_smd %>% filter(yi <= -50)
 
 selected.Var = dados_meta_smd %>% filter(vi>=100)
@@ -151,6 +155,21 @@ selected.duration = dados_meta_smd %>% filter(Duration_hours>72) %>% select(c("r
 writexl::write_xlsx(selected.duration, "lista_duracao.xlsx")
 
 ```
+
+Durante a limpeza de n_definition, notei erros na extracao dos valores de n. De 11 artigos revisados inicialmente, 5 estavam sem o valor de n extraído sendo que o artigo reporta médias de replicatas e informa o número de replicatas.
+
+Devemos decidir se vale revisar todos os casos sem n:
+```{r}
+sem_n = dados_limpos %>% filter(control_mean!=0&!is.na(control_mean)&treated_mean!=0&!is.na(treated_mean)&treated_variation!=0&!is.na(treated_variation)) %>% filter(is.na(treated_n)|is.na(control_n))
+sem_n_artigos = sem_n %>% count(rayyan.key)
+```
+
+Total de comparacoes a revisar: `r nrow(sem_n)`
+Total de artigos: `r nrow(sem_n_artigos)`
+
+# Meta-análises sem outliers
+
+## 2-level 
 Por enquanto, removemos comparacoes com variancia igual ou maior que 1000.
 ```{r}
 dados_meta_smd = dados_meta_smd %>% filter(vi<1000)
@@ -159,14 +178,14 @@ summary(meta1)
 confint(meta1)
 ```
 
-Acho que vale conferir pelo menos os 4 maiores valores de vi, mas talvez mesmo os outros ainda ficam algumas ordens de grandeza acima dos menores valores.
-
 Forest plot (SMD)
 ```{r, fig.height=15, fig.width=10}
 #forest1 = viz_forest(meta1, study_labels = dados_meta_smd$rayyan.key, col = "black", annotate_CI = TRUE, xlab = "Hedge's g")
 #forest1
 #ggsave("forest.png", width = 10, height = 49, units = "in")
 ```
+
+## 3-level 
 
 Meta-análise (3-level SMD)
 ```{r}
@@ -310,6 +329,29 @@ mlm.variance.distribution = var.comp = function(x){
 mlm.variance.distribution(x = meta_3l)
 ```
 
+### excluindo n de replicatas ou outras unidades nao independentes
+
+```{r}
+dados_meta_smd %>% count(n_definition)
+dados_meta_smd_independent = dados_meta_smd %>% filter(n_definition=="independent determinations" | 
+                                                            n_definition=="independent experimental measurements" |
+                                                            n_definition=="independent experiments" |
+                                                            n_definition=="independent repetitions" |
+                                                            n_definition=="independent replicates" |
+                                                            n_definition=="independent sets of studies")
+```
+
+```{r}
+meta_3l_independent = rma.mv(yi=yi, V=vi, data = dados_meta_smd_independent, method = "REML", random = ~1|rayyan.key/Comparison_ID)
+meta_3l_independent
+#confint(meta_3l_independent)
+```
+```{r fig.keep='none', warning=FALSE}
+mlm.variance.distribution(x = meta_3l_independent)
+```
+
+## Publication bias
+
 Trim-and-fill (only for 2-level model)
 
 ```{r}
@@ -342,7 +384,7 @@ Egger's regression
 regtest(x = meta1, ni = dados_meta_smd$mean_n, predictor = "sqrtninv")
 ```
 
-Meta-regressions (3-level)
+## Meta-regressions (3-level)
 
 Differentiation
 ```{r}
@@ -372,7 +414,7 @@ meta_difduration
 
 Diff. duration bubble plot
 ```{r}
-ggplot(dados_meta_smd, aes(x = Diferentiation_duration_days, y=yi, size = 1/sqrt(vi))) + 
+ggplot(dados_meta_smd, aes(x = as.numeric(Diferentiation_duration_days), y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 1, stroke = 1) + 
   labs(y = "Hedge's g", x = "Duration of differentiation (days)") + 
   theme_classic() + 
@@ -482,7 +524,7 @@ ggplot(dados_meta_smd, aes(x = as.numeric(Cell_density), y=yi, size = 1/sqrt(vi)
   geom_abline(slope = 0, linetype = "dashed", color = "grey")
 ```
 
-Multivariate Meta-regressions (3-level)
+## Multivariate Meta-regressions (3-level)
 
 "All combinations of variables from the selected list were tested in multivariable models, and the best models were ranked by corrected Akaike Information Criteria (AICc). For each best model selected (for complete, training and reactivation datasets with 2- and 3-level analyses), we decomposed the R2 value for each moderator included. For this, we calculated the mean of the differences between R2 from models with and without the moderator in all possible orders of moderator inclusion. Additionally, we performed a Q test of moderators for each variable (including all dummy variables for each categorical moderator) to obtain p-values for individual variables."
 
@@ -595,7 +637,7 @@ Resultados:
 #melhor_modelo.summary %>% select(1,3,4)
 ```
 
-## excluindo outliers de concentracao de abeta:
+### excluindo outliers de concentracao de abeta:
 
 Como a gente só pode usar as comparacoes que tenham a descricao completa de todas as variáveis testadas, precisamos filtrar os dadose conferir se seguimos com N suficiente.
 ```{r}
@@ -631,7 +673,7 @@ Resultados:
 #melhor_modelo.summary %>% select(1,3,4)
 ```
 
-### Controle de qualidade dos dados
+# Controle de qualidade dos dados
 
 Revisor como moderador
 ```{r}
@@ -654,7 +696,7 @@ ggplot(dados_meta_smd, aes(x = Created.By, y=yi, size = 1/sqrt(vi))) +
   scale_x_discrete(guide = guide_axis(angle = 45))
 ```
 
-### Análises descritivas
+# Análises descritivas
 
 ```{r}
 dados_por_artigo = dados_completos %>% distinct(rayyan.key, .keep_all = T)
