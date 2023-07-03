@@ -1,0 +1,268 @@
+---
+title: "Análise e manejo de outliers"
+author: "Clarissa F. D. Carneiro"
+date: "2023-06-06"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, warning = F)
+```
+
+Objetivo: Comparar valores de médias e desvios entre a extracao original e re-extracao. A amostra re-extraída foi selecionada por serem outliers, ou no tamanho de efeito ou na variancia dele.
+
+```{r, include=FALSE}
+library(readxl)
+library(tidyverse)
+library(metafor)
+library(metaviz)
+library(glmulti)
+library(knitr)
+```
+
+```{r}
+#cópia do dia em que decidimos voltar e revisar outliers
+dados_limpos = read_xlsx("20230512_dados_limpos.xlsx")
+```
+
+```{r}
+##Passos de limpeza/organizacao incluídos pras metanálises:
+
+#remove comparacoes sem dados de média, variacao ou n
+
+dados_completos = dados_limpos %>% filter(control_mean!=0&!is.na(control_mean)&treated_mean!=0&!is.na(treated_mean)&control_n!=0&!is.na(control_n)&treated_n!=0&!is.na(treated_n)&treated_variation!=0&!is.na(treated_variation))
+
+dados_completos = dados_completos %>% filter(Abeta_sequence!="Not informed") %>% filter(Abeta_sequence!="not reported") %>% filter(!is.na(Abeta_sequence))
+
+#converte SEM para SD, se necessário
+
+dados_completos = dados_completos %>% mutate(control_sd = 
+                                       if_else(condition = variation=="SD", true = control_variation, false = (control_variation*sqrt(control_n))))
+
+dados_completos = dados_completos %>% mutate(treated_sd = 
+                                       if_else(condition = variation=="SD", true = treated_variation, false = (treated_variation*sqrt(treated_n))))
+
+#calcula pooled SD por dois métodos, dependendo da normalizacao (desenho one-sample ou two-sample)
+dados_two_sample = dados_completos %>% filter(!is.na(control_sd)) %>% filter(control_sd!=0)
+
+dados_one_sample = dados_completos %>% filter(is.na(control_sd)|control_sd==0)
+
+#calcula tamanhos de efeito para os dois desenhos
+dados_two_sample_smd = escalc(measure = "SMD", m1i = as.numeric(treated_mean), m2i = as.numeric(control_mean), sd1i = as.numeric(treated_sd), sd2i = as.numeric(control_sd), n1i = as.numeric(treated_n), n2i = as.numeric(control_n), data = dados_two_sample)
+
+dados_one_sample_smd = escalc(measure = "SMD", m1i = as.numeric(treated_mean), m2i = as.numeric(control_mean), sd1i = as.numeric(treated_sd), sd2i = as.numeric(treated_sd), n1i = as.numeric(treated_n), n2i = as.numeric(control_n), data = dados_one_sample)
+
+#junta os dados e adiciona um ID para comparacoes
+dados_meta_smd = rbind(dados_two_sample_smd, dados_one_sample_smd)
+
+dados_meta_smd = dados_meta_smd %>% mutate(Comparison_ID = 1:nrow(dados_meta_smd))
+```
+
+Ao tentar fazer a meta-análise inicial, houve um erro que aponta para uma diferenca muito grande entre a menor e maior variancia (ou n). Os autores da funcao de análise indicam que isso pode ocorrer por erros de extracao de dados.
+
+Comecamos conferindo a distribuicao de sample sizes e de vi para ver onde pode estar o problema:
+```{r}
+summary(dados_meta_smd$control_n)
+
+summary(dados_meta_smd$treated_n)
+
+summary(dados_meta_smd$vi)
+
+top.vi = dados_meta_smd %>% arrange(-vi) %>% select(c("rayyan.key", "yi", "vi")) %>% slice(1:10)
+kable(top.vi)
+bottom.vi = dados_meta_smd %>% arrange(vi) %>% select(c("rayyan.key", "yi", "vi")) %>% slice(1:10)
+kable(bottom.vi)
+```
+
+Além desses casos, observamos também outras comparacoes com tamanhos de efeito muito extremos. Decidimos conferir esses outliers, comecando pelos mais extremos. Dependendo de quantos erros encontrarmos, devemos decidir até que threshold deveríamos conferir todas as extracoes. 
+```{r}
+menor.100 = dados_meta_smd %>% filter(yi <= -100) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
+
+menor.50 = dados_meta_smd %>% filter(yi <= -50) %>% filter(yi > -100) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
+
+menor.20 = dados_meta_smd %>% filter(yi <= -20) %>% filter(yi > -50) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
+
+menor.10 = dados_meta_smd %>% filter(yi <= -10) %>% filter(yi > -20) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
+```
+
+Comparacoes com g menor ou igual a -100: `r nrow(menor.100)`
+
+Comparacoes com g menor ou igual a -50 (e maior que -100): `r nrow(menor.50)`
+
+Comparacoes com g menor ou igual a -20 (e maior que -50): `r nrow(menor.20)`
+
+Comparacoes com g menor ou igual a -10 (e maior que -20): `r nrow(menor.10)`
+
+Para decidir os bins de variancia, podemos olhar pra distribuicao dos valores:
+
+```{r}
+ggplot(dados_meta_smd %>% filter(vi<1000), aes(x = vi)) + 
+  geom_histogram(binwidth = 1) + 
+  theme_classic()
+
+maior.1000 = dados_meta_smd %>% filter(vi>=1000)
+maior.500 = dados_meta_smd %>% filter(vi>=500) %>% filter(vi<1000)
+maior.100 = dados_meta_smd %>% filter(vi>=100) %>% filter(vi<500)
+maior.50 = dados_meta_smd %>% filter(vi>=50) %>% filter(vi<100)
+maior.10 = dados_meta_smd %>% filter(vi>=10) %>% filter(vi<50)
+
+```
+
+Comparacoes com vi maior ou igual a 1000: `r nrow(maior.1000)`
+
+Comparacoes com vi maior ou igual a 500 (e menor que 1000): `r nrow(maior.500)`
+
+Comparacoes com vi maior ou igual a 100 (e menor que 500): `r nrow(maior.100)`
+
+Comparacoes com vi maior ou igual a 50 (e menor que 100): `r nrow(maior.50)`
+
+Comparacoes com vi maior ou igual a 10 (e menor que 50): `r nrow(maior.10)`
+
+
+No primeiro round de verificacoes, decidimos re-extrair médias e variacao das comparacoes com tamanho de efeito menor ou igual a -50, e variancia maior ou igual a 100.
+```{r}
+selected.ES = dados_meta_smd %>% filter(yi <= -50)
+
+selected.Var = dados_meta_smd %>% filter(vi>=100)
+
+lista_double_checking = bind_rows(selected.ES, selected.Var, .id = "motivo")
+
+#writexl::write_xlsx(lista_double_checking, "lista_outliers.xlsx")
+
+#também listamos para conferencia as comparacoes com outliers de concentracao de Abeta e duracao da exposicao, mas nao estamos usando o resultado agora
+selected.concent = dados_meta_smd %>% filter(Concentration_uM >100) %>% select(c("rayyan.key", "Comparison_ID"))
+#writexl::write_xlsx(selected.concent, "lista_concentracao.xlsx")
+
+selected.duration = dados_meta_smd %>% filter(Duration_hours>72) %>% select(c("rayyan.key", "Comparison_ID"))
+#writexl::write_xlsx(selected.duration, "lista_duracao.xlsx")
+
+```
+
+```{r}
+#cópia do dia 06-06-2023
+dados_limpos2 = read_xlsx("dados_limpos.xlsx")
+
+#filtra só as comparacoes de interesse
+dados_parciais = dados_limpos2 %>% filter(!is.na(control_mean_double_check))
+```
+
+```{r}
+##Passos de limpeza/organizacao incluídos pras metanálises:
+
+#converte SEM para SD, se necessário
+
+dados_completos2 = dados_parciais %>% mutate(control_sd = 
+                                       if_else(condition = variation=="SD", true = control_variation, false = (control_variation*sqrt(control_n))))
+
+dados_completos2 = dados_completos2 %>% mutate(treated_sd = 
+                                       if_else(condition = variation=="SD", true = treated_variation, false = (treated_variation*sqrt(treated_n))))
+
+dados_completos2 = dados_completos2 %>% mutate(control_sd2 = 
+                                       if_else(condition = variation=="SD", true = control_variation_double_check, false = (control_variation_double_check*sqrt(control_n))))
+
+dados_completos2 = dados_completos2 %>% mutate(treated_sd2 = 
+                                       if_else(condition = variation=="SD", true = treated_variation_double_check, false = (treated_variation_double_check*sqrt(treated_n))))
+
+#calculos por dois métodos, dependendo da normalizacao (desenho one-sample ou two-sample)
+dados_two_sample2 = dados_completos2 %>% filter(!is.na(control_sd)) %>% filter(control_sd!=0)
+
+dados_one_sample2 = dados_completos2 %>% filter(is.na(control_sd)|control_sd==0)
+
+dados_two_sample_smd2 = escalc(measure = "SMD", m1i = as.numeric(treated_mean), m2i = as.numeric(control_mean), sd1i = as.numeric(treated_sd), sd2i = as.numeric(control_sd), n1i = as.numeric(treated_n), n2i = as.numeric(control_n), data = dados_two_sample2)
+
+dados_one_sample_smd2 = escalc(measure = "SMD", m1i = as.numeric(treated_mean), m2i = as.numeric(control_mean), sd1i = as.numeric(treated_sd), sd2i = as.numeric(treated_sd), n1i = as.numeric(treated_n), n2i = as.numeric(control_n), data = dados_one_sample2)
+
+dados_two_sample_smd3 = escalc(measure = "SMD", m1i = as.numeric(treated_mean_double_check), m2i = as.numeric(control_mean_double_check), sd1i = as.numeric(treated_sd2), sd2i = as.numeric(control_sd2), n1i = as.numeric(treated_n), n2i = as.numeric(control_n), data = dados_two_sample2)
+
+dados_one_sample_smd3 = escalc(measure = "SMD", m1i = as.numeric(treated_mean_double_check), m2i = as.numeric(control_mean_double_check), sd1i = as.numeric(treated_sd2), sd2i = as.numeric(treated_sd2), n1i = as.numeric(treated_n), n2i = as.numeric(control_n), data = dados_one_sample2)
+
+#junta os dados e adiciona um ID para comparacoes
+dados_meta_smd2 = rbind(dados_two_sample_smd2, dados_one_sample_smd2)
+
+dados_meta_smd2 = dados_meta_smd2 %>% mutate(Comparison_ID = 1:nrow(dados_meta_smd2))
+
+dados_meta_smd3 = rbind(dados_two_sample_smd3, dados_one_sample_smd3)
+
+dados_meta_smd3 = dados_meta_smd3 %>% mutate(Comparison_ID = 1:nrow(dados_meta_smd3))
+
+dados_meta_smd4 = full_join(dados_meta_smd2, dados_meta_smd3, by =  c("rayyan.key", "Comparison_ID", "doi", "first_author", "title", "journal", "year", "tests_reversal", "sample_size_calculation", "conflict_interest", "protocol_registration", "Created.By", "figure", "dep_variable", "control_name", "treated_name", "control_mean", "control_mean_double_check", "control_variation", "control_variation_double_check", "control_n", "treated_mean", "treated_mean_double_check", "treated_variation", "treated_variation_double_check", "treated_n", "variation", "n_definition", "OBS_n", "OBS_general", "Assay", "Cell_source", "Cell_bank", "Cell_authentication", "Cell_mycoplasma", "Control_description", "Abeta_sequence", "Abeta_origin", "Abeta_species", "Abeta_aggregation", "Single_exposure", "Duration_hours", "Concentration_uM", "Passage_number", "N_cells", "N_cells_unit", "N_cells_volume", "Plate_size", "Well_area", "Cell_density", "Culture_medium", "Culture_medium_corrected", "Medium_supplements", "Antibiotics", "Glutamine", "Serum_type", "Serum_concentration", "Diferentiation_method", "Diferentiation_duration_days", "Differentiation_medium", "Differentiation_serum_type", "Differentiation_serum_concentration", "Differentiation_RA_concentration", "Differentiation_supplements", "Differentiation_antibiotics", "Differentiation_glutamine", "Differentiation_protocol", "OBS", "control_sd", "treated_sd", "control_sd2", "treated_sd2"))
+```
+
+Correlacoes:
+
+```{r}
+ggplot(dados_meta_smd4, aes(x = control_mean, y = control_mean_double_check)) +
+  geom_point() + 
+  labs(x = "original", y = "reextracao", title = "médias, controles") + 
+  theme_classic() + 
+  scale_x_continuous(breaks = c(0, 100, 500, 1000)) +
+  scale_y_continuous(n.breaks = 10, limits = c(98.8, 102))
+```
+
+```{r}
+ggplot(dados_meta_smd4, aes(x = treated_mean, y = treated_mean_double_check)) +
+  geom_point() + 
+  labs(x = "original", y = "reextracao", title = "médias, tratados") + 
+  theme_classic() + 
+  scale_x_continuous(n.breaks = 10, limits = c(0, 100)) +
+  scale_y_continuous(n.breaks = 10, limits = c(0, 100))
+```
+
+```{r}
+ggplot(dados_meta_smd4, aes(x = control_variation, y = control_variation_double_check)) +
+  geom_point() + 
+  labs(x = "original", y = "reextracao", title = "SEM/SD, controles") + 
+  theme_classic()
+```
+
+```{r}
+ggplot(dados_meta_smd4, aes(x = treated_variation, y = treated_variation_double_check)) +
+  geom_point() + 
+  labs(x = "original", y = "reextracao", title = "SEM/SD, tratados") + 
+  theme_classic()
+```
+
+```{r}
+ggplot(dados_meta_smd4, aes(x = control_sd, y = control_sd2)) +
+  geom_point() + 
+  labs(x = "original", y = "reextracao", title = "SD calculado, controles") + 
+  theme_classic()
+```
+
+```{r}
+ggplot(dados_meta_smd4, aes(x = treated_sd, y = treated_sd2)) +
+  geom_point() + 
+  labs(x = "original", y = "reextracao", title = "SD calculado, tratados") + 
+  theme_classic()
+```
+
+```{r}
+ggplot(dados_meta_smd4, aes(x = yi.x, y = yi.y)) +
+  geom_point() + 
+  labs(x = "original", y = "reextracao", title = "Hedge's g") + 
+  theme_classic()
+```
+
+```{r}
+ggplot(dados_meta_smd4, aes(x = vi.x, y = vi.y)) +
+  geom_point() + 
+  labs(x = "original", y = "reextracao", title = "vi") + 
+  theme_classic()
+```
+
+*OBS:* Uma mesma comparacao segue como outlier em ES e vi.
+
+---
+
+Além disso, durante a limpeza de n_definition, notei erros na extracao dos valores de n. De 11 artigos revisados inicialmente, 5 estavam sem o valor de n extraído sendo que o artigo reporta médias de replicatas e informa o número de replicatas.
+
+Devemos decidir se vale revisar todos os casos sem n:
+```{r}
+sem_n = dados_limpos %>% filter(control_mean!=0&!is.na(control_mean)&treated_mean!=0&!is.na(treated_mean)&treated_variation!=0&!is.na(treated_variation)) %>% filter(is.na(treated_n)|is.na(control_n))
+sem_n_artigos = sem_n %>% count(rayyan.key)
+```
+
+
+Total de comparacoes a revisar: `r nrow(sem_n)`
+
+Total de artigos: `r nrow(sem_n_artigos)`

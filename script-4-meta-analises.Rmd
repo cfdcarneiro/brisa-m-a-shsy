@@ -2,7 +2,7 @@
 title: "Meta-análises"
 author: "Clarissa F. D. Carneiro"
 date: "2022-10-18"
-output: html_document
+output: word_document
 ---
 
 ```{r setup, include=FALSE}
@@ -23,11 +23,14 @@ Depois da limpeza, importamos dados de volta para análises.
 dados_limpos = read_xlsx("dados_limpos.xlsx")
 ```
 
-Para análises, precisamos da média e n dos dois grupos e da variacao no tratado, seja SEM, SD ou Unclear. Também precisamos excluir casos em que a sequencia de abeta nao esteja clara.
+Para análises, precisamos da média e n dos dois grupos e da variacao no tratado, seja SEM, SD ou Unclear. Excluímos todos os casos em que falta pelo menos um desses valores.
 ```{r}
-dados_completos = dados_limpos %>% filter(control_mean!=0&!is.na(control_mean)&treated_mean!=0&!is.na(treated_mean)&control_n!=0&!is.na(control_n)&treated_n!=0&!is.na(treated_n)&treated_variation!=0&!is.na(treated_variation))
+dados_completos1 = dados_limpos %>% filter(control_mean!=0&!is.na(control_mean)&treated_mean!=0&!is.na(treated_mean)&treated_variation!=0&!is.na(treated_variation))
 
-dados_completos = dados_completos %>% filter(Abeta_sequence!="Not informed") %>% filter(Abeta_sequence!="not reported") %>% filter(!is.na(Abeta_sequence))
+dados_completos = dados_completos1 %>% filter(control_n!=0&!is.na(control_n)&treated_n!=0&!is.na(treated_n))
+
+#dados_sem_n = dados_completos1 %>% filter(control_n==0|is.na(control_n)|treated_n==0|is.na(treated_n))
+#writexl::write_xlsx(dados_sem_n, "dados_sem_n.xlsx")
 ```
 
 Para montar um fluxograma:
@@ -40,6 +43,25 @@ dados_completos[dados_completos=="WST-1"] = "WST"
 dados_completos[dados_completos=="WST-8"] = "WST"
 dados_completos$Duration_hours = as.numeric(dados_completos$Duration_hours)
 ```
+Como re-extraímos alguns valores durante a verificacao de outliers, precisamos usar esses valores corrigidos
+```{r}
+dados_completos = dados_completos %>% rename(control_mean_original = control_mean) %>%
+                                      rename(treated_mean_original = treated_mean) %>%
+                                      rename(control_variation_original = control_variation) %>%
+                                      rename(treated_variation_original = treated_variation)
+
+dados_completos = dados_completos %>% mutate(control_mean = 
+                                        if_else(is.na(control_mean_double_check)==T, true = control_mean_original, false = control_mean_double_check))
+
+dados_completos = dados_completos %>% mutate(treated_mean = 
+                                        if_else(is.na(treated_mean_double_check)==T, true = treated_mean_original, false = treated_mean_double_check))
+
+dados_completos = dados_completos %>% mutate(control_variation = 
+                                        if_else(is.na(control_variation_double_check)==T, true = control_variation_original, false = control_variation_double_check))
+
+dados_completos = dados_completos %>% mutate(treated_variation = 
+                                        if_else(is.na(treated_variation_double_check)==T, true = treated_variation_original, false = treated_variation_double_check))
+```
 
 Calculei SDs a partir de SEMs (se estava 'unclear', considerei SEM).
 ```{r}
@@ -48,7 +70,6 @@ dados_completos = dados_completos %>% mutate(control_sd =
 
 dados_completos = dados_completos %>% mutate(treated_sd = 
                                        if_else(condition = variation=="SD", true = treated_variation, false = (treated_variation*sqrt(treated_n))))
-
 ```
 
 Para usar SMD, precisamos do SD dos dois grupos necessariamente - decidimos considerar sd do controle igual ao tratado (que vai ser igual ao pooled).
@@ -69,114 +90,22 @@ dados_meta_smd = rbind(dados_two_sample_smd, dados_one_sample_smd)
 dados_meta_smd = dados_meta_smd %>% mutate(Comparison_ID = 1:nrow(dados_meta_smd))
 ```
 
-# Meta-análise 2-level
+# 2-level
 
 Meta-análise (2-level SMD)
 ```{r}
 meta1 = rma(yi=yi, vi=vi, data = dados_meta_smd, measure = "SMD", method = "REML", slab = rayyan.key)
 summary(meta1)
-#confint(meta1)
-```
-
-## OBS: Outliers e limpezas adicionais
-
-Sobre o alerta "Ratio of largest to smallest sampling variance extremely large. May not be able to obtain stable results.", ver essa discussao: https://stat.ethz.ch/pipermail/r-sig-meta-analysis/2019-February/001426.html
-Podemos conferir a distribuicao de sample sizes e de vi para ver onde pode estar o problema:
-```{r}
-summary(dados_meta_smd$control_n)
-
-summary(dados_meta_smd$treated_n)
-
-summary(dados_meta_smd$vi)
-
-top.vi = dados_meta_smd %>% arrange(-vi) %>% select(c("rayyan.key", "yi", "vi")) %>% slice(1:10)
-kable(top.vi)
-bottom.vi = dados_meta_smd %>% arrange(vi) %>% select(c("rayyan.key", "yi", "vi")) %>% slice(1:10)
-kable(bottom.vi)
-```
-
-Além desses casos, observamos também outras comparacoes com tamanhos de efeito muito extremos. Decidimos conferir esses outliers, comecando pelos mais extremos. Dependendo de quantos erros encontrarmos, decidir até que threshold deveríamos conferir todas as extracoes. 
-```{r}
-menor.100 = dados_meta_smd %>% filter(yi <= -100) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
-kable(menor.100)
-
-menor.50 = dados_meta_smd %>% filter(yi <= -50) %>% filter(yi > -100) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
-kable(menor.50)
-
-menor.20 = dados_meta_smd %>% filter(yi <= -20) %>% filter(yi > -50) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
-kable(menor.20)
-
-menor.10 = dados_meta_smd %>% filter(yi <= -10) %>% filter(yi > -20) %>% select(c("rayyan.key", "yi", "vi")) %>% arrange(yi)
-kable(menor.10)
-```
-
-Comparacoes com g menor ou igual a -100: `r nrow(menor.100)`
-Comparacoes com g menor ou igual a -50 (e maior que -100): `r nrow(menor.50)`
-Comparacoes com g menor ou igual a -20 (e maior que -50): `r nrow(menor.20)`
-Comparacoes com g menor ou igual a -10 (e maior que -20): `r nrow(menor.10)`
-
-Para decidir os bins de variancia, podemos olhar pra distribuicao dos valores:
-
-```{r}
-ggplot(dados_meta_smd %>% filter(vi<1000), aes(x = vi)) + 
-  geom_histogram(binwidth = 1) + 
-  theme_classic()
-
-maior.1000 = dados_meta_smd %>% filter(vi>=1000)
-maior.500 = dados_meta_smd %>% filter(vi>=500) %>% filter(vi<1000)
-maior.100 = dados_meta_smd %>% filter(vi>=100) %>% filter(vi<500)
-maior.50 = dados_meta_smd %>% filter(vi>=50) %>% filter(vi<100)
-maior.10 = dados_meta_smd %>% filter(vi>=10) %>% filter(vi<50)
-
-```
-
-Comparacoes com vi maior ou igual a 1000: `r nrow(maior.1000)`
-Comparacoes com vi maior ou igual a 500 (e menor que 1000): `r nrow(maior.500)`
-Comparacoes com vi maior ou igual a 100 (e menor que 500): `r nrow(maior.100)`
-Comparacoes com vi maior ou igual a 50 (e menor que 100): `r nrow(maior.50)`
-Comparacoes com vi maior ou igual a 10 (e menor que 50): `r nrow(maior.10)`
-
-```{r}
-#first round of double checking
-#based on dataset 20230512_dados_limpos
-
-selected.ES = dados_meta_smd %>% filter(yi <= -50)
-
-selected.Var = dados_meta_smd %>% filter(vi>=100)
-
-lista_double_checking = bind_rows(selected.ES, selected.Var, .id = "motivo")
-
-writexl::write_xlsx(lista_double_checking, "lista_outliers.xlsx")
-
-selected.concent = dados_meta_smd %>% filter(Concentration_uM >100) %>% select(c("rayyan.key", "Comparison_ID"))
-writexl::write_xlsx(selected.concent, "lista_concentracao.xlsx")
-
-selected.duration = dados_meta_smd %>% filter(Duration_hours>72) %>% select(c("rayyan.key", "Comparison_ID"))
-writexl::write_xlsx(selected.duration, "lista_duracao.xlsx")
-
-```
-
-Durante a limpeza de n_definition, notei erros na extracao dos valores de n. De 11 artigos revisados inicialmente, 5 estavam sem o valor de n extraído sendo que o artigo reporta médias de replicatas e informa o número de replicatas.
-
-Devemos decidir se vale revisar todos os casos sem n:
-```{r}
-sem_n = dados_limpos %>% filter(control_mean!=0&!is.na(control_mean)&treated_mean!=0&!is.na(treated_mean)&treated_variation!=0&!is.na(treated_variation)) %>% filter(is.na(treated_n)|is.na(control_n))
-sem_n_artigos = sem_n %>% count(rayyan.key)
-```
-
-Total de comparacoes a revisar: `r nrow(sem_n)`
-Total de artigos: `r nrow(sem_n_artigos)`
-
-# Meta-análises sem outliers
-
-## 2-level 
-Por enquanto, removemos comparacoes com variancia igual ou maior que 1000.
-```{r}
-dados_meta_smd = dados_meta_smd %>% filter(vi<1000)
-meta1 = rma(yi=yi, vi=vi, data = dados_meta_smd, measure = "SMD", method = "REML", slab = rayyan.key)
-summary(meta1)
 confint(meta1)
 ```
+OBS: aqui tem mais uma exclusao de uma comparacao por causa de n=1
+
+-----
+OBS: Outliers e limpezas adicionais
+
+Sobre o alerta "Ratio of largest to smallest sampling variance extremely large. May not be able to obtain stable results.", ver essa discussao: https://stat.ethz.ch/pipermail/r-sig-meta-analysis/2019-February/001426.html
+Ao observar esse erro, decidimos voltar e avaliar os outliers. Análises no script 3,5.
+-----
 
 Forest plot (SMD)
 ```{r, fig.height=15, fig.width=10}
@@ -185,7 +114,7 @@ Forest plot (SMD)
 #ggsave("forest.png", width = 10, height = 49, units = "in")
 ```
 
-## 3-level 
+# 3-level 
 
 Meta-análise (3-level SMD)
 ```{r}
@@ -375,7 +304,7 @@ ggplot(dados_meta_smd, aes(x = yi, y = 1/sqrt(mean_n))) +
   geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
   geom_vline(xintercept = meta1$beta, linetype="dashed", color = "darkgreen")
 
-ggsave("funnel-plot.png")
+#ggsave("funnel-plot.png")
 
 ```
 
@@ -384,7 +313,7 @@ Egger's regression
 regtest(x = meta1, ni = dados_meta_smd$mean_n, predictor = "sqrtninv")
 ```
 
-## Meta-regressions (3-level)
+# Meta-regressions (3-level)
 
 Differentiation
 ```{r}
@@ -524,7 +453,7 @@ ggplot(dados_meta_smd, aes(x = as.numeric(Cell_density), y=yi, size = 1/sqrt(vi)
   geom_abline(slope = 0, linetype = "dashed", color = "grey")
 ```
 
-## Multivariate Meta-regressions (3-level)
+# Multivariate Meta-regressions (3-level)
 
 "All combinations of variables from the selected list were tested in multivariable models, and the best models were ranked by corrected Akaike Information Criteria (AICc). For each best model selected (for complete, training and reactivation datasets with 2- and 3-level analyses), we decomposed the R2 value for each moderator included. For this, we calculated the mean of the differences between R2 from models with and without the moderator in all possible orders of moderator inclusion. Additionally, we performed a Q test of moderators for each variable (including all dummy variables for each categorical moderator) to obtain p-values for individual variables."
 
@@ -868,4 +797,8 @@ experiment_level = data.frame(
 )
 
 kable(experiment_level, digits = 1)
+```
+
+```{r}
+
 ```
