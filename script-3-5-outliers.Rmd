@@ -1,7 +1,7 @@
 ---
 title: "Análise e manejo de outliers"
 author: "Clarissa F. D. Carneiro"
-date: "2023-06-06"
+date: "2023-07-20"
 output: word_document
 ---
 
@@ -139,7 +139,7 @@ selected.duration = dados_meta_smd %>% filter(Duration_hours>72) %>% select(c("r
 ```
 
 ```{r}
-#cópia do dia 06-06-2023
+#cópia do dia 20-07-2023
 dados_limpos2 = read_xlsx("dados_limpos.xlsx")
 
 #filtra só as comparacoes de interesse

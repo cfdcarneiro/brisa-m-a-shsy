@@ -1,7 +1,7 @@
 ---
 title: "Meta-análises"
 author: "Clarissa F. D. Carneiro"
-date: "2022-10-18"
+date: "2023-08-18"
 output: word_document
 ---
 
@@ -9,7 +9,7 @@ output: word_document
 knitr::opts_chunk$set(echo = F)
 ```
 
-```{r}
+```{r warning=FALSE, results='hide'}
 library(readxl)
 library(tidyverse)
 library(metafor)
@@ -19,11 +19,13 @@ library(knitr)
 ```
 
 Depois da limpeza, importamos dados de volta para análises.
-```{r}
-dados_limpos = read_xlsx("dados_limpos.xlsx")
+
+```{r warning=FALSE}
+dados_limpos = read_xlsx("dados_limpos-revisado.xlsx")
 ```
 
 Para análises, precisamos da média e n dos dois grupos e da variacao no tratado, seja SEM, SD ou Unclear. Excluímos todos os casos em que falta pelo menos um desses valores.
+
 ```{r}
 dados_completos1 = dados_limpos %>% filter(control_mean!=0&!is.na(control_mean)&treated_mean!=0&!is.na(treated_mean)&treated_variation!=0&!is.na(treated_variation))
 
@@ -33,17 +35,19 @@ dados_completos = dados_completos1 %>% filter(control_n!=0&!is.na(control_n)&tre
 #writexl::write_xlsx(dados_sem_n, "dados_sem_n.xlsx")
 ```
 
-Para montar um fluxograma:
-Número de comparações extraídas = `r nrow(dados_limpos)`
-Número de comparações excluídas por falta de dados = `r nrow(dados_limpos)-nrow(dados_completos)`
+Para montar um fluxograma: Número de comparações extraídas = `r nrow(dados_limpos)` Número de comparações excluídas por falta de dados: por média/variacao: `r nrow(dados_limpos)-nrow(dados_completos1)`, por n ausente: `r nrow(dados_completos1)-nrow(dados_completos)`.
+
+Número de artigos extraídos: `r nrow(dados_limpos %>% count(rayyan.key))`
 
 Outras limpezas:
+
 ```{r}
 dados_completos[dados_completos=="WST-1"] = "WST"
 dados_completos[dados_completos=="WST-8"] = "WST"
-dados_completos$Duration_hours = as.numeric(dados_completos$Duration_hours)
 ```
+
 Como re-extraímos alguns valores durante a verificacao de outliers, precisamos usar esses valores corrigidos
+
 ```{r}
 dados_completos = dados_completos %>% rename(control_mean_original = control_mean) %>%
                                       rename(treated_mean_original = treated_mean) %>%
@@ -64,6 +68,7 @@ dados_completos = dados_completos %>% mutate(treated_variation =
 ```
 
 Calculei SDs a partir de SEMs (se estava 'unclear', considerei SEM).
+
 ```{r}
 dados_completos = dados_completos %>% mutate(control_sd = 
                                        if_else(condition = variation=="SD", true = control_variation, false = (control_variation*sqrt(control_n))))
@@ -88,43 +93,632 @@ dados_one_sample_smd = escalc(measure = "SMD", m1i = as.numeric(treated_mean), m
 dados_meta_smd = rbind(dados_two_sample_smd, dados_one_sample_smd)
 
 dados_meta_smd = dados_meta_smd %>% mutate(Comparison_ID = 1:nrow(dados_meta_smd))
+dados_meta_smd = dados_meta_smd %>% mutate(mean_n = (treated_n+control_n)/2)
+
+dados_meta_smd = dados_meta_smd %>% mutate(Duration_days = Duration_hours/24)
 ```
+
+Filtrando outliers
+```{r}
+dados_meta_smd_900 = dados_meta_smd %>% filter(yi >-900)
+dados_meta_smd_100 = dados_meta_smd %>% filter(yi >-100)
+dados_meta_smd_50 = dados_meta_smd %>% filter(yi >-50)
+dados_meta_smd_20 = dados_meta_smd %>% filter(yi >-20)
+dados_meta_smd_10 = dados_meta_smd %>% filter(yi >-10)
+```
+
+Ns finais
+N comparacoes: `r nrow(dados_meta_smd)`
+N artigos: `r nrow(dados_meta_smd %>% count(rayyan.key))`
+
+Excluindo ES < -900: 
+N comparacoes: `r nrow(dados_meta_smd_900)`
+N artigos: `r nrow(dados_meta_smd_900 %>% count(rayyan.key))`
+
+Excluindo ES < -100: 
+N comparacoes: `r nrow(dados_meta_smd_100)`
+N artigos: `r nrow(dados_meta_smd_100 %>% count(rayyan.key))`
+
+Excluindo ES < -50: 
+N comparacoes: `r nrow(dados_meta_smd_50)`
+N artigos: `r nrow(dados_meta_smd_50 %>% count(rayyan.key))`
+
+Excluindo ES < -20: 
+N comparacoes: `r nrow(dados_meta_smd_20)`
+N artigos: `r nrow(dados_meta_smd_20 %>% count(rayyan.key))`
+
+Excluindo ES < -10: 
+N comparacoes: `r nrow(dados_meta_smd_10)`
+N artigos: `r nrow(dados_meta_smd_10 %>% count(rayyan.key))`
+
+Definicao alternativa de outliers: cortes com base nos SDs em relacao as médias
+```{r}
+dados_meta_smd_perc = dados_meta_smd %>% mutate(percSD_control = (control_sd*100)/control_mean)
+dados_meta_smd_perc = dados_meta_smd_perc %>% mutate(percSD_treated = (treated_sd*100)/treated_mean)
+
+dados_meta_smd_perc = dados_meta_smd_perc %>% mutate(control_coef_var = control_sd/control_mean)
+dados_meta_smd_perc = dados_meta_smd_perc %>% mutate(treated_coef_var = treated_sd/treated_mean)
+
+  
+dados_meta_smd_1perc = dados_meta_smd_perc %>% filter(percSD_control > 1 | percSD_control == 0) %>% filter(percSD_treated > 1)
+dados_meta_smd_2perc = dados_meta_smd_perc %>% filter(percSD_control > 2 | percSD_control == 0) %>% filter(percSD_treated > 2)
+dados_meta_smd_3perc = dados_meta_smd_perc %>% filter(percSD_control > 3 | percSD_control == 0) %>% filter(percSD_treated > 3)
+dados_meta_smd_4perc = dados_meta_smd_perc %>% filter(percSD_control > 4 | percSD_control == 0) %>% filter(percSD_treated > 4)
+dados_meta_smd_5perc = dados_meta_smd_perc %>% filter(percSD_control > 5 | percSD_control == 0) %>% filter(percSD_treated > 5)
+```
+
+Ns finais
+N comparacoes: `r nrow(dados_meta_smd)`
+N artigos: `r nrow(dados_meta_smd %>% count(rayyan.key))`
+
+Excluindo ES < -900: 
+N comparacoes: `r nrow(dados_meta_smd_900)`
+N artigos: `r nrow(dados_meta_smd_900 %>% count(rayyan.key))`
+
+Excluindo ES < -100: 
+N comparacoes: `r nrow(dados_meta_smd_100)`
+N artigos: `r nrow(dados_meta_smd_100 %>% count(rayyan.key))`
+
+Excluindo ES < -50: 
+N comparacoes: `r nrow(dados_meta_smd_50)`
+N artigos: `r nrow(dados_meta_smd_50 %>% count(rayyan.key))`
+
+Excluindo ES < -20: 
+N comparacoes: `r nrow(dados_meta_smd_20)`
+N artigos: `r nrow(dados_meta_smd_20 %>% count(rayyan.key))`
+
+Excluindo ES < -10: 
+N comparacoes: `r nrow(dados_meta_smd_10)`
+N artigos: `r nrow(dados_meta_smd_10 %>% count(rayyan.key))`
+
+Histograms
+```{r}
+A = ggplot(dados_meta_smd_1perc, aes(x = yi)) + 
+  geom_histogram(binwidth = 1, color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = paste("Excluindo SD < 1% da média (n total = ", nrow(dados_meta_smd_1perc), ")", sep = ""))
+
+B = ggplot(dados_meta_smd_2perc, aes(x = yi)) + 
+  geom_histogram(binwidth = 1, color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = paste("Excluindo SD < 2% da média (n total = ", nrow(dados_meta_smd_2perc), ")", sep = ""))
+
+C = ggplot(dados_meta_smd_3perc, aes(x = yi)) + 
+  geom_histogram(binwidth = 1, color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = paste("Excluindo SD < 3% da média (n total = ", nrow(dados_meta_smd_3perc), ")", sep = ""))
+
+D = ggplot(dados_meta_smd_4perc, aes(x = yi)) + 
+  geom_histogram(binwidth = 1, color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = paste("Excluindo SD < 4% da média (n total = ", nrow(dados_meta_smd_4perc), ")", sep = ""))
+
+E = ggplot(dados_meta_smd_5perc, aes(x = yi)) + 
+  geom_histogram(binwidth = 1, color="black", fill = "white") +
+  theme_classic()  + 
+  labs(title = paste("Excluindo SD < 5% da média (n total = ", nrow(dados_meta_smd_5perc), ")", sep = ""))
+
+cowplot::plot_grid(A, B, C, D, E, nrow = 3)
+ggsave("./Figures/histo-ES-exclusoes.png", width = 30, units = "cm")
+
+G = ggplot(dados_meta_smd_perc, aes(x = yi)) + 
+  geom_histogram(binwidth = 1, color="black", fill = "white") +
+  theme_classic()  + 
+  labs(title = paste("Sem exclusoes (n total = ", nrow(dados_meta_smd_perc), ")", sep = ""))
+
+H = ggplot(dados_meta_smd_perc, aes(x = yi)) + 
+  geom_histogram(binwidth = 1, color="black", fill = "white") +
+  theme_classic()  + 
+  labs(title = paste("Excluindo ES < -100 (n total = ", nrow(dados_meta_smd_perc %>% filter(yi>-100)), ")", sep = "")) + 
+  scale_x_continuous(limits = c(-100, max(dados_meta_smd_perc$yi)))
+
+cowplot::plot_grid(G,H, nrow = 1)
+ggsave("./Figures/histo-ES-exclusoes-2.png", width = 30, height = 10, units = "cm")
+
+
+I = ggplot(dados_meta_smd_perc, aes(x = control_coef_var)) + 
+  geom_histogram(color="black", fill = "white") +
+  theme_classic()  + 
+  labs(title = "Controles, sem exclusoes")
+
+J = ggplot(dados_meta_smd_perc, aes(x = treated_coef_var)) + 
+  geom_histogram(color="black", fill = "white") +
+  theme_classic()  + 
+  labs(title = "Tratados, sem exclusoes")
+
+K = ggplot(dados_meta_smd_1perc, aes(x = control_coef_var)) + 
+  geom_histogram(color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = "Controles, Excluindo SD < 1% da média")
+
+L = ggplot(dados_meta_smd_1perc, aes(x = treated_coef_var)) + 
+  geom_histogram(color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = "Tratados, Excluindo SD < 1% da média")
+
+M = ggplot(dados_meta_smd_2perc, aes(x = control_coef_var)) + 
+  geom_histogram(color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = "Controles, Excluindo SD < 2% da média")
+
+N = ggplot(dados_meta_smd_2perc, aes(x = treated_coef_var)) + 
+  geom_histogram(color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = "Tratados, Excluindo SD < 2% da média")
+
+O = ggplot(dados_meta_smd_3perc, aes(x = control_coef_var)) + 
+  geom_histogram(color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = "Controles, Excluindo SD < 3% da média")
+
+P = ggplot(dados_meta_smd_3perc, aes(x = treated_coef_var)) + 
+  geom_histogram(color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = "Tratados, Excluindo SD < 3% da média")
+
+Q = ggplot(dados_meta_smd_4perc, aes(x = control_coef_var)) + 
+  geom_histogram(color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = "Controles, Excluindo SD < 4% da média")
+
+R = ggplot(dados_meta_smd_4perc, aes(x = treated_coef_var)) + 
+  geom_histogram(color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = "Tratados, Excluindo SD < 4% da média")
+
+S = ggplot(dados_meta_smd_5perc, aes(x = control_coef_var)) + 
+  geom_histogram(color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = "Controles, Excluindo SD < 5% da média")
+
+U = ggplot(dados_meta_smd_5perc, aes(x = treated_coef_var)) + 
+  geom_histogram(color="black", fill = "white") +
+  theme_classic() + 
+  labs(title = "Tratados, Excluindo SD < 5% da média")
+
+cowplot::plot_grid(I, J, K, L, M, N, O, P, Q, R, S, U, ncol = 2)
+ggsave("./Figures/histo-coef-var.png", width = 30, height = 60, units = "cm")
+
+
+```
+
+# Sample description
+
+```{r}
+dados_por_artigo = dados_completos %>% distinct(rayyan.key, .keep_all = T)
+```
+
+```{r}
+ggplot(dados_por_artigo, aes(x=year)) + 
+  geom_histogram(binwidth = 1, color="black", fill = "white") +
+  theme_classic() +
+  scale_y_continuous(n.breaks = 10)
+
+ggsave("./Figures/year-histo.png")
+```
+
+Os artigos foram publicados entre `r as.numeric(dados_por_artigo %>% summarize(min(year)))` e `r as.numeric(dados_por_artigo %>% summarize(max(year)))`
+
+Article-level info:
+
+```{r}
+reversal = dados_por_artigo %>% count(tests_reversal)
+
+ssc = dados_por_artigo %>% count(sample_size_calculation)
+
+conflict = dados_por_artigo %>% count(conflict_interest)
+
+registration = dados_por_artigo %>% count(protocol_registration)
+```
+
+```{r}
+article_level = data.frame(
+  Feature=c("Studies testing reversal", 
+            "Provides sample size calculation", 
+            "Includes conflict of interest statement", 
+            "Has pre-registered"),
+  Count = c(as.numeric(reversal[2,2]), 
+            0, 
+            as.numeric(conflict[1,2]+conflict[3,2]), 
+            as.numeric(registration[2,2]+registration[3,2])),
+  Percent = c(as.numeric(reversal[2,2])*100/nrow(dados_por_artigo), 
+              0*100/nrow(dados_por_artigo),
+              as.numeric(conflict[1,2]+conflict[3,2])*100/nrow(dados_por_artigo), 
+              as.numeric(registration[2,2]+registration[3,2])*100/nrow(dados_por_artigo))
+)
+
+kable(article_level, digits = 1)
+```
+
+Número de comparacoes por artigo:
+```{r}
+#min
+as.numeric(dados_completos %>% group_by(rayyan.key) %>% summarise(n()) %>% summarise(min(`n()`)))
+#max
+as.numeric(dados_completos %>% group_by(rayyan.key) %>% summarise(n()) %>% summarise(max(`n()`)))
+#median
+as.numeric(dados_completos %>% group_by(rayyan.key) %>% summarise(n()) %>% summarise(median(`n()`)))
+```
+
+```{r}
+ggplot((dados_completos %>% group_by(rayyan.key) %>% summarise(n())), aes(x=`n()`)) + 
+  geom_histogram(binwidth = 1, color="black", fill = "white") +
+  theme_classic() +
+  scale_y_continuous(limits = c(0,30), n.breaks = 10) +
+  scale_x_continuous(n.breaks = 10)
+
+ggsave("./Figures/n-comp-histo.png")
+```
+
+Experiment-level info
+
+Assay
+
+```{r}
+assay = dados_completos %>% count(Assay) %>% arrange(-n)
+assay = assay %>% mutate(Percent = 100*(assay$n/nrow(dados_completos)))
+
+kable(assay , digits = 1)
+
+assay_a = dados_completos %>% group_by(rayyan.key) %>% count(Assay)
+assay_a = assay_a %>% group_by(Assay) %>% summarise(n())%>% arrange(-`n()`) %>% mutate(Percent = 100*(`n()`/nrow(dados_por_artigo)))
+
+kable(assay_a , digits = 1)
+```
+
+Cell line QC
+
+```{r}
+csource = dados_completos %>% count(Cell_source)
+csource = csource %>% mutate(Percent = 100*(csource$n/nrow(dados_completos)))
+kable(csource, digits = 1)
+
+csource_a = dados_completos %>% group_by(rayyan.key) %>% count(Cell_source)
+csource_a = csource_a %>% group_by(Cell_source) %>% summarise(n()) %>% mutate(Percent = 100*(`n()`/nrow(dados_por_artigo)))
+kable(csource_a, digits = 1)
+
+cbank = dados_completos %>% filter(Cell_source=="Cell bank") %>% count(Cell_bank)
+kable(cbank, digits = 1)
+
+cbank_a = dados_completos %>% filter(Cell_source=="Cell bank")  %>% group_by(rayyan.key) %>% count(Cell_bank)
+cbank_a = cbank_a %>% group_by(Cell_bank) %>% summarise(n()) %>% mutate(Percent = 100*(`n()`/nrow(dados_por_artigo)))
+kable(cbank_a, digits = 1)
+
+cauthent = dados_completos %>% count(Cell_authentication)
+cauthent = cauthent 
+kable(cauthent, digits = 1)
+
+cauthent_a = dados_completos %>% group_by(rayyan.key) %>% count(Cell_authentication)
+cauthent_a = cauthent_a %>% group_by(Cell_authentication) %>% summarise(n()) %>% mutate(Percent = 100*(`n()`/nrow(dados_por_artigo)))
+kable(cauthent_a, digits = 1)
+
+cmyco = dados_completos %>% count(Cell_mycoplasma)
+cmyco = cmyco %>% mutate(Percent = 100*(cmyco$n/nrow(dados_completos)))
+kable(cmyco, digits = 1)
+
+cmyco_a = dados_completos %>% group_by(rayyan.key) %>% count(Cell_mycoplasma)
+cmyco_a = cmyco_a %>% group_by(Cell_mycoplasma) %>% summarise(n()) %>% mutate(Percent = 100*(`n()`/nrow(dados_por_artigo)))
+kable(cmyco_a, digits = 1)
+```
+
+Cell culture protocol
+```{r}
+cserum = dados_completos %>% count(Serum_type) %>% arrange(-n)
+cserum = cserum %>% mutate(Percent = 100*(cserum$n/nrow(dados_completos)))
+kable(cserum, digits = 1)
+
+cserumconc = dados_completos %>% count(Serum_concentration) %>% arrange(-n)
+cserumconc = cserumconc %>% mutate(Percent = 100*(cserumconc$n/nrow(dados_completos)))
+kable(cserumconc, digits = 1)
+
+cserumandconc = dados_completos %>% group_by(Serum_type) %>% count(Serum_concentration) %>% arrange(-n)
+kable(cserumandconc, digits = 1)
+
+cmedium = dados_completos %>% count(Culture_medium_corrected) %>% arrange(-n)
+cmedium = cmedium %>% mutate(Percent = 100*(cmedium$n/nrow(dados_completos)))
+kable(cmedium, digits = 1)
+
+cantibio = dados_completos %>% count(Antibiotics) %>% arrange(-n)
+cantibio = cantibio %>% mutate(Percent = 100*(cantibio$n/nrow(dados_completos)))
+kable(cantibio, digits = 1)
+
+cglut = dados_completos %>% count(Glutamine) %>% arrange(-n)
+cglut = cglut %>% mutate(Percent = 100*(cglut$n/nrow(dados_completos)))
+kable(cglut, digits = 1)
+
+```
+
+Treatment protocol
+
+```{r}
+control = dados_completos %>% count(Control_description) %>% arrange(-n)
+control = control %>% mutate(Percent = 100*(control$n/nrow(dados_completos)))
+kable(control, digits = 1)
+
+a_seq = dados_completos %>% count(Abeta_sequence) %>% arrange(-n)
+a_seq = a_seq %>% mutate(Percent = 100*(a_seq$n/nrow(dados_completos)))
+kable(a_seq, digits = 1)
+
+a_orig = dados_completos %>% count(Abeta_origin) %>% arrange(-n)
+a_orig = a_orig %>% mutate(Percent = 100*(a_orig$n/nrow(dados_completos)))
+kable(a_orig, digits = 1)
+
+a_spec = dados_completos %>% count(Abeta_species) %>% arrange(-n)
+a_spec = a_spec %>% mutate(Percent = 100*(a_spec$n/nrow(dados_completos)))
+kable(a_spec, digits = 1)
+
+a_aggr = dados_completos %>% count(Abeta_aggregation) %>% arrange(-n)
+a_aggr = a_aggr %>% mutate(Percent = 100*(a_aggr$n/nrow(dados_completos)))
+kable(a_aggr, digits = 1)
+
+a_exp = dados_completos %>% count(Single_exposure) %>% arrange(-n)
+a_exp = a_exp %>% mutate(Percent = 100*(a_exp$n/nrow(dados_completos)))
+kable(a_exp, digits = 1)
+```
+
+```{r}
+conferir = dados_completos %>% filter(is.na(Abeta_sequence))
+
+writexl::write_xlsx(conferir, "lista_abeta_indefinido.xlsx")
+
+```
+
+```{r}
+quant_treat = data.frame(
+  Protocol_variable = c(rep(c("Duration of exposure, in hours"), 6), rep(c("Concentration, in uM"), 6)),
+  Estimate = c("n", "mean", "sd", "median", "min", "max"),
+  Data = c(nrow(dados_completos %>% filter(!is.na(Duration_hours))),
+           as.numeric(dados_completos %>% summarise(mean(Duration_hours, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(sd(Duration_hours, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(median(Duration_hours, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(min(Duration_hours, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(max(Duration_hours, na.rm = T))),
+           nrow(dados_completos %>% filter(!is.na(Concentration_uM))),
+           as.numeric(dados_completos %>% summarise(mean(Concentration_uM, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(sd(Concentration_uM, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(median(Concentration_uM, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(min(Concentration_uM, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(max(Concentration_uM, na.rm = T)))
+           )
+)
+
+kable(quant_treat)
+```
+
+
+Diferenciacao
+
+```{r}
+dif = dados_completos %>% count(Diferentiation_method)
+kable(dif %>% arrange(-n), digits = 1)
+
+difserum = dados_completos %>% count(Differentiation_serum_type) %>% arrange(-n)
+difserum = difserum %>% mutate(Percent = 100*(difserum$n/nrow(dados_completos)))
+kable(difserum, digits = 1)
+
+difserumconc = dados_completos %>% count(Differentiation_serum_concentration) %>% arrange(-n)
+difserumconc = difserumconc %>% mutate(Percent = 100*(difserumconc$n/nrow(dados_completos)))
+kable(difserumconc, digits = 1)
+
+difserumandconc = dados_completos %>% group_by(Differentiation_serum_type) %>% count(Differentiation_serum_concentration) %>% arrange(-n)
+kable(difserumandconc, digits = 1)
+
+difmedium = dados_completos %>% count(Differentiation_medium) %>% arrange(-n)
+difmedium = difmedium %>% mutate(Percent = 100*(difmedium$n/nrow(dados_completos)))
+kable(difmedium, digits = 1)
+
+difantibio = dados_completos %>% count(Differentiation_antibiotics) %>% arrange(-n)
+difantibio = difantibio %>% mutate(Percent = 100*(difantibio$n/nrow(dados_completos)))
+kable(difantibio, digits = 1)
+
+difglut = dados_completos %>% count(Differentiation_glutamine) %>% arrange(-n)
+difglut = difglut %>% mutate(Percent = 100*(difglut$n/nrow(dados_completos)))
+kable(difglut, digits = 1)
+
+```
+
+```{r}
+quant_treat_dif = data.frame(
+  Protocol_variable = c(rep(c("Duration of differentiation, in days"), 6), rep(c("Concentration of RA, in uM"), 6)),
+  Estimate = c("n", "mean", "sd", "median", "min", "max"),
+  Data = c(nrow(dados_completos %>% filter(!is.na(Diferentiation_duration_days))),
+           as.numeric(dados_completos %>% summarise(mean(Diferentiation_duration_days, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(sd(Diferentiation_duration_days, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(median(Diferentiation_duration_days, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(min(Diferentiation_duration_days, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(max(Diferentiation_duration_days, na.rm = T))),
+           nrow(dados_completos %>% filter(!is.na(Differentiation_RA_concentration_uM))),
+           as.numeric(dados_completos %>% summarise(mean(Differentiation_RA_concentration_uM, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(sd(Differentiation_RA_concentration_uM, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(median(Differentiation_RA_concentration_uM, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(min(Differentiation_RA_concentration_uM, na.rm = T))),
+           as.numeric(dados_completos %>% summarise(max(Differentiation_RA_concentration_uM, na.rm = T)))
+           )
+)
+
+kable(quant_treat_dif)
+```
+
+Reporting
+
+```{r}
+experiment_level = data.frame(
+  Feature=c("Describes cell source", 
+            "Describes cell authentication", 
+            "Describes mycoplasma testing", 
+            "Control group is clear",
+            "Describes Abeta sequence",
+            "Describes Abeta origin",
+            "Describes Abeta species",
+            "Describes Abeta aggregation",
+            "Has single exposure",
+            "Describes duration of Abeta exposure",
+            "Describes concentration of Abeta"),
+  Count = c(as.numeric(csource[2,2]+csource[1,2]), 
+            as.numeric(cauthent[2,2]), 
+            as.numeric(cmyco[2,2]), 
+            as.numeric(control[2,2]+control[3,2]+control[4,2]),
+            sum(!is.na(dados_completos$Abeta_sequence)),
+            as.numeric(a_orig[2,2]+a_orig[3,2]),
+            as.numeric(a_spec[2,2]+a_spec[3,2]),
+            as.numeric(a_aggr[2,2]+a_aggr[3,2]+a_aggr[4,2]),
+            as.numeric(a_exp[1,2]),
+            sum(!is.na(dados_completos$Duration_hours)),
+            sum(!is.na(dados_completos$Concentration_uM))),
+  Percent = c(as.numeric(csource[2,2]+csource[1,2])*100/nrow(dados_completos), 
+            as.numeric(cauthent[2,2])*100/nrow(dados_completos), 
+            as.numeric(cmyco[2,2])*100/nrow(dados_completos), 
+            as.numeric(control[2,2]+control[3,2]+control[4,2])*100/nrow(dados_completos),
+            sum(!is.na(dados_completos$Abeta_sequence))*100/nrow(dados_completos),
+            as.numeric(a_orig[2,2]+a_orig[3,2])*100/nrow(dados_completos),
+            as.numeric(a_spec[2,2]+a_spec[3,2])*100/nrow(dados_completos),
+            as.numeric(a_aggr[2,2]+a_aggr[3,2]+a_aggr[4,2])*100/nrow(dados_completos),
+            as.numeric(a_exp[1,2])*100/nrow(dados_completos),
+            sum(!is.na(dados_completos$Duration_hours))*100/nrow(dados_completos),
+            sum(!is.na(dados_completos$Concentration_uM))*100/nrow(dados_completos))
+)
+
+kable(experiment_level, digits = 1)
+```
+
 
 # 2-level
 
 Meta-análise (2-level SMD)
+
 ```{r}
 meta1 = rma(yi=yi, vi=vi, data = dados_meta_smd, measure = "SMD", method = "REML", slab = rayyan.key)
 summary(meta1)
 confint(meta1)
+
 ```
-OBS: aqui tem mais uma exclusao de uma comparacao por causa de n=1
+Exact p value: `r meta1$pval`
+Exact Q test p value `r meta1$QEp`
+------------------------------------------------------------------------
 
------
-OBS: Outliers e limpezas adicionais
+*OBS: Outliers e limpezas adicionais*
 
-Sobre o alerta "Ratio of largest to smallest sampling variance extremely large. May not be able to obtain stable results.", ver essa discussao: https://stat.ethz.ch/pipermail/r-sig-meta-analysis/2019-February/001426.html
-Ao observar esse erro, decidimos voltar e avaliar os outliers. Análises no script 3,5.
------
+*Sobre o alerta "Ratio of largest to smallest sampling variance extremely large. May not be able to obtain stable results.", ver essa discussao: <https://stat.ethz.ch/pipermail/r-sig-meta-analysis/2019-February/001426.html> Ao observar esse erro, decidimos voltar e avaliar os outliers. Análises no script 3,5.*
+
+Após as revisoes nao temos mais o erro, seguimos com todos os dados disponíveis e adicionamos uma análise removendo um outlier com tamanho de efeito ~ -900.
+
+
+```{r}
+meta900 = rma(yi=yi, vi=vi, data = dados_meta_smd_900, measure = "SMD", method = "REML", slab = rayyan.key)
+summary(meta900)
+```
+
+```{r}
+meta100 = rma(yi=yi, vi=vi, data = dados_meta_smd_100, measure = "SMD", method = "REML", slab = rayyan.key)
+summary(meta100)
+```
+
+```{r}
+meta50 = rma(yi=yi, vi=vi, data = dados_meta_smd_50, measure = "SMD", method = "REML", slab = rayyan.key)
+summary(meta50)
+```
+
+```{r}
+meta20 = rma(yi=yi, vi=vi, data = dados_meta_smd_20, measure = "SMD", method = "REML", slab = rayyan.key)
+summary(meta20)
+```
+
+```{r}
+meta10 = rma(yi=yi, vi=vi, data = dados_meta_smd_10, measure = "SMD", method = "REML", slab = rayyan.key)
+summary(meta10)
+```
 
 Forest plot (SMD)
+
 ```{r, fig.height=15, fig.width=10}
-#forest1 = viz_forest(meta1, study_labels = dados_meta_smd$rayyan.key, col = "black", annotate_CI = TRUE, xlab = "Hedge's g")
-#forest1
-#ggsave("forest.png", width = 10, height = 49, units = "in")
+forest1 = viz_forest(meta1, study_labels = dados_meta_smd$rayyan.key, col = "black", annotate_CI = TRUE, xlab = "Hedge's g")
+forest1
+ggsave("./Figures/forest.png", width = 10, height = 49, units = "in")
 ```
 
-# 3-level 
+Orchard Plot
+
+```{r}
+orchaRd::orchard_plot(meta50, group = "Comparison_ID", xlab = "Effect size (Hedge's g)",
+    transfm = "none") + 
+  scale_color_manual(values = "black") + 
+  scale_fill_manual(values = "grey")
+
+ggsave("./Figures/orchard-maior--50.png", width = 30, height = 20, units = "cm")
+```
+## Publication bias
+
+Trim-and-fill (only for 2-level model)
+
+```{r}
+#meta_trimfill_R = trimfill(meta, estimator = "R0", side = "right")
+#meta_trimfill_R
+#meta_trimfill_L = trimfill(meta, estimator = "L0", side = "right")
+#meta_trimfill_L
+```
+
+OBS: Decidimos nao usar a análise de trim-and-fill por causa da questao biológica ser necessariamente assimétrica (impossível ter aumentos grandes de viabilidade celular com Abeta).
+
+Funnel plot
+
+```{r}
+ggplot(dados_meta_smd_900, aes(x = yi, y = 1/sqrt(mean_n))) +
+  geom_point() + 
+  scale_x_continuous(name = "Effect size (Hedge's g)") +
+  scale_y_continuous(trans = "reverse", name = expression(1/sqrt(N))) +
+  theme_classic() + 
+  geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
+  geom_vline(xintercept = meta1$beta, linetype="dashed", color = "darkgreen")
+
+ggsave("./Figures/funnel-plot.png")
+
+```
+
+Egger's regression
+
+```{r}
+regtest(x = meta900, ni = dados_meta_smd_900$mean_n, predictor = "sqrtninv")
+```
+
+# 3-level
 
 Meta-análise (3-level SMD)
-```{r}
-#dados_meta_smd = dados_meta_smd %>% mutate(Comparison_ID = 1:nrow(dados_meta_smd))
 
+```{r}
 meta_3l = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID)
 meta_3l
-#confint(meta_3l)
+confint(meta_3l)
 ```
 
+```{r}
+meta_3l_900 = rma.mv(yi=yi, V=vi, data = dados_meta_smd_900, method = "REML", random = ~1|rayyan.key/Comparison_ID)
+meta_3l_900
+confint(meta_3l_900)
+```
+
+```{r}
+meta_3l_100 = rma.mv(yi=yi, V=vi, data = dados_meta_smd_100, method = "REML", random = ~1|rayyan.key/Comparison_ID)
+meta_3l_100
+confint(meta_3l_100)
+```
+
+```{r}
+meta_3l_50 = rma.mv(yi=yi, V=vi, data = dados_meta_smd_50, method = "REML", random = ~1|rayyan.key/Comparison_ID)
+meta_3l_50
+confint(meta_3l_50)
+```
+
+```{r}
+meta_3l_20 = rma.mv(yi=yi, V=vi, data = dados_meta_smd_20, method = "REML", random = ~1|rayyan.key/Comparison_ID)
+meta_3l_20
+confint(meta_3l_20)
+```
+
+```{r}
+meta_3l_10 = rma.mv(yi=yi, V=vi, data = dados_meta_smd_10, method = "REML", random = ~1|rayyan.key/Comparison_ID)
+meta_3l_10
+confint(meta_3l_10)
+```
 
 ```{r}
 #As there is not function in the package metafor for estimating I^2 values for 3-level models, we imported the function from Mathias Harrer & David Daniel Ebert (https://raw.githubusercontent.com/MathiasHarrer/dmetar/master/R/mlm.variance.distribution.R)
@@ -256,75 +850,72 @@ mlm.variance.distribution = var.comp = function(x){
 
 ```{r fig.keep='none', warning=FALSE}
 mlm.variance.distribution(x = meta_3l)
+
+mlm.variance.distribution(x = meta_3l_900)
+mlm.variance.distribution(x = meta_3l_100)
+mlm.variance.distribution(x = meta_3l_50)
+mlm.variance.distribution(x = meta_3l_20)
+mlm.variance.distribution(x = meta_3l_10)
+
 ```
 
 ### excluindo n de replicatas ou outras unidades nao independentes
 
 ```{r}
-dados_meta_smd %>% count(n_definition)
+kable(dados_meta_smd %>% count(n_definition))
 dados_meta_smd_independent = dados_meta_smd %>% filter(n_definition=="independent determinations" | 
                                                             n_definition=="independent experimental measurements" |
                                                             n_definition=="independent experiments" |
                                                             n_definition=="independent repetitions" |
                                                             n_definition=="independent replicates" |
+                                                            n_definition=="independent runs" |
                                                             n_definition=="independent sets of studies")
 ```
 
 ```{r}
 meta_3l_independent = rma.mv(yi=yi, V=vi, data = dados_meta_smd_independent, method = "REML", random = ~1|rayyan.key/Comparison_ID)
 meta_3l_independent
-#confint(meta_3l_independent)
+confint(meta_3l_independent)
 ```
+
 ```{r fig.keep='none', warning=FALSE}
 mlm.variance.distribution(x = meta_3l_independent)
 ```
 
-## Publication bias
-
-Trim-and-fill (only for 2-level model)
-
-```{r}
-#meta_trimfill_R = trimfill(meta, estimator = "R0", side = "right")
-#meta_trimfill_R
-#meta_trimfill_L = trimfill(meta, estimator = "L0", side = "right")
-#meta_trimfill_L
-```
-
-Funnel plot
-```{r}
-#viz_funnel(x = meta_3l, trim_and_fill = TRUE, trim_and_fill_side = "right", xlab = "Hedge's g", y_axis = "se", ylab = "S.E.", contours = TRUE, sig_contours = FALSE, contours_type = "REM", egger = TRUE) + theme_classic()
-
-dados_meta_smd = dados_meta_smd %>% mutate(mean_n = (treated_n+control_n)/2)
-
-ggplot(dados_meta_smd, aes(x = yi, y = 1/sqrt(mean_n))) +
-  geom_point() + 
-  scale_x_continuous(limits = c(-150,150), name = "Effect size (Hedge's g)") +
-  scale_y_continuous(trans = "reverse", name = expression(1/sqrt(N))) +
-  theme_classic() + 
-  geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
-  geom_vline(xintercept = meta1$beta, linetype="dashed", color = "darkgreen")
-
-#ggsave("funnel-plot.png")
-
-```
-
-Egger's regression
-```{r}
-regtest(x = meta1, ni = dados_meta_smd$mean_n, predictor = "sqrtninv")
-```
 
 # Meta-regressions (3-level)
 
 Differentiation
+
 ```{r}
 meta_differentiation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Diferentiation_method), ref="No differentiation"))
 
 meta_differentiation
+
+summary_differentiation = data.frame("variable" = c("Method of differentiation"), 
+                              "category" = c(row.names(meta_differentiation$beta)),
+                              "sample size" = c(
+nrow(dados_meta_smd%>%filter(Diferentiation_method=="No differentiation")), 
+nrow(dados_meta_smd%>%filter(Diferentiation_method=="ATRA")), 
+nrow(dados_meta_smd%>%filter(Diferentiation_method=="ATRA plus")), 
+nrow(dados_meta_smd%>%filter(Diferentiation_method=="Other")), 
+nrow(dados_meta_smd%>%filter(Diferentiation_method=="Unclear"))),
+                              "Effect size [95% CI] (Hedge's g)" = c(
+paste(meta_differentiation$b[1,1], " [", meta_differentiation$ci.lb[1], ", ", meta_differentiation$ci.ub[1], "]", sep = ""), 
+paste(meta_differentiation$b[2,1], " [", meta_differentiation$ci.lb[2], ", ", meta_differentiation$ci.ub[2], "]", sep = ""), paste(meta_differentiation$b[3,1], " [", meta_differentiation$ci.lb[3], ", ", meta_differentiation$ci.ub[3], "]", sep = ""), paste(meta_differentiation$b[4,1], " [", meta_differentiation$ci.lb[4], ", ", meta_differentiation$ci.ub[4], "]", sep = ""), paste(meta_differentiation$b[5,1], " [", meta_differentiation$ci.lb[5], ", ", meta_differentiation$ci.ub[5], "]", sep = "")),
+                              "p-value" = c(meta_differentiation$pval),
+                              "I2" = c(mlm.variance.distribution(meta_differentiation)$totalI2),
+                              "p-value (QE)" = c(meta_differentiation$QEp),
+                              "R2" = c(if_else(((sum(meta_3l$sigma2)-sum(meta_differentiation$sigma2))/sum(meta_3l$sigma2)*100)<0, 0, ((sum(meta_3l$sigma2)-sum(meta_differentiation$sigma2))/sum(meta_3l$sigma2)*100))),
+                              "p-value (QM)" = c(meta_differentiation$QMp))
+
 ```
 
 Differentiation bubble plot
+
 ```{r}
-ggplot(dados_meta_smd, aes(x = Diferentiation_method, y=yi, size = 1/sqrt(vi))) + 
+fig_differentiation = 
+  ggplot(dados_meta_smd, aes(x = Diferentiation_method, y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
   labs(y = "Hedge's g", x = "Differentiation method") + 
   theme_classic() + 
@@ -335,15 +926,29 @@ ggplot(dados_meta_smd, aes(x = Diferentiation_method, y=yi, size = 1/sqrt(vi))) 
 ```
 
 Diff. duration
+
 ```{r}
-meta_difduration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~dados_meta_smd$Diferentiation_duration_days)
+meta_difduration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_smd$Diferentiation_duration_days))
 
 meta_difduration
+
+summary_difduration = data.frame("variable" = c("Duration of differentiation"), 
+                              "category" = c("intercept", "(unit)"),
+                              "sample size" = c(NA, meta_difduration$k),
+                              "Effect size [95% CI] (Hedge's g)" = c(paste(round(meta_difduration$b[1,1], 2), " [", round(meta_difduration$ci.lb[1], 1), ", ", round(meta_difduration$ci.ub[1], 1), "]", sep = ""), paste(meta_difduration$b[2,1], " [", meta_difduration$ci.lb[2], ", ", meta_difduration$ci.ub[2], "]", sep = "")),
+                              "p-value" = c(meta_difduration$pval),
+                              "I2" = c(mlm.variance.distribution(meta_difduration)$totalI2),
+                              "p-value (QE)" = c(meta_difduration$QEp),
+                              "R2" = c(if_else(((sum(meta_3l$sigma2)-sum(meta_difduration$sigma2))/sum(meta_3l$sigma2)*100)<0, 0, ((sum(meta_3l$sigma2)-sum(meta_difduration$sigma2))/sum(meta_3l$sigma2)*100))),
+                              "p-value (QM)" = c(meta_difduration$QMp))
+
 ```
 
 Diff. duration bubble plot
+
 ```{r}
-ggplot(dados_meta_smd, aes(x = as.numeric(Diferentiation_duration_days), y=yi, size = 1/sqrt(vi))) + 
+fig_difduration = 
+  ggplot(dados_meta_smd, aes(x = as.numeric(Diferentiation_duration_days), y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 1, stroke = 1) + 
   labs(y = "Hedge's g", x = "Duration of differentiation (days)") + 
   theme_classic() + 
@@ -355,36 +960,72 @@ ggplot(dados_meta_smd, aes(x = as.numeric(Diferentiation_duration_days), y=yi, s
 ```
 
 Aggregation
+
 ```{r}
-meta_aggregation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Abeta_aggregation), ref="Unclear"))
+meta_aggregation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Abeta_aggregation), ref="Monomers"))
 
 meta_aggregation
+
+summary_aggregation = data.frame("variable" = c("Abeta aggregation"), 
+                              "category" = c(row.names(meta_aggregation$beta)),
+                              "sample size" = c(
+nrow(dados_meta_smd%>%filter(Abeta_aggregation=="Monomers")), 
+nrow(dados_meta_smd%>%filter(Abeta_aggregation=="Fibers")), 
+nrow(dados_meta_smd%>%filter(Abeta_aggregation=="Oligomers")), 
+nrow(dados_meta_smd%>%filter(Abeta_aggregation=="Unclear"))),
+                              "Effect size [95% CI] (Hedge's g)" = c(
+paste(meta_aggregation$b[1,1], " [", meta_aggregation$ci.lb[1], ", ", meta_aggregation$ci.ub[1], "]", sep = ""), 
+paste(meta_aggregation$b[2,1], " [", meta_aggregation$ci.lb[2], ", ", meta_aggregation$ci.ub[2], "]", sep = ""), paste(meta_aggregation$b[3,1], " [", meta_aggregation$ci.lb[3], ", ", meta_aggregation$ci.ub[3], "]", sep = ""), paste(meta_aggregation$b[4,1], " [", meta_aggregation$ci.lb[4], ", ", meta_aggregation$ci.ub[4], "]", sep = "")),
+                              "p-value" = c(meta_aggregation$pval),
+                              "I2" = c(mlm.variance.distribution(meta_aggregation)$totalI2),
+                              "p-value (QE)" = c(meta_aggregation$QEp),
+                              "R2" = c(if_else(((sum(meta_3l$sigma2)-sum(meta_aggregation$sigma2))/sum(meta_3l$sigma2)*100)<0, 0, ((sum(meta_3l$sigma2)-sum(meta_aggregation$sigma2))/sum(meta_3l$sigma2)*100))),
+                              "p-value (QM)" = c(meta_aggregation$QMp))
+
+summary_aggregation
 ```
 
 Aggregation bubble plot
+
 ```{r}
-ggplot(dados_meta_smd, aes(x = Abeta_aggregation, y=yi, size = 1/sqrt(vi))) + 
+fig_agregation = 
+  ggplot(dados_meta_smd, aes(x = Abeta_aggregation, y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
   labs(y = "Hedge's g", x = "Abeta aggregation") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
+  scale_x_discrete(limits = c("Monomers", "Oligomers", "Fibers", "Unclear"))
   geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
 ```
 
-Abeta concentration
-```{r}
-dados_meta_smd_max2500 = dados_meta_smd %>% filter(Concentration_uM<2500)
+Abeta concentration (só até 100 uM)
 
-meta_concent = rma.mv(yi=yi, V=vi, data = dados_meta_smd_max2500, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~dados_meta_smd_max2500$Concentration_uM)
+```{r}
+dados_meta_smd_max100 = dados_meta_smd %>% filter(Concentration_uM<100)
+
+meta_concent = rma.mv(yi=yi, V=vi, data = dados_meta_smd_max100, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~dados_meta_smd_max100$Concentration_uM)
 
 meta_concent
+
+summary_concent = data.frame("variable" = c("Abeta concentration"), 
+                              "category" = c("intercept", "(uM)"),
+                              "sample size" = c(NA, meta_concent$k),
+                              "Effect size [95% CI] (Hedge's g)" = c(paste(round(meta_concent$b[1,1], 2), " [", round(meta_concent$ci.lb[1], 1), ", ", round(meta_concent$ci.ub[1], 1), "]", sep = ""), paste(meta_concent$b[2,1], " [", meta_concent$ci.lb[2], ", ", meta_concent$ci.ub[2], "]", sep = "")),
+                              "p-value" = c(meta_concent$pval),
+                              "I2" = c(mlm.variance.distribution(meta_concent)$totalI2),
+                              "p-value (QE)" = c(meta_concent$QEp),
+                              "R2" = c(if_else(((sum(meta_3l$sigma2)-sum(meta_concent$sigma2))/sum(meta_3l$sigma2)*100)<0, 0, ((sum(meta_3l$sigma2)-sum(meta_concent$sigma2))/sum(meta_3l$sigma2)*100))),
+                              "p-value (QM)" = c(meta_concent$QMp))
+
 ```
 
 Abeta concentration bubble plot
+
 ```{r}
-ggplot(dados_meta_smd_max2500, aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi))) + 
+fig_concent_c = 
+  ggplot(dados_meta_smd_max100, aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 1, stroke = 1) + 
   labs(y = "Hedge's g", x = "Abeta concentration (uM)") + 
   theme_classic() + 
@@ -393,20 +1034,49 @@ ggplot(dados_meta_smd_max2500, aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi)
   scale_y_continuous(n.breaks = 7) + 
   scale_x_continuous(n.breaks = 7) + 
   geom_abline(slope = 0, linetype = "dashed", color = "grey")
+
+fig_concent_f = 
+  ggplot(dados_meta_smd_max100 %>% filter(Concentration_uM<10), aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi))) + 
+  geom_point(shape = 1, stroke = 1) + 
+  theme_classic() + 
+  scale_size_continuous(guide = "none") + 
+  theme(legend.position = "none") + 
+  scale_y_continuous(n.breaks = 7, name = element_blank()) + 
+  scale_x_continuous(n.breaks = 7, name = element_blank()) + 
+  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+
+fig_concent = 
+  fig_concent_c + annotation_custom(ggplotGrob(fig_concent_f), xmin = 40, xmax = 80, 
+                       ymin = -850, ymax = -300)
+
 ```
 
 Abeta duration of exposure
+
 ```{r}
-meta_duration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_smd$Duration_hours))
+meta_duration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_smd$Duration_days))
 
 meta_duration
+
+summary_duration = data.frame("variable" = c("Abeta exposure duration"), 
+                              "category" = c("intercept", "(days)"),
+                              "sample size" = c(NA, meta_duration$k),
+                              "Effect size [95% CI] (Hedge's g)" = c(paste(round(meta_duration$b[1,1], 2), " [", round(meta_duration$ci.lb[1], 1), ", ", round(meta_duration$ci.ub[1], 1), "]", sep = ""), paste(meta_duration$b[2,1], " [", meta_duration$ci.lb[2], ", ", meta_duration$ci.ub[2], "]", sep = "")),
+                              "p-value" = c(meta_duration$pval),
+                              "I2" = c(mlm.variance.distribution(meta_duration)$totalI2),
+                              "p-value (QE)" = c(meta_duration$QEp),
+                              "R2" = c(if_else(((sum(meta_3l$sigma2)-sum(meta_duration$sigma2))/sum(meta_3l$sigma2)*100)<0, 0, ((sum(meta_3l$sigma2)-sum(meta_duration$sigma2))/sum(meta_3l$sigma2)*100))),
+                              "p-value (QM)" = c(meta_duration$QMp))
+
 ```
 
 Abeta duration bubble plot
+
 ```{r}
-ggplot(dados_meta_smd, aes(x = as.numeric(Duration_hours), y=yi, size = 1/sqrt(vi))) + 
+fig_duration =
+  ggplot(dados_meta_smd, aes(x = as.numeric(Duration_days), y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 1, stroke = 1) + 
-  labs(y = "Hedge's g", x = "Abeta duration of exposure (hours)") + 
+  labs(y = "Hedge's g", x = "Abeta duration of exposure (days)") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
@@ -416,33 +1086,79 @@ ggplot(dados_meta_smd, aes(x = as.numeric(Duration_hours), y=yi, size = 1/sqrt(v
 ```
 
 Assay
+
 ```{r}
 meta_assay = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Assay), ref="MTT"))
 
 meta_assay
+
+summary_assay = data.frame("variable" = c("Assay"), 
+                              "category" = c(row.names(meta_assay$beta)),
+                              "sample size" = c(
+nrow(dados_meta_smd%>%filter(Assay=="MTT")), 
+nrow(dados_meta_smd%>%filter(Assay=="CCK-8")), 
+nrow(dados_meta_smd%>%filter(Assay=="EZ4U")), 
+nrow(dados_meta_smd%>%filter(Assay=="MTS")), 
+nrow(dados_meta_smd%>%filter(Assay=="Resazurin")),
+nrow(dados_meta_smd%>%filter(Assay=="WST")), 
+nrow(dados_meta_smd%>%filter(Assay=="XTT"))),
+                              "Effect size [95% CI] (Hedge's g)" = c(
+paste(meta_assay$b[1,1], " [", meta_assay$ci.lb[1], ", ", meta_assay$ci.ub[1], "]", sep = ""), 
+paste(meta_assay$b[2,1], " [", meta_assay$ci.lb[2], ", ", meta_assay$ci.ub[2], "]", sep = ""), 
+paste(meta_assay$b[3,1], " [", meta_assay$ci.lb[3], ", ", meta_assay$ci.ub[3], "]", sep = ""), 
+paste(meta_assay$b[4,1], " [", meta_assay$ci.lb[4], ", ", meta_assay$ci.ub[4], "]", sep = ""), 
+paste(meta_assay$b[5,1], " [", meta_assay$ci.lb[5], ", ", meta_assay$ci.ub[5], "]", sep = ""), 
+paste(meta_assay$b[6,1], " [", meta_assay$ci.lb[6], ", ", meta_assay$ci.ub[6], "]", sep = ""),
+paste(meta_assay$b[7,1], " [", meta_assay$ci.lb[7], ", ", meta_assay$ci.ub[6], "]", sep = "")),
+                              "p-value" = c(meta_assay$pval),
+                              "I2" = c(mlm.variance.distribution(meta_assay)$totalI2),
+                              "p-value (QE)" = c(meta_assay$QEp),
+                              "R2" = c(if_else(((sum(meta_3l$sigma2)-sum(meta_assay$sigma2))/sum(meta_3l$sigma2)*100)<0, 0, ((sum(meta_3l$sigma2)-sum(meta_assay$sigma2))/sum(meta_3l$sigma2)*100))),
+                              "p-value (QM)" = c(meta_assay$QMp))
+
 ```
 
 Assay bubble plot
+
 ```{r}
-ggplot(dados_meta_smd, aes(x = Assay, y=yi, size = 1/sqrt(vi))) + 
+fig_assay = 
+  ggplot(dados_meta_smd, aes(x = Assay, y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
   labs(y = "Hedge's g", x = "Assay") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
+  scale_x_discrete(limits = c("MTT", "WST", "CCK-8", "MTS", "XTT", "Rezasurin", "EZ4U")) + 
   geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
 ```
 
 Cell density
+
 ```{r}
 meta_density = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_smd$Cell_density))
 
 meta_density
+
+summary_density = data.frame("variable" = c("cell density"), 
+                              "category" = c("intercept", "(unit)"),
+                              "sample size" = c(NA, meta_density$k),
+                              "Effect size [95% CI] (Hedge's g)" = c(
+paste(meta_density$b[1,1], " [", meta_density$ci.lb[1], ", ", meta_density$ci.ub[1], "]", sep = ""), 
+paste(meta_density$b[2,1], " [", meta_density$ci.lb[2], ", ", meta_density$ci.ub[2], "]", sep = "")),
+                              "p-value" = c(meta_density$pval),
+                              "I2" = c(mlm.variance.distribution(meta_density)$totalI2),
+                              "p-value (QE)" = c(meta_density$QEp),
+                              "R2" = c(if_else(((sum(meta_3l$sigma2)-sum(meta_density$sigma2))/sum(meta_3l$sigma2)*100)<0, 0, ((sum(meta_3l$sigma2)-sum(meta_density$sigma2))/sum(meta_3l$sigma2)*100))),
+                              "p-value (QM)" = c(meta_density$QMp))
+
 ```
+
 Cell density bubble plot
+
 ```{r}
-ggplot(dados_meta_smd, aes(x = as.numeric(Cell_density), y=yi, size = 1/sqrt(vi))) + 
+fig_density = 
+  ggplot(dados_meta_smd, aes(x = as.numeric(Cell_density), y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 1, stroke = 1) + 
   labs(y = "Hedge's g", x = "Cell density (log10 scale)") + 
   theme_classic() + 
@@ -452,6 +1168,23 @@ ggplot(dados_meta_smd, aes(x = as.numeric(Cell_density), y=yi, size = 1/sqrt(vi)
   scale_x_continuous(trans = "log10") + 
   geom_abline(slope = 0, linetype = "dashed", color = "grey")
 ```
+
+### Summary
+
+```{r}
+meta_regressions = rbind(summary_aggregation, summary_assay, summary_concent, summary_density, summary_difduration, summary_differentiation, summary_duration)
+
+kable(meta_regressions)
+
+cowplot::plot_grid(fig_agregation, fig_assay, fig_concent, fig_density, fig_difduration, fig_differentiation, fig_duration, labels = LETTERS)
+ggsave("./Figures/meta-regressions.png", width = 30, height = 30, units = "cm")
+```
+
+
+# Meta-regressions (3-level) - sem outlier
+
+Falta escolher qual, ou se queremos fazer todos também.
+
 
 # Multivariate Meta-regressions (3-level)
 
@@ -463,6 +1196,7 @@ rma.mv.glmulti <- function(formula, data, ...)
 ```
 
 Functions to decompose R2 (3-level)
+
 ```{r}
 # Gera a lista de combinaÃ§Ãµes de preditores, a partir da lista de preditores e um de interesse, pra qual vocÃª quer calcular o R2 - retorna o texto das fÃ³rmulas, e.g. "~ a + b"
 build_model_combinations = function (todos_preditores, preditor_interesse){
@@ -532,79 +1266,79 @@ get_R2_for_all_predictors_3a = function (todos_preditores) {
 ```
 
 Como a gente só pode usar as comparacoes que tenham a descricao completa de todas as variáveis testadas, precisamos filtrar os dadose conferir se seguimos com N suficiente.
+
 ```{r}
-dados_uteis <- dados_meta_smd
-dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Assay", "Diferentiation_duration_days", "Concentration_uM", "Duration_hours", "Cell_density")], 1, anyNA),]
+dados_uteis <- dados_meta_smd_max100
+dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Assay", "Diferentiation_duration_days", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
 ```
+
 Considering all pre-registered variables, we'd have `r nrow(dados_uteis)` experiments available (i.e. `r nrow(dados_meta_smd)-nrow(dados_uteis)` exclusions due to missing data). As we have 7 variables, we should have at least 70 comparisons - so can use all of them now. There are `r 2^7` possible models.
 
 ```{r}
 multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Assay + Diferentiation_duration_days + Concentration_uM + Duration_hours + Cell_density, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^7), plotty = F)
 ```
+
 ```{r}
 print(multi_meta_reg)
 ```
+Top models (within 2 IC units of best model)
+```{r}
+top <- weightable(multi_meta_reg)
+top <- top[top$aicc <= min(top$aicc) + 2,]
+top
+```
 
 Decomposing R2 for the best model:
+
 ```{r}
 dat = dados_uteis
-meus_preditores = c("Diferentiation_duration_days", "Concentration_uM", "Duration_hours", "Cell_density")
+meus_preditores = c("Concentration_uM", "Duration_hours")
 melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
 
 melhor_modelo.summary = melhor_modelo$summary 
 
-#revisar!!!
-#melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
-#melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[1]], btt = 2)$QMp
-#melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[1]], btt = 3)$QMp
+melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[1]], btt = 2)$QMp
+melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[1]], btt = 3)$QMp
 ```
 
 Resultados:
-```{r}
-#multi_meta_reg@objects[[1]]
 
-#melhor_modelo.summary %>% select(1,3,4)
+```{r}
+multi_meta_reg@objects[[1]]
+confint(multi_meta_reg@objects[[1]])
+mlm.variance.distribution(multi_meta_reg@objects[[1]])
+#Pseudo R2: 
+(sum(meta_3l$sigma2)-sum(multi_meta_reg@objects[[1]]$sigma2))/sum(meta_3l$sigma2)*100
 ```
 
-### excluindo outliers de concentracao de abeta:
-
-Como a gente só pode usar as comparacoes que tenham a descricao completa de todas as variáveis testadas, precisamos filtrar os dadose conferir se seguimos com N suficiente.
 ```{r}
-#dados_uteis <- dados_meta_smd_max2500
-#dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Assay", "Diferentiation_duration_days", "Concentration_uM", "Duration_hours")], 1, anyNA),]
-```
-Considering all pre-registered variables, we'd have `r nrow(dados_uteis)` experiments available (i.e. `r nrow(dados_meta_smd_max2500)-nrow(dados_uteis)` exclusions due to missing data). As we have 7 variables, we should have at least 70 comparisons - so can use all of them now. There are `r 2^7` possible models.
+dat = dados_uteis
+meus_preditores = c("Concentration_uM", "Duration_hours", "Cell_density")
+melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
 
-```{r}
-#multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Assay + Diferentiation_duration_days + Concentration_uM + Duration_hours, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^6), plotty = F)
-```
-```{r}
-#print(multi_meta_reg)
-```
+melhor_modelo.summary = melhor_modelo$summary 
 
-Decomposing R2 for the best model:
-```{r}
-#dat = dados_uteis
-#meus_preditores = c("Diferentiation_duration_days", "Duration_hours")
-#melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
-
-#melhor_modelo.summary = melhor_modelo$summary 
-
-#melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
-#melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[1]], btt = 2)$QMp
-#melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[1]], btt = 3)$QMp
+melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[2]], btt = 2)$QMp
+melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[2]], btt = 3)$QMp
+melhor_modelo.summary[3,4] = anova(multi_meta_reg@objects[[2]], btt = 4)$QMp
 ```
 
 Resultados:
-```{r}
-#multi_meta_reg@objects[[1]]
 
-#melhor_modelo.summary %>% select(1,3,4)
+```{r}
+multi_meta_reg@objects[[2]]
+#confint(multi_meta_reg@objects[[2]])
+mlm.variance.distribution(multi_meta_reg@objects[[2]])
+#Pseudo R2: 
+(sum(meta_3l$sigma2)-sum(multi_meta_reg@objects[[2]]$sigma2))/sum(meta_3l$sigma2)*100
 ```
 
 # Controle de qualidade dos dados
 
 Revisor como moderador
+
 ```{r}
 dados_meta_smd %>% count(Created.By)
 
@@ -613,6 +1347,7 @@ meta_revisor = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", rando
 meta_revisor
 
 ```
+
 ```{r}
 ggplot(dados_meta_smd, aes(x = Created.By, y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
@@ -625,179 +1360,6 @@ ggplot(dados_meta_smd, aes(x = Created.By, y=yi, size = 1/sqrt(vi))) +
   scale_x_discrete(guide = guide_axis(angle = 45))
 ```
 
-# Análises descritivas
-
-```{r}
-dados_por_artigo = dados_completos %>% distinct(rayyan.key, .keep_all = T)
-```
-
-```{r}
-ggplot(dados_por_artigo, aes(x=year)) + 
-  geom_histogram(binwidth = 1, color="black", fill = "white") +
-  theme_classic() +
-  scale_y_continuous(limits = c(0,50), n.breaks = 10)
-```
-
-Article-level info:
-```{r}
-reversal = dados_por_artigo %>% count(tests_reversal)
-
-ssc = dados_por_artigo %>% count(sample_size_calculation)
-
-conflict = dados_por_artigo %>% count(conflict_interest)
-
-registration = dados_por_artigo %>% count(protocol_registration)
-```
-
-```{r}
-article_level = data.frame(
-  Feature=c("Studies testing reversal", 
-            "Provides sample size calculation", 
-            "Includes conflict of interest statement", 
-            "Has pre-registered"),
-  Count = c(as.numeric(reversal[2,2]), 
-            0, 
-            as.numeric(conflict[1,2]+conflict[3,2]), 
-            as.numeric(registration[2,2]+registration[3,2])),
-  Percent = c(as.numeric(reversal[2,2])*100/nrow(dados_por_artigo), 
-              0*100/nrow(dados_por_artigo),
-              as.numeric(conflict[1,2]+conflict[3,2])*100/nrow(dados_por_artigo), 
-              as.numeric(registration[2,2]+registration[3,2])*100/nrow(dados_por_artigo))
-)
-
-kable(article_level, digits = 1)
-```
-
-Experiment-level info
-
-Assay
-```{r}
-assay = dados_completos %>% count(Assay)
-kable(assay %>% arrange(-n), digits = 1)
-```
-
-Cell line
-```{r}
-csource = dados_completos %>% count(Cell_source)
-kable(csource %>% arrange(-n), digits = 1)
-
-cbank = dados_completos %>% filter(Cell_source=="Cell bank") %>% count(Cell_bank)
-kable(cbank %>% arrange(-n), digits = 1)
-
-cauthent = dados_completos %>% count(Cell_authentication)
-kable(cauthent %>% arrange(-n), digits = 1)
-
-cmyco = dados_completos %>% count(Cell_mycoplasma)
-kable(cmyco %>% arrange(-n), digits = 1)
-
-cserum = dados_completos %>% count(Serum_type)
-kable(cserum %>% arrange(-n), digits = 1)
-
-cserumconc = dados_completos %>% count(Serum_concentration)
-kable(cserumconc %>% arrange(-n), digits = 1)
-
-#adicionar meio de cultura e suplementos
-```
-
-Treatment
-```{r}
-control = dados_completos %>% count(Control_description)
-kable(control %>% arrange(-n), digits = 1)
-
-a_seq = dados_completos %>% count(Abeta_sequence)
-kable(a_seq %>% arrange(-n), digits = 1)
-
-a_orig = dados_completos %>% count(Abeta_origin)
-kable(a_orig %>% arrange(-n), digits = 1)
-
-a_spec = dados_completos %>% count(Abeta_species)
-kable(a_spec %>% arrange(-n), digits = 1)
-
-a_aggr = dados_completos %>% count(Abeta_aggregation)
-kable(a_aggr %>% arrange(-n), digits = 1)
-
-a_exp = dados_completos %>% count(Single_exposure)
-kable(a_exp %>% arrange(-n), digits = 1)
-
-```
-
-```{r}
-dados_completos %>% summarise(mean(Duration_hours, na.rm = T))
-dados_completos %>% summarise(sd(Duration_hours, na.rm = T))
-dados_completos %>% summarise(median(Duration_hours, na.rm = T))
-dados_completos %>% summarise(min(Duration_hours, na.rm = T))
-dados_completos %>% summarise(max(Duration_hours, na.rm = T))
-
-ggplot(dados_completos, aes(x=Duration_hours)) + 
-  geom_histogram(binwidth = 1, color="black", fill = "white") +
-  theme_classic() +
-  scale_y_continuous(n.breaks = 10) +
-  scale_x_continuous(n.breaks = 10)
-```
-
-```{r}
-dados_completos %>% summarise(mean(Concentration_uM, na.rm = T))
-dados_completos %>% summarise(sd(Concentration_uM, na.rm = T))
-dados_completos %>% summarise(median(Concentration_uM, na.rm = T))
-dados_completos %>% summarise(min(Concentration_uM, na.rm = T))
-dados_completos %>% summarise(max(Concentration_uM, na.rm = T))
-
-ggplot(dados_completos, aes(x=Concentration_uM)) + 
-  geom_histogram(binwidth = 1, color="black", fill = "white") +
-  theme_classic() +
-  scale_y_continuous(n.breaks = 10) +
-  scale_x_continuous(n.breaks = 10)
-```
-
-Diferenciacao
-```{r}
-dif = dados_completos %>% count(Diferentiation_method)
-kable(dif %>% arrange(-n), digits = 1)
-
-#adicionar meio de cultura, suplementos, soro e concentracao
-```
-
-
-Reporting
-```{r}
-experiment_level = data.frame(
-  Feature=c("Describes cell source", 
-            "Describes cell authentication", 
-            "Describes mycoplasma testing", 
-            "Control group is clear",
-            "Describes Abeta sequence",
-            "Describes Abeta origin",
-            "Describes Abeta species",
-            "Describes Abeta aggregation",
-            "Has single exposure",
-            "Describes duration of Abeta exposure",
-            "Describes concentration of Abeta"),
-  Count = c(as.numeric(csource[2,2]+csource[1,2]), 
-            as.numeric(cauthent[2,2]), 
-            as.numeric(cmyco[2,2]), 
-            as.numeric(control[3,2]),
-            sum(!is.na(dados_completos$Abeta_sequence)),
-            as.numeric(a_orig[3,2]),
-            as.numeric(a_spec[3,2]),
-            as.numeric(a_aggr[4,2]),
-            as.numeric(a_exp[2,2]),
-            sum(!is.na(dados_completos$Duration_hours)),
-            sum(!is.na(dados_completos$Concentration_uM))),
-  Percent = c(as.numeric(csource[2,2]+csource[1,2])*100/nrow(dados_completos), 
-            as.numeric(cauthent[2,2])*100/nrow(dados_completos), 
-            as.numeric(cmyco[2,2])*100/nrow(dados_completos), 
-            as.numeric(control[3,2])*100/nrow(dados_completos),
-            sum(!is.na(dados_completos$Abeta_sequence))*100/nrow(dados_completos),
-            as.numeric(a_orig[3,2])*100/nrow(dados_completos),
-            as.numeric(a_spec[3,2])*100/nrow(dados_completos),
-            as.numeric(a_aggr[4,2])*100/nrow(dados_completos),
-            as.numeric(a_exp[2,2])*100/nrow(dados_completos),
-            sum(!is.na(dados_completos$Duration_hours))*100/nrow(dados_completos),
-            sum(!is.na(dados_completos$Concentration_uM))*100/nrow(dados_completos))
-)
-
-kable(experiment_level, digits = 1)
-```
 
 ```{r}
 
