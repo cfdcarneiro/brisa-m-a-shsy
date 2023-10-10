@@ -96,7 +96,15 @@ dados_meta_smd = dados_meta_smd %>% mutate(Comparison_ID = 1:nrow(dados_meta_smd
 dados_meta_smd = dados_meta_smd %>% mutate(mean_n = (treated_n+control_n)/2)
 
 dados_meta_smd = dados_meta_smd %>% mutate(Duration_days = Duration_hours/24)
+
+
 ```
+
+Comparacoes excluídas por falta de info sobre sequencia de Abeta: `r nrow(dados_meta_smd %>% filter(is.na(Abeta_sequence)))`
+
+```{r}
+dados_meta_smd = dados_meta_smd %>% filter(!is.na(Abeta_sequence))
+``` 
 
 Filtrando outliers
 ```{r}
@@ -631,9 +639,9 @@ summary(meta10)
 Forest plot (SMD)
 
 ```{r, fig.height=15, fig.width=10}
-forest1 = viz_forest(meta1, study_labels = dados_meta_smd$rayyan.key, col = "black", annotate_CI = TRUE, xlab = "Hedge's g")
-forest1
-ggsave("./Figures/forest.png", width = 10, height = 49, units = "in")
+#forest1 = viz_forest(meta1, study_labels = dados_meta_smd$rayyan.key, col = "black", annotate_CI = TRUE, xlab = "Hedge's g")
+#forest1
+#ggsave("./Figures/forest.png", width = 10, height = 49, units = "in")
 ```
 
 Orchard Plot
@@ -645,6 +653,13 @@ orchaRd::orchard_plot(meta50, group = "Comparison_ID", xlab = "Effect size (Hedg
   scale_fill_manual(values = "grey")
 
 ggsave("./Figures/orchard-maior--50.png", width = 30, height = 20, units = "cm")
+
+orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (Hedge's g)",
+    transfm = "none") + 
+  scale_color_manual(values = "black") + 
+  scale_fill_manual(values = "grey")
+
+ggsave("./Figures/orchard-completo.png", width = 30, height = 20, units = "cm")
 ```
 ## Publication bias
 
