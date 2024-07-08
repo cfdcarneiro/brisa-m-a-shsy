@@ -1,0 +1,98 @@
+---
+title: "Meta-análises"
+author: "Clarissa F. D. Carneiro"
+date: "2023-08-18"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+```
+
+```{r warning=FALSE, results='hide'}
+library(readxl)
+library(tidyverse)
+library(knitr)
+```
+
+After data cleaning, we import the dataset back for analyses.
+
+```{r warning=FALSE}
+dados_limpos = read_xlsx("dados_limpos-revisado.xlsx")
+```
+
+We should still exclude all comparisons without information on the Abeta sequence used.
+
+```{r}
+dados_limpos = dados_limpos %>% filter(!is.na(Abeta_sequence))
+```
+
+For the analyses, we need the mean and sample size of both groups and the variation of the treated group (whether it is described as SEM, SD ou Unclear). We exclude all comparisons with at least one of these missing values.
+
+```{r}
+dados_completos1 = dados_limpos %>% filter(control_mean!=0&!is.na(control_mean)&treated_mean!=0&!is.na(treated_mean)&treated_variation!=0&!is.na(treated_variation))
+
+dados_completos = dados_completos1 %>% filter(control_n!=0&!is.na(control_n)&treated_n!=0&!is.na(treated_n))
+```
+
+
+Data for screening and inclusion flowchart:
+```{r}
+print("Total number of comparison extracted")
+nrow(dados_limpos)
+
+print("Number of papers for the complete dataset")
+nrow(dados_limpos %>% count(rayyan.key))
+
+print("Number of comparisons excluded for missing means or variation")
+nrow(dados_limpos)-nrow(dados_completos1)
+
+print("Number of comparisons excluded for missing sample sizes")
+nrow(dados_completos1)-nrow(dados_completos)
+```
+
+Other data cleaning steps still needed are to pull together WST assays as a single assay type, and select the values that were re-extracted during the verification of outliers.
+
+```{r}
+dados_completos[dados_completos=="WST-1"] = "WST"
+dados_completos[dados_completos=="WST-8"] = "WST"
+```
+
+```{r}
+dados_completos = dados_completos %>% rename(control_mean_original = control_mean) %>%
+                                      rename(treated_mean_original = treated_mean) %>%
+                                      rename(control_variation_original = control_variation) %>%
+                                      rename(treated_variation_original = treated_variation)
+
+dados_completos = dados_completos %>% mutate(control_mean = 
+                                        if_else(is.na(control_mean_double_check)==T, true = control_mean_original, false = control_mean_double_check))
+
+dados_completos = dados_completos %>% mutate(treated_mean = 
+                                        if_else(is.na(treated_mean_double_check)==T, true = treated_mean_original, false = treated_mean_double_check))
+
+dados_completos = dados_completos %>% mutate(control_variation = 
+                                        if_else(is.na(control_variation_double_check)==T, true = control_variation_original, false = control_variation_double_check))
+
+dados_completos = dados_completos %>% mutate(treated_variation = 
+                                        if_else(is.na(treated_variation_double_check)==T, true = treated_variation_original, false = treated_variation_double_check))
+```
+
+After that, we can get the SD values where SEM was reported (if unclear, we chose to consider as SEM)
+
+```{r}
+dados_completos = dados_completos %>% mutate(control_sd = 
+                                       if_else(condition = variation=="SD", true = control_variation, false = (control_variation*sqrt(control_n))))
+
+dados_completos = dados_completos %>% mutate(treated_sd = 
+                                       if_else(condition = variation=="SD", true = treated_variation, false = (treated_variation*sqrt(treated_n))))
+```
+
+For the next analysis steps, we can simplify the dataset by removing unused columns (these can be useful for tracing the extracted values back to the original publication, which can still be done later by using the Comparison_ID as a unique identifier).
+
+```{r}
+dados_analise = dados_completos %>% select(-c("doi", "title", "figure", "dep_variable", "control_name", "treated_name", "control_mean_original", "control_mean_double_check", "control_variation_original", "control_variation_double_check", "treated_mean_original", "treated_mean_double_check", "treated_variation_original", "treated_variation_double_check", "OBS_n", "OBS_general", "Passage_number", "N_cells", "N_cells_unit", "N_cells_volume", "Plate_size", "Well_area", "Culture_medium", "Medium_supplements", "Differentiation_supplements", "Differentiation_protocol", "OBS"))
+```
+
+```{r}
+save(dados_analise, file = "dados_analise.R")
+```
