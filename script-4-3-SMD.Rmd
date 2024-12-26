@@ -281,7 +281,7 @@ fig_differentiation =
   scale_y_continuous(n.breaks = 7) + 
   geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
 
-ggsave("fig_differentiation.png")
+ggsave("./Figures/fig_differentiation-smd.png")
 ```
 
 Diff. duration
@@ -306,7 +306,7 @@ fig_difduration =
   scale_x_continuous(n.breaks = 7) + 
   geom_abline(slope = 0, linetype = "dashed", color = "grey")
 
-ggsave("fig_difduration.png")
+ggsave("./Figures/fig_difduration-smd.png")
 
 ```
 
@@ -332,7 +332,7 @@ fig_agregation =
   scale_x_discrete(limits = c("Monomers", "Oligomers", "Fibers", "Unclear"))
   geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
   
-ggsave("fig_agregation.png")
+ggsave("./Figures/fig_agregation-smd.png")
 ```
 
 Abeta concentration (só até 100 uM)
@@ -374,7 +374,7 @@ fig_concent =
                        ymin = -850, ymax = -300)
 
 
-ggsave("fig_concent.png")
+ggsave("./Figures/fig_concent-smd.png")
 ```
 
 Abeta duration of exposure
@@ -399,7 +399,7 @@ fig_duration =
   scale_x_continuous(n.breaks = 7) + 
   geom_abline(slope = 0, linetype = "dashed", color = "grey")
 
-ggsave("fig_duration.png")
+ggsave("./Figures/fig_duration-smd.png")
 ```
 
 Assay
@@ -424,7 +424,7 @@ fig_assay =
   scale_x_discrete(limits = c("MTT", "WST", "CCK-8", "MTS", "XTT", "Rezasurin", "EZ4U")) + 
   geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
 
-ggsave("fig_assay.png")
+ggsave("./Figures/fig_assay-smd.png")
 ```
 
 Cell density
@@ -449,14 +449,14 @@ fig_density =
   scale_x_continuous(trans = "log10") + 
   geom_abline(slope = 0, linetype = "dashed", color = "grey")
 
-ggsave("fig_density.png")
+ggsave("./Figures/fig_density-smd.png")
 ```
 
 ### Summary
 
 ```{r}
 cowplot::plot_grid(fig_agregation, fig_assay, fig_concent, fig_density, fig_difduration, fig_differentiation, fig_duration, labels = LETTERS)
-ggsave("./Figures/meta-regressions.png", width = 30, height = 30, units = "cm")
+ggsave("./Figures/meta-regressions-smd.png", width = 30, height = 30, units = "cm")
 ```
 
 # Multivariate Meta-regressions (3-level)

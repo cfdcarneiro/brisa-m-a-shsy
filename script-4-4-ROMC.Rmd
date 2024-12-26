@@ -1,0 +1,607 @@
+---
+title: "Meta-análises com SMCC"
+author: "Clarissa F. D. Carneiro"
+date: "2024-12-26"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+```
+
+```{r warning=FALSE, results='hide'}
+library(tidyverse)
+library(metafor)
+library(metaviz)
+library(glmulti)
+library(knitr)
+```
+
+
+```{r warning=FALSE}
+load("dados_analise.R")
+```
+
+This script runs all analyses with effect size measures for ratios. 
+
+Where the publications present a measure of variation for the control group, we are using the ROM (log transformed ratio of means) as the effect size measure, and in the cases where no variation is presented we are using ROMC (log transformed ratio of mean change), given sd control=0 and correlation = 0.
+
+```{r}
+dados_two_sample = dados_analise %>% filter(!is.na(control_sd)) %>% filter(control_sd!=0)
+
+dados_one_sample = dados_analise %>% filter(is.na(control_sd)|control_sd==0)
+```
+
+```{r}
+dados_two_sample_rom = escalc(measure = "ROM", m1i = as.numeric(treated_mean), m2i = as.numeric(control_mean), sd1i = as.numeric(treated_sd), sd2i = as.numeric(control_sd), n1i = as.numeric(treated_n), n2i = as.numeric(control_n), data = dados_two_sample)
+
+dados_one_sample_romc = escalc(measure = "ROMC", m1i = as.numeric(treated_mean), m2i = as.numeric(control_mean), sd1i = as.numeric(treated_sd), sd2i = rep(0, nrow(dados_one_sample)), ni = as.numeric(treated_n), ri = rep(0, nrow(dados_one_sample)), data = dados_one_sample)
+
+dados_meta_ratios = rbind(dados_two_sample_rom, dados_one_sample_romc)
+```
+
+# 2-level
+
+```{r}
+meta1 = rma(yi=yi, vi=vi, data = dados_meta_ratios, measure = "ROM", method = "REML", slab = rayyan.key)
+summary(meta1)
+confint(meta1)
+```
+Exact p value: `r meta1$pval`
+Exact Q test p value `r meta1$QEp`
+
+
+Orchard Plot
+
+```{r}
+orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (ratio of means)",
+    transfm = "none") + 
+  scale_color_manual(values = "black") + 
+  scale_fill_manual(values = "grey")
+
+ggsave("./Figures/orchard-ratios.png", width = 30, height = 20, units = "cm")
+```
+## Publication bias
+
+Trim-and-fill
+
+```{r}
+meta_trimfill_R = trimfill(meta1, estimator = "R0", side = "right")
+meta_trimfill_R
+meta_trimfill_L = trimfill(meta1, estimator = "L0", side = "right")
+meta_trimfill_L
+```
+
+Funnel plot
+
+```{r}
+ggplot(dados_meta_ratios, aes(x = yi, y = 1/sqrt(mean_n))) +
+  geom_point() + 
+  scale_x_continuous(name = "Effect size (ratio of means)") +
+  scale_y_continuous(trans = "reverse", name = expression(1/sqrt(N))) +
+  theme_classic() + 
+  geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
+  geom_vline(xintercept = meta1$beta, linetype="dashed", color = "darkgreen")
+
+ggsave("./Figures/funnel-plot-ratios.png")
+
+```
+
+Egger's regression
+
+```{r}
+regtest(x = meta1, ni = dados_meta_ratios$mean_n, predictor = "sqrtninv")
+```
+
+# 3-level
+
+```{r}
+meta2 = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID)
+meta2
+confint(meta2)
+```
+
+```{r}
+#As there is not function in the package metafor for estimating I^2 values for 3-level models, we imported the function from Mathias Harrer & David Daniel Ebert (https://raw.githubusercontent.com/MathiasHarrer/dmetar/master/R/mlm.variance.distribution.R)
+
+mlm.variance.distribution = var.comp = function(x){
+
+  m = x
+
+  # Check class
+  if (!(class(m)[1] %in% c("rma.mv", "rma"))){
+    stop("x must be of class 'rma.mv'.")
+  }
+
+  # Check for three level model
+  if (m$sigma2s != 2){
+    stop("The model you provided does not seem to be a three-level model. This function can only be used for three-level models.")
+  }
+
+  # Check for right specification (nested model)
+  if (sum(grepl("/", as.character(m$random[[1]]))) < 1){
+    stop("Model must contain nested random effects. Did you use the '~ 1 | cluster/effect-within-cluster' notation in 'random'? See ?metafor::rma.mv for more details.")
+  }
+
+  # Get variance diagonal and calculate total variance
+  n = m$k.eff
+  vector.inv.var = 1/(diag(m$V))
+  sum.inv.var = sum(vector.inv.var)
+  sum.sq.inv.var = (sum.inv.var)^2
+  vector.inv.var.sq = 1/(diag(m$V)^2)
+  sum.inv.var.sq = sum(vector.inv.var.sq)
+  num = (n-1)*sum.inv.var
+  den = sum.sq.inv.var - sum.inv.var.sq
+  est.samp.var = num/den
+
+  # Calculate variance proportions
+  level1=((est.samp.var)/(m$sigma2[1]+m$sigma2[2]+est.samp.var)*100)
+  level2=((m$sigma2[2])/(m$sigma2[1]+m$sigma2[2]+est.samp.var)*100)
+  level3=((m$sigma2[1])/(m$sigma2[1]+m$sigma2[2]+est.samp.var)*100)
+
+  # Prepare df for return
+  Level=c("Level 1", "Level 2 (exp)", "Level 3 (art)")
+  Variance=c(level1, level2, level3)
+  df.res=data.frame(Variance)
+  colnames(df.res) = c("% of total variance")
+  rownames(df.res) = Level
+  I2 = c("---", round(Variance[2:3], 2))
+  df.res = as.data.frame(cbind(df.res, I2))
+
+  totalI2 = Variance[2] + Variance[3]
+
+
+  # Generate plot
+  df1 = data.frame("Level" = c("Sampling Error", "Total Heterogeneity"),
+                  "Variance" = c(df.res[1,1], df.res[2,1]+df.res[3,1]),
+                  "Type" = rep(1,2))
+
+  df2 = data.frame("Level" = rownames(df.res),
+                   "Variance" = df.res[,1],
+                   "Type" = rep(2,3))
+
+  df = as.data.frame(rbind(df1, df2))
+
+
+  g = ggplot(df, aes(fill=Level, y=Variance, x=as.factor(Type))) +
+    coord_cartesian(ylim = c(0,1), clip = "off") +
+    geom_bar(stat="identity", position="fill", width = 1, color="black") +
+    scale_y_continuous(labels = scales::percent)+
+    theme(axis.title.x=element_blank(),
+          axis.text.y = element_text(color="black"),
+          axis.line.y = element_blank(),
+          axis.title.y=element_blank(),
+          axis.line.x = element_blank(),
+          axis.ticks.x = element_blank(),
+          axis.text.x = element_blank(),
+          axis.ticks.y = element_line(lineend = "round"),
+          legend.position = "none",
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.background = element_blank(),
+          legend.background = element_rect(linetype="solid",
+                                           colour ="black"),
+          legend.title = element_blank(),
+          legend.key.size = unit(0.75,"cm"),
+          axis.ticks.length=unit(.25, "cm"),
+          plot.margin = unit(c(1,3,1,1), "lines")) +
+    scale_fill_manual(values = c("darkseagreen3", "deepskyblue3", "darkseagreen2",
+                                 "deepskyblue1", "deepskyblue2")) +
+
+    # Add Annotation
+
+    # Total Variance
+    annotate("text", x = 1.5, y = 1.05,
+             label = paste("Total Variance:",
+                           round(m$sigma2[1]+m$sigma2[2]+est.samp.var, 3))) +
+
+    # Sampling Error
+    annotate("text", x = 1, y = (df[1,2]/2+df[2,2])/100,
+             label = paste("Sampling Error Variance: \n", round(est.samp.var, 3)), size = 3) +
+
+    # Total I2
+    annotate("text", x = 1, y = ((df[2,2])/100)/2-0.02,
+             label = bquote("Total"~italic(I)^2*":"~.(round(df[2,2],2))*"%"), size = 3) +
+    annotate("text", x = 1, y = ((df[2,2])/100)/2+0.05,
+             label = paste("Variance not attributable \n to sampling error: \n", round(m$sigma2[1]+m$sigma2[2],3)), size = 3) +
+
+    # Level 1
+    annotate("text", x = 2, y = (df[1,2]/2+df[2,2])/100, label = paste("Level 1: \n",
+                                                                       round(df$Variance[3],2), "%", sep=""), size = 3) +
+
+    # Level 2
+    annotate("text", x = 2, y = (df[5,2]+(df[4,2]/2))/100,
+             label = bquote(italic(I)[Level2]^2*":"~.(round(df[4,2],2))*"%"), size = 3) +
+
+    # Level 3
+    annotate("text", x = 2, y = (df[5,2]/2)/100,
+             label = bquote(italic(I)[Level3]^2*":"~.(round(df[5,2],2))*"%"), size = 3)
+
+  returnlist = list(results = df.res,
+                    totalI2 = totalI2,
+                    plot = g)
+  class(returnlist) = c("mlm.variance.distribution", "list")
+
+  invisible(returnlist)
+
+  returnlist
+
+}
+```
+
+```{r fig.keep='none', warning=FALSE}
+mlm.variance.distribution(x = meta2)
+```
+
+### excluindo n de replicatas ou outras unidades nao independentes
+
+```{r}
+kable(dados_meta_ratios %>% count(n_definition))
+dados_meta_ratios_independent = dados_meta_ratios %>% filter(
+  n_definition=="independent determinations" | 
+  n_definition=="independent experimental measurements" |
+  n_definition=="independent experiments" |
+  n_definition=="independent repetitions" |
+  n_definition=="independent replicates" |
+  n_definition=="independent runs" |
+  n_definition=="independent sets of studies")
+```
+
+```{r}
+meta3 = rma.mv(yi=yi, V=vi, data = dados_meta_ratios_independent, method = "REML", random = ~1|rayyan.key/Comparison_ID)
+meta3
+confint(meta3)
+```
+
+```{r fig.keep='none', warning=FALSE}
+mlm.variance.distribution(x = meta3)
+```
+
+
+# Meta-regressions (3-level)
+
+Differentiation
+
+```{r}
+meta_differentiation = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_ratios$Diferentiation_method), ref="No differentiation"))
+
+meta_differentiation
+```
+
+Differentiation bubble plot
+
+```{r}
+fig_differentiation = 
+  ggplot(dados_meta_ratios, aes(x = Diferentiation_method, y=yi, size = 1/sqrt(vi))) + 
+  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
+  labs(y = "Ratio of means", x = "Differentiation method") + 
+  theme_classic() + 
+  scale_size_continuous(guide = "none") + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(n.breaks = 7) + 
+  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
+
+ggsave("./Figures/fig_differentiation-ratios.png")
+```
+
+Diff. duration
+
+```{r}
+meta_difduration = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_ratios$Diferentiation_duration_days))
+
+meta_difduration
+```
+
+Diff. duration bubble plot
+
+```{r}
+fig_difduration = 
+  ggplot(dados_meta_ratios, aes(x = as.numeric(Diferentiation_duration_days), y=yi, size = 1/sqrt(vi))) + 
+  geom_point(shape = 1, stroke = 1) + 
+  labs(y = "Ratio of means", x = "Duration of differentiation (days)") + 
+  theme_classic() + 
+  scale_size_continuous(guide = "none") + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(n.breaks = 7) + 
+  scale_x_continuous(n.breaks = 7) + 
+  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+
+ggsave("./Figures/fig_difduration-ratios.png")
+
+```
+
+Aggregation
+
+```{r}
+meta_aggregation = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_ratios$Abeta_aggregation), ref="Monomers"))
+
+meta_aggregation
+```
+
+Aggregation bubble plot
+
+```{r}
+fig_agregation = 
+  ggplot(dados_meta_ratios, aes(x = Abeta_aggregation, y=yi, size = 1/sqrt(vi))) + 
+  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
+  labs(y = "Ratio of means", x = "Abeta aggregation") + 
+  theme_classic() + 
+  scale_size_continuous(guide = "none") + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(n.breaks = 7) + 
+  scale_x_discrete(limits = c("Monomers", "Oligomers", "Fibers", "Unclear"))
+  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
+  
+ggsave("./Figures/fig_agregation-ratios.png")
+```
+
+Abeta concentration (só até 100 uM)
+
+```{r}
+dados_meta_ratios_max100 = dados_meta_ratios %>% filter(Concentration_uM<100)
+
+meta_concent = rma.mv(yi=yi, V=vi, data = dados_meta_ratios_max100, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~dados_meta_ratios_max100$Concentration_uM)
+
+meta_concent
+```
+
+Abeta concentration bubble plot
+
+```{r}
+fig_concent_c = 
+  ggplot(dados_meta_ratios_max100, aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi))) + 
+  geom_point(shape = 1, stroke = 1) + 
+  labs(y = "Ratio of means", x = "Abeta concentration (uM)") + 
+  theme_classic() + 
+  scale_size_continuous(guide = "none") + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(n.breaks = 7) + 
+  scale_x_continuous(n.breaks = 7) + 
+  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+
+fig_concent_f = 
+  ggplot(dados_meta_ratios_max100 %>% filter(Concentration_uM<10), aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi))) + 
+  geom_point(shape = 1, stroke = 1) + 
+  theme_classic() + 
+  scale_size_continuous(guide = "none") + 
+  theme(legend.position = "none") + 
+  scale_y_continuous(n.breaks = 7, name = element_blank()) + 
+  scale_x_continuous(n.breaks = 7, name = element_blank()) + 
+  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+
+fig_concent = 
+  fig_concent_c + annotation_custom(ggplotGrob(fig_concent_f), xmin = 40, xmax = 80, 
+                       ymin = -850, ymax = -300)
+
+
+ggsave("./Figures/fig_concent-ratios.png")
+```
+
+Abeta duration of exposure
+
+```{r}
+meta_duration = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_ratios$Duration_days))
+
+meta_duration
+```
+
+Abeta duration bubble plot
+
+```{r}
+fig_duration =
+  ggplot(dados_meta_ratios, aes(x = as.numeric(Duration_days), y=yi, size = 1/sqrt(vi))) + 
+  geom_point(shape = 1, stroke = 1) + 
+  labs(y = "Ratio of means", x = "Abeta duration of exposure (days)") + 
+  theme_classic() + 
+  scale_size_continuous(guide = "none") + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(n.breaks = 7) + 
+  scale_x_continuous(n.breaks = 7) + 
+  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+
+ggsave("./Figures/fig_duration-ratios.png")
+```
+
+Assay
+
+```{r}
+meta_assay = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_ratios$Assay), ref="MTT"))
+
+meta_assay
+```
+
+Assay bubble plot
+
+```{r}
+fig_assay = 
+  ggplot(dados_meta_ratios, aes(x = Assay, y=yi, size = 1/sqrt(vi))) + 
+  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
+  labs(y = "Ratio of means", x = "Assay") + 
+  theme_classic() + 
+  scale_size_continuous(guide = "none") + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(n.breaks = 7) + 
+  scale_x_discrete(limits = c("MTT", "WST", "CCK-8", "MTS", "XTT", "Rezasurin", "EZ4U")) + 
+  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
+
+ggsave("./Figures/fig_assay-ratios.png")
+```
+
+Cell density
+
+```{r}
+meta_density = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_ratios$Cell_density))
+
+meta_density
+```
+
+Cell density bubble plot
+
+```{r}
+fig_density = 
+  ggplot(dados_meta_ratios, aes(x = as.numeric(Cell_density), y=yi, size = 1/sqrt(vi))) + 
+  geom_point(shape = 1, stroke = 1) + 
+  labs(y = "Ratio of means", x = "Cell density (log10 scale)") + 
+  theme_classic() + 
+  scale_size_continuous(guide = "none") + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(n.breaks = 7) + 
+  scale_x_continuous(trans = "log10") + 
+  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+
+ggsave("./Figures/fig_density-ratios.png")
+```
+
+### Summary
+
+```{r}
+cowplot::plot_grid(fig_agregation, fig_assay, fig_concent, fig_density, fig_difduration, fig_differentiation, fig_duration, labels = LETTERS)
+ggsave("./Figures/meta-regressions-ratios.png", width = 30, height = 30, units = "cm")
+```
+
+# Multivariate Meta-regressions (3-level)
+
+All combinations of variables from the selected list are tested in multivariable models, and the best models are ranked by corrected Akaike Information Criteria (AICc). For each best model selected, we decompose the R2 value for each moderator included. For this, we calculate the mean of the differences between R2 from models with and without the moderator in all possible orders of moderator inclusion. Additionally, we performed a Q test of moderators for each variable (including all dummy variables for each categorical moderator) to obtain p-values for individual variables.
+
+```{r mv-functions}
+rma.mv.glmulti <- function(formula, data, ...)
+   rma.mv(formula, vi, data=data, method="ML", random = ~1|rayyan.key/Comparison_ID, verbose = FALSE, ...)
+```
+
+Functions to decompose R2 (3-level)
+
+```{r}
+# Create the list of all combinations of predictors for which you want to get R2 - returns the formula string, e.g. "~ a + b".
+build_model_combinations = function (todos_preditores, preditor_interesse){
+  outros_preditores = todos_preditores[todos_preditores != preditor_interesse]
+  
+  reduced_models = c("", map(1:length(outros_preditores), function (i) {
+    paste0("~ ", apply(combn(outros_preditores, i), MARGIN = 2, paste0, collapse = " + "))
+  }) |> unlist())
+  
+  full_models = map_chr(reduced_models, function (f) {
+    if (f == "") {
+      return (paste0("~ ", preditor_interesse) )
+    } else {
+      return (paste0(f, " + ", preditor_interesse) )
+    }
+  })
+  
+  list(full_models = full_models, reduced_models = reduced_models)
+}
+
+# Runs all models, full x reduced, from the formulas created above and calculates the difference between R2 values. 
+all_model_comparisons_3a = function (comparison_list) {
+  map2_dfr(comparison_list$reduced_models, comparison_list$full_models, function (m0s, m1s) {
+    if (m0s == "") {
+      m0 = rma(yi, vi, data=dat, method="ML", control = list(maxiter = 3000))
+    } else {
+      m0f = as.formula(m0s)
+      m0 = rma.mv(yi, vi, random = ~1|rayyan.key/Comparison_ID, mods = m0f, data=dat, method="ML", control = list(maxiter = 3000))
+    }
+    
+    m1f = as.formula(m1s)
+    m1 = rma.mv(yi, vi, random = ~1|rayyan.key/Comparison_ID, mods = m1f, data=dat, method="ML", control = list(maxiter = 3000))
+   
+    m2 = rma.mv(yi=yi, V=vi, data = dat, method = "REML", random = ~1|rayyan.key/Comparison_ID, control = list(maxiter = 3000)) 
+    
+    reduced_model_size = length(all.vars(m1f)) - 1
+    
+    tibble(reduced = m0s, full = m1s, R2 = ((sum(m2$sigma2)-sum(m1$sigma2))/sum(m2$sigma2)*100)-((sum(m2$sigma2)-sum(m0$sigma2))/sum(m2$sigma2)*100), permutations = factorial(reduced_model_size))
+  })
+}
+
+get_R2_for_single_predictor_3a = function (todos_preditores, preditor_interesse) {
+  comparison_list = build_model_combinations(todos_preditores, preditor_interesse)
+  
+  r = all_model_comparisons_3a(comparison_list)
+  s = mean(r$R2, na.rm = T)
+
+  ws = weighted.mean(r$R2, r$permutations, na.rm = T)
+  
+  list(all_predictors = todos_preditores, predictor = preditor_interesse, results = r, mean = s, wmean = ws)
+}
+
+get_R2_for_all_predictors_3a = function (todos_preditores) {
+  df = map(todos_preditores, function (preditor_interesse) {
+    print(paste("Running models for", preditor_interesse))
+    get_R2_for_single_predictor_3a(todos_preditores, preditor_interesse)
+  })
+  s = tibble(mean_R2 = map_dbl(df, "mean"), weighted_mean_R2 = map_dbl(df, "wmean"), predictor = map_chr(df, "predictor"))
+  list(full_results = df, summary = s)
+}
+```
+
+For the multivariate analyses, we can only use the comparisons for which all variables of interest are reported.
+
+```{r}
+dados_uteis <- dados_meta_ratios_max100
+dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Assay", "Diferentiation_duration_days", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
+```
+
+Considering all pre-registered variables, we'd have `r nrow(dados_uteis)` experiments available (i.e. `r nrow(dados_meta_ratios)-nrow(dados_uteis)` exclusions due to missing data). As we have 7 variables, we should have at least 70 comparisons - so can use all of them now. There are `r 2^7` possible models.
+
+```{r}
+multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Assay + Diferentiation_duration_days + Concentration_uM + Duration_hours + Cell_density, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^7), plotty = F)
+```
+
+```{r}
+print(multi_meta_reg)
+```
+Top models (within 2 IC units of best model)
+```{r}
+top <- weightable(multi_meta_reg)
+top <- top[top$aicc <= min(top$aicc) + 2,]
+top
+```
+
+Decomposing R2 for the best model:
+
+```{r}
+dat = dados_uteis
+meus_preditores = c("Diferentiation_method", "Abeta_aggregation", "Assay", "Concentration_uM", "Cell_density")
+melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
+
+melhor_modelo.summary = melhor_modelo$summary 
+
+melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[1]], btt = 2)$QMp
+melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[1]], btt = 3)$QMp
+melhor_modelo.summary[3,4] = anova(multi_meta_reg@objects[[1]], btt = 4)$QMp
+melhor_modelo.summary[4,4] = anova(multi_meta_reg@objects[[1]], btt = 5)$QMp
+```
+
+Resultados:
+
+```{r}
+multi_meta_reg@objects[[1]]
+confint(multi_meta_reg@objects[[1]])
+mlm.variance.distribution(multi_meta_reg@objects[[1]])
+#Pseudo R2: 
+(sum(meta2$sigma2)-sum(multi_meta_reg@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
+```
+
+```{r}
+dat = dados_uteis
+meus_preditores = c("Diferentiation_method", "Abeta_aggregation", "Assay", "Concentration_uM")
+melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
+
+melhor_modelo.summary = melhor_modelo$summary 
+
+melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[2]], btt = 2)$QMp
+melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[2]], btt = 3)$QMp
+melhor_modelo.summary[3,4] = anova(multi_meta_reg@objects[[2]], btt = 4)$QMp
+melhor_modelo.summary[4,4] = anova(multi_meta_reg@objects[[2]], btt = 5)$QMp
+```
+
+Resultados:
+
+```{r}
+multi_meta_reg@objects[[2]]
+confint(multi_meta_reg@objects[[2]])
+mlm.variance.distribution(multi_meta_reg@objects[[2]])
+#Pseudo R2: 
+(sum(meta2$sigma2)-sum(multi_meta_reg@objects[[2]]$sigma2))/sum(meta2$sigma2)*100
+```
+
