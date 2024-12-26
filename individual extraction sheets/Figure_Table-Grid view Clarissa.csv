@@ -1,0 +1,34 @@
+﻿Fig_ID,Article_ID,figure,dep_variable,control_name,treated_name,OBS,Results
+242,80,Figure 1d,Relative absorbance of viable cells,-/-/-,+/-/-,,214
+243,81,Figure 1a (white bars),Viability % (MTT Absorbance),Untreated,Abeta,,215
+244,81,Figure 4 (black bars),Viability % (MTT Absorbance),Untreated,Abeta,,216
+245,82,Figure 3,Cell viability (% of control),Ctrl,0 (Icariin (uM)),,217
+246,82,Figure 4,Cell viability (% of control),-/-/-,+/-/- E -/+/-,,"218,219"
+247,83,Figure 5 (black bars),% Cell viability,WT,Aβ,,220
+248,84,Figure 1,Cell viability,Ctrl,Aβ,,221
+249,85,Figure 1B,% cell viability (% vs control),Ctr,Aβ 1-42,,222
+250,86,Figure 1I,Cell viability (% of control),con,Aβ,,223
+251,87,Figure 3A,Cell viability (% control),Control,Aβ 1-42,,224
+253,87,Figure 3B,Cell viability (% control),Control,Aβ 1-42,,226
+254,89,Figure 4,MTT reduction ability (per control),CT,Aβ 1-42,,227
+255,90,Figure 5,MTT reduction ability (% of control),ct,Abeta,,228
+256,91,Figure 1,Cell viability (% of control),0,0.1 and 0.5 and 1 and 2,,"229,230,231,232"
+257,92,Figure 2,Cell viability (% of control),Control,Aβ 1-42 (10uM),,233
+258,93,Figure 7A (black bars),% Viability,(not shown),0,,234
+259,94,Figure 3A,Cell viability /%,DMSO 0.1%,Aβ 1.25 uM and Aβ 2.5 uM and Aβ 5 uM and Aβ 10 uM and Aβ 20 uM,,"235,236,237,238,239"
+260,94,Figure 3B,Cell viability /%,DMSO 0.1%,Aβ,,240
+261,94,Figure 3C,Cell viability /%,DMSO 0.1%,Aβ,,241
+262,95,Figure 4A,Cell viability (% of control),0,25 and 100 and 1000,,"242,243,244"
+275,95,Figure 4C,Cell death (% of control),(not shown),Aβ1-42 + / BNDF-,"discutimos que deve ser MTT, mas e o efeito? deveria ser invertido?",261
+263,96,Figure 8A,Cell viability (% of control),Control,Aβ (1-42),,245
+264,97,Figure 3A,Cell viability (% of control),Control,Vehicle (Aβ),,246
+265,98,Figure 3A,Cell viability (% control),(not shown in graph = 100%),"0.1, 0.5, 1, 2 and 5",,"247,248,249,250,251"
+266,98,Figure 4B,Cell viability (% control),(not shown in graph = 100%),Aβ (2uM),,252
+267,98,Figure 5A,Cell viability (% control),(not shown in graph = 100%),Aβ 1-42,,253
+268,99,Figure 7A/text,% Cell viability,Control,Aβ 1-42 (2uM),numeric data is also presented in the text,254
+269,100,Figure 9B,Mitochondrial activity / %,'---- (black bar),'+--- (first white bar),,255
+270,101,Figure 6,Cell viability (% of control),CT,Aβ,,256
+271,102,Figure 8C,Neuronal cells (% of control),Control,Aβ,,257
+272,103,Figure 15,Viability (% control),'-- (first bar),'+- (second bar),,258
+273,104,Figure 1,Viability (% of control),Control,Ab,,259
+274,105,Table 1,% Neuronal Survival,"(not shown, 100%)",SH-SY5Y x Ab1-42 Control,,260

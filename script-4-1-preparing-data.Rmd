@@ -1,7 +1,7 @@
 ---
 title: "Meta-análises"
 author: "Clarissa F. D. Carneiro"
-date: "2023-08-18"
+date: "12-7-2024"
 output: word_document
 ---
 
@@ -51,11 +51,17 @@ print("Number of comparisons excluded for missing sample sizes")
 nrow(dados_completos1)-nrow(dados_completos)
 ```
 
-Other data cleaning steps still needed are to pull together WST assays as a single assay type, and select the values that were re-extracted during the verification of outliers.
+Other data cleaning steps still needed are to pull together WST assays as a single assay type, convert some variables and select the values that were re-extracted during the verification of outliers.
 
 ```{r}
 dados_completos[dados_completos=="WST-1"] = "WST"
 dados_completos[dados_completos=="WST-8"] = "WST"
+```
+
+```{r}
+dados_completos = dados_completos %>% mutate(mean_n = (treated_n+control_n)/2)
+
+dados_completos = dados_completos %>% mutate(Duration_days = Duration_hours/24)
 ```
 
 ```{r}

@@ -1,0 +1,178 @@
+---
+title: "Comparação SMD e SMCC"
+author: "Clarissa F. D. Carneiro"
+date: "2024-07-12"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = T)
+```
+
+```{r warning=FALSE, results='hide', message=FALSE}
+library(readxl)
+library(tidyverse)
+library(metafor)
+library(orchaRd)
+#library(metaviz)
+#library(glmulti)
+#library(knitr)
+```
+
+```{r warning=FALSE}
+load("dados_analise.R")
+```
+
+
+### Comparação SMD e SMCC
+
+```{r}
+dados_two_sample = dados_analise %>% filter(!is.na(control_sd)) %>% filter(control_sd!=0)
+
+dados_one_sample = dados_analise %>% filter(is.na(control_sd)|control_sd==0)
+```
+
+Tem 5 comparações em que os Ns não são iguais entre os grupos nos dados 'one-sample'. Excluo essas comparações.
+```{r}
+dados_one_sample = dados_one_sample %>% mutate(dif_n = if_else(control_n==treated_n, TRUE, FALSE))
+
+dados_one_sample %>% count(dif_n)
+
+dados_one_sample = dados_one_sample %>% filter(dif_n!=FALSE) %>% select(-c("dif_n"))
+```
+Para usar SMD, considero sd do controle igual ao tratado (que vai ser igual ao pooled).
+
+```{r}
+dados_two_sample_smd = escalc(measure = "SMD", m1i = as.numeric(treated_mean), m2i = as.numeric(control_mean), sd1i = as.numeric(treated_sd), sd2i = as.numeric(control_sd), n1i = as.numeric(treated_n), n2i = as.numeric(control_n), data = dados_two_sample)
+
+dados_one_sample_smd = escalc(measure = "SMD", m1i = as.numeric(treated_mean), m2i = as.numeric(control_mean), sd1i = as.numeric(treated_sd), sd2i = rep(c(0), nrow(dados_one_sample)), n1i = as.numeric(treated_n), n2i = as.numeric(control_n), data = dados_one_sample)
+
+dados_meta_smd = rbind(dados_two_sample_smd, dados_one_sample_smd)
+```
+
+Tamanho de efeito SMCC (comparações com n=2 são excluídas)
+```{r}
+dados_one_sample_smcc = escalc(measure = "SMCC", m1i = as.numeric(treated_mean), m2i = as.numeric(control_mean), sd1i = as.numeric(treated_sd), sd2i = rep(0, length(dados_one_sample$control_mean)), ri = rep(0, length(dados_one_sample$control_mean)), ni = as.numeric(treated_n), data = dados_one_sample)
+```
+
+Tamanhos de efeito mistos
+```{r}
+dados_meta_misto = rbind(dados_two_sample_smd, dados_one_sample_smcc)
+
+```
+
+Meta-análise (2-level SMD)
+
+dados completos (excluindo n=2)
+```{r}
+meta1 = rma(yi=yi, vi=vi, data = dados_meta_smd %>% filter(treated_n>2), measure = "SMD", method = "REML", slab = rayyan.key)
+summary(meta1)
+#confint(meta1)
+
+orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size",
+    transfm = "none") + 
+  scale_color_manual(values = "black") + 
+  scale_fill_manual(values = "grey")
+
+```
+
+só dados one-sample (excluindo n=2)
+```{r}
+meta2 = rma(yi=yi, vi=vi, data = dados_one_sample_smd %>% filter(treated_n>2), measure = "SMD", method = "REML", slab = rayyan.key)
+summary(meta2)
+#confint(meta2)
+
+orchard_plot(meta2, group = "Comparison_ID", xlab = "Effect size",
+    transfm = "none") + 
+  scale_color_manual(values = "black") + 
+  scale_fill_manual(values = "grey")
+
+```
+
+Meta-análise (2-level SMCC)
+
+só dados one-sample
+```{r}
+meta3 = rma(yi=yi, vi=vi, data = dados_one_sample_smcc %>% filter(treated_n>2), measure = "SMCC", method = "REML", slab = rayyan.key)
+summary(meta3)
+#confint(meta3)
+
+orchard_plot(meta3, group = "Comparison_ID", xlab = "Effect size",
+    transfm = "none") + 
+  scale_color_manual(values = "black") + 
+  scale_fill_manual(values = "grey")
+
+```
+
+dados completos, ES misto, measure = SMCC
+
+```{r}
+meta4 = rma(yi=yi, vi=vi, data = dados_meta_misto %>% filter(treated_n>2), measure = "SMCC", method = "REML", slab = rayyan.key)
+summary(meta4)
+#confint(meta4)
+
+orchard_plot(meta4, group = "Comparison_ID", xlab = "Effect size",
+    transfm = "none") + 
+  scale_color_manual(values = "black") + 
+  scale_fill_manual(values = "grey")
+
+```
+
+dados completos, ES misto, measure = SMD
+
+```{r}
+meta5 = rma(yi=yi, vi=vi, data = dados_meta_misto %>% filter(treated_n>2), measure = "SMD", method = "REML", slab = rayyan.key)
+summary(meta5)
+#confint(meta5)
+
+orchard_plot(meta5, group = "Comparison_ID", xlab = "Effect size",
+    transfm = "none") + 
+  scale_color_manual(values = "black") + 
+  scale_fill_manual(values = "grey")
+
+```
+
+Meta-análise (3-level SMD)
+
+```{r}
+meta1_3l = rma.mv(yi=yi, V=vi, data = dados_meta_smd %>% filter(treated_n>2), method = "REML", random = ~1|rayyan.key/Comparison_ID)
+meta1_3l
+#confint(meta_3l)
+```
+
+```{r}
+meta2_3l = rma.mv(yi=yi, V=vi, data = dados_one_sample_smd %>% filter(treated_n>2), method = "REML", random = ~1|rayyan.key/Comparison_ID)
+meta2_3l
+```
+
+Meta-análise (3-level SMCC)
+
+```{r}
+meta3_3l = rma.mv(yi=yi, V=vi, data = dados_one_sample_smcc %>% filter(treated_n>2), method = "REML", random = ~1|rayyan.key/Comparison_ID)
+meta3_3l
+```
+
+```{r}
+meta4_3l = rma.mv(yi=yi, V=vi, data = dados_meta_misto %>% filter(treated_n>2), method = "REML", random = ~1|rayyan.key/Comparison_ID)
+meta4_3l
+```
+
+
+### variabilidade entre diferenças e entre grupos
+
+```{r}
+library(ggplot2)
+
+ggplot(dados_one_sample, aes(y = treated_sd)) +
+  geom_jitter(aes(x=1)) + 
+  labs(title = "sd das diferenças") +
+  scale_y_continuous(limits = c(0, 110))
+
+dados_sd_grupo = dados_two_sample %>% select(c("treated_sd", "control_sd", "Comparison_ID"))
+dados_sd_grupo = reshape2::melt(dados_sd_grupo, id.vars = "Comparison_ID")
+
+ggplot(dados_sd_grupo, aes(y = value, x = variable)) +
+  geom_jitter() + 
+  labs(title = "sd de cada grupo") +
+  scale_y_continuous(limits = c(0, 110))
+```

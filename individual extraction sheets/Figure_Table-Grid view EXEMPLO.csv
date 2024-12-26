@@ -1,0 +1,3 @@
+﻿Fig_ID,Article_ID,figure,dep_variable,control_name,treated_name,OBS,Results
+242,80,2C,Cell viability,Control,Abeta1-42,,214
+243,80,3C,Cell viability,Control,Abeta1-42,,215

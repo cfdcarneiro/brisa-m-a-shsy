@@ -1,0 +1,332 @@
+﻿Protocol_ID,Results_ID,Assay,Cell_source,Cell_bank,Cell_authentication,Cell_mycoplasma,Control_description,Abeta_sequence,Abeta_origin,Abeta_species,Abeta_aggregation,Single_exposure,Duration_hours,Concentration_uM,Passage_number,N_cells,N_cells_unit,N_cells_volume,Plate_size,Culture_medium,Medium_supplements,Serum_type,Serum_concentration,Diferentiation_method,Diferentiation_duration_days,Differentiation_medium,Differentiation_serum_type,Differentiation_serum_concentration,Differentiation_supplements,Differentiation_protocol,OBS
+201,214,MTT,Cell bank,DSMZ (ACC 209 and ACC 305),No,No,Vehicle,1-38,synthetic,Unclear,Monomers,"Yes, single",12.0,1.000,,,,,,,,,,No differentiation,,,,,,,
+202,215,MTT,Cell bank,DSMZ (ACC 209 and ACC 305),No,No,Vehicle,1-40,synthetic,Unclear,Monomers,"Yes, single",12.0,1.000,,,,,,,,,,No differentiation,,,,,,,
+203,216,MTT,Cell bank,DSMZ (ACC 209 and ACC 305),No,No,Vehicle,1-42,synthetic,Unclear,Monomers,"Yes, single",12.0,1.000,,,,,,,,,,No differentiation,,,,,,,
+204,217,MTT,Cell bank,DSMZ (ACC 209 and ACC 305),No,No,Vehicle,1-43,synthetic,Unclear,Monomers,"Yes, single",12.0,1.000,,,,,,,,,,No differentiation,,,,,,,
+205,218,MTT,Cell bank,DSMZ (ACC 209 and ACC 305),No,No,Vehicle,1-38,synthetic,Unclear,Monomers,"Yes, single",12.0,2.500,,,,,,,,,,No differentiation,,,,,,,
+206,219,MTT,Cell bank,DSMZ (ACC 209 and ACC 305),No,No,Vehicle,1-40,synthetic,Unclear,Monomers,"Yes, single",12.0,2.500,,,,,,,,,,No differentiation,,,,,,,
+207,220,MTT,Cell bank,DSMZ (ACC 209 and ACC 305),No,No,Vehicle,1-42,synthetic,Unclear,Monomers,"Yes, single",12.0,2.500,,,,,,,,,,No differentiation,,,,,,,
+208,221,MTT,Cell bank,DSMZ (ACC 209 and ACC 305),No,No,Vehicle,1-43,synthetic,Unclear,Monomers,"Yes, single",12.0,2.500,,,,,,,,,,No differentiation,,,,,,,
+209,222,WST,Unclear,,No,No,Vehicle,1-40,synthetic,Human,Unclear,"Yes, single",120.0,10.000,,15000,cells/well,,96,,,,,No differentiation,,,,,,,BD BioCoat™ Human Fibronectin Cellware 96-well plates
+210,223,MTT,Unclear,,No,No,Medium only,1-42,synthetic,Unclear,Fibers,"Yes, single",72.0,5.000,,20000,cells/mL,300.0,24,DMEM,"with penicillin, streptomycin; 5.5mM Glucose",FBS,5% or 10 %,ATRA,8.0,DMEM-F12 media,FBS,1%,10 µM ATRA,"Cells were plated at a concentration of
+0.2 million cells/ml in 0.3 ml of F5 media in sterile 24-well
+plates coated with 0.1 mg/ml poly-L-lysine (Day 0). On
+Days 1 and 4, media on SH-SY5Y cells were replaced with
+0.4 ml of DMEM-F12 media containing 1% FBS (F1 media)
+and 10 μM retinoic acid. On Day 7, media were switched to
+0.4 ml of F1 low glucose media containing 10 μM retinoic
+acid. 
+",
+211,224,MTT,Unclear,,No,No,Medium only,1-42,synthetic,Unclear,Fibers,"Yes, single",72.0,5.000,,20000,cells/mL,300.0,24,DMEM,"with penicillin, streptomycin; 30.5 mM Glucose",FBS,5% or 10 %,ATRA,8.0,DMEM-F12 media,FBS,1%,"10 µM ATRA, 30.5 mM glucose","Cells were plated at a concentration of
+0.2 million cells/ml in 0.3 ml of F5 media in sterile 24-well
+plates coated with 0.1 mg/ml poly-L-lysine (Day 0). On
+Days 1 and 4, media on SH-SY5Y cells were replaced with
+0.4 ml of DMEM-F12 media containing 1% FBS (F1 media)
+and 10 μM retinoic acid. On Day 7, media were switched to
+0.4 ml of F1 low glucose media containing 10 μM retinoic
+acid. Finally, on Day 8, glucose solution was added to some
+wells to achieve a concentration of 30.5 mM glucose in respective
+wells. 
+",
+220,225,MTT,Donation,,No,No,Vehicle,1-42,synthetic,Unclear,Unclear,"Yes, single",24.0,20.000,,30000,cells/well,,96,DMEM:F12,"l-Glutamine (4 mM; Gibco, Europe), penicillin (200 units/ml; Gibco), streptomycin (200 g/ml; Gibco), MEM non-essential amino acids (100×; Gibco)",FBS,10%,No differentiation,,,,,,,aggregated peptides; synthesized in the solid phase in our laboratory; the synthesis method was reported earlier
+221,226,MTT,Donation,,No,No,Vehicle,1-42,synthetic,Unclear,Unclear,"Yes, single",24.0,20.000,,25000,cells/mL,,24,DMEM:F12,"l-Glutamine (4 mM; Gibco, Europe), penicillin (200 units/ml; Gibco), streptomycin (200 g/ml; Gibco), MEM non-essential amino acids (100×; Gibco)",FBS,10%,ATRA plus,8.0,DMEM-F12 media,FBS,10%,"10 µM ATRA, 0.5% DMSO","cells were grown for 8 days on 24-well plates, and
+cell differentiation was initiated by the addition of 10 M
+RA dissolved in cell culture medium containing 0.5%
+DMSO. On the first day, the number of non-differentiated
+cells in the wells was 2.5 × 105 cells/ml in suspension.
+After 8 days of differentiation, the cells were bound as a
+monolayer to the plate, and cell counting gave a number
+of 3 × 105 cells/cm2 (corresponding to 6.5 × 105 cells/ml
+in suspension). Fig. 1 shows the confluent monolayer of
+the cells (Fig. 1C) with long neurites (Fig. 1D).",aggregated peptides; synthesized in the solid phase in our laboratory; the synthesis method was reported earlier
+222,227,MTT,Donation,,No,No,Vehicle,1-42,synthetic,Unclear,Unclear,"Yes, single",48.0,20.000,,30000,cells/well,,96,DMEM:F12,"l-Glutamine (4 mM; Gibco, Europe), penicillin (200 units/ml; Gibco), streptomycin (200 g/ml; Gibco), MEM non-essential amino acids (100×; Gibco)",FBS,10%,No differentiation,,,,,,,aggregated peptides; synthesized in the solid phase in our laboratory; the synthesis method was reported earlier
+223,228,MTT,Donation,,No,No,Vehicle,1-42,synthetic,Unclear,Unclear,"Yes, single",48.0,20.000,,25000,cells/mL,,24,DMEM:F12,"l-Glutamine (4 mM; Gibco, Europe), penicillin (200 units/ml; Gibco), streptomycin (200 g/ml; Gibco), MEM non-essential amino acids (100×; Gibco)",FBS,10%,ATRA plus,8.0,DMEM-F12 media,FBS,10%,"10 µM ATRA, 0.5% DMSO","cells were grown for 8 days on 24-well plates, and
+cell differentiation was initiated by the addition of 10 M
+RA dissolved in cell culture medium containing 0.5%
+DMSO. On the first day, the number of non-differentiated
+cells in the wells was 2.5 × 105 cells/ml in suspension.
+After 8 days of differentiation, the cells were bound as a
+monolayer to the plate, and cell counting gave a number
+of 3 × 105 cells/cm2 (corresponding to 6.5 × 105 cells/ml
+in suspension). Fig. 1 shows the confluent monolayer of
+the cells (Fig. 1C) with long neurites (Fig. 1D).",aggregated peptides; synthesized in the solid phase in our laboratory; the synthesis method was reported earlier
+224,229,MTT,Donation,,No,No,Vehicle,1-42,synthetic,Unclear,Unclear,"Yes, single",24.0,1.000,,25000,cells/mL,,24,DMEM:F12,"l-Glutamine (4 mM; Gibco, Europe), penicillin (200 units/ml; Gibco), streptomycin (200 g/ml; Gibco), MEM non-essential amino acids (100×; Gibco)",FBS,10%,ATRA plus,8.0,DMEM-F12 media,FBS,10%,"10 µM ATRA, 0.5% DMSO","cells were grown for 8 days on 24-well plates, and
+cell differentiation was initiated by the addition of 10 M
+RA dissolved in cell culture medium containing 0.5%
+DMSO. On the first day, the number of non-differentiated
+cells in the wells was 2.5 × 105 cells/ml in suspension.
+After 8 days of differentiation, the cells were bound as a
+monolayer to the plate, and cell counting gave a number
+of 3 × 105 cells/cm2 (corresponding to 6.5 × 105 cells/ml
+in suspension). Fig. 1 shows the confluent monolayer of
+the cells (Fig. 1C) with long neurites (Fig. 1D).",aggregated peptides; synthesized in the solid phase in our laboratory; the synthesis method was reported earlier
+225,230,MTT,Donation,,No,No,Vehicle,1-42,synthetic,Unclear,Unclear,"Yes, single",24.0,20.000,,25000,cells/mL,,24,DMEM:F12,"l-Glutamine (4 mM; Gibco, Europe), penicillin (200 units/ml; Gibco), streptomycin (200 g/ml; Gibco), MEM non-essential amino acids (100×; Gibco)",FBS,10%,ATRA plus,8.0,DMEM-F12 media,FBS,10%,"10 µM ATRA, 0.5% DMSO","cells were grown for 8 days on 24-well plates, and
+cell differentiation was initiated by the addition of 10 M
+RA dissolved in cell culture medium containing 0.5%
+DMSO. On the first day, the number of non-differentiated
+cells in the wells was 2.5 × 105 cells/ml in suspension.
+After 8 days of differentiation, the cells were bound as a
+monolayer to the plate, and cell counting gave a number
+of 3 × 105 cells/cm2 (corresponding to 6.5 × 105 cells/ml
+in suspension). Fig. 1 shows the confluent monolayer of
+the cells (Fig. 1C) with long neurites (Fig. 1D).",aggregated peptides; synthesized in the solid phase in our laboratory; the synthesis method was reported earlier
+226,231,MTT,Donation,,No,No,Vehicle,1-42,synthetic,Unclear,Unclear,"Yes, single",24.0,50.000,,25000,cells/mL,,24,DMEM:F12,"l-Glutamine (4 mM; Gibco, Europe), penicillin (200 units/ml; Gibco), streptomycin (200 g/ml; Gibco), MEM non-essential amino acids (100×; Gibco)",FBS,10%,ATRA plus,8.0,DMEM-F12 media,FBS,10%,"10 µM ATRA, 0.5% DMSO","cells were grown for 8 days on 24-well plates, and
+cell differentiation was initiated by the addition of 10 M
+RA dissolved in cell culture medium containing 0.5%
+DMSO. On the first day, the number of non-differentiated
+cells in the wells was 2.5 × 105 cells/ml in suspension.
+After 8 days of differentiation, the cells were bound as a
+monolayer to the plate, and cell counting gave a number
+of 3 × 105 cells/cm2 (corresponding to 6.5 × 105 cells/ml
+in suspension). Fig. 1 shows the confluent monolayer of
+the cells (Fig. 1C) with long neurites (Fig. 1D).",aggregated peptides; synthesized in the solid phase in our laboratory; the synthesis method was reported earlier
+230,235,MTT,Cell bank,ECACC,No,No,Unclear,1-40,synthetic,Unclear,Unclear,"Yes, single",48.0,25.000,,7500,cells/well,100.0,96,DMEM/Ham's F-12 Nutrient Mix,"10 IU penicillin/ml,100 μg streptomycin/m. 1% non-essential amino acids and 2 mM glutamine
+",foetal calf serum,15%,No differentiation,,,,,,,
+231,236,MTT,Cell bank,ECACC,No,No,Unclear,1-42,synthetic,Unclear,Unclear,"Yes, single",48.0,25.000,,7500,cells/well,100.0,96,DMEM/Ham's F-12 Nutrient Mix,"10 IU penicillin/ml,100 μg streptomycin/m. 1% non-essential amino acids and 2 mM glutamine
+",foetal calf serum,15%,No differentiation,,,,,,,
+232,237,MTT,Cell bank,ECACC,No,No,Unclear,1-40,synthetic,Unclear,Unclear,"Yes, single",48.0,25.000,,7500,cells/well,100.0,96,DMEM/Ham's F-12 Nutrient Mix,"10 IU penicillin/ml,100 μg streptomycin/m. 1% non-essential amino acids and 2 mM glutamine
+",foetal calf serum,15%,No differentiation,,,,,,,
+233,238,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",48.0,25.000,,5000,cells,80.0,96,DMEM:F12,"1% glutamic acid, 1% penicillin and streptomycin",FBS,10%,No differentiation,,,,,,,
+234,239,MTT,Donation,National Neurobiology Laboraory of Fudan University,No,No,Vehicle,1-40,recombinant,Unclear,Monomers,"Yes, single",48.0,10.000,,,,,,Not clear,,FBS,,No differentiation,,,,,,,"1,000–10,000 cells per well"
+235,240,MTT,Donation,National Neurobiology Laboraory of Fudan University,No,No,Vehicle,1-40,recombinant,Unclear,Oligomers,"Yes, single",48.0,10.000,,,,,,Not clear,,FBS,,No differentiation,,,,,,,"1,000–10,000 cells per well"
+236,241,MTT,Cell bank,ATCC,No,No,Unclear,1-40,Unclear,Unclear,Fibers,"Yes, single",24.0,,,80000,cells,,96,RPMI,,FBS,10%,No differentiation,,,,,,,
+237,242,MTT,Cell bank,ATCC,No,No,Unclear,1-40,Unclear,Unclear,Fibers,"Yes, single",48.0,,,80000,cells,,96,RPMI,,FBS,10%,No differentiation,,,,,,,
+238,243,MTT,Cell bank,ATCC,No,No,Unclear,1-40,Unclear,Unclear,Fibers,"Yes, single",24.0,,,80000,cells,,96,RPMI,,FBS,10%,No differentiation,,,,,,,
+239,244,MTT,Cell bank,ATCC,No,No,Unclear,1-40,Unclear,Unclear,Fibers,"Yes, single",48.0,,,80000,cells,,96,RPMI,,FBS,10%,No differentiation,,,,,,,
+240,245,MTT,Cell bank,ATCC,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",48.0,20.000,,,,,,DMEM/F12,"penicillin (100 U/mL), and streptomycin (100 mg/mL)",FBS,10%,ATRA,,,,,10uM ATRA dissolved in ethan,,
+241,246,MTT,Cell bank,ATCC,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",48.0,20.000,,,,,,DMEM/F12,"penicillin (100 U/mL), and streptomycin (100 mg/mL)",FBS,10%,ATRA,,,,,10uM ATRA dissolved in ethan,,
+242,247,MTT,Cell bank,ATCC,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",48.0,20.000,,,,,,DMEM/F12,"penicillin (100 U/mL), and streptomycin (100 mg/mL)",FBS,10%,ATRA,,,,,10uM ATRA dissolved in ethan,,
+243,248,MTT,Cell bank,ATCC,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",48.0,20.000,,,,,,DMEM/F12,"penicillin (100 U/mL), and streptomycin (100 mg/mL)",FBS,10%,ATRA,,,,,10uM ATRA dissolved in ethan,,
+244,249,MTT,Cell bank,ATCC,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",48.0,20.000,,10000,cells/well,,96,DMEM/F12,"penicillin (100 U/mL), and streptomycin (100 mg/mL)",FBS,10%,ATRA,,,,,10uM ATRA dissolved in ethan,,
+245,250,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-40,synthetic,Unclear,Oligomers,"Yes, single",48.0,0.220,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,1.000 ug/mL of AB
+246,251,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-40,synthetic,Unclear,Oligomers,"Yes, single",48.0,2.220,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,10.000 ug/mL of AB
+247,252,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-40,synthetic,Unclear,Oligomers,"Yes, single",48.0,11.110,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,50.000 ug/mL of AB
+248,253,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-40,synthetic,Unclear,Oligomers,"Yes, single",48.0,22.220,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,100.000 ug/mL of AB
+249,254,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-40,synthetic,Unclear,Oligomers,"Yes, single",48.0,0.220,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,1.000 ug/mL of AB
+250,255,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-40,synthetic,Unclear,Oligomers,"Yes, single",48.0,2.220,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,10.000 ug/mL of AB
+251,256,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-40,synthetic,Unclear,Oligomers,"Yes, single",48.0,11.110,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,50.000 ug/mL of AB
+252,257,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-40,synthetic,Unclear,Oligomers,"Yes, single",48.0,22.220,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,100.000 ug/mL of AB
+253,258,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-42,synthetic,Unclear,Oligomers,"Yes, single",48.0,0.220,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,1.000 ug/mL of AB
+254,259,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-42,synthetic,Unclear,Oligomers,"Yes, single",48.0,2.220,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,10.000 ug/mL of AB
+255,260,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-42,synthetic,Unclear,Oligomers,"Yes, single",48.0,11.110,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,50.000 ug/mL of AB
+256,261,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-42,synthetic,Unclear,Oligomers,"Yes, single",48.0,22.220,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,100.000 ug/mL of AB
+257,262,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-42,synthetic,Unclear,Oligomers,"Yes, single",48.0,0.220,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,1.000 ug/mL of AB
+258,263,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-42,synthetic,Unclear,Oligomers,"Yes, single",48.0,2.220,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,10.000 ug/mL of AB
+259,264,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-42,synthetic,Unclear,Oligomers,"Yes, single",48.0,11.110,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,50.000 ug/mL of AB
+260,265,MTT,Cell bank,European Collection of Cell Cultures,No,No,Unclear,1-42,synthetic,Unclear,Oligomers,"Yes, single",48.0,22.220,,7500,cells/well,100.0,96,DMEM:F12,"10 IU penicillin/ml and 100 mg streptomycin/ml; 1% non-essential MEM amino acid supplement, and 2 mM freshly prepared glutamine",fetal calf serum,15%,No differentiation,,,,,,,100.000 ug/mL of AB
+261,266,MTT,Unclear,,No,No,Vehicle,1-42,synthetic,Human,Oligomers,"Yes, single",24.0,0.100,,25000,cells/well,,96,Ham’s F12 GlutaMax,1% penicillin/streptomycin,fetal bovine serum,15%,No differentiation,,,,,,,
+262,267,MTT,Unclear,,No,No,Vehicle,1-42,synthetic,Human,Oligomers,"Yes, single",24.0,0.250,,25000,cells/well,,96,Ham’s F12 GlutaMax,1% penicillin/streptomycin,fetal bovine serum,15%,No differentiation,,,,,,,
+263,268,MTT,Unclear,,No,No,Vehicle,1-42,synthetic,Human,Oligomers,"Yes, single",24.0,1.000,,25000,cells/well,,96,Ham’s F12 GlutaMax,1% penicillin/streptomycin,fetal bovine serum,15%,No differentiation,,,,,,,
+264,269,MTT,Unclear,,No,No,Vehicle,1-42,synthetic,Human,Oligomers,"Yes, single",24.0,5.000,,25000,cells/well,,96,Ham’s F12 GlutaMax,1% penicillin/streptomycin,fetal bovine serum,15%,No differentiation,,,,,,,
+265,270,MTT,Unclear,,No,No,Vehicle,1-42,synthetic,Human,Oligomers,"Yes, single",24.0,10.000,,25000,cells/well,,96,Ham’s F12 GlutaMax,1% penicillin/streptomycin,fetal bovine serum,15%,No differentiation,,,,,,,
+266,271,MTT,Unclear,,No,No,Vehicle,1-42,synthetic,Human,Oligomers,"Yes, single",24.0,15.000,,25000,cells/well,,96,Ham’s F12 GlutaMax,1% penicillin/streptomycin,fetal bovine serum,15%,No differentiation,,,,,,,
+267,272,MTT,Donation,,No,No,Vehicle,1-40,synthetic,Unclear,Oligomers,"Yes, single",20.0,10.000,,,cells/well,,96,MEM,"3 mM L-glutamine, 100 U/mL penicillin, 100 ug/mL streptomycin, and 2.5 uh/mL amphotericin B ",FBS,10%,No differentiation,,,,,,,plated 100000 to 200000 cells/well
+268,273,MTT,Donation,,No,No,Vehicle,1-40,synthetic,Unclear,Oligomers,"Yes, single",20.0,20.000,,,cells/well,,96,MEM,"3 mM L-glutamine, 100 U/mL penicillin, 100 ug/mL streptomycin, and 2.5 uh/mL amphotericin B ",FBS,10%,No differentiation,,,,,,,plated 100000 to 200000 cells/well
+269,274,MTT,Donation,,No,No,Vehicle,1-40,synthetic,Unclear,Oligomers,"Yes, single",20.0,40.000,,,cells/well,,96,MEM,"3 mM L-glutamine, 100 U/mL penicillin, 100 ug/mL streptomycin, and 2.5 uh/mL amphotericin B ",FBS,10%,No differentiation,,,,,,,plated 100000 to 200000 cells/well
+270,275,MTT,Donation,,No,No,Vehicle,1-40,synthetic,Unclear,Oligomers,"Yes, single",41.0,10.000,,,cells/well,,96,MEM,"3 mM L-glutamine, 100 U/mL penicillin, 100 ug/mL streptomycin, and 2.5 uh/mL amphotericin B ",FBS,10%,No differentiation,,,,,,,plated 100000 to 200000 cells/well
+271,276,MTT,Donation,,No,No,Vehicle,1-40,synthetic,Unclear,Oligomers,"Yes, single",41.0,20.000,,,cells/well,,96,MEM,"3 mM L-glutamine, 100 U/mL penicillin, 100 ug/mL streptomycin, and 2.5 uh/mL amphotericin B ",FBS,10%,No differentiation,,,,,,,plated 100000 to 200000 cells/well
+272,277,MTT,Donation,,No,No,Vehicle,1-40,synthetic,Unclear,Oligomers,"Yes, single",41.0,40.000,,,cells/well,,96,MEM,"3 mM L-glutamine, 100 U/mL penicillin, 100 ug/mL streptomycin, and 2.5 uh/mL amphotericin B ",FBS,10%,No differentiation,,,,,,,plated 100000 to 200000 cells/well
+273,278,MTT,Donation,,No,No,Vehicle,1-40,synthetic,Unclear,Oligomers,"Yes, single",65.0,10.000,,,cells/well,,96,MEM,"3 mM L-glutamine, 100 U/mL penicillin, 100 ug/mL streptomycin, and 2.5 uh/mL amphotericin B ",FBS,10%,No differentiation,,,,,,,plated 100000 to 200000 cells/well
+274,279,MTT,Donation,,No,No,Vehicle,1-40,synthetic,Unclear,Oligomers,"Yes, single",65.0,20.000,,,cells/well,,96,MEM,"3 mM L-glutamine, 100 U/mL penicillin, 100 ug/mL streptomycin, and 2.5 uh/mL amphotericin B ",FBS,10%,No differentiation,,,,,,,plated 100000 to 200000 cells/well
+275,280,MTT,Donation,,No,No,Vehicle,1-40,synthetic,Unclear,Oligomers,"Yes, single",65.0,40.000,,,cells/well,,96,MEM,"3 mM L-glutamine, 100 U/mL penicillin, 100 ug/mL streptomycin, and 2.5 uh/mL amphotericin B ",FBS,10%,No differentiation,,,,,,,plated 100000 to 200000 cells/well
+276,281,MTT,Cell bank,ECACC,No,No,Unclear,1-42,synthetic,Unclear,Unclear,"Yes, single",48.0,20.000,,10000,cells/well,,96,RPMI 1640,,FBS,10%,No differentiation,,,,,,,
+277,282,MTT,Cell bank,ECACC,No,No,Unclear,1-42,synthetic,Unclear,Unclear,"Yes, single",48.0,5.000,,10000,cells/well,,96,RPMI 1640,,FBS,10%,No differentiation,,,,,,,
+278,283,MTT,Cell bank,ECACC,No,No,Unclear,1-42,synthetic,Unclear,Unclear,"Yes, single",48.0,10.000,,10000,cells/well,,96,RPMI 1640,,FBS,10%,No differentiation,,,,,,,
+279,284,MTT,Cell bank,ECACC,No,No,Unclear,1-42,synthetic,Unclear,Unclear,"Yes, single",48.0,15.000,,10000,cells/well,,96,RPMI 1640,,FBS,10%,No differentiation,,,,,,,
+280,285,MTT,Cell bank,ECACC,No,No,Unclear,1-42,synthetic,Unclear,Unclear,"Yes, single",48.0,20.000,,10000,cells/well,,96,RPMI 1640,,FBS,10%,No differentiation,,,,,,,
+281,286,MTT,Cell bank,DSMZ,No,No,Vehicle,1-40,synthetic,Unclear,Unclear,"Yes, single",12.0,1.000,,,,,,,,fetal calf serum,20%,No differentiation,,,,,,,"""...treatment with a concentration of 1 M of individual peptides..."""
+282,287,MTT,Cell bank,DSMZ,No,No,Vehicle,1-42,synthetic,Unclear,Unclear,"Yes, single",12.0,1.000,,,,,,,,fetal calf serum,20%,No differentiation,,,,,,,...treatment with a concentration of 1 M of individual peptides...
+283,288,MTT,Unclear,,No,No,Vehicle,1-42,Unclear,Unclear,Unclear,"Yes, single",24.0,20.000,,,,,96,DMEM,100 units/mL penicillin and 100 g/mL streptomycin,FBS,10%,No differentiation,,,,,,,
+284,289,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Human,Unclear,"Yes, single",12.0,5.000,,,,,,DMEM,1% penicillin/streptomycin,FBS,10%,No differentiation,,,,,,,"""Aβ1–42 fibrillar oligomers"""
+285,290,MTT,Unclear,,No,No,Unclear,1-42,synthetic,Unclear,Oligomers,"Yes, single",24.0,1.000,,20000,cells/well,,96,Ham's F12 medium,,,,No differentiation,,,,,,,"AB from Anaspec, ask for author the culture medium"
+286,291,MTT,Unclear,,No,No,Unclear,1-42,synthetic,Unclear,Unclear,"Yes, single",24.0,1.000,,20000,cells/well,,96,Ham's F12 medium,,,,No differentiation,,,,,,,"AB from Anaspec; ""we prepared Aβ1–42 aggregates for 24 h in vitro. Then, they were incubated with the CTermin vitro for 24 h in order to disassemble the oligomers.""; ask for author the culture medium"
+287,292,MTT,Unclear,,No,No,Vehicle,1-42,synthetic,Human,Oligomers,"Yes, single",72.0,10.000,,5000,cells/well,,96,RPMI,"2mM L-glutamine, 100 UI/mL penicillin, 100 μg/mL streptomycin",FBS,10%,No differentiation,,,,,,,
+288,293,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",24.0,5.000,,,,,,DMEM,1% penicillin/streptomycin,FBS,10%,ATRA,4.0,progesterone-free N2 medium,,,,"""Before factor treatment, SH-SY5Y cells were cultured in progesterone-free N2 medium (Bottenstein and
+Sato, 1979) with 10 MM retinoic acid (Sigma) for 4 days to
+provoke neuronal differentiation. Various combinations of the
+following factors were treated in DMEM for 3 days: 5 MM
+AB1–42 (US peptides, Fullerton, CA), various doses of estrogenic
+agents and 200 nM ICI 182,780, a specific ER antagonist (Tocris,
+UK).""",
+289,294,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",24.0,10.000,,,,,,DMEM,1% penicillin/streptomycin,FBS,10%,ATRA,4.0,progesterone-free N2 medium,,,,"""Before factor treatment, SH-SY5Y cells were cultured in progesterone-free N2 medium (Bottenstein and
+Sato, 1979) with 10 MM retinoic acid (Sigma) for 4 days to
+provoke neuronal differentiation. Various combinations of the
+following factors were treated in DMEM for 3 days: 5 MM
+AB1–42 (US peptides, Fullerton, CA), various doses of estrogenic
+agents and 200 nM ICI 182,780, a specific ER antagonist (Tocris,
+UK).""",
+290,295,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",48.0,1.000,,,,,,DMEM,1% penicillin/streptomycin,FBS,10%,ATRA,4.0,progesterone-free N2 medium,,,,"""Before factor treatment, SH-SY5Y cells were cultured in progesterone-free N2 medium (Bottenstein and
+Sato, 1979) with 10 MM retinoic acid (Sigma) for 4 days to
+provoke neuronal differentiation. Various combinations of the
+following factors were treated in DMEM for 3 days: 5 MM
+AB1–42 (US peptides, Fullerton, CA), various doses of estrogenic
+agents and 200 nM ICI 182,780, a specific ER antagonist (Tocris,
+UK).""",
+291,296,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",48.0,2.000,,,,,,DMEM,1% penicillin/streptomycin,FBS,10%,ATRA,4.0,progesterone-free N2 medium,,,,"""Before factor treatment, SH-SY5Y cells were cultured in progesterone-free N2 medium (Bottenstein and
+Sato, 1979) with 10 MM retinoic acid (Sigma) for 4 days to
+provoke neuronal differentiation. Various combinations of the
+following factors were treated in DMEM for 3 days: 5 MM
+AB1–42 (US peptides, Fullerton, CA), various doses of estrogenic
+agents and 200 nM ICI 182,780, a specific ER antagonist (Tocris,
+UK).""",
+292,297,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",48.0,5.000,,,,,,DMEM,1% penicillin/streptomycin,FBS,10%,ATRA,4.0,progesterone-free N2 medium,,,,"""Before factor treatment, SH-SY5Y cells were cultured in progesterone-free N2 medium (Bottenstein and
+Sato, 1979) with 10 MM retinoic acid (Sigma) for 4 days to
+provoke neuronal differentiation. Various combinations of the
+following factors were treated in DMEM for 3 days: 5 MM
+AB1–42 (US peptides, Fullerton, CA), various doses of estrogenic
+agents and 200 nM ICI 182,780, a specific ER antagonist (Tocris,
+UK).""",
+293,298,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",48.0,10.000,,,,,,DMEM,1% penicillin/streptomycin,FBS,10%,ATRA,4.0,progesterone-free N2 medium,,,,"""Before factor treatment, SH-SY5Y cells were cultured in progesterone-free N2 medium (Bottenstein and
+Sato, 1979) with 10 MM retinoic acid (Sigma) for 4 days to
+provoke neuronal differentiation. Various combinations of the
+following factors were treated in DMEM for 3 days: 5 MM
+AB1–42 (US peptides, Fullerton, CA), various doses of estrogenic
+agents and 200 nM ICI 182,780, a specific ER antagonist (Tocris,
+UK).""",
+294,299,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",72.0,1.000,,,,,,DMEM,1% penicillin/streptomycin,FBS,10%,ATRA,4.0,progesterone-free N2 medium,,,,"""Before factor treatment, SH-SY5Y cells were cultured in progesterone-free N2 medium (Bottenstein and
+Sato, 1979) with 10 MM retinoic acid (Sigma) for 4 days to
+provoke neuronal differentiation. Various combinations of the
+following factors were treated in DMEM for 3 days: 5 MM
+AB1–42 (US peptides, Fullerton, CA), various doses of estrogenic
+agents and 200 nM ICI 182,780, a specific ER antagonist (Tocris,
+UK).""",
+295,300,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",72.0,2.000,,,,,,DMEM,1% penicillin/streptomycin,FBS,10%,ATRA,4.0,progesterone-free N2 medium,,,,"""Before factor treatment, SH-SY5Y cells were cultured in progesterone-free N2 medium (Bottenstein and
+Sato, 1979) with 10 MM retinoic acid (Sigma) for 4 days to
+provoke neuronal differentiation. Various combinations of the
+following factors were treated in DMEM for 3 days: 5 MM
+AB1–42 (US peptides, Fullerton, CA), various doses of estrogenic
+agents and 200 nM ICI 182,780, a specific ER antagonist (Tocris,
+UK).""",
+296,301,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",72.0,5.000,,,,,,DMEM,1% penicillin/streptomycin,FBS,10%,ATRA,4.0,progesterone-free N2 medium,,,,"""Before factor treatment, SH-SY5Y cells were cultured in progesterone-free N2 medium (Bottenstein and
+Sato, 1979) with 10 MM retinoic acid (Sigma) for 4 days to
+provoke neuronal differentiation. Various combinations of the
+following factors were treated in DMEM for 3 days: 5 MM
+AB1–42 (US peptides, Fullerton, CA), various doses of estrogenic
+agents and 200 nM ICI 182,780, a specific ER antagonist (Tocris,
+UK).""",
+297,302,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",72.0,10.000,,,,,,DMEM,1% penicillin/streptomycin,FBS,10%,ATRA,4.0,progesterone-free N2 medium,,,,"""Before factor treatment, SH-SY5Y cells were cultured in progesterone-free N2 medium (Bottenstein and
+Sato, 1979) with 10 MM retinoic acid (Sigma) for 4 days to
+provoke neuronal differentiation. Various combinations of the
+following factors were treated in DMEM for 3 days: 5 MM
+AB1–42 (US peptides, Fullerton, CA), various doses of estrogenic
+agents and 200 nM ICI 182,780, a specific ER antagonist (Tocris,
+UK).""",
+298,303,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",72.0,5.000,,,,,,DMEM,1% penicillin/streptomycin,FBS,10%,ATRA,4.0,progesterone-free N2 medium,,,,"""Before factor treatment, SH-SY5Y cells were cultured in progesterone-free N2 medium (Bottenstein and
+Sato, 1979) with 10 MM retinoic acid (Sigma) for 4 days to
+provoke neuronal differentiation. Various combinations of the
+following factors were treated in DMEM for 3 days: 5 MM
+AB1–42 (US peptides, Fullerton, CA), various doses of estrogenic
+agents and 200 nM ICI 182,780, a specific ER antagonist (Tocris,
+UK).""",
+299,304,WST,Cell bank,Riken Bioresource Center of Japan,No,No,Vehicle,1-42,Unclear,Unclear,Monomers,"Yes, single",48.0,20.000,,20000,cells/well,,96,DMEM,"100 U/ml penicillin, and 100 U/ml streptomycin",FBS,10%,No differentiation,,,,,,,"Monomers: ""After 4 h incubation, 20 μM of Aβ1-42, freshly dissolved in PBS (50 mM, pH = 7.4) and previously incubated at 37 °C for 48 h to induce aggregation [21], was added to the cells."" 
+""To estimate the neuroprotective activity, SH-SY5Y cells were cultured in 96-well plate at a density of 2 x 104 cells/well in a serum-free DMEM and a humidified atmosphere of 5% (v/v) CO2 and 95% (v/v) air at 37 °C."""
+300,305,MTT,Cell bank,Institute of Basic Medical Sciences of the Chinese Academy of Medical Sciences,No,No,Medium only,1-40,synthetic,Unclear,Unclear,"Yes, single",24.0,1.000,,50000,cells/well,,96,RPMI 1640,"300 μg/ml glutamine, 100 μg/ml streptomycin, and 100 U/ml penicillin",FBS,10%,No differentiation,,,,,,,
+301,306,MTT,Cell bank,Institute of Basic Medical Sciences of the Chinese Academy of Medical Sciences,No,No,Medium only,1-40,synthetic,Unclear,Unclear,"Yes, single",24.0,3.000,,50000,cells/well,,96,RPMI 1640,"300 μg/ml glutamine, 100 μg/ml streptomycin, and 100 U/ml penicillin",FBS,10%,No differentiation,,,,,,,
+302,307,MTT,Cell bank,Institute of Basic Medical Sciences of the Chinese Academy of Medical Sciences,No,No,Medium only,1-40,synthetic,Unclear,Unclear,"Yes, single",24.0,5.000,,50000,cells/well,,96,RPMI 1640,"300 μg/ml glutamine, 100 μg/ml streptomycin, and 100 U/ml penicillin",FBS,10%,No differentiation,,,,,,,
+303,308,MTT,Cell bank,Institute of Basic Medical Sciences of the Chinese Academy of Medical Sciences,No,No,Medium only,1-40,synthetic,Unclear,Unclear,"Yes, single",6.0,5.000,,50000,cells/well,,96,RPMI 1640,"300 μg/ml glutamine, 100 μg/ml streptomycin, and 100 U/ml penicillin",FBS,10%,No differentiation,,,,,,,
+304,309,MTT,Cell bank,Institute of Basic Medical Sciences of the Chinese Academy of Medical Sciences,No,No,Medium only,1-40,synthetic,Unclear,Unclear,"Yes, single",12.0,5.000,,50000,cells/well,,96,RPMI 1640,"300 μg/ml glutamine, 100 μg/ml streptomycin, and 100 U/ml penicillin",FBS,10%,No differentiation,,,,,,,
+305,310,MTT,Cell bank,Institute of Basic Medical Sciences of the Chinese Academy of Medical Sciences,No,No,Medium only,1-40,synthetic,Unclear,Unclear,"Yes, single",24.0,5.000,,50000,cells/well,,96,RPMI 1640,"300 μg/ml glutamine, 100 μg/ml streptomycin, and 100 U/ml penicillin",FBS,10%,No differentiation,,,,,,,
+306,311,MTT,Cell bank,Institute of Basic Medical Sciences of the Chinese Academy of Medical Sciences,No,No,Medium only,1-40,synthetic,Unclear,Unclear,"Yes, single",48.0,5.000,,50000,cells/well,,96,RPMI 1640,"300 μg/ml glutamine, 100 μg/ml streptomycin, and 100 U/ml penicillin",FBS,10%,No differentiation,,,,,,,
+307,312,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",24.0,1.000,,,,,96,MEM,,Fetal calf serum,,No differentiation,,,,,,,"""Sixteen hours before treatment, cells were washedfree of medium containing fetal calf serum (FCS) and further incubatedin FCS-free MEM containing neuroblastoma growth supplement N2."""
+308,313,MTT,Unclear,,No,No,Vehicle,1-42,synthetic,Unclear,Unclear,"Yes, single",24.0,1.000,,,,,,DMEM,"200 lg/mL sodium pyruvate, 150 lg/mL uridine, and 1% penicillin–streptomycin solution",non-dialyzed FBS,10%,No differentiation,,,,,,,
+309,314,MTT,Unclear,,No,No,Unclear,1-42,synthetic,Unclear,Oligomers,"Yes, single",4.0,10.000,,30000,cells/well,,96,DMEM,"2 mM L-glutamine, 50 U/mL penicillin and 50 g/mL streptomycin",FBS,10%,No differentiation,,,,,,,
+310,315,MTT,Cell bank,German Collection of Microorganisms and Cell Cultures,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",48.0,1.000,,,,,96,DMEM,100 units of penicillin–streptomycin/ml.,heat-inactivated fetal bovine serum,15%,No differentiation,,,,,,,
+311,316,MTT,Cell bank,ATCC,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",24.0,10.000,,,,,,DMEM,,FBS,10%,No differentiation,,,,,,,
+312,317,MTT,Unclear,,No,No,Vehicle,1-42,Unclear,Human,Unclear,"Yes, single",,1.000,,5000,cells/well,,96,DMEM:F12 Ham's,"1% (v/v) L-GLUTAMINE, 1% (v/v) Minimum Essential Medium — with nonessential amino acids (MEM-NAA) and 1% (v/v) Pen/strep",FBS,10%,No differentiation,,,,,,,"""For cell-based assays synthetic Aβ peptides were purchased from rPeptide® (Georgia, USA). Aβ1–42 (A-1002) peptides are the recombinant form of the human Aβ peptide."" 
+Time to AB incubation not informed"
+313,318,MTT,Unclear,,No,No,Vehicle,1-42,Unclear,Human,Unclear,"Yes, single",,2.000,,5000,cells/well,,96,DMEM:F12 Ham's,"1% (v/v) L-GLUTAMINE, 1% (v/v) Minimum Essential Medium — with nonessential amino acids (MEM-NAA) and 1% (v/v) Pen/strep",FBS,10%,No differentiation,,,,,,,"""For cell-based assays synthetic Aβ peptides were purchased from rPeptide® (Georgia, USA). Aβ1–42 (A-1002) peptides are the recombinant form of the human Aβ peptide."" 
+Time to AB incubation not informed"
+314,319,MTT,Unclear,,No,No,Vehicle,1-42,Unclear,Human,Unclear,"Yes, single",,5.000,,5000,cells/well,,96,DMEM:F12 Ham's,"1% (v/v) L-GLUTAMINE, 1% (v/v) Minimum Essential Medium — with nonessential amino acids (MEM-NAA) and 1% (v/v) Pen/strep",FBS,10%,No differentiation,,,,,,,"""For cell-based assays synthetic Aβ peptides were purchased from rPeptide® (Georgia, USA). Aβ1–42 (A-1002) peptides are the recombinant form of the human Aβ peptide."" 
+Time to AB incubation not informed"
+315,320,MTT,Unclear,,No,No,Vehicle,1-42,Unclear,Human,Unclear,"Yes, single",,10.000,,5000,cells/well,,96,DMEM:F12 Ham's,"1% (v/v) L-GLUTAMINE, 1% (v/v) Minimum Essential Medium — with nonessential amino acids (MEM-NAA) and 1% (v/v) Pen/strep",FBS,10%,No differentiation,,,,,,,"""For cell-based assays synthetic Aβ peptides were purchased from rPeptide® (Georgia, USA). Aβ1–42 (A-1002) peptides are the recombinant form of the human Aβ peptide."" 
+Time to AB incubation not informed"
+316,321,MTT,Unclear,,No,No,Vehicle,1-42,Unclear,Human,Unclear,"Yes, single",,50.000,,5000,cells/well,,96,DMEM:F12 Ham's,"1% (v/v) L-GLUTAMINE, 1% (v/v) Minimum Essential Medium — with nonessential amino acids (MEM-NAA) and 1% (v/v) Pen/strep",FBS,10%,No differentiation,,,,,,,"""For cell-based assays synthetic Aβ peptides were purchased from rPeptide® (Georgia, USA). Aβ1–42 (A-1002) peptides are the recombinant form of the human Aβ peptide."" 
+Time to AB incubation not informed"
+317,322,MTT,Unclear,,No,No,Unclear,1-42,recombinant,Human,Oligomers,"Yes, single",24.0,0.025,,,,,,DMEM/F12,"penicillin (100 U/ml) and streptomycin, (100 μg/ml)",FBS,10%,No differentiation,,,,,,,"""Human recombinant β-amyloid peptide 1–42 (Aβ42; Innovagen, Lund, Sweden) was dissolved in dimethylsulfoxide as a 5 mM stock, subsequently diluted to 100 μMin culture mediumand enriched in oligomers by incubation at 4 °C for 24 h prior to use."" Ask for authors the AB concentration
+"
+318,323,MTT,Unclear,,No,No,Unclear,1-42,recombinant,Human,Oligomers,"Yes, single",24.0,,,,,,,DMEM/F12,"penicillin (100 U/ml) and streptomycin, (100 μg/ml)",FBS,10%,No differentiation,,,,,,,"""Human recombinant β-amyloid peptide 1–42 (Aβ42; Innovagen, Lund, Sweden) was dissolved in dimethylsulfoxide as a 5 mM stock, subsequently diluted to 100 μMin culture mediumand enriched in oligomers by incubation at 4 °C for 24 h prior to use."" Ask for authors the AB concentration
+"
+319,324,MTT,Unclear,,No,No,Unclear,1-42,recombinant,Human,Oligomers,"Yes, single",24.0,,,,,,,DMEM/F12,"penicillin (100 U/ml) and streptomycin, (100 μg/ml)",FBS,10%,No differentiation,,,,,,,"""Human recombinant β-amyloid peptide 1–42 (Aβ42; Innovagen, Lund, Sweden) was dissolved in dimethylsulfoxide as a 5 mM stock, subsequently diluted to 100 μMin culture mediumand enriched in oligomers by incubation at 4 °C for 24 h prior to use."" Ask for authors the AB concentration
+"
+320,325,MTT,Unclear,,No,No,Unclear,1-42,recombinant,Human,Oligomers,"Yes, single",24.0,,,,,,,DMEM/F12,"penicillin (100 U/ml) and streptomycin, (100 μg/ml)",FBS,10%,No differentiation,,,,,,,"""Human recombinant β-amyloid peptide 1–42 (Aβ42; Innovagen, Lund, Sweden) was dissolved in dimethylsulfoxide as a 5 mM stock, subsequently diluted to 100 μMin culture mediumand enriched in oligomers by incubation at 4 °C for 24 h prior to use."" Ask for authors the AB concentration
+"
+321,326,MTT,Unclear,,No,No,Unclear,1-42,recombinant,Human,Oligomers,"Yes, single",24.0,,,,,,,DMEM/F12,"penicillin (100 U/ml) and streptomycin, (100 μg/ml)",FBS,10%,No differentiation,,,,,,,"""Human recombinant β-amyloid peptide 1–42 (Aβ42; Innovagen, Lund, Sweden) was dissolved in dimethylsulfoxide as a 5 mM stock, subsequently diluted to 100 μMin culture mediumand enriched in oligomers by incubation at 4 °C for 24 h prior to use."" Ask for authors the AB concentration
+"
+322,327,MTT,Unclear,,No,No,Unclear,1-42,recombinant,Human,Oligomers,"Yes, single",24.0,,,,,,,DMEM/F12,"penicillin (100 U/ml) and streptomycin, (100 μg/ml)",FBS,10%,No differentiation,,,,,,,"""Human recombinant β-amyloid peptide 1–42 (Aβ42; Innovagen, Lund, Sweden) was dissolved in dimethylsulfoxide as a 5 mM stock, subsequently diluted to 100 μMin culture mediumand enriched in oligomers by incubation at 4 °C for 24 h prior to use."" Ask for authors the AB concentration
+"
+323,328,MTT,Unclear,,No,No,Unclear,1-42,recombinant,Human,Oligomers,"Yes, single",24.0,,,,,,,DMEM/F12,"penicillin (100 U/ml) and streptomycin, (100 μg/ml)",FBS,10%,No differentiation,,,,,,,"""Human recombinant β-amyloid peptide 1–42 (Aβ42; Innovagen, Lund, Sweden) was dissolved in dimethylsulfoxide as a 5 mM stock, subsequently diluted to 100 μMin culture mediumand enriched in oligomers by incubation at 4 °C for 24 h prior to use."" Ask for authors the AB concentration
+"
+324,329,MTT,Unclear,,No,No,Unclear,1-42,recombinant,Human,Oligomers,"Yes, single",24.0,,,,,,,DMEM/F12,"penicillin (100 U/ml) and streptomycin, (100 μg/ml)",FBS,10%,No differentiation,,,,,,,"""Human recombinant β-amyloid peptide 1–42 (Aβ42; Innovagen, Lund, Sweden) was dissolved in dimethylsulfoxide as a 5 mM stock, subsequently diluted to 100 μMin culture mediumand enriched in oligomers by incubation at 4 °C for 24 h prior to use."" Ask for authors the AB concentration
+"
+325,330,MTT,Unclear,,No,No,Unclear,1-42,recombinant,Human,Oligomers,"Yes, single",24.0,10.000,,,,,,DMEM/F12,"penicillin (100 U/ml) and streptomycin, (100 μg/ml)",FBS,10%,No differentiation,,,,,,,"""Human recombinant β-amyloid peptide 1–42 (Aβ42; Innovagen, Lund, Sweden) was dissolved in dimethylsulfoxide as a 5 mM stock, subsequently diluted to 100 μMin culture mediumand enriched in oligomers by incubation at 4 °C for 24 h prior to use."" Ask for authors the AB concentration
+"
+326,331,MTT,Unclear,,No,No,Unclear,1-42,recombinant,Human,Oligomers,"Yes, single",24.0,2.000,,,,,,DMEM/F12,"penicillin (100 U/ml) and streptomycin, (100 μg/ml)",FBS,10%,No differentiation,,,,,,,"""Human recombinant β-amyloid peptide 1–42 (Aβ42; Innovagen, Lund, Sweden) was dissolved in dimethylsulfoxide as a 5 mM stock, subsequently diluted to 100 μMin culture mediumand enriched in oligomers by incubation at 4 °C for 24 h prior to use."" Ask for authors the AB concentration
+"
+327,332,MTT,Cell bank,"""The Cell Resource Centre of Institute of Basic Medicine""",No,No,Vehicle,1-42,Unclear,Unclear,Unclear,"Yes, single",24.0,10.000,,100000,cells,,96,1640,1% penicillin-streptomycin,FBS,10%,No differentiation,,,,,,,
+328,333,MTT,Cell bank,ATCC,No,No,Other,1-40,synthetic,Unclear,Unclear,"Yes, single",6.0,5.000,,13000,cells,100.0,96,MEM/F12,100 U mL1 penicillin,FBS,10%,No differentiation,,,,,,,"""The viability values were calculated by comparison to cells treated with a volume of H2O equal to the protein added"""
+329,334,MTT,Cell bank,ATCC,No,No,Other,1-42,synthetic,Unclear,Unclear,"Yes, single",6.0,5.000,,13000,cells,100.0,96,MEM/F12,100 U mL1 penicillin,FBS,10%,No differentiation,,,,,,,"""The viability values were calculated by comparison to cells treated with a volume of H2O equal to the protein added"""
+330,335,MTT,Cell bank,ATCC,No,No,Other,1-40,synthetic,Unclear,Unclear,"Yes, single",24.0,5.000,,13000,cells,100.0,96,MEM/F12,100 U mL1 penicillin,FBS,10%,No differentiation,,,,,,,"""The viability values were calculated by comparison to cells treated with a volume of H2O equal to the protein added"""
+331,336,MTT,Cell bank,ATCC,No,No,Other,1-42,synthetic,Unclear,Unclear,"Yes, single",24.0,5.000,,13000,cells,100.0,96,MEM/F12,100 U mL1 penicillin,FBS,10%,No differentiation,,,,,,,"""The viability values were calculated by comparison to cells treated with a volume of H2O equal to the protein added"""
+332,337,MTT,Unclear,,No,No,Vehicle,1-42,Unclear,Unclear,Fibers,"Yes, single",24.0,50.000,,200000,cells/mL,,24,DMEM/F12,,,,ATRA,7.0,DMEM:F12 + ATRA,,,10 uM ATRA,"""SH-SY5Y cells were plated in a 24-well plate at a density of 2  105 cells/ml in Dulbecco’s modified Eagle/F12 medium (Gibco) medium and differentiated with 10 mM of all-trans retinoic acid (RA) (Sigma–
+Aldrich) for 7 days. The medium was replaced with 900 ml of new medium (with 1% FBS and N2 supplement) free from RA; this was done rapidly prior to assay.""",added: 3 days fibrils formation
+333,338,MTT,Unclear,,No,No,Vehicle,1-42,Unclear,Unclear,Fibers,"Yes, single",24.0,50.000,,200000,cells/mL,,24,DMEM/F12,,,,ATRA,7.0,DMEM:F12 + ATRA,,,10 uM ATRA,"""SH-SY5Y cells were plated in a 24-well plate at a density of 2  105 cells/ml in Dulbecco’s modified Eagle/F12 medium (Gibco) medium and differentiated with 10 mM of all-trans retinoic acid (RA) (Sigma–
+Aldrich) for 7 days. The medium was replaced with 900 ml of new medium (with 1% FBS and N2 supplement) free from RA; this was done rapidly prior to assay.""",added: fibrils preformed
+334,339,MTT,Unclear,,No,No,Vehicle,1-42,Unclear,Unclear,Fibers,"Yes, single",24.0,50.000,,200000,cells/mL,,24,DMEM/F12,,,,ATRA,7.0,DMEM:F12 + ATRA,,,10 uM ATRA,"""SH-SY5Y cells were plated in a 24-well plate at a density of 2  105 cells/ml in Dulbecco’s modified Eagle/F12 medium (Gibco) medium and differentiated with 10 mM of all-trans retinoic acid (RA) (Sigma–
+Aldrich) for 7 days. The medium was replaced with 900 ml of new medium (with 1% FBS and N2 supplement) free from RA; this was done rapidly prior to assay.""",added: 7 days fibrils formation
+335,340,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",0.5,10.000,,,,,96,MEM,"100 mg/mL streptomycin sulphate, 100 U/mL penicillin G and l-glutamine (designated complete medium)",FCS,10%,No differentiation,,,,,,,
+336,341,MTT,Cell bank,ECACC,No,No,Medium only,1-42,Unclear,Human,Unclear,"Yes, single",24.0,0.500,,500000,cells/well,2000.0,6,DMEM/F12,100 units/ml penicillin and 100 lg/ml streptomycin,FBS,15%,No differentiation,,,,,,,Stimulus medium: 2% FBS-culture medium containing human Ab
+337,342,MTT,Cell bank,ATCC,No,No,Vehicle,1-42,Unclear,Unclear,Unclear,"Yes, single",24.0,22.220,,,,,96,DMEM/F12,"100 IU/ml penicillin, and 100 lg/ml streptomycin",FBS,10%,No differentiation,,,,,,,AB concentation: 100 um/ml
+338,343,CCK-8,Unclear,,No,No,Medium only,1-42,Unclear,Unclear,Unclear,"Yes, single",72.0,100.000,,8000,cells/well,,96,MEM,supplemented with 1X MEM NEAA,FBS,10%,No differentiation,,,,,,,"""The medium was then replaced every day and the remaining mixture was incubated for 72 hours at 37 °C in 5% CO2 humidified air"""
+339,344,CCK-8,Unclear,,No,No,Medium only,1-42,Unclear,Unclear,Unclear,"Yes, single",72.0,100.000,,8000,cells/well,,96,MEM,supplemented with 1X MEM NEAA,FBS,10%,No differentiation,,,,,,,"""The medium was then replaced every day and the remaining mixture was incubated for 72 hours at 37 °C in 5% CO2 humidified air"""
+340,345,CCK-8,Unclear,,No,No,Medium only,1-42,Unclear,Unclear,Unclear,"Yes, single",72.0,100.000,,8000,cells/well,,96,MEM,supplemented with 1X MEM NEAA,FBS,10%,No differentiation,,,,,,,"""The medium was then replaced every day and the remaining mixture was incubated for 72 hours at 37 °C in 5% CO2 humidified air"""
+341,346,WST,Unclear,,No,No,Medium only,1-42,Unclear,Unclear,Unclear,"Yes, single",72.0,100.000,,8000,cells/well,,96,MEM,supplemented with 1X MEM NEAA,FBS,10%,No differentiation,,,,,,,"""The medium was then replaced every day and the remaining mixture was incubated for 72 hours at 37 °C in 5% CO2 humidified air"""
+342,347,CCK-8,Unclear,,No,No,Medium only,1-42,Unclear,Unclear,Unclear,"Yes, single",72.0,100.000,,8000,cells/well,,96,MEM,supplemented with 1X MEM NEAA,FBS,10%,No differentiation,,,,,,,"""The medium was then replaced every day and the remaining mixture was incubated for 72 hours at 37 °C in 5% CO2 humidified air"""
+343,348,MTT,Cell bank,ECCC,No,No,Unclear,1-40,synthetic,Human,Monomers,"Yes, single",48.0,50.000,,50000,cells/well,,48,DMEM,"2 mM L-glutamine, penicillin (20 units/ml), streptomycin (20 mg/ml)",foetal calf serum,10%,ATRA,,,,,,"""Commercially available immortalised human neuroblastoma cell line, Retinoic acid (RA)-differentiated [(RA-SHSY5Y, ECCC; Encinas et al., 2000)] were used in the studies documented here""","""Commercially available immortalised human neuroblastoma cell line, Retinoic acid (RA)-differentiated [(RA-SHSY5Y, ECCC; Encinas et al., 2000)] were used in the studies documented here"""
+344,349,MTT,Cell bank,ECCC,No,No,Unclear,1-40,synthetic,Human,Oligomers,"Yes, single",48.0,50.000,,50000,cells/well,,48,DMEM,"2 mM L-glutamine, penicillin (20 units/ml), streptomycin (20 mg/ml)",foetal calf serum,10%,ATRA,,,,,,"""Commercially available immortalised human neuroblastoma cell line, Retinoic acid (RA)-differentiated [(RA-SHSY5Y, ECCC; Encinas et al., 2000)] were used in the studies documented here""","""Commercially available immortalised human neuroblastoma cell line, Retinoic acid (RA)-differentiated [(RA-SHSY5Y, ECCC; Encinas et al., 2000)] were used in the studies documented here"""
+345,350,MTT,Cell bank,ECCC,No,No,Unclear,1-40,synthetic,Human,Fibers,"Yes, single",48.0,50.000,,50000,cells/well,,48,DMEM,"2 mM L-glutamine, penicillin (20 units/ml), streptomycin (20 mg/ml)",foetal calf serum,10%,ATRA,,,,,,"""Commercially available immortalised human neuroblastoma cell line, Retinoic acid (RA)-differentiated [(RA-SHSY5Y, ECCC; Encinas et al., 2000)] were used in the studies documented here""","""Commercially available immortalised human neuroblastoma cell line, Retinoic acid (RA)-differentiated [(RA-SHSY5Y, ECCC; Encinas et al., 2000)] were used in the studies documented here"""
+346,351,MTT,Cell bank,ECCC,No,No,Unclear,1-42,synthetic,Human,Monomers,"Yes, single",48.0,50.000,,50000,cells/well,,48,DMEM,"2 mM L-glutamine, penicillin (20 units/ml), streptomycin (20 mg/ml)",foetal calf serum,10%,ATRA,,,,,,"""Commercially available immortalised human neuroblastoma cell line, Retinoic acid (RA)-differentiated [(RA-SHSY5Y, ECCC; Encinas et al., 2000)] were used in the studies documented here""","""Commercially available immortalised human neuroblastoma cell line, Retinoic acid (RA)-differentiated [(RA-SHSY5Y, ECCC; Encinas et al., 2000)] were used in the studies documented here"""
+347,352,MTT,Cell bank,ECCC,No,No,Unclear,1-42,synthetic,Human,Oligomers,"Yes, single",48.0,50.000,,50000,cells/well,,48,DMEM,"2 mM L-glutamine, penicillin (20 units/ml), streptomycin (20 mg/ml)",foetal calf serum,10%,ATRA,,,,,,"""Commercially available immortalised human neuroblastoma cell line, Retinoic acid (RA)-differentiated [(RA-SHSY5Y, ECCC; Encinas et al., 2000)] were used in the studies documented here""","""Commercially available immortalised human neuroblastoma cell line, Retinoic acid (RA)-differentiated [(RA-SHSY5Y, ECCC; Encinas et al., 2000)] were used in the studies documented here"""
+348,353,MTT,Cell bank,ECCC,No,No,Unclear,1-42,synthetic,Human,Fibers,"Yes, single",48.0,50.000,,50000,cells/well,,48,DMEM,"2 mM L-glutamine, penicillin (20 units/ml), streptomycin (20 mg/ml)",foetal calf serum,10%,ATRA,,,,,,"""Commercially available immortalised human neuroblastoma cell line, Retinoic acid (RA)-differentiated [(RA-SHSY5Y, ECCC; Encinas et al., 2000)] were used in the studies documented here""","""Commercially available immortalised human neuroblastoma cell line, Retinoic acid (RA)-differentiated [(RA-SHSY5Y, ECCC; Encinas et al., 2000)] were used in the studies documented here"""
+349,354,MTT,Unclear,,No,No,Unclear,1-42,recombinant,Unclear,Oligomers,"Yes, single",24.0,20.000,,15000,cell/well,,96,DMEM/F12,1% antibiotics,FBS,10%,No differentiation,,,,,,,"Freshly prepared Ab42 was used for incubation. ""Cells were seeded at a density of 15,000 cells/well in 96-well plates (Nalge, Rochester, NY) and incubated For 24 h. Culture medium was then replaced with serum-free medium and cells were cultured for further 12 h. Cells were then treated with 20 lM of freshly prepared or preformed oligomeric ab42 with or without the indicated concentrations of MBP for 24 h.""
+"
+350,355,MTT,Unclear,,No,No,Unclear,1-42,recombinant,Unclear,Oligomers,"Yes, single",24.0,20.000,,15000,cell/well,,96,DMEM/F12,1% antibiotics,FBS,10%,No differentiation,,,,,,,"""Cells were seeded at a density of 15,000 cells/well in 96-well plates (Nalge, Rochester, NY) and incubated For 24 h. Culture medium was then replaced with serum-free medium and cells were cultured for further 12 h. Cells were then treated with 20 lM of freshly prepared or preformed oligomeric ab42 with or without the indicated concentrations of MBP for 24 h."""
+351,356,MTT,Donation,,No,No,Unclear,1-42,Unclear,Unclear,Fibers,"Yes, single",70.0,25.000,,5000,cells/well,,96,DMEM/F12,100 U/ml penicillin,FBS,10%,No differentiation,,,,,,,
+352,357,MTT,Cell bank,ECACC,No,No,Unclear,1-42,synthetic,Human,Unclear,"Yes, single",24.0,0.500,,80000,cells/well,,96,DMEM/F12,"100 units/ml penicillin, and 100 μg/ml streptomycin",FBS,15%,No differentiation,,,,,,,
+353,358,MTT,Cell bank,"National Centre for Cell Science,",No,No,Vehicle,1-42,Unclear,Unclear,Unclear,"Yes, single",72.0,20.000,,100000,cells/mL,,96,DMEM/F12,0.1% antibiotic solution,FBS,10%,No differentiation,,,,,,,
+354,359,MTT,Cell bank,ECACC,No,No,Unclear,1-42,Unclear,Human,Unclear,"Yes, single",20.0,1.000,,,,,,DMEM/Ham’s F-12,"10% FBS and penicillin G sodium, streptomycin sulfate, and amphotericin B",FBS,10%,ATRA,,,,,,no information about differentiation protocol,
+355,360,MTT,Cell bank,ECACC,No,No,Unclear,1-42,Unclear,Human,Unclear,"Yes, single",20.0,2.500,,,,,,DMEM/Ham’s F-12,"10% FBS and penicillin G sodium, streptomycin sulfate, and amphotericin B",FBS,10%,ATRA,,,,,,no information about differentiation protocol,
+356,361,MTT,Cell bank,ECACC,No,No,Unclear,1-42,Unclear,Human,Unclear,"Yes, single",20.0,5.000,,,,,,DMEM/Ham’s F-12,"10% FBS and penicillin G sodium, streptomycin sulfate, and amphotericin B",FBS,10%,ATRA,,,,,,no information about differentiation protocol,
+357,362,MTT,Cell bank,ECACC,No,No,Unclear,1-42,Unclear,Human,Unclear,"Yes, single",20.0,10.000,,,,,,DMEM/Ham’s F-12,"10% FBS and penicillin G sodium, streptomycin sulfate, and amphotericin B",FBS,10%,ATRA,,,,,,no information about differentiation protocol,
+358,363,MTT,Cell bank,ECACC,No,No,Unclear,1-42,Unclear,Human,Unclear,"Yes, single",20.0,2.500,,,,,,DMEM/Ham’s F-12,"10% FBS and penicillin G sodium, streptomycin sulfate, and amphotericin B",FBS,10%,ATRA,,,,,,no information about differentiation protocol,
+359,364,MTT,Cell bank,ECACC,No,No,Unclear,1-42,Unclear,Human,Unclear,"Yes, single",20.0,2.500,,,,,,DMEM/Ham’s F-12,"10% FBS and penicillin G sodium, streptomycin sulfate, and amphotericin B",FBS,10%,ATRA,,,,,,no information about differentiation protocol,
+360,365,MTT,Cell bank,DSMZ Cell Lines Bank,No,No,Unclear,1-42,synthetic,Human,Unclear,"Yes, single",24.0,10.000,,20000,cells/well,,96,DMEM,1% of penicillin/streptomycin,FBS,17%,No differentiation,,,,,,,"""Control cells were treated with AB 1-42 peptide aggregates"""
+361,366,MTT,Cell bank,DSMZ Cell Lines Bank,No,No,Unclear,1-42,synthetic,Human,Unclear,"Yes, single",48.0,10.000,,20000,cells/well,,96,DMEM,1% of penicillin/streptomycin,FBS,17%,No differentiation,,,,,,,"""Control cells were treated with AB 1-42 peptide aggregates"""
+362,367,MTT,Cell bank,DSMZ Cell Lines Bank,No,No,Unclear,1-42,synthetic,Human,Unclear,"Yes, single",72.0,10.000,,20000,cells/well,,96,DMEM,1% of penicillin/streptomycin,FBS,17%,No differentiation,,,,,,,"""Control cells were treated with AB 1-42 peptide aggregates"""
+363,368,MTT,Cell bank,DSMZ Cell Lines Bank,No,No,Unclear,1-42,synthetic,Human,Unclear,"Yes, single",72.0,10.000,,20000,cells/well,,96,DMEM,1% of penicillin/streptomycin,FBS,17%,No differentiation,,,,,,,"""Control cells were treated with AB 1-42 peptide aggregates"""
+364,369,MTT,Cell bank,DSMZ Cell Lines Bank,No,No,Unclear,1-40,Unclear,Unclear,Unclear,"Yes, single",72.0,2.500,,20000,cells/well,,96,DMEM,1% penicillin/streptomycin/L-glutamine,FBS,17%,No differentiation,,,,,,,"""control (untreated) cells"""
+365,370,MTT,Cell bank,DSMZ Cell Lines Bank,No,No,Unclear,1-42,Unclear,Unclear,Unclear,"Yes, single",72.0,2.500,,20000,cells/well,,96,DMEM,1% penicillin/streptomycin/L-glutamine,FBS,17%,No differentiation,,,,,,,"""control (untreated) cells"""
+366,371,MTT,Cell bank,BeNa Culture Collection,No,No,Unclear,1-42,synthetic,Human,Unclear,"Yes, single",24.0,1.000,,,,,96,,,,,No differentiation,,,,,,,"""Cells were plated in 96-well plates containing complete medium and cultured for 24 h at 37 C"" No information about complete medium"
+367,372,MTT,Unclear,,No,No,Unclear,1-40,synthetic,Human,Unclear,"Yes, single",24.0,10.000,,5000,cells/well,,96,DMEM,"1% l-glutamine, and 1% antibiotic mix",FBS,10%,No differentiation,,,,,,,"""Cell culture chemicals were purchased from Lonza, HyClone, or
+Thermo Scientific"" 
+""Commercially available Ab1–40 protein fragment (A1075,
+Sigma–Aldrich)"""
+368,373,MTT,Cell bank,ATCC,No,No,Unclear,1-42,Unclear,Human,Fibers,"Yes, single",24.0,1.000,,,,500.0,24,DMEM/F-12,,FBS,10%,No differentiation,,,,,,,"""These cells were cultured in DMEM/F-12 containing 10% FBS
+for 24 h followed by replacing the media by neurobasal medium
+containing 2% B27 supplement"""
+369,374,MTT,Cell bank,ECACC,No,No,Vehicle,1-42,Unclear,Unclear,Unclear,"Yes, single",24.0,10.000,,50000,cells/well,,96,Eagle’s minimum essential medium and Nutrient Mixture Ham’s F-12,"glutamine (2 mM), penicillin/streptomycin, non-essential aminoacids ",FBS,10%,No differentiation,,,,,,,
+370,375,MTT,Cell bank,ECACC,No,No,Vehicle,1-42,Unclear,Unclear,Unclear,"Yes, single",24.0,10.000,,50000,cells/well,,96,Eagle’s minimum essential medium and Nutrient Mixture Ham’s F-12,"glutamine (2 mM), penicillin/streptomycin, non-essential aminoacids ",FBS,10%,No differentiation,,,,,,,
+371,376,MTT,Unclear,,No,No,Medium only,1-42,Unclear,Unclear,Unclear,"Yes, single",48.0,25.000,,20000,cells/well,,96,DMEM,1% penicillin–streptomycin solution,FBS,10%,No differentiation,,,,,,,
+372,377,MTT,Unclear,,No,No,Unclear,1-40,Unclear,Unclear,Unclear,"Yes, single",24.0,10.000,,5000,cells/well,,96,DMEM,,FBS,10%,No differentiation,,,,,,,
+373,378,MTT,Unclear,,No,No,Vehicle,1-40,Unclear,Unclear,Unclear,"Yes, single",24.0,10.000,,5000,cells/well,,96,DMEM,,FBS,10%,No differentiation,,,,,,,
+374,379,MTT,Unclear,,No,No,Vehicle,1-40,Unclear,Unclear,Unclear,"Yes, single",24.0,40.000,,5000,cells/well,,96,DMEM,,FBS,10%,No differentiation,,,,,,,
+375,380,MTT,Unclear,,No,No,Vehicle,1-40,Unclear,Unclear,Unclear,"Yes, single",24.0,10.000,,5000,cells/well,,96,DMEM,,FBS,10%,No differentiation,,,,,,,
+376,381,MTT,Unclear,,No,No,Vehicle,1-40,Unclear,Unclear,Unclear,"Yes, single",24.0,40.000,,5000,cells/well,,96,DMEM,,FBS,10%,No differentiation,,,,,,,
+377,382,MTT,Unclear,,No,No,Vehicle,1-40,Unclear,Unclear,Unclear,"Yes, single",24.0,10.000,,5000,cells/well,,96,DMEM,,FBS,10%,No differentiation,,,,,,,
+378,383,MTT,Unclear,,No,No,Vehicle,1-40,Unclear,Unclear,Unclear,"Yes, single",24.0,40.000,,5000,cells/well,,96,DMEM,,FBS,10%,No differentiation,,,,,,,
+379,384,MTT,Unclear,,No,No,Vehicle,1-40,Unclear,Unclear,Unclear,"Yes, single",24.0,10.000,,5000,cells/well,,96,DMEM,,FBS,10%,No differentiation,,,,,,,
+380,385,MTT,Unclear,,No,No,Vehicle,1-40,Unclear,Unclear,Unclear,"Yes, single",24.0,40.000,,5000,cells/well,,96,DMEM,,FBS,10%,No differentiation,,,,,,,
+381,386,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Human,Oligomers,"Yes, single",24.0,0.100,,,,,96,DMEM,"4.5 g/L glucose supplemented, 100 U/mL penicillin and 100 μg/mL streptomycin",FBS,10%,No differentiation,,,,,,,
+382,387,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Human,Oligomers,"Yes, single",24.0,1.000,,,,,96,DMEM,"4.5 g/L glucose supplemented, 100 U/mL penicillin and 100 μg/mL streptomycin",FBS,10%,No differentiation,,,,,,,
+383,388,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Human,Oligomers,"Yes, single",24.0,5.000,,,,,96,DMEM,"4.5 g/L glucose supplemented, 100 U/mL penicillin and 100 μg/mL streptomycin",FBS,10%,No differentiation,,,,,,,
+384,389,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Human,Oligomers,"Yes, single",24.0,10.000,,,,,96,DMEM,"4.5 g/L glucose supplemented, 100 U/mL penicillin and 100 μg/mL streptomycin",FBS,10%,No differentiation,,,,,,,
+385,390,MTT,Unclear,,No,No,Unclear,1-42,Unclear,Human,Oligomers,"Yes, single",24.0,10.000,,,,,96,DMEM,"4.5 g/L glucose supplemented, 100 U/mL penicillin and 100 μg/mL streptomycin",FBS,10%,No differentiation,,,,,,,

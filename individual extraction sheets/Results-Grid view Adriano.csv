@@ -1,0 +1,95 @@
+﻿Results_ID,Fig_ID,control_mean,control_variation,control_n,treated_mean,treated_variation,treated_n,variation,n_definition,OBS_n,OBS_general,Protocol,Date_results
+214,242,100.000,,3,49.910,0.468,3,SEM,independent experiments ,"""at least three independent experiments""",,201,4/18/2022
+217,243,100.000,,3,48.300,0.733,3,SEM,independent experiments ,"""at least three independent experiments""",,204,4/20/2022
+219,244,100.000,4.984,4,81.210,3.812,4,SEM,independent experiments ,,treatment with 1uM Abeta,205,4/22/2022
+220,244,100.000,4.984,4,68.610,3.518,4,SEM,independent experiments,,"treatment with 2uM Abeta
+",206,4/22/2022
+221,244,100.000,4.984,4,54.830,3.812,4,SEM,independent experiments,,treatment with 5uM Abeta,207,4/22/2022
+222,245,100.000,5.155,4,53.530,2.753,4,SEM,independent experiments,,,207,4/22/2022
+223,246,100.000,7.862,3,26.920,2.611,3,SD,not defined,"apenas mencionam na legend da Fig ""n=3"". Nao ha qualquer outra informação sobre 'n' ao longo do artigo (incluindo supp methods)]
+",,208,4/27/2022
+229,247,100.000,3.793,3,59.420,2.845,3,SD,not defined,"""Experiment was performed in triplicate""",,209,5/6/2022
+224,248,100.000,4.685,3,58.190,2.135,3,SD,independent experiments,"""Data are the mean ± SD of three
+independent experiments""
+",,210,5/6/2022
+230,249,100.000,,3,64.710,10.000,3,SEM,independent experiments,Data shown are expressed as  from three independent experiments  percentage of control values with each experimental value being the average of six trials,nao apresenta dado de variação do controle,211,5/20/2022
+231,250,100.000,,3,64.820,2.249,3,SEM,independent experiments,three independent experiments  percentage of control values with each experimental value being the average of six trials,nao apresenta dado de variação do controle,212,5/20/2022
+232,251,100.000,,5,77.830,8.490,5,SEM,five different experiments,"each experiment performed in triplicate
+","nao apresenta dado de variação do controle
+",213,5/27/2022
+233,252,100.000,0.000,5,63.000,7.935,5,SEM,All data are presented as means ± SEM of five or more independent experiment.,,tem barra de erro do control mas e tao pequena que o gsys atribuiu zero,217,6/10/2022
+234,253,100.000,,3,96.380,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,218,6/10/2022
+236,253,100.000,,3,93.450,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,221,6/10/2022
+237,253,100.000,,3,92.960,2.057,3,SEM,"x ± SEM, n = 3, %",,,222,6/10/2022
+238,253,100.000,,3,91.500,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,223,6/10/2022
+239,253,100.000,,3,95.090,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,224,6/10/2022
+240,253,100.000,,3,93.710,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,225,6/10/2022
+241,253,100.000,,3,91.310,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,226,6/10/2022
+242,253,100.000,,3,87.540,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,227,6/10/2022
+243,253,100.000,,3,92.040,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,228,6/10/2022
+244,253,100.000,,3,90.330,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,229,6/10/2022
+245,253,100.000,,3,85.870,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,230,6/10/2022
+246,253,100.000,,3,83.130,2.059,3,SEM,"x ± SEM, n = 3, %",,,231,6/10/2022
+247,253,100.000,,3,89.350,0.686,3,SEM,"x ± SEM, n = 3, %",,,232,6/13/2022
+248,253,100.000,,3,85.580,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,233,6/13/2022
+249,253,100.000,,3,80.780,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,234,6/13/2022
+251,253,100.000,,3,76.660,1.029,3,SEM,"x ± SEM, n = 3, %",,,235,6/13/2022
+252,253,100.000,,3,88.370,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,236,6/13/2022
+253,253,100.000,,3,81.510,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,237,6/13/2022
+254,253,100.000,,3,78.770,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,238,6/13/2022
+255,253,100.000,,3,67.450,2.401,3,SEM,"x ± SEM, n = 3, %",,,239,6/13/2022
+256,253,100.000,,3,82.580,1.028,3,SEM,"x ± SEM, n = 3, %",,,240,6/13/2022
+257,253,100.000,,3,76.750,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,241,6/13/2022
+258,253,100.000,,3,73.670,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,242,6/13/2022
+259,253,100.000,,3,60.980,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,243,6/13/2022
+260,253,100.000,,3,75.430,1.714,3,SEM,"x ± SEM, n = 3, %",,,244,6/13/2022
+261,253,100.000,,3,75.430,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,245,6/13/2022
+262,253,100.000,,3,72.340,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,246,6/13/2022
+263,253,100.000,,3,59.310,0.000,3,SEM,"x ± SEM, n = 3, %",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,247,6/13/2022
+264,255,100.000,,6,68.520,0.000,6,SEM,"x ± SEM, n = 6, %)",,tem barra de erro mas e tao pequena que nao consegui extrair com gsys,248,6/13/2022
+265,256,100.000,5.350,,39.360,6.115,,Unclear,,sem informação clara sobre n ou analise de variação da media,,249,6/13/2022
+266,257,100.000,0.875,3,95.560,2.045,3,SD,"All experiments are means of triplicates. All of the data are
+expressed as mean standard deviation (SD)",,,250,6/17/2022
+267,257,100.000,0.875,3,86.450,1.460,3,SD,"All experiments are means of triplicates. All of the data are
+expressed as mean standard deviation (SD)",,same control as above,251,6/17/2022
+268,257,100.000,0.875,3,76.470,1.755,3,SD,"All experiments are means of triplicates. All of the data are
+expressed as mean standard deviation (SD)",,same control as above,252,6/17/2022
+269,257,100.000,0.875,3,60.350,1.461,3,SD,"All experiments are means of triplicates. All of the data are
+expressed as mean standard deviation (SD)",,same control as above,253,6/17/2022
+270,257,100.000,0.875,3,46.560,1.172,3,SD,"All experiments are means of triplicates. All of the data are
+expressed as mean standard deviation (SD)",,same control as above,254,6/17/2022
+271,257,100.000,0.875,3,36.580,0.000,3,SD,"All experiments are means of triplicates. All of the data are
+expressed as mean standard deviation (SD)",,same control as above,255,6/17/2022
+272,258,100.000,0.000,3,99.500,0.000,3,SEM,"Each experiment was performed as least
+three times and the data are expressed as the mean ± standard
+error",,"toda essa figura apresenta dados de inibição, ou seja, o oposto da viabilidade. Entao subtrai os valores extraidos de 100 antes de lançar aqui",256,6/17/2022
+273,258,100.000,0.000,3,92.338,0.000,3,SEM,"Each experiment was performed as least
+three times and the data are expressed as the mean ± standard
+error",,"toda essa figura apresenta dados de inibição, ou seja, o oposto da viabilidade. Entao subtrai os valores extraidos de 100 antes de lançar aqui",257,6/17/2022
+280,259,100.000,,,32.030,3.182,,,no info on n or type of variation,no info on n or type of variation,,258,6/20/2022
+281,260,100.000,,2,99.420,,2,,mean of two independent experiments,,unnagregated Abeta 1-42 (circulos abertos),259,6/21/2022
+282,260,100.000,,2,90.100,,2,,mean of two independent experiments,,unnagregated Abeta 1-42 (circulos abertos),260,6/21/2022
+283,260,100.000,,2,89.710,,2,,mean of two independent experiments,,unnagregated Abeta 1-42 (circulos abertos),261,6/21/2022
+284,260,100.000,,2,88.540,,2,,mean of two independent experiments,,unnagregated Abeta 1-42 (circulos abertos),262,6/21/2022
+285,260,100.000,,2,84.270,,2,,mean of two independent experiments,,unnagregated Abeta 1-42 (circulos abertos),263,6/21/2022
+286,261,100.000,,2,64.460,,2,,mean of two independent experiments,,Abeta oligomers,264,6/21/2022
+287,261,100.000,,2,50.100,,2,,mean of two independent experiments,,Abeta oligomers,265,6/21/2022
+288,261,100.000,,2,49.710,,2,,mean of two independent experiments,,Abeta oligomers,266,6/21/2022
+289,261,100.000,,2,48.540,,2,,mean of two independent experiments,,Abeta oligomers,267,6/21/2022
+290,261,100.000,,2,46.210,,2,,mean of two independent experiments,,Abeta oligomers,268,6/21/2022
+291,262,100.000,,3,55.270,2.804,3,SEM,three independent experiments,,barra branca (pre-treat),269,6/21/2022
+292,262,100.000,,3,52.950,3.090,3,SEM,three independent experiments,,barra cinza (co-treat),270,6/21/2022
+293,262,100.000,,3,54.570,2.252,3,SEM,three independent experiments,,barra preta (post-treat),271,6/21/2022
+294,263,100.000,2.760,3,82.750,3.956,3,SEM,"Data are represented as the
+mean±S.E.M. from three independent experiments. ",,,272,6/21/2022
+295,264,100.000,1.416,3,78.370,9.748,3,SEM,Data are represented as themean±S.E.M. from three independent experiments. ,,,273,6/21/2022
+296,265,100.000,3.229,3,39.000,2.059,3,Unclear,3 independent experiments ,,,274,6/22/2022
+297,266,100.000,0.727,3,54.560,4.616,3,SEM, three experiments and each included triplicate sets.,,,275,6/22/2022
+298,267,100.000,1.433,4,55.520,4.298,4,SD,Values are means + ou - s.d. of four independent experiments,,,276,6/25/2022
+299,268,100.000,9.939,4,65.660,4.794,4,SD,Values are means 6 s.d. of four independent experiments,,,277,6/25/2022
+300,269,100.000,3.303,3,78.310,3.303,3,SD,"Each experiment was performed in triplicate; data are
+presented as mean ± SD; and a p value < 0.05 was considered statistically significant.",,,278,6/27/2022
+301,270,100.000,14.157,3,42.029,6.193,3,SD,"Values were expressed as mean ±
+SD (n = 3)",,valores no paper em absorbancia. Eu converti pra % apos coleta dados no gsys,279,6/27/2022
+302,271,100.000,11.899,3,41.973,6.797,3,SD,"Values were expressed as mean ±
+SD (n = 3)",,valores no paper em absorbancia. Eu converti pra % apos coleta dados no gsys,280,6/27/2022

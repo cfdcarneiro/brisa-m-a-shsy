@@ -1,0 +1,412 @@
+﻿Outcomes ID,Screening ID,Método,Figura,Grupos,Observações gerais da figura ou desfecho
+16,15,1.1 - Ensaio de redução de MTT e análogos,figura 2,control vs. Aβ(1-42),
+17,25,1.4 - Viabilidade celular (outros),figura 5,no treatment vs. Aβ,
+18,27,1.1 - Ensaio de redução de MTT e análogos,figura 6,ct vs. Aβ,
+19,39,1.1 - Ensaio de redução de MTT e análogos,figura 2b,- vs. 5,
+20,39,1.1 - Ensaio de redução de MTT e análogos,figura 2b,- vs. 10,
+21,39,1.1 - Ensaio de redução de MTT e análogos,figura 2b,- vs. 20,
+22,39,1.1 - Ensaio de redução de MTT e análogos,figura 2b,- vs. 30,
+23,39,1.1 - Ensaio de redução de MTT e análogos,figura 2b,-- vs. +-,
+24,41,1.1 - Ensaio de redução de MTT e análogos,figura 4,CT vs.  Aβ1-42,
+25,43,1.1 - Ensaio de redução de MTT e análogos,figura 3e,control vs. A-beta,
+26,44,1.1 - Ensaio de redução de MTT e análogos,figura 5,cells alone vs. cells plus Abeta,
+27,44,1.2 - Ensaio de liberação de LDH,figura s19,cells alone vs. cells plus Abeta,
+28,46,1.1 - Ensaio de redução de MTT e análogos,figura 1b,Ctr vs. Aβ1-42 1µM,
+29,46,1.1 - Ensaio de redução de MTT e análogos,figura 1c,Ctr vs. Aβ1-42 1µM,
+30,46,3.3 - Produtos de estresse oxidativo,figura 4b,Ctr vs. Aβ1-42 1µM,
+31,46,3.1 - Níveis de espécies reativas de oxigênio,figura 4c,Ctr vs. Aβ1-42 1µM,
+32,47,3.1 - Níveis de espécies reativas de oxigênio,figura 7b,Control vs. Aβ,
+33,47,1.1 - Ensaio de redução de MTT e análogos,figura 8c,Control vs. Aβ,
+34,47,3.1 - Níveis de espécies reativas de oxigênio,figura s10,Control vs. Aβ,
+35,49,1.2 - Ensaio de liberação de LDH,figura 5b,control (no Aβ) vs. 0,
+36,53,1.1 - Ensaio de redução de MTT e análogos,figura 7a,control vs. Aβ1-42 (2µM),
+37,53,3.1 - Níveis de espécies reativas de oxigênio,figura 7b,control vs. Aβ1-42 (2µM),
+38,53,2.2 - Marcadores diretos de apoptose,figura 7c,control vs. Aβ1-42 (2µM),
+39,36,1.1 - Ensaio de redução de MTT e análogos,figura 1a,100% viability vs. 1 (Aβ1-42 concentration (µM),undifferentiated cells
+40,36,1.1 - Ensaio de redução de MTT e análogos,figura 1a,100% viability vs. 5 (Aβ1-42 concentration (µM),undifferentiated cells
+41,36,1.1 - Ensaio de redução de MTT e análogos,figura 1a,100% viability vs. 10 (Aβ1-42 concentration (µM),undifferentiated cells
+42,36,1.1 - Ensaio de redução de MTT e análogos,figura 1a,100% viability vs. 15 (Aβ1-42 concentration (µM),undifferentiated cells
+43,36,1.1 - Ensaio de redução de MTT e análogos,figura 1a,100% viability vs. 1 (Aβ1-42 concentration (µM),differentiated cells
+44,36,1.1 - Ensaio de redução de MTT e análogos,figura 1a,100% viability vs. 5 (Aβ1-42 concentration (µM),differentiated cells
+45,36,1.1 - Ensaio de redução de MTT e análogos,figura 1a,100% viability vs. 10 (Aβ1-42 concentration (µM),differentiated cells
+46,36,1.1 - Ensaio de redução de MTT e análogos,figura 1a,100% viability vs. 15 (Aβ1-42 concentration (µM),differentiated cells
+47,36,1.1 - Ensaio de redução de MTT e análogos,figura 2a,100% viability vs. Aβto,
+48,36,1.1 - Ensaio de redução de MTT e análogos,figura 2a,100% viability vs. Aβ,
+49,36,2.1 - Indicadores diretos de morte,figura 4,control vs. Aβ,
+50,45,1.1 - Ensaio de redução de MTT e análogos,figura 6,control vs. Aβ1-42 (Aβ incubated with Sal B for 3 days),
+51,45,1.1 - Ensaio de redução de MTT e análogos,figura 6,control vs. Aβ1-42 (preformed Aβ with Sal B),
+52,45,1.1 - Ensaio de redução de MTT e análogos,figura 6,control vs. Aβ1-42 (Aβ incubated with Sal B for 7 days),
+53,50,1.1 - Ensaio de redução de MTT e análogos,figura 2b,control vs. Aβ1-42,
+54,42,1.4 - Viabilidade celular (outros),figura 5,100% viability vs. Aβ1-42 (PRE),
+55,42,1.4 - Viabilidade celular (outros),figura 5,100% viability vs. Aβ1-42 (CO),
+56,42,1.4 - Viabilidade celular (outros),figura 5,100% viability vs. Aβ1-42 (POST),
+57,56,1.4 - Viabilidade celular (outros),figura 2,control vs. Aβ1-42 (1µM),
+58,57,1.1 - Ensaio de redução de MTT e análogos,figura 6a,100 viability vs. +Aβ (-),
+59,57,1.1 - Ensaio de redução de MTT e análogos,figura S10,100 viability vs. +Aβ (-),
+60,57,1.1 - Ensaio de redução de MTT e análogos,figura S11,100 viability vs. +Aβ (-),
+61,58,1.1 - Ensaio de redução de MTT e análogos,figura 2,ctrl- vs. Aβ,MTT (gráfico de cima)
+62,58,1.2 - Ensaio de liberação de LDH,figura 2,ctrl- vs. Aβ,LDH (gráfico de cima)
+63,58,1.1 - Ensaio de redução de MTT e análogos,figura 2,ctrl- vs. Aβ,MTT (gráfico de baixo)
+64,58,1.2 - Ensaio de liberação de LDH,figura 2,ctrl- vs. Aβ,LDH (gráfico de baixo)
+65,58,1.1 - Ensaio de redução de MTT e análogos,figura S37,ctrl- vs. Aβ,MTT (gráfico de cima)
+66,58,1.2 - Ensaio de liberação de LDH,figura S37,ctrl- vs. Aβ,LDH (gráfico de cima)
+67,58,1.1 - Ensaio de redução de MTT e análogos,figura S37,ctrl- vs. Aβ,MTT (gráfico do meio)
+68,58,1.2 - Ensaio de liberação de LDH,figura S37,ctrl- vs. Aβ,LDH (gráfico do meio)
+69,58,1.1 - Ensaio de redução de MTT e análogos,figura S37,ctrl- vs. Aβ,MTT (gráfico de baixo)
+70,58,1.2 - Ensaio de liberação de LDH,figura S37,ctrl- vs. Aβ,LDH (gráfico de baixo)
+71,61,2.2 - Marcadores diretos de apoptose,figura 2b,control vs. AP(1-40),necrosis
+72,61,2.2 - Marcadores diretos de apoptose,figura 2b,control vs. AP(1-40),apoptosis
+73,61,2.2 - Marcadores diretos de apoptose,figura 2b,control vs. AP(1-40),live cells
+74,61,1.2 - Ensaio de liberação de LDH,figura 3,control vs. AP(1-40),
+75,61,2.2 - Marcadores diretos de apoptose,figura 4,control vs. AP(1-40),
+76,61,2.2 - Marcadores diretos de apoptose,figura 5,control vs. AP(1-40),
+77,64,1.4 - Viabilidade celular (outros),figura 6,control vs. Aβ,5 µM (24h)
+78,64,1.4 - Viabilidade celular (outros),figura 6,control vs. Aβ,10 µM (24h)
+79,64,1.4 - Viabilidade celular (outros),figura 6,control vs. Aβ,5 µM (48h)
+80,64,1.4 - Viabilidade celular (outros),figura 6,control vs. Aβ,10 µM (48h)
+81,66,2.2 - Marcadores diretos de apoptose,figura 1b,control vs. 10µM β-amyloid,
+82,69,1.1 - Ensaio de redução de MTT e análogos,figura 1,control vs. 1µM (Aβ),
+83,69,1.1 - Ensaio de redução de MTT e análogos,figura 1,control vs. 2µM (Aβ),
+84,69,1.1 - Ensaio de redução de MTT e análogos,figura 1,control vs. 5µM (Aβ),
+85,69,1.1 - Ensaio de redução de MTT e análogos,figura 1,control vs. 10µM (Aβ),
+86,69,1.3 - Trypam blue exclusion test,figura 3b,cont vs. Aβ,
+87,69,1.1 - Ensaio de redução de MTT e análogos,figura 4,cont (ICI non-treated) vs. Aβ,
+88,69,2.2 - Marcadores diretos de apoptose,figura 6,control vs. Aβ,
+89,71,1.1 - Ensaio de redução de MTT e análogos,figura 4a,control vs. Aβ,
+90,71,1.1 - Ensaio de redução de MTT e análogos,figura 4c,control vs. Aβ,
+91,73,1.2 - Ensaio de liberação de LDH,figura 4a,--- vs. -+-,
+92,73,1.2 - Ensaio de liberação de LDH,figura 4b,---- vs. -+--,
+93,74,1.1 - Ensaio de redução de MTT e análogos,figura 1b,control vs. Aβ1-42O,
+94,74,1.1 - Ensaio de redução de MTT e análogos,figura 1b,control vs. unaggregated Aβ1-42,
+95,74,1.1 - Ensaio de redução de MTT e análogos,figura 2,control vs. Aβ1-42O,pre-treatment
+96,74,1.1 - Ensaio de redução de MTT e análogos,figura 2,control vs. Aβ1-42O,co-treatment
+97,74,1.1 - Ensaio de redução de MTT e análogos,figura 2,control vs. Aβ1-42O,pos-treatment
+98,74,2.1 - Indicadores diretos de morte,figura 3a,-- vs. +-,necrosis
+99,74,2.2 - Marcadores diretos de apoptose,figura 3a,-- vs. +-,apoptosis
+100,74,2.2 - Marcadores diretos de apoptose,figura 3c,---- vs. +---,
+101,74,3.1 - Níveis de espécies reativas de oxigênio,figura 4a,--- vs. +--,
+102,75,1.1 - Ensaio de redução de MTT e análogos,figura 5,SHSY5Y vs. 20 microM Aβ1-42/SHSY5Y,24h
+103,75,1.1 - Ensaio de redução de MTT e análogos,figura 5,SHSY5Y vs. 20 microM Aβ1-42/SHSY5Y,48h
+104,75,1.1 - Ensaio de redução de MTT e análogos,figura 5,differentiated SHSY5Y vs. 20 microM Aβ1-42/differentiated SHSY5Y,24h
+105,75,1.1 - Ensaio de redução de MTT e análogos,figura 5,differentiated SHSY5Y vs. 20 microM Aβ1-42/differentiated SHSY5Y,48h
+106,75,1.1 - Ensaio de redução de MTT e análogos,figura 6,control vs. Aβ1-42,1 microM
+107,75,1.1 - Ensaio de redução de MTT e análogos,figura 6,control vs. Aβ1-42,20 microM
+108,75,1.1 - Ensaio de redução de MTT e análogos,figura 6,control vs. Aβ1-42,50 microM
+109,76,1.1 - Ensaio de redução de MTT e análogos,figura 2b,C vs. 0,
+110,76,2.2 - Marcadores diretos de apoptose,figura 3b,Sham control vs. Aβ1-42 20 µM,
+111,81,2.3 - Marcadores de morte celular (outros),figura 1b,con vs. Aβ1-42,
+112,81,2.3 - Marcadores de morte celular (outros),figura 1c,con vs. Aβ1-42,
+113,83,1.1 - Ensaio de redução de MTT e análogos,figura 2,no Aβ vs. Aβ42,
+114,83,1.1 - Ensaio de redução de MTT e análogos,figura 8a,no Aβ vs. Aβ Oligomers,
+115,83,2.2 - Marcadores diretos de apoptose,figura 8b,no Aβ vs. Aβ Oligomers,
+116,86,1.1 - Ensaio de redução de MTT e análogos,figura 5a,control vs. Aβ1-40,"0,5 µM de Aβ1-40"
+117,86,1.1 - Ensaio de redução de MTT e análogos,figura 5a,control vs. Aβ1-40,1 µM de Aβ1-40
+118,86,1.1 - Ensaio de redução de MTT e análogos,figura 5a,control vs. Aβ1-40,5 µM de Aβ1-40
+119,86,1.1 - Ensaio de redução de MTT e análogos,figura 5a,control vs. Aβ1-40,10 µM de Aβ1-40
+120,86,1.1 - Ensaio de redução de MTT e análogos,figura 5a,control vs. Aβ1-40,20 µM de Aβ1-40
+121,86,1.1 - Ensaio de redução de MTT e análogos,figura 5c,-- vs. -+,
+122,86,1.2 - Ensaio de liberação de LDH,figura 5d,-- vs. -+,
+123,94,2.3 - Marcadores de morte celular (outros),figura 5a,CON vs. Aβ20µM,
+124,94,2.3 - Marcadores de morte celular (outros),figura 5a,CON vs. Aβ20µM,
+125,94,2.3 - Marcadores de morte celular (outros),figura 5b,CON (unchallenged) vs CON (β-amyloid-challenged),
+126,94,2.3 - Marcadores de morte celular (outros),figura 5c,CON (unchallenged) vs CON (β-amyloid-challenged),
+127,95,1.4 - Viabilidade celular (outros),figura 6b,Aβ1−42 alone (black curve) ,0 min
+128,95,1.4 - Viabilidade celular (outros),figura 6b,Aβ1−42 alone (black curve),20 min
+129,95,1.4 - Viabilidade celular (outros),figura 6b,Aβ1−42 alone (black curve),40 min
+130,95,1.4 - Viabilidade celular (outros),figura 6b,Aβ1−42 alone (black curve),60 min
+131,95,1.4 - Viabilidade celular (outros),figura 6c,Aβ1−42 (-),"The results are averaged and the percentage of
+fluorescence of control is subtracted for each value."
+132,99,1.1 - Ensaio de redução de MTT e análogos,figura 2b,control vs. Aβ,
+133,99,1.1 - Ensaio de redução de MTT e análogos,figura 4a,control vs. Aβ,
+134,99,3.1 - Níveis de espécies reativas de oxigênio,figura 5,control vs. Aβ,
+135,100,1.1 - Ensaio de redução de MTT e análogos,figura 1a,control vs. Aβ42 (20µM),24h
+136,100,1.1 - Ensaio de redução de MTT e análogos,figura 1b,control vs. Aβ42 (20µM),48h
+137,100,1.1 - Ensaio de redução de MTT e análogos,figura 2,control vs. Aβ,24h
+138,100,3.1 - Níveis de espécies reativas de oxigênio,figura 4,control vs. Aβ,
+139,100,2.2 - Marcadores diretos de apoptose,figura 5,control vs. Aβ,
+140,102,1.1 - Ensaio de redução de MTT e análogos,figura 1,control vs. Ab,
+141,103,1.1 - Ensaio de redução de MTT e análogos,figura 1a,c vs. Aβ1−42,1µM
+142,103,1.1 - Ensaio de redução de MTT e análogos,figura 1a,c vs. Aβ1−42,5µM
+143,103,1.1 - Ensaio de redução de MTT e análogos,figura 1a,c vs. Aβ1−42,10µM
+144,103,1.1 - Ensaio de redução de MTT e análogos,figura 1c,c vs. Aβ1−42 (10µM),
+145,103,2.2 - Marcadores diretos de apoptose,figura 2b,c vs. Aβ1−42 (10µM),
+146,103,2.2 - Marcadores diretos de apoptose,figura 2c,c vs. Aβ1−42 (10µM),
+147,103,2.3 - Marcadores de morte celular (outros),figura 2d,c vs. Aβ1−42 (10µM),
+148,103,2.2 - Marcadores diretos de apoptose,figura 2e,c vs. Aβ1−42 (10µM),cytoplasm ratio
+149,103,2.2 - Marcadores diretos de apoptose,figura 2e,c vs. Aβ1−42 (10µM),mitochondria ratio
+150,103,3.1 - Níveis de espécies reativas de oxigênio,figura 3b,c vs. Aβ1−42 (10µM),
+151,103,1.4 - Viabilidade celular (outros),figura 4c,c vs. Aβ1−42 (10µM),
+152,103,3.2 - Dano ao potencial de membrana mitocondrial,figura 4b,c vs. Aβ1−42 (10µM),JC1
+153,103,3.2 - Dano ao potencial de membrana mitocondrial,figura 5b,c vs. Aβ1−42 (10µM),mitotraker
+154,106,1.1 - Ensaio de redução de MTT e análogos,figura 8b,control vs. Aβ42,
+155,108,1.1 - Ensaio de redução de MTT e análogos,figura 7a,vehicle vs. Aβ1−42,
+156,112,1.1 - Ensaio de redução de MTT e análogos,figura 5,control vs. Aβ42,
+157,116,1.1 - Ensaio de redução de MTT e análogos,figura 5,1.0 viability vs. Aβ42,
+158,116,1.1 - Ensaio de redução de MTT e análogos,figura S5,1.0 viability vs. 5 (nM),
+159,116,1.1 - Ensaio de redução de MTT e análogos,figura S5,1.0 viability vs. 10 (nM),
+160,116,1.1 - Ensaio de redução de MTT e análogos,figura S5,1.0 viability vs. 15 (nM),
+161,116,1.1 - Ensaio de redução de MTT e análogos,figura S5,1.0 viability vs. 20 (nM),
+162,119,1.1 - Ensaio de redução de MTT e análogos,figura 3,untreated vs. Aβ42 ADDLs,
+163,119,1.1 - Ensaio de redução de MTT e análogos,figura 3,untreated vs. monomeric Aβ42,
+164,119,1.4 - Viabilidade celular (outros),figura 4b,untreated vs. Aβ42 ADDLs,
+165,119,3.1 - Níveis de espécies reativas de oxigênio,figura 5b,untreated vs. Aβ42 ADDLs,
+166,120,2.2 - Marcadores diretos de apoptose,figura 1b,control vs. Aβ (1µM),
+167,120,2.2 - Marcadores diretos de apoptose,figura 1d,control vs. Aβ (1µM),
+168,120,2.2 - Marcadores diretos de apoptose,figura 1e,control vs. Aβ (1µM),
+169,120,2.2 - Marcadores diretos de apoptose,figura 1c,control vs. Aβ (1µM),
+170,120,1.1 - Ensaio de redução de MTT e análogos,figura 5d,control vs. Aβ (1µM),
+171,121,1.1 - Ensaio de redução de MTT e análogos,figura 5,control vs. Aβ42,
+172,89,2.3 - Marcadores de morte celular (outros),figura 1b,(-)Aβ vs. (+)Aβ,PCR de ácido nucleico circulante
+173,91,1.1 - Ensaio de redução de MTT e análogos,figura 2,0.001 vs. 0.01, Four parameter logistic standard curves
+174,91,1.1 - Ensaio de redução de MTT e análogos,figura 2,0.001 vs. 0.1,
+175,91,1.1 - Ensaio de redução de MTT e análogos,figura 2,0.001 vs. 1,
+176,91,1.1 - Ensaio de redução de MTT e análogos,figura 2,0.001 vs. 10,
+177,91,1.1 - Ensaio de redução de MTT e análogos,figura 2,0.001 vs. 100,
+178,91,1.1 - Ensaio de redução de MTT e análogos,figura 3b,0,cell survival (%of control)
+179,122,1.1 - Ensaio de redução de MTT e análogos,figura 5,,"é uma correlação, faltam os dados individuais"
+180,126,1.1 - Ensaio de redução de MTT e análogos,figura 8a,control vs. Aβ 1-42,
+181,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,1 µg/ml (Aβ40 fresh),% of control
+182,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,10 µg/ml (Aβ40 fresh),% of control
+183,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,50 µg/ml (Aβ40 fresh),% of control
+184,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,100 µg/ml (Aβ40 fresh),% of control
+185,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,1 µg/ml (Aβ40 aged),% of control
+186,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,10 µg/ml (Aβ40 aged),% of control
+187,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,50 µg/ml (Aβ40 aged),% of control
+188,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,100 µg/ml (Aβ40 aged),% of control
+189,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,1 µg/ml (Aβ42 fresh),% of control
+190,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,10 µg/ml (Aβ42 fresh),% of control
+191,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,50 µg/ml (Aβ42 fresh),% of control
+192,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,100 µg/ml (Aβ42 fresh),% of control
+193,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,1 µg/ml (Aβ42 aged),% of control
+194,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,10 µg/ml (Aβ42 aged),% of control
+195,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,50 µg/ml (Aβ42 aged),% of control
+196,127,1.1 - Ensaio de redução de MTT e análogos,figura 5,100 µg/ml (Aβ42 aged),% of control
+197,128,1.2 - Ensaio de liberação de LDH,figura 2c,0% vs. +--,
+198,128,1.1 - Ensaio de redução de MTT e análogos,figura S6a,--- vs. +--,
+199,129,1.1 - Ensaio de redução de MTT e análogos,figura 5a,0 vs. 0.002,
+200,129,1.1 - Ensaio de redução de MTT e análogos,figura 5a,0 vs. 0.0039,
+201,129,1.1 - Ensaio de redução de MTT e análogos,figura 5a,0 vs. 0.0078,
+202,129,1.1 - Ensaio de redução de MTT e análogos,figura 5a,0 vs. 0.016,
+203,129,1.1 - Ensaio de redução de MTT e análogos,figura 5a,0 vs. 0.031,
+204,129,1.1 - Ensaio de redução de MTT e análogos,figura 5a,0 vs. 0.063,
+205,129,1.1 - Ensaio de redução de MTT e análogos,figura 5a,0 vs. 0.13,
+206,129,1.1 - Ensaio de redução de MTT e análogos,figura 5a,0 vs. 0.25,
+207,129,1.1 - Ensaio de redução de MTT e análogos,figura 5a,0 vs. 0.5,
+208,129,1.1 - Ensaio de redução de MTT e análogos,figura 5a,0 vs.1,
+209,129,1.1 - Ensaio de redução de MTT e análogos,figura 5a,0 vs. 2,
+210,130,1.1 - Ensaio de redução de MTT e análogos,figura 3d,ctrl vs. Aβ42,
+211,130,1.1 - Ensaio de redução de MTT e análogos,figura S2,ctrl vs. without LPS (Aβ42),
+212,130,1.1 - Ensaio de redução de MTT e análogos,figura S3a,ctrl vs. Aβ42,
+213,130,1.1 - Ensaio de redução de MTT e análogos,figura S4b,ctrl vs. Aβ42,
+214,130,1.1 - Ensaio de redução de MTT e análogos,figura S8,---- vs. +---,
+266,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,0,(UD) undifferenciated
+215,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,0.5,(UD) undifferenciated
+216,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,3,(UD) undifferenciated
+217,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,6,(UD) undifferenciated
+218,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,24,(UD) undifferenciated
+267,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,0,(D) differenciated
+219,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,0.5,(D) differenciated
+220,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,3,(D) differenciated
+221,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,6,(D) differenciated
+222,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,24,(D) differenciated
+268,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,0,(UD Rev) undifferenciated reversibility
+223,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,0.5,(UD Rev) undifferenciated reversibility
+224,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,3,(UD Rev) undifferenciated reversibility
+225,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,6,(UD Rev) undifferenciated reversibility
+226,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,24,(UD Rev) undifferenciated reversibility
+269,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,0,(D Rev) differenciated reversibility
+227,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,0.5,(D Rev) differenciated reversibility
+228,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,3,(D Rev) differenciated reversibility
+229,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,6,(D Rev) differenciated reversibility
+230,131,1.1 - Ensaio de redução de MTT e análogos,figura 2a,24,(D Rev) differenciated reversibility
+231,131,1.1 - Ensaio de redução de MTT e análogos,figura 2b,0.01,(UD) % vs untreated cells
+232,131,1.1 - Ensaio de redução de MTT e análogos,figura 2b,0.1,(UD) % vs untreated cells
+233,131,1.1 - Ensaio de redução de MTT e análogos,figura 2b,1,(UD) % vs untreated cells
+234,131,1.1 - Ensaio de redução de MTT e análogos,figura 2b,10,(UD) % vs untreated cells
+235,131,1.1 - Ensaio de redução de MTT e análogos,figura 2b,0.01,(D) % vs untreated cells
+236,131,1.1 - Ensaio de redução de MTT e análogos,figura 2b,0.1,(D) % vs untreated cells
+237,131,1.1 - Ensaio de redução de MTT e análogos,figura 2b,1,(D) % vs untreated cells
+238,131,1.1 - Ensaio de redução de MTT e análogos,figura 2b,10,(D) % vs untreated cells
+239,131,1.1 - Ensaio de redução de MTT e análogos,figura 3b,Aβ1-40,(UD) % vs untreated cells
+240,131,1.1 - Ensaio de redução de MTT e análogos,figura 3b,Aβ1-42,(UD) % vs untreated cells
+241,131,1.1 - Ensaio de redução de MTT e análogos,figura 3b,Aβ1-40,(D) % vs untreated cells
+242,131,1.1 - Ensaio de redução de MTT e análogos,figura 3b,Aβ1-42,(D) % vs untreated cells
+243,131,3.1 - Níveis de espécies reativas de oxigênio,figura 5b,20 (Time of exposure to Aβ1-42),(UD) % vs untreated cells
+244,131,3.1 - Níveis de espécies reativas de oxigênio,figura 5b,40 (Time of exposure to Aβ1-42),(UD) % vs untreated cells
+245,131,3.1 - Níveis de espécies reativas de oxigênio,figura 5b,60 (Time of exposure to Aβ1-42),(UD) % vs untreated cells
+246,131,3.1 - Níveis de espécies reativas de oxigênio,figura 5b,20 (Time of exposure to Aβ1-42),(D) % vs untreated cells
+247,131,3.1 - Níveis de espécies reativas de oxigênio,figura 5b,40 (Time of exposure to Aβ1-42),(D) % vs untreated cells
+248,131,3.1 - Níveis de espécies reativas de oxigênio,figura 5b,60 (Time of exposure to Aβ1-42),(D) % vs untreated cells
+270,131,1.4 - Viabilidade celular (outros),figura 7b,0,(UD) Aβ1-40
+249,131,1.4 - Viabilidade celular (outros),figura 7b,5,(UD) Aβ1-40
+250,131,1.4 - Viabilidade celular (outros),figura 7b,10,(UD) Aβ1-40
+251,131,1.4 - Viabilidade celular (outros),figura 7b,15,(UD) Aβ1-40
+252,131,1.4 - Viabilidade celular (outros),figura 7b,20,(UD) Aβ1-40
+271,131,1.4 - Viabilidade celular (outros),figura 7b,0,(D) Aβ1-40
+254,131,1.4 - Viabilidade celular (outros),figura 7b,5,(D) Aβ1-40
+255,131,1.4 - Viabilidade celular (outros),figura 7b,10,(D) Aβ1-40
+256,131,1.4 - Viabilidade celular (outros),figura 7b,15,(D) Aβ1-40
+257,131,1.4 - Viabilidade celular (outros),figura 7b,20,(D) Aβ1-40
+272,131,1.4 - Viabilidade celular (outros),figura 7b,0,(UD) Aβ1-42
+258,131,1.4 - Viabilidade celular (outros),figura 7b,5,(UD) Aβ1-42
+259,131,1.4 - Viabilidade celular (outros),figura 7b,10,(UD) Aβ1-42
+260,131,1.4 - Viabilidade celular (outros),figura 7b,15,(UD) Aβ1-42
+261,131,1.4 - Viabilidade celular (outros),figura 7b,20,(UD) Aβ1-42
+273,131,1.4 - Viabilidade celular (outros),figura 7b,0,(D) Aβ1-42
+262,131,1.4 - Viabilidade celular (outros),figura 7b,5,(D) Aβ1-42
+263,131,1.4 - Viabilidade celular (outros),figura 7b,10,(D) Aβ1-42
+264,131,1.4 - Viabilidade celular (outros),figura 7b,15,(D) Aβ1-42
+265,131,1.4 - Viabilidade celular (outros),figura 7b,20,(D) Aβ1-42
+274,131,1.4 - Viabilidade celular (outros),figura 7b,0,(UD) Aβ1-40
+275,131,1.4 - Viabilidade celular (outros),figura 7b,1,(UD) Aβ1-40
+276,131,1.4 - Viabilidade celular (outros),figura 7b,2,(UD) Aβ1-40
+277,131,1.4 - Viabilidade celular (outros),figura 7b,3,(UD) Aβ1-40
+278,131,1.4 - Viabilidade celular (outros),figura 7b,24,(UD) Aβ1-40
+279,131,1.4 - Viabilidade celular (outros),figura 7b,0,(D) Aβ1-40
+280,131,1.4 - Viabilidade celular (outros),figura 7b,1,(D) Aβ1-40
+281,131,1.4 - Viabilidade celular (outros),figura 7b,2,(D) Aβ1-40
+282,131,1.4 - Viabilidade celular (outros),figura 7b,3,(D) Aβ1-40
+283,131,1.4 - Viabilidade celular (outros),figura 7b,24,(D) Aβ1-40
+284,131,1.4 - Viabilidade celular (outros),figura 7b,0,(UD) Aβ1-42
+285,131,1.4 - Viabilidade celular (outros),figura 7b,1,(UD) Aβ1-42
+286,131,1.4 - Viabilidade celular (outros),figura 7b,2,(UD) Aβ1-42
+287,131,1.4 - Viabilidade celular (outros),figura 7b,3,(UD) Aβ1-42
+288,131,1.4 - Viabilidade celular (outros),figura 7b,24,(UD) Aβ1-42
+289,131,1.4 - Viabilidade celular (outros),figura 7b,0,(D) Aβ1-42
+290,131,1.4 - Viabilidade celular (outros),figura 7b,1,(D) Aβ1-42
+291,131,1.4 - Viabilidade celular (outros),figura 7b,2,(D) Aβ1-42
+292,131,1.4 - Viabilidade celular (outros),figura 7b,3,(D) Aβ1-42
+293,131,1.4 - Viabilidade celular (outros),figura 7b,24,(D) Aβ1-42
+294,131,3.2 - Dano ao potencial de membrana mitocondrial,figura 8b,0,(UD) calcein fluorescence (MTP)
+295,131,3.2 - Dano ao potencial de membrana mitocondrial,figura 8b,10,(UD) calcein fluorescence (MTP)
+296,131,3.2 - Dano ao potencial de membrana mitocondrial,figura 8b,20,(UD) calcein fluorescence (MTP)
+297,131,3.2 - Dano ao potencial de membrana mitocondrial,figura 8b,30,(UD) calcein fluorescence (MTP)
+298,131,3.2 - Dano ao potencial de membrana mitocondrial,figura 8b,60,(UD) calcein fluorescence (MTP)
+299,131,3.2 - Dano ao potencial de membrana mitocondrial,figura 8b,0,(D) calcein fluorescence (MTP)
+300,131,3.2 - Dano ao potencial de membrana mitocondrial,figura 8b,10,(D) calcein fluorescence (MTP)
+301,131,3.2 - Dano ao potencial de membrana mitocondrial,figura 8b,20,(D) calcein fluorescence (MTP)
+302,131,3.2 - Dano ao potencial de membrana mitocondrial,figura 8b,30,(D) calcein fluorescence (MTP)
+303,131,3.2 - Dano ao potencial de membrana mitocondrial,figura 8b,60,(D) calcein fluorescence (MTP)
+304,131,2.2 - Marcadores diretos de apoptose,figura 8c,0,(UD) 
+305,131,2.2 - Marcadores diretos de apoptose,figura 8c,3,(UD) 
+306,131,2.2 - Marcadores diretos de apoptose,figura 8c,6,(UD) 
+307,131,2.2 - Marcadores diretos de apoptose,figura 8c,16,(UD) 
+308,131,2.2 - Marcadores diretos de apoptose,figura 8c,24,(UD) 
+309,131,2.2 - Marcadores diretos de apoptose,figura 8c,0,(D) 
+310,131,2.2 - Marcadores diretos de apoptose,figura 8c,3,(D) 
+311,131,2.2 - Marcadores diretos de apoptose,figura 8c,6,(D) 
+312,131,2.2 - Marcadores diretos de apoptose,figura 8c,16,(D) 
+313,131,2.2 - Marcadores diretos de apoptose,figura 8c,24,(D) 
+314,132,1.1 - Ensaio de redução de MTT e análogos,tabela 1,control (Aβ1-42),"Percentage cell survival in cultures was calculated by
+reference to untreated cells incubated with WST-1
+(100%)"
+315,135,1.1 - Ensaio de redução de MTT e análogos,figura 8,control vs. Aβ(1-42),
+316,136,1.1 - Ensaio de redução de MTT e análogos,figura 2a,control vs. 0 (Aβ42),
+317,136,1.2 - Ensaio de liberação de LDH,figura 2b,control vs. 0 (Aβ42),
+318,136,2.2 - Marcadores diretos de apoptose,figura 3b,control vs. 0 (Aβ42),
+319,137,2.2 - Marcadores diretos de apoptose,figura 5a,,os pontos não correspondem aos valores do eixo x
+320,139,1.1 - Ensaio de redução de MTT e análogos,figura 8,control vs. Aβ,
+321,140,3.1 - Níveis de espécies reativas de oxigênio,figura 4b,control vs. Aβ,
+322,140,1.1 - Ensaio de redução de MTT e análogos,figura 5b,control vs. Aβ,
+323,146,1.1 - Ensaio de redução de MTT e análogos,figura S4,Aβ,o gráfico não deixa claro qual o grupo controle
+324,147,1.1 - Ensaio de redução de MTT e análogos,figura 5,control vs. Aβ only,without Zn
+325,147,1.1 - Ensaio de redução de MTT e análogos,figura 6,control vs. 0 (Aβ42),
+326,149,1.4 - Viabilidade celular (outros),figura 5e,buffer vs. olig,resazurin reduction assay
+327,153,1.2 - Ensaio de liberação de LDH,figura 3b,+-- vs. -+-,
+328,153,2.2 - Marcadores diretos de apoptose,figura 3d,+-- vs. -+-,
+329,153,2.2 - Marcadores diretos de apoptose,figura 4b,+-- vs. -+-,cleaved caspase 3
+330,153,2.2 - Marcadores diretos de apoptose,figura 4b,+-- vs. -+-,cleaved caspase 9
+331,154,1.1 - Ensaio de redução de MTT e análogos,figura 4d,control vs. 20 µM Aβ,
+332,155,1.1 - Ensaio de redução de MTT e análogos,figura 1a,control vs. Aβ only,
+333,159,1.1 - Ensaio de redução de MTT e análogos,figura 1a,control vs. 0.25,
+334,159,1.1 - Ensaio de redução de MTT e análogos,figura 1a,control vs. 0.5,
+335,159,1.1 - Ensaio de redução de MTT e análogos,figura 1a,control vs. 1,
+336,159,1.1 - Ensaio de redução de MTT e análogos,figura 1a,control vs. 1.5,
+337,159,1.1 - Ensaio de redução de MTT e análogos,figura 1b,control vs. Aβ oligomers,
+338,159,2.2 - Marcadores diretos de apoptose,figura 3,control vs. Aβ oligomers,
+339,159,3.1 - Níveis de espécies reativas de oxigênio,figura 4,control vs. Aβ oligomers,
+340,159,1.1 - Ensaio de redução de MTT e análogos,figura 6,control vs. Aβ oligomers,
+341,159,1.1 - Ensaio de redução de MTT e análogos,figura 8,control vs. Aβ oligomers,
+342,162,1.2 - Ensaio de liberação de LDH,figura 2d,ctrl vs. Aβ,
+343,162,1.1 - Ensaio de redução de MTT e análogos,figura 2e,ctrl vs. Aβ,
+344,164,1.1 - Ensaio de redução de MTT e análogos,figura 1b,vehicle vs. 2h,
+349,164,1.1 - Ensaio de redução de MTT e análogos,figura 1b,vehicle vs. 4h,
+350,164,1.1 - Ensaio de redução de MTT e análogos,figura 1b,vehicle vs. 6h ,
+351,164,1.1 - Ensaio de redução de MTT e análogos,figura 1b,vehicle vs. 8h,
+352,164,1.1 - Ensaio de redução de MTT e análogos,figura 1b,vehicle vs. 12h,
+353,164,1.1 - Ensaio de redução de MTT e análogos,figura 1b,vehicle vs. 24h,
+354,164,1.1 - Ensaio de redução de MTT e análogos,figura 1b,vehicle vs. 48h,
+355,166,1.1 - Ensaio de redução de MTT e análogos,figura 7b,A vs. B,
+357,166,1.1 - Ensaio de redução de MTT e análogos,figura 7b,A vs. C,
+358,167,1.1 - Ensaio de redução de MTT e análogos,figura 6,-- vs. +-,
+359,151,2.1 - Indicadores diretos de morte,figura 7a,Control vs. Aβ(1-42),Hoechst 33342 (apoptotic cells) and propidium iodide (necrotic cells) 
+360,169,1.1 - Ensaio de redução de MTT e análogos,3A,control vs. Aβ1-40,
+361,169,1.1 - Ensaio de redução de MTT e análogos,3B,control vs. Aβ1-40 alone (12h),
+356,169,1.1 - Ensaio de redução de MTT e análogos,3B,control vs. Aβ1-40 alone (24h),
+362,169,1.1 - Ensaio de redução de MTT e análogos,3B,control vs. Aβ1-40 alone (48h),
+363,169,1.1 - Ensaio de redução de MTT e análogos,3B,control vs. Aβ1-40 alone (72h),
+364,169,1.2 - Ensaio de liberação de LDH,3C,control vs. Aβ1-40,
+365,169,1.2 - Ensaio de liberação de LDH,3D,control vs. Aβ1-40 alone (12h),
+366,169,1.2 - Ensaio de liberação de LDH,3D,control vs. Aβ1-40 alone (24h),
+367,169,1.2 - Ensaio de liberação de LDH,3D,control vs. Aβ1-40 alone (48h),
+368,169,1.2 - Ensaio de liberação de LDH,3D,control vs. Aβ1-40 alone (72h),
+369,169,2.2 - Marcadores diretos de apoptose,4B,control vs. Aβ1-40,
+370,169,3.1 - Níveis de espécies reativas de oxigênio,5,control vs. Aβ1-40,
+371,169,1.4 - Viabilidade celular (outros),6,control vs. Aβ1-40,
+372,169,2.2 - Marcadores diretos de apoptose,7D,control vs. Aβ1-40,
+373,169,2.2 - Marcadores diretos de apoptose,8B,control vs. Aβ1-40,
+374,169,2.2 - Marcadores diretos de apoptose,8C,control vs. Aβ1-40,
+375,169,1.1 - Ensaio de redução de MTT e análogos,S2B,control vs. Aβ1-40 (10uM),
+376,169,1.2 - Ensaio de liberação de LDH,S2C,control vs. Aβ1-40 (10uM),
+377,169,2.2 - Marcadores diretos de apoptose,S3B,control vs. Aβ1-40,
+378,169,1.2 - Ensaio de liberação de LDH,S4,control vs. Aβ1-40,
+379,169,3.1 - Níveis de espécies reativas de oxigênio,S6B,control vs. Aβ1-40,
+380,172,3.1 - Níveis de espécies reativas de oxigênio,8,-/-/-/-/-/ vs. -/-/-/-/+,
+381,174,1.1 - Ensaio de redução de MTT e análogos,1A,-/- vs. -/+,
+382,177,1.4 - Viabilidade celular (outros),1A,100% cell survival vs. 0,
+383,177,1.4 - Viabilidade celular (outros),1B,100% cell survival vs. 0,"Black
+"
+384,177,1.4 - Viabilidade celular (outros),1B,100% cell survival vs. 0,"Red
+"
+385,177,1.4 - Viabilidade celular (outros),1B,100% cell survival vs. 0,Green
+386,181,2.2 - Marcadores diretos de apoptose,2B,-/-/-/-/- vs. +/-/-/-/-,
+387,181,2.2 - Marcadores diretos de apoptose,1C,-/-/-/- vs. +/-/-/-,
+388,181,1.1 - Ensaio de redução de MTT e análogos,1E,-/-/-/-/- vs. +/-/-/-/-,
+389,181,1.2 - Ensaio de liberação de LDH,1F,-/-/-/-/- vs. +/-/-/-/-,
+390,182,1.1 - Ensaio de redução de MTT e análogos,1B,control vs. Aβ oligomers 1.5 uM,
+391,182,1.2 - Ensaio de liberação de LDH,1C,control vs. Aβ oligomers ,
+392,182,1.1 - Ensaio de redução de MTT e análogos,1D,control vs. Aβ oligomers 1.5 uM,
+393,182,2.1 - Indicadores diretos de morte,2B,control vs. Aβ oligomers 1.5 uM,
+394,182,2.2 - Marcadores diretos de apoptose,3B,control vs. Aβ oligomers 1.5 uM,
+395,182,3.1 - Níveis de espécies reativas de oxigênio,4B,control vs. Aβ oligomers 1.5 uM,
+396,182,3.1 - Níveis de espécies reativas de oxigênio,4C,control vs. Aβ oligomers 1.5 uM (1h),
+397,182,3.1 - Níveis de espécies reativas de oxigênio,4C,control vs. Aβ oligomers 1.5 uM (2h),
+398,182,3.1 - Níveis de espécies reativas de oxigênio,4C,control vs. Aβ oligomers 1.5 uM (3h),
+399,182,1.1 - Ensaio de redução de MTT e análogos,5,control vs. Aβ oligomers ,
+400,183,1.1 - Ensaio de redução de MTT e análogos,7,buffer (control) vs. soluble Aβ42,
+401,183,1.1 - Ensaio de redução de MTT e análogos,7,buffer (control) vs. Aβ42 fibril,
+402,184,1.1 - Ensaio de redução de MTT e análogos,4,cells vs. Aβ,
+403,176,1.4 - Viabilidade celular (outros),1B,untreated vs. A+,
+404,176,1.4 - Viabilidade celular (outros),1B,untreated vs. A-,
+405,176,1.4 - Viabilidade celular (outros),1B,untreated vs. ADDLs,
+406,176,1.4 - Viabilidade celular (outros),1B,untreated vs. Ladiwala fibrils,
+407,176,1.4 - Viabilidade celular (outros),1B,untreated vs. Lambert fibrils,
+408,176,1.1 - Ensaio de redução de MTT e análogos,1C,untreated vs. A+,
+409,176,1.1 - Ensaio de redução de MTT e análogos,1C,untreated vs. A-,
+410,176,1.1 - Ensaio de redução de MTT e análogos,1C,untreated vs. ADDLs,
+411,176,1.1 - Ensaio de redução de MTT e análogos,1C,untreated vs. Ladiwala fibrils,
+412,176,1.1 - Ensaio de redução de MTT e análogos,1C,untreated vs. Lambert fibrils,
+413,176,1.1 - Ensaio de redução de MTT e análogos,4A,untreated vs. A+,
+414,176,1.1 - Ensaio de redução de MTT e análogos,4A,untreated vs. ADDLs,
+415,176,1.1 - Ensaio de redução de MTT e análogos,4A,untreated vs. Ladiwala fibrils,
+416,176,1.1 - Ensaio de redução de MTT e análogos,4A,untreated vs. Lambert fibrils,
+417,176,2.2 - Marcadores diretos de apoptose,4C,untreated vs. A+,
+418,176,2.2 - Marcadores diretos de apoptose,4C,untreated vs. ADDLs,
+419,176,2.2 - Marcadores diretos de apoptose,4C,untreated vs. Ladiwala fibrils,
+420,176,2.2 - Marcadores diretos de apoptose,4C,untreated vs. Lambert fibrils,
+421,176,1.1 - Ensaio de redução de MTT e análogos,5C,untreated vs. toxic oligomers (ADDLs),
+422,176,1.1 - Ensaio de redução de MTT e análogos,5C,untreated vs. toxic oligomers (A+),
+423,176,1.1 - Ensaio de redução de MTT e análogos,6C,untreated vs. toxic fibrils (Lambert fibrils),
+424,176,1.1 - Ensaio de redução de MTT e análogos,6C,untreated vs. toxic fibrils (Ladiwala fibrils),
+425,,,,,
+426,,,,,

@@ -1,0 +1,183 @@
+﻿Fig_ID,Article_ID,figure,dep_variable,control_name,treated_name,OBS,Results
+242,80,Fig 2(second graph),cell viability (%),0uM (Aβ),1uM (Aβ),,214
+243,80,Fig 2(second graph),cell viability (%),0uM (Aβ),2uM (Aβ),,215
+244,80,Fig 2(second graph),cell viability (%),0uM (Aβ),4uM (Aβ),,216
+245,80,Fig 2(second graph),cell viability (%),0uM (Aβ),8uM (Aβ),,217
+246,80,Fig 2(second graph),cell viability (%),0uM (Aβ),12uM (Aβ),,218
+247,80,Fig 2(second graph),cell viability (%),0uM (Aβ),16uM (Aβ),,219
+248,80,Fig 2(second graph),cell viability (%),0uM (Aβ),24uM (Aβ),,220
+249,81,Fig 1,cell viability (%),0uM (Aβ),1.5uM (Aβ),,221
+250,81,Fig 1,cell viability (%),0uM (Aβ),10uM (Aβ),,222
+251,81,Fig 1,cell viability (%),0uM (Aβ),12.5uM (Aβ),,223
+252,81,Fig 1,cell viability (%),0uM (Aβ),15uM (Aβ),,224
+253,81,Fig 1,cell viability (%),0uM (Aβ),20uM (Aβ),,225
+254,82,Fig 3,cell viability (%),0uM (Aβ),2.5uM (Aβ),,226
+255,83,Fig 5a,cell viability (%),0uM (Aβ),0.5uM (Aβ),,227
+256,83,Fig 5a,cell viability (%),0uM (Aβ),1uM (Aβ),,228
+257,83,Fig 5a,cell viability (%),0uM (Aβ),5uM (Aβ),,229
+258,83,Fig 5a,cell viability (%),0uM (Aβ),10uM (Aβ),,230
+259,83,Fig 5a,cell viability (%),0uM (Aβ),20uM (Aβ),,231
+260,83,Fig 5c,cell viability (%),0uM (Aβ),10uM (Aβ),,232
+261,84,Fig 3d,cell viability (%),0uM (Aβ),0.1uM (Aβ),,233
+262,84,Fig 3d,cell viability (%),0uM (Aβ),0.25uM (Aβ),,234
+263,84,Fig 3d,cell viability (%),0uM (Aβ),0.5uM (Aβ),,235
+264,84,Fig 3d,cell viability (%),0uM (Aβ),1uM (Aβ),,236
+265,84,Fig 3d,cell viability (%),0uM (Aβ),2.5uM (Aβ),,237
+266,84,Fig 3d,cell viability (%),0uM (Aβ),5uM (Aβ),,238
+267,84,Fig 3d,cell viability (%),0uM (Aβ),10uM (Aβ),,239
+268,85,Fig 2a,MTT reduction (% vs untreated cells),untreated cells,0.5h 1uM (Aβ1-42) D,differentiated,240
+269,85,Fig 2a,MTT reduction (% vs untreated cells),untreated cells,3h 1uM (Aβ1-42) D,differentiated,241
+270,85,Fig 2a,MTT reduction (% vs untreated cells),untreated cells,6h 1uM (Aβ1-42) D,differentiated,242
+271,85,Fig 2a,MTT reduction (% vs untreated cells),untreated cells,24h 1uM (Aβ1-42) D,differentiated,243
+272,85,Fig 2a,MTT reduction (% vs untreated cells),untreated cells,0.5h 1uM (Aβ1-42) UD,undifferentiated,244
+273,85,Fig 2a,MTT reduction (% vs untreated cells),untreated cells,3h 1uM (Aβ1-42) UD,undifferentiated,245
+274,85,Fig 2a,MTT reduction (% vs untreated cells),untreated cells,6h 1uM (Aβ1-42) UD,undifferentiated,246
+275,85,Fig 2a,MTT reduction (% vs untreated cells),untreated cells,24h 1uM (Aβ1-42) UD,undifferentiated,247
+276,85,"Fig 2b
+",MTT reduction (% vs untreated cells),untreated cells,0.01uM (Aβ1-42) D,differentiated,248
+277,85,"Fig 2b
+",MTT reduction (% vs untreated cells),untreated cells,0.1uM (Aβ1-42) D,differentiated,249
+278,85,"Fig 2b
+",MTT reduction (% vs untreated cells),untreated cells,1uM (Aβ1-42) D,differentiated,250
+279,85,"Fig 2b
+",MTT reduction (% vs untreated cells),untreated cells,10uM (Aβ1-42) D,differentiated,251
+280,85,"Fig 2b
+",MTT reduction (% vs untreated cells),untreated cells,0.01uM (Aβ1-42) UD,undifferentiated,252
+281,85,"Fig 2b
+",MTT reduction (% vs untreated cells),untreated cells,0.1uM (Aβ1-42) UD,undifferentiated,253
+282,85,"Fig 2b
+",MTT reduction (% vs untreated cells),untreated cells,1uM (Aβ1-42) UD,undifferentiated,254
+283,85,"Fig 2b
+",MTT reduction (% vs untreated cells),untreated cells,10uM (Aβ1-42) UD,undifferentiated,255
+284,85,"Fig 3b
+",MTT reduction (% vs untreated cells),untreated cells,1uM (Aβ1-42) D,differentiated,256
+285,85,"Fig 3b
+",MTT reduction (% vs untreated cells),untreated cells,1uM (Aβ1-42) UD,undifferentiated,257
+286,85,"Fig 3b
+",MTT reduction (% vs untreated cells),untreated cells,1uM (Aβ1-40) D,differentiated,258
+287,85,"Fig 3b
+",MTT reduction (% vs untreated cells),untreated cells,1uM (Aβ1-40) UD,undifferentiated,259
+288,86,Fig 7a,MTT reduction (% vs untreated cells),untreated cells,3.125uM (Aβ1-40),"fresh
+",260
+289,86,Fig 7a,MTT reduction (% vs untreated cells),untreated cells,6.25uM (Aβ1-40),"fresh
+",261
+290,86,Fig 7a,MTT reduction (% vs untreated cells),untreated cells,12.5uM (Aβ1-40),"fresh
+",262
+291,86,Fig 7a,MTT reduction (% vs untreated cells),untreated cells,25uM (Aβ1-40),"fresh
+",263
+292,86,"Fig 7b
+",MTT reduction (% vs untreated cells),untreated cells,3.125uM (Aβ1-40),aged,264
+293,86,"Fig 7b
+",MTT reduction (% vs untreated cells),untreated cells,6.25uM (Aβ1-40),aged,265
+294,86,"Fig 7b
+",MTT reduction (% vs untreated cells),untreated cells,12.5uM (Aβ1-40),aged,266
+295,86,"Fig 7b
+",MTT reduction (% vs untreated cells),untreated cells,25uM (Aβ1-40),aged,267
+296,86,Fig 7c,MTT reduction (% vs untreated cells),untreated cells,0.3125uM (Aβ1-42),aged,268
+297,86,Fig 7c,MTT reduction (% vs untreated cells),untreated cells,3.125uM (Aβ1-42),aged,269
+298,86,Fig 7c,MTT reduction (% vs untreated cells),untreated cells,6.25uM (Aβ1-42),aged,270
+299,86,Fig 7c,MTT reduction (% vs untreated cells),untreated cells,12.5uM (Aβ1-42),aged,271
+300,86,Fig 7c,MTT reduction (% vs untreated cells),untreated cells,25uM (Aβ1-42),aged,272
+301,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,0.231uM (Aβ1-40),fresh,273
+302,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,2.31uM (Aβ1-40),fresh,274
+303,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,11.55uM (Aβ1-40),fresh,275
+304,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,23.1uM (Aβ1-40),fresh,276
+305,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,0.231uM (Aβ1-40),aged,277
+306,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,2.31uM (Aβ1-40),aged,278
+307,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,11.55uM (Aβ1-40),aged,279
+308,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,23.1uM (Aβ1-40),aged,280
+309,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,0.231uM (Aβ1-42),fresh,281
+310,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,2.31uM (Aβ1-42),fresh,282
+311,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,11.55uM (Aβ1-42),fresh,283
+312,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,23.1uM (Aβ1-42),fresh,284
+313,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,0.231uM (Aβ1-42),aged,285
+314,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,2.31uM (Aβ1-42),aged,286
+315,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,11.55uM (Aβ1-42),aged,287
+316,87,Fig 5,MTT reduction (% vs untreated cells),untreated cells,23.1uM (Aβ1-42),aged,288
+317,88,Fig 3,cell viability (%),control,1uM (Aβ1-42),,289
+318,88,Fig 3,cell viability (%),control,5uM (Aβ1-42),,290
+319,88,Fig 3,cell viability (%),control,10uM (Aβ1-42),,291
+320,88,Fig 3,cell viability (%),control,20uM (Aβ1-42),,292
+321,88,Fig 3,cell viability (%),control,50uM (Aβ1-42),,293
+322,89,Fig 6,Cell viability,control,40uM (Aβ1-42),,294
+323,89,Fig S2,Cell viability,control,10uM (Aβ1-42),,295
+324,89,Fig S2,Cell viability,control,20uM (Aβ1-42),,296
+325,89,Fig S2,Cell viability,control,30uM (Aβ1-42),,297
+326,89,Fig S2,Cell viability,control,40uM (Aβ1-42),,298
+327,89,Fig S2,Cell viability,control,50uM (Aβ1-42),,299
+328,90,Fig 2b,MTT viability (%),untreated cells,1uM mAβ1-42,"24h
+The cell viability (%) was expressed as the percentage relative to the control cells (untreated cells)",300
+329,90,Fig 2b,MTT viability (%),untreated cells,1uM aAβ1-42,"24h
+",301
+330,90,Fig 2b,MTT viability (%),untreated cells,1uM mAβ1-42,48h,302
+331,90,Fig 2b,MTT viability (%),untreated cells,1uM aAβ1-42,48h,303
+332,90,Fig 2b,MTT viability (%),untreated cells,1uM mAβ1-42,72h,304
+333,90,Fig 2b,MTT viability (%),untreated cells,1uM aAβ1-42,72h,305
+334,91,"Fig 4a
+",% SH-SY5Y cells viability,untreated cells,5uM Aβ1-42,,306
+335,91,"Fig 4a
+",% SH-SY5Y cells viability,untreated cells,10uM Aβ1-42,,307
+336,91,"Fig 4a
+",% SH-SY5Y cells viability,untreated cells,15uM Aβ1-42,,308
+337,91,"Fig 4a
+",% SH-SY5Y cells viability,untreated cells,20uM Aβ1-42,,309
+338,91,"Fig 4a
+",% SH-SY5Y cells viability,untreated cells,25uM Aβ1-42,,310
+339,91,"Fig 4a
+",% SH-SY5Y cells viability,untreated cells,30uM Aβ1-42,,311
+340,91,"Fig 4a
+",% SH-SY5Y cells viability,untreated cells,35uM Aβ1-42,,312
+341,91,"Fig 4a
+",% SH-SY5Y cells viability,untreated cells,40uM Aβ1-42,,313
+342,91,Fig 4b,% SH-SY5Y cells viability,untreated cells,25uM Aβ1-42,,314
+343,91,Fig 4c,% SH-SY5Y cells viability,untreated cells,25uM Aβ1-42,,315
+344,91,Fig 4d,% SH-SY5Y cells viability,untreated cells,25uM Aβ1-42,,316
+345,92,Fig 2b,Cells viability (% of vehicle),untreated cells,5uM Aβ1-42,,317
+346,92,Fig 2b,Cells viability (% of vehicle),untreated cells,10uM Aβ1-42,,318
+347,92,Fig 2b,Cells viability (% of vehicle),untreated cells,20uM Aβ1-42,,319
+348,92,Fig 2b,Cells viability (% of vehicle),untreated cells,30uM Aβ1-42,,320
+349,92,Fig 2b,Cells viability (% of vehicle),untreated cells,20uM Aβ1-42,,321
+350,93,Fig 2,% of control,untreated cells,0.6uM Aβ1-42,oligomeric ,322
+351,93,Fig 2,% of control,untreated cells,1.2uM Aβ1-42,oligomeric ,323
+352,93,Fig 2,% of control,untreated cells,2.5uM Aβ1-42,oligomeric ,324
+353,93,Fig 2,% of control,untreated cells,5uM Aβ1-42,oligomeric ,325
+354,93,Fig 2,% of control,untreated cells,0.6uM Aβ1-42,fibrillar,326
+355,93,Fig 2,% of control,untreated cells,1.2uM Aβ1-42,fibrillar,330
+356,93,Fig 2,% of control,untreated cells,2.5uM Aβ1-42,fibrillar,327
+357,93,Fig 2,% of control,untreated cells,5uM Aβ1-42,fibrillar,328
+358,94,Fig 1a,Cell viability,untreated cells,25 μM Aβ1-42,,329
+359,95,Fig 3a,Cell viability (%),untreated cells,1 μM Aβ1–42,,331
+360,96,Fig 6a,Cell viability (%),untreated cells,10 uM Aβ1–42,,332
+361,97,Fig 8,Neuronal viability (% vs control),control,10 uM  OAβ1–42,,333
+362,98,Fig 7,Cell viability (%),control,Aβ,,334
+363,99,Fig 6,Relative cell viability (%),control cells,Aβ1-40,,335
+364,99,Fig 7,Relative cell viability (%),control cells,Aβ1-40,,336
+365,100,Fig 3b,% of survival,control,1 μM Aβ,,337
+366,101,Fig 5,Cell viability (%),control,Aβ42 alone,,338
+367,101,Fig 6,Cell viability (%),control,Aβ42,,339
+368,102,"Fig 4a
+",Cell viability as a fraction of control growth,control,Aβ42 alone,,340
+369,102,Fig 4b,Cell viability as a fraction of control growth,control,Aβ42 alone,,341
+372,104,Fig 6,MTT reduction ability (relative to control),control,Aβ,,342
+373,105,Fig 3e,Relative cell viability (%),control,Aβ,,343
+374,106,"Fig 2
+",MTT reduction (% of control),no Aβ,Aβ42,,344
+375,106,Fig 8a,MTT reduction (% of control),no Aβ,Aβ oligomers,,345
+376,107,"Fig 1
+","Cell viability, % Control",control,Aβ,,346
+377,107,Fig 2b,"Cell viability, % Control",control,Aβ,,347
+378,108,Fig 5a,SHSY5Y % cell viability (% of negative control),C-,CAβ,,348
+379,109,Fig 6,Cell viability (%),control,Aβ,,349
+380,110,Fig 2e,Survival (%),Ctrl,Aβ,,350
+381,111,"Fig 7
+",Cell viability (% of control),Buffer (control),soluble Aβ42,,351
+382,111,"Fig 7
+",Cell viability (% of control),Buffer (control),Aβ42 fibril,,352
+383,112,Fig 4,MTT reduction (% of control),Cells,Aβ,,353
+384,113,Fig 1a,% Viability,0 Aß 0.3 DMSO ,1 Aß 0.3 DMSO,,354
+385,113,Fig 1a,% Viability,0 Aß 0.3 DMSO,5 Aß 0.3 DMSO,,355
+386,113,Fig 1a,% Viability,0 Aß 0.3 DMSO ,10 Aß 0.3 DMSO,,356
+387,113,Fig 1a,% Viability,0 Aß 0.3 DMSO , 20 Aß 0.3 DMSO,,357
+388,113,Fig 1a,% Viability,0 Aß 0.3 DMSO ,40 Aß 0.3 DMSO,,358
+389,113,Fig 1b,% Viability,0 Aß 0 curcumin 0.3 DMSO ,20 Aß 0 curcumin 0.3 DMSO,,359
+390,114,Fig 4,Cell viability (% of control),Control,Aβ1-42,,360
