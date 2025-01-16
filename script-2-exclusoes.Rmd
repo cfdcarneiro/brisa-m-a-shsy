@@ -49,7 +49,7 @@ nrow(full_text_list)
 ```
 
 ```{r}
-full_text_data = read.csv2("full_text_screening_data.csv")
+full_text_data = read.csv("full_text_screening_data.csv", encoding = "UTF-8")
 ```
 
 Artigos incluídos:
@@ -72,7 +72,10 @@ Nao tem nenhum artigo sem motivo de exclusao na lista, entao parece nao ter sido
 
 Motivos de exclusão:
 ```{r}
-kable(excluded_ft %>% count(Motivo.para.exclusão))
+excluded_ft_unique = excluded_ft %>% arrange(Motivo.para.exclusão) 
+excluded_ft_unique = excluded_ft_unique %>% distinct(rayyan.key, .keep_all = T)
+
+kable(excluded_ft_unique %>% count(Motivo.para.exclusão))
 ```
 
 
