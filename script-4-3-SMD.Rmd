@@ -45,7 +45,7 @@ dados_meta_smd = rbind(dados_two_sample_smd, dados_one_sample_smd)
 ```{r}
 meta1 = rma(yi=yi, vi=vi, data = dados_meta_smd, measure = "SMD", method = "REML", slab = rayyan.key)
 summary(meta1)
-confint(meta1)
+#confint(meta1)
 ```
 Exact p value: `r meta1$pval`
 Exact Q test p value `r meta1$QEp`
@@ -98,7 +98,7 @@ regtest(x = meta1, ni = dados_meta_smd$mean_n, predictor = "sqrtninv")
 ```{r}
 meta2 = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID)
 meta2
-confint(meta2)
+#confint(meta2)
 ```
 
 ```{r}
@@ -250,7 +250,7 @@ dados_meta_smd_independent = dados_meta_smd %>% filter(
 ```{r}
 meta3 = rma.mv(yi=yi, V=vi, data = dados_meta_smd_independent, method = "REML", random = ~1|rayyan.key/Comparison_ID)
 meta3
-confint(meta3)
+#confint(meta3)
 ```
 
 ```{r fig.keep='none', warning=FALSE}
@@ -266,6 +266,9 @@ Differentiation
 meta_differentiation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Diferentiation_method), ref="No differentiation"))
 
 meta_differentiation
+
+mlm.variance.distribution(x = meta_differentiation)
+
 ```
 
 Differentiation bubble plot
@@ -281,6 +284,8 @@ fig_differentiation =
   scale_y_continuous(n.breaks = 7) + 
   geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
 
+fig_differentiation
+
 ggsave("./Figures/fig_differentiation-smd.png")
 ```
 
@@ -290,6 +295,9 @@ Diff. duration
 meta_difduration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_smd$Diferentiation_duration_days))
 
 meta_difduration
+
+mlm.variance.distribution(x = meta_difduration)
+
 ```
 
 Diff. duration bubble plot
@@ -306,6 +314,8 @@ fig_difduration =
   scale_x_continuous(n.breaks = 7) + 
   geom_abline(slope = 0, linetype = "dashed", color = "grey")
 
+fig_difduration
+
 ggsave("./Figures/fig_difduration-smd.png")
 
 ```
@@ -316,6 +326,9 @@ Aggregation
 meta_aggregation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Abeta_aggregation), ref="Monomers"))
 
 meta_aggregation
+
+mlm.variance.distribution(x = meta_aggregation)
+
 ```
 
 Aggregation bubble plot
@@ -331,6 +344,8 @@ fig_agregation =
   scale_y_continuous(n.breaks = 7) + 
   scale_x_discrete(limits = c("Monomers", "Oligomers", "Fibers", "Unclear"))
   geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
+
+  fig_agregation
   
 ggsave("./Figures/fig_agregation-smd.png")
 ```
@@ -343,6 +358,9 @@ dados_meta_smd_max100 = dados_meta_smd %>% filter(Concentration_uM<100)
 meta_concent = rma.mv(yi=yi, V=vi, data = dados_meta_smd_max100, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~dados_meta_smd_max100$Concentration_uM)
 
 meta_concent
+
+mlm.variance.distribution(x = meta_concent)
+
 ```
 
 Abeta concentration bubble plot
@@ -371,8 +389,9 @@ fig_concent_f =
 
 fig_concent = 
   fig_concent_c + annotation_custom(ggplotGrob(fig_concent_f), xmin = 40, xmax = 80, 
-                       ymin = -850, ymax = -300)
+                       ymin = -120, ymax = -50)
 
+fig_concent
 
 ggsave("./Figures/fig_concent-smd.png")
 ```
@@ -383,6 +402,9 @@ Abeta duration of exposure
 meta_duration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_smd$Duration_days))
 
 meta_duration
+
+mlm.variance.distribution(x = meta_duration)
+
 ```
 
 Abeta duration bubble plot
@@ -399,21 +421,26 @@ fig_duration =
   scale_x_continuous(n.breaks = 7) + 
   geom_abline(slope = 0, linetype = "dashed", color = "grey")
 
+fig_duration
+
 ggsave("./Figures/fig_duration-smd.png")
 ```
 
 Assay
 
 ```{r}
-meta_assay = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Assay), ref="MTT"))
+#meta_assay = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Assay), ref="MTT"))
 
-meta_assay
+#meta_assay
+
+#mlm.variance.distribution(x = meta_assay)
+
 ```
 
 Assay bubble plot
 
 ```{r}
-fig_assay = 
+#fig_assay = 
   ggplot(dados_meta_smd, aes(x = Assay, y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
   labs(y = "Hedge's g", x = "Assay") + 
@@ -424,7 +451,7 @@ fig_assay =
   scale_x_discrete(limits = c("MTT", "WST", "CCK-8", "MTS", "XTT", "Rezasurin", "EZ4U")) + 
   geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
 
-ggsave("./Figures/fig_assay-smd.png")
+#ggsave("./Figures/fig_assay-smd.png")
 ```
 
 Cell density
@@ -433,6 +460,13 @@ Cell density
 meta_density = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_smd$Cell_density))
 
 meta_density
+
+mlm.variance.distribution(x = meta_density)
+
+meta_density$beta[2]
+meta_density$ci.lb
+meta_density$ci.ub
+
 ```
 
 Cell density bubble plot
@@ -448,15 +482,15 @@ fig_density =
   scale_y_continuous(n.breaks = 7) + 
   scale_x_continuous(trans = "log10") + 
   geom_abline(slope = 0, linetype = "dashed", color = "grey")
-
+fig_density
 ggsave("./Figures/fig_density-smd.png")
 ```
 
 ### Summary
 
 ```{r}
-cowplot::plot_grid(fig_agregation, fig_assay, fig_concent, fig_density, fig_difduration, fig_differentiation, fig_duration, labels = LETTERS)
-ggsave("./Figures/meta-regressions-smd.png", width = 30, height = 30, units = "cm")
+cowplot::plot_grid(fig_differentiation, fig_difduration, fig_agregation, fig_concent, fig_duration, fig_density, labels = LETTERS)
+ggsave("./Figures/meta-regressions-smd.png", width = 30, height = 20, units = "cm")
 ```
 
 # Multivariate Meta-regressions (3-level)
@@ -536,13 +570,13 @@ For the multivariate analyses, we can only use the comparisons for which all var
 
 ```{r}
 dados_uteis <- dados_meta_smd_max100
-dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Assay", "Diferentiation_duration_days", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
+dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Diferentiation_duration_days", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
 ```
 
-Considering all pre-registered variables, we'd have `r nrow(dados_uteis)` experiments available (i.e. `r nrow(dados_meta_smd)-nrow(dados_uteis)` exclusions due to missing data). As we have 7 variables, we should have at least 70 comparisons - so can use all of them now. There are `r 2^7` possible models.
+Considering all pre-registered variables, we'd have `r nrow(dados_uteis)` experiments available (i.e. `r nrow(dados_meta_smd)-nrow(dados_uteis)` exclusions due to missing data). As we have 6 variables, we should have at least 60 comparisons - so can use all of them now. There are `r 2^6` possible models.
 
 ```{r}
-multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Assay + Diferentiation_duration_days + Concentration_uM + Duration_hours + Cell_density, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^7), plotty = F)
+multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Diferentiation_duration_days + Concentration_uM + Duration_hours + Cell_density, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^6), plotty = F)
 ```
 
 ```{r}
@@ -573,7 +607,7 @@ Resultados:
 
 ```{r}
 multi_meta_reg@objects[[1]]
-confint(multi_meta_reg@objects[[1]])
+#confint(multi_meta_reg@objects[[1]])
 mlm.variance.distribution(multi_meta_reg@objects[[1]])
 #Pseudo R2: 
 (sum(meta2$sigma2)-sum(multi_meta_reg@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
@@ -596,9 +630,31 @@ Resultados:
 
 ```{r}
 multi_meta_reg@objects[[2]]
-confint(multi_meta_reg@objects[[2]])
+#confint(multi_meta_reg@objects[[2]])
 mlm.variance.distribution(multi_meta_reg@objects[[2]])
 #Pseudo R2: 
 (sum(meta2$sigma2)-sum(multi_meta_reg@objects[[2]]$sigma2))/sum(meta2$sigma2)*100
+
+multi_meta_reg@objects[[2]]$beta
+multi_meta_reg@objects[[2]]$ci.lb
+multi_meta_reg@objects[[2]]$ci.ub
+
 ```
 
+```{r}
+#meta-regrassões tirando cell density
+
+dados_uteis_2 <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Diferentiation_duration_days", "Concentration_uM", "Duration_days")], 1, anyNA),]
+
+nrow(dados_uteis_2) #experiments available 
+nrow(dados_meta_smd)-nrow(dados_uteis_2) #exclusions
+```
+
+```{r}
+#meta-regrassões tirando duração da diferenciação (só vale pros que diferenciam, o resto é NA)
+
+dados_uteis_3 <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
+
+nrow(dados_uteis_3) #experiments available 
+nrow(dados_meta_smd)-nrow(dados_uteis_3) #exclusions
+```
