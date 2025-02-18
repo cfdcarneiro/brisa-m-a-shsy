@@ -1,7 +1,7 @@
 ---
-title: "Meta-análises"
+title: "Meta-análises com SMD"
 author: "Clarissa F. D. Carneiro"
-date: "2023-08-18"
+date: "2025-02-18"
 output: word_document
 ---
 
@@ -46,6 +46,9 @@ dados_meta_smd = rbind(dados_two_sample_smd, dados_one_sample_smd)
 meta1 = rma(yi=yi, vi=vi, data = dados_meta_smd, measure = "SMD", method = "REML", slab = rayyan.key)
 summary(meta1)
 #confint(meta1)
+
+meta1$pval
+formatC(meta1$pval, format = "f", digits = 324)
 ```
 Exact p value: `r meta1$pval`
 Exact Q test p value `r meta1$QEp`

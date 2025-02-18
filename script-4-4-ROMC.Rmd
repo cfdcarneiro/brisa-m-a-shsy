@@ -1,7 +1,7 @@
 ---
-title: "Meta-análises com SMCC"
+title: "Meta-análises com ROMC"
 author: "Clarissa F. D. Carneiro"
-date: "2024-12-26"
+date: "2025-02-18"
 output: word_document
 ---
 
@@ -61,6 +61,16 @@ orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (ratio
 
 ggsave("./Figures/orchard-ratios.png", width = 30, height = 20, units = "cm")
 ```
+
+```{r}
+orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (percent change)",
+    transfm = "percentr") + 
+  scale_color_manual(values = "black") + 
+  scale_fill_manual(values = "grey")
+
+ggsave("./Figures/orchard-ratios-percent-scale.png", width = 30, height = 20, units = "cm")
+```
+
 ## Publication bias
 
 Trim-and-fill
@@ -84,6 +94,32 @@ ggplot(dados_meta_ratios, aes(x = yi, y = 1/sqrt(mean_n))) +
   geom_vline(xintercept = meta1$beta, linetype="dashed", color = "darkgreen")
 
 ggsave("./Figures/funnel-plot-ratios.png")
+
+```
+
+```{r}
+ggplot(dados_meta_ratios, aes(x = yi, y = 1/vi)) +
+  geom_point() + 
+  scale_x_continuous(name = "Effect size (ratio of means)") +
+  scale_y_continuous(trans = "reverse", name = "1/Variance") +
+  theme_classic() + 
+  geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
+  geom_vline(xintercept = meta1$beta, linetype="dashed", color = "darkgreen")
+
+ggsave("./Figures/funnel-plot-ratios-vi.png")
+
+```
+
+```{r}
+ggplot(dados_meta_ratios, aes(x = yi, y = 1/sqrt(vi))) +
+  geom_point() + 
+  scale_x_continuous(name = "Effect size (ratio of means)") +
+  scale_y_continuous(trans = "reverse", name = "1/SEM") +
+  theme_classic() + 
+  geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
+  geom_vline(xintercept = meta1$beta, linetype="dashed", color = "darkgreen")
+
+ggsave("./Figures/funnel-plot-ratios-sem.png")
 
 ```
 
