@@ -45,7 +45,7 @@ dados_meta_ratios = rbind(dados_two_sample_rom, dados_one_sample_romc)
 ```{r}
 meta1 = rma(yi=yi, vi=vi, data = dados_meta_ratios, measure = "ROM", method = "REML", slab = rayyan.key)
 summary(meta1)
-confint(meta1)
+#confint(meta1)
 ```
 Exact p value: `r meta1$pval`
 Exact Q test p value `r meta1$QEp`
@@ -134,7 +134,7 @@ regtest(x = meta1, ni = dados_meta_ratios$mean_n, predictor = "sqrtninv")
 ```{r}
 meta2 = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID)
 meta2
-confint(meta2)
+#confint(meta2)
 ```
 
 ```{r}
@@ -286,7 +286,7 @@ dados_meta_ratios_independent = dados_meta_ratios %>% filter(
 ```{r}
 meta3 = rma.mv(yi=yi, V=vi, data = dados_meta_ratios_independent, method = "REML", random = ~1|rayyan.key/Comparison_ID)
 meta3
-confint(meta3)
+#confint(meta3)
 ```
 
 ```{r fig.keep='none', warning=FALSE}
@@ -302,6 +302,21 @@ Differentiation
 meta_differentiation = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_ratios$Diferentiation_method), ref="No differentiation"))
 
 meta_differentiation
+mlm.variance.distribution(meta_differentiation)
+```
+
+```{r}
+dados_meta_ratios = dados_meta_ratios |> mutate(Diferentiation_method_YN = if_else(
+  Diferentiation_method == "No differentiation",
+  "No",
+  "Yes"
+))
+
+meta_differentiationYN = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_ratios$Diferentiation_method_YN), ref="No"))
+
+meta_differentiationYN
+
+mlm.variance.distribution(meta_differentiationYN)
 ```
 
 Differentiation bubble plot
@@ -318,6 +333,18 @@ fig_differentiation =
   geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
 
 ggsave("./Figures/fig_differentiation-ratios.png")
+
+fig_differentiationYN = 
+  ggplot(dados_meta_ratios, aes(x = Diferentiation_method_YN, y=yi, size = 1/sqrt(vi))) + 
+  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
+  labs(y = "Ratio of means", x = "Differentiated cells") + 
+  theme_classic() + 
+  scale_size_continuous(guide = "none") + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(n.breaks = 7) + 
+  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
+
+ggsave("./Figures/fig_differentiation-ratios-sim-nao.png")
 ```
 
 Diff. duration
@@ -326,6 +353,8 @@ Diff. duration
 meta_difduration = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_ratios$Diferentiation_duration_days))
 
 meta_difduration
+
+mlm.variance.distribution(meta_difduration)
 ```
 
 Diff. duration bubble plot
@@ -352,6 +381,8 @@ Aggregation
 meta_aggregation = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_ratios$Abeta_aggregation), ref="Monomers"))
 
 meta_aggregation
+
+mlm.variance.distribution(meta_aggregation)
 ```
 
 Aggregation bubble plot
@@ -379,6 +410,8 @@ dados_meta_ratios_max100 = dados_meta_ratios %>% filter(Concentration_uM<100)
 meta_concent = rma.mv(yi=yi, V=vi, data = dados_meta_ratios_max100, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~dados_meta_ratios_max100$Concentration_uM)
 
 meta_concent
+
+mlm.variance.distribution(meta_concent)
 ```
 
 Abeta concentration bubble plot
@@ -419,6 +452,8 @@ Abeta duration of exposure
 meta_duration = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_ratios$Duration_days))
 
 meta_duration
+
+mlm.variance.distribution(meta_duration)
 ```
 
 Abeta duration bubble plot
@@ -444,6 +479,8 @@ Assay
 meta_assay = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_ratios$Assay), ref="MTT"))
 
 meta_assay
+
+mlm.variance.distribution(meta_assay)
 ```
 
 Assay bubble plot
@@ -469,6 +506,8 @@ Cell density
 meta_density = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_ratios$Cell_density))
 
 meta_density
+
+mlm.variance.distribution(meta_density)
 ```
 
 Cell density bubble plot
@@ -491,8 +530,8 @@ ggsave("./Figures/fig_density-ratios.png")
 ### Summary
 
 ```{r}
-cowplot::plot_grid(fig_agregation, fig_assay, fig_concent, fig_density, fig_difduration, fig_differentiation, fig_duration, labels = LETTERS)
-ggsave("./Figures/meta-regressions-ratios.png", width = 30, height = 30, units = "cm")
+#cowplot::plot_grid(fig_agregation, fig_assay, fig_concent, fig_density, fig_difduration, fig_differentiation, fig_duration, labels = LETTERS)
+#ggsave("./Figures/meta-regressions-ratios.png", width = 30, height = 30, units = "cm")
 ```
 
 # Multivariate Meta-regressions (3-level)
@@ -639,5 +678,50 @@ confint(multi_meta_reg@objects[[2]])
 mlm.variance.distribution(multi_meta_reg@objects[[2]])
 #Pseudo R2: 
 (sum(meta2$sigma2)-sum(multi_meta_reg@objects[[2]]$sigma2))/sum(meta2$sigma2)*100
+```
+
+
+# Mudando diferenciação para sim/não, tirando Assay e duração da diferenciação
+```{r}
+dados_uteis2 <- dados_meta_ratios_max100
+dados_uteis2 <-  dados_uteis2[!apply(dados_uteis2[,c("Diferentiation_method_YN", "Abeta_aggregation", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
+
+
+multi_meta_reg2 <- glmulti(yi ~ Diferentiation_method_YN + Abeta_aggregation + Concentration_uM + Duration_days + Cell_density, data = dados_uteis2, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^5), plotty = F)
+```
+
+```{r}
+print(multi_meta_reg2)
+```
+Top models (within 2 IC units of best model)
+```{r}
+top <- weightable(multi_meta_reg2)
+top <- top[top$aicc <= min(top$aicc) + 2,]
+top
+```
+
+Decomposing R2 for the best model:
+
+```{r}
+dat = dados_uteis2
+meus_preditores = c( "Abeta_aggregation", "Concentration_uM", "Duration_days")
+melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
+
+melhor_modelo.summary = melhor_modelo$summary 
+
+melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+melhor_modelo.summary[1,4] = anova(multi_meta_reg2@objects[[1]], btt = 2)$QMp
+melhor_modelo.summary[2,4] = anova(multi_meta_reg2@objects[[1]], btt = 3)$QMp
+melhor_modelo.summary[3,4] = anova(multi_meta_reg2@objects[[1]], btt = 4)$QMp
+```
+
+Resultados:
+
+```{r}
+multi_meta_reg2@objects[[1]]
+confint(multi_meta_reg2@objects[[1]])
+mlm.variance.distribution(multi_meta_reg2@objects[[1]])
+#Pseudo R2: 
+(sum(meta2$sigma2)-sum(multi_meta_reg2@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
 ```
 
