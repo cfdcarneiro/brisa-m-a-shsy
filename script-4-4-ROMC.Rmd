@@ -1,7 +1,7 @@
 ---
 title: "Meta-análises com ROMC"
 author: "Clarissa F. D. Carneiro"
-date: "2025-02-18"
+date: "2025-03-31"
 output: word_document
 ---
 
@@ -45,30 +45,60 @@ dados_meta_ratios = rbind(dados_two_sample_rom, dados_one_sample_romc)
 ```{r}
 meta1 = rma(yi=yi, vi=vi, data = dados_meta_ratios, measure = "ROM", method = "REML", slab = rayyan.key)
 summary(meta1)
-#confint(meta1)
+confint(meta1)
 ```
 Exact p value: `r meta1$pval`
 Exact Q test p value `r meta1$QEp`
+
+Effect (% of control): `r exp(meta1$b)`
+CI.lb (%): `r exp(meta1$ci.lb)`
+CI.ub (%): `r exp(meta1$ci.ub)`
 
 
 Orchard Plot
 
 ```{r}
-orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (ratio of means)",
-    transfm = "none") + 
-  scale_color_manual(values = "black") + 
-  scale_fill_manual(values = "grey")
+#orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (ratio of means)",
+#    transfm = "none") + 
+#  scale_color_manual(values = "black") + 
+#  scale_fill_manual(values = "grey")
 
-ggsave("./Figures/orchard-ratios.png", width = 30, height = 20, units = "cm")
+#ggsave("./Figures/orchard-ratios.png", width = 30, height = 20, units = "cm")
 ```
 
 ```{r}
-orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (percent change)",
-    transfm = "percentr") + 
-  scale_color_manual(values = "black") + 
-  scale_fill_manual(values = "grey")
+#orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (percentr)",
+#    transfm = "percentr") + 
+#  scale_color_manual(values = "black") + 
+#  scale_fill_manual(values = "grey") + 
+#  scale_y_continuous(n.breaks = 20)
 
-ggsave("./Figures/orchard-ratios-percent-scale.png", width = 30, height = 20, units = "cm")
+#ggsave("./Figures/orchard-ratios-percent-scale.png", width = 30, height = 20, units = "cm")
+
+#orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (invlogit)",
+#    transfm = "invlogit") + 
+#  scale_color_manual(values = "black") + 
+#  scale_fill_manual(values = "grey") + 
+#  scale_y_continuous(n.breaks = 20)
+
+#ggsave("./Figures/orchard-ratios-inv-logit.png", width = 30, height = 20, units = "cm")
+
+#orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (tanh)",
+#    transfm = "tanh") + 
+#  scale_color_manual(values = "black") + 
+#  scale_fill_manual(values = "grey") + 
+#  scale_y_continuous(n.breaks = 20)
+
+
+orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Cell viability in the Abeta group (% of control)",
+    transfm = "percent") + 
+  scale_color_manual(values = "black") + 
+  scale_fill_manual(values = "grey") + 
+  scale_y_continuous(n.breaks = 20) + 
+  theme(plot.margin = margin(0,10,0,0)) + 
+  geom_abline(intercept = 100, slope = 0, linetype = "longdash", color = "darkgreen", size = 0.70)
+
+ggsave("./Figures/orchard-ratios-percent.png", width = 30, height = 15, units = "cm")
 ```
 
 ## Publication bias
@@ -78,48 +108,62 @@ Trim-and-fill
 ```{r}
 meta_trimfill_R = trimfill(meta1, estimator = "R0", side = "right")
 meta_trimfill_R
+#Effect (% of control): 
+exp(meta_trimfill_R$b)
+#CI.lb (%): 
+exp(meta_trimfill_R$ci.lb)
+#CI.ub (%): 
+exp(meta_trimfill_R$ci.ub)
+
+
 meta_trimfill_L = trimfill(meta1, estimator = "L0", side = "right")
 meta_trimfill_L
+
+#Effect (% of control): 
+exp(meta_trimfill_L$b)
+#CI.lb (%): 
+exp(meta_trimfill_L$ci.lb)
+#CI.ub (%): 
+exp(meta_trimfill_L$ci.ub)
 ```
 
 Funnel plot
 
 ```{r}
-ggplot(dados_meta_ratios, aes(x = yi, y = 1/sqrt(mean_n))) +
-  geom_point() + 
-  scale_x_continuous(name = "Effect size (ratio of means)") +
-  scale_y_continuous(trans = "reverse", name = expression(1/sqrt(N))) +
-  theme_classic() + 
-  geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
-  geom_vline(xintercept = meta1$beta, linetype="dashed", color = "darkgreen")
+#ggplot(dados_meta_ratios, aes(x = exp(yi), y = 1/sqrt(mean_n))) +
+#  geom_point(shape = 21, fill = "grey") + 
+#  scale_x_continuous(name = "Cell viability in Abeta group (% of control)") +
+#  scale_y_continuous(trans = "reverse", name = expression(1/sqrt(N))) +
+#  theme_classic() + 
+#  geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
+#  geom_vline(xintercept = exp(meta1$beta), linetype="dashed", color = "darkgreen")
 
-ggsave("./Figures/funnel-plot-ratios.png")
+#ggsave("./Figures/funnel-plot-ratios.png")
+```
+
+```{r}
+#ggplot(dados_meta_ratios, aes(x = yi, y = 1/vi)) +
+#  geom_point() + 
+#  scale_x_continuous(name = "Effect size (ratio of means)") +
+#  scale_y_continuous(trans = "reverse", name = "1/Variance") +
+#  theme_classic() + 
+#  geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
+#  geom_vline(xintercept = meta1$beta, linetype="dashed", color = "darkgreen")
+
+#ggsave("./Figures/funnel-plot-ratios-vi.png")
 
 ```
 
 ```{r}
-ggplot(dados_meta_ratios, aes(x = yi, y = 1/vi)) +
-  geom_point() + 
-  scale_x_continuous(name = "Effect size (ratio of means)") +
-  scale_y_continuous(trans = "reverse", name = "1/Variance") +
-  theme_classic() + 
-  geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
-  geom_vline(xintercept = meta1$beta, linetype="dashed", color = "darkgreen")
-
-ggsave("./Figures/funnel-plot-ratios-vi.png")
-
-```
-
-```{r}
-ggplot(dados_meta_ratios, aes(x = yi, y = 1/sqrt(vi))) +
-  geom_point() + 
-  scale_x_continuous(name = "Effect size (ratio of means)") +
+ggplot(dados_meta_ratios, aes(x = exp(yi), y = 1/sqrt(vi))) +
+  geom_point(shape = 21, fill = "grey") + 
+  scale_x_continuous(name = "Cell viability of Abeta group (% of control)", n.breaks = 10) +
   scale_y_continuous(trans = "reverse", name = "1/SEM") +
   theme_classic() + 
   geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
-  geom_vline(xintercept = meta1$beta, linetype="dashed", color = "darkgreen")
+  geom_vline(xintercept = exp(meta1$beta), linetype="dashed", color = "darkgreen")
 
-ggsave("./Figures/funnel-plot-ratios-sem.png")
+ggsave("./Figures/funnel-plot-ratios-sem-percent-scale.png")
 
 ```
 
@@ -134,8 +178,14 @@ regtest(x = meta1, ni = dados_meta_ratios$mean_n, predictor = "sqrtninv")
 ```{r}
 meta2 = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID)
 meta2
-#confint(meta2)
+confint(meta2)
 ```
+Exact p value: `r meta2$pval`
+Exact Q test p value `r meta2$QEp`
+
+Effect (% of control): `r exp(meta2$b)`
+CI.lb (%): `r exp(meta2$ci.lb)`
+CI.ub (%): `r exp(meta2$ci.ub)`
 
 ```{r}
 #As there is not function in the package metafor for estimating I^2 values for 3-level models, we imported the function from Mathias Harrer & David Daniel Ebert (https://raw.githubusercontent.com/MathiasHarrer/dmetar/master/R/mlm.variance.distribution.R)
@@ -284,13 +334,13 @@ dados_meta_ratios_independent = dados_meta_ratios %>% filter(
 ```
 
 ```{r}
-meta3 = rma.mv(yi=yi, V=vi, data = dados_meta_ratios_independent, method = "REML", random = ~1|rayyan.key/Comparison_ID)
-meta3
+#meta3 = rma.mv(yi=yi, V=vi, data = dados_meta_ratios_independent, method = "REML", random = ~1|rayyan.key/Comparison_ID)
+#meta3
 #confint(meta3)
 ```
 
 ```{r fig.keep='none', warning=FALSE}
-mlm.variance.distribution(x = meta3)
+#mlm.variance.distribution(x = meta3)
 ```
 
 
@@ -299,10 +349,10 @@ mlm.variance.distribution(x = meta3)
 Differentiation
 
 ```{r}
-meta_differentiation = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_ratios$Diferentiation_method), ref="No differentiation"))
+#meta_differentiation = rma.mv(yi=yi, V=vi, data = dados_meta_ratios, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_ratios$Diferentiation_method), ref="No differentiation"))
 
-meta_differentiation
-mlm.variance.distribution(meta_differentiation)
+#meta_differentiation
+#mlm.variance.distribution(meta_differentiation)
 ```
 
 ```{r}
@@ -319,32 +369,46 @@ meta_differentiationYN
 mlm.variance.distribution(meta_differentiationYN)
 ```
 
+Exact p value: `r meta_differentiationYN$pval`
+Exact Q test p value `r meta_differentiationYN$QEp`
+
+intercept
+Effect (% of control): `r exp(meta_differentiationYN$b[1])`
+CI.lb (%): `r exp(meta_differentiationYN$ci.lb[1])`
+CI.ub (%): `r exp(meta_differentiationYN$ci.ub[1])`
+moderator:
+Effect (% of control): `r exp(meta_differentiationYN$b[2])`
+CI.lb (%): `r exp(meta_differentiationYN$ci.lb[2])`
+CI.ub (%): `r exp(meta_differentiationYN$ci.ub[2])`
+
 Differentiation bubble plot
 
 ```{r}
-fig_differentiation = 
-  ggplot(dados_meta_ratios, aes(x = Diferentiation_method, y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
-  labs(y = "Ratio of means", x = "Differentiation method") + 
-  theme_classic() + 
-  scale_size_continuous(guide = "none") + 
-  theme(legend.position = "bottom") + 
-  scale_y_continuous(n.breaks = 7) + 
-  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
+#fig_differentiation = 
+#  ggplot(dados_meta_ratios, aes(x = Diferentiation_method, y=yi, size = 1/sqrt(vi))) + 
+#  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
+#  labs(y = "Ratio of means", x = "Differentiation method") + 
+#  theme_classic() + 
+#  scale_size_continuous(guide = "none") + 
+#  theme(legend.position = "bottom") + 
+#  scale_y_continuous(n.breaks = 7) + 
+#  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
 
-ggsave("./Figures/fig_differentiation-ratios.png")
+#ggsave("./Figures/fig_differentiation-ratios.png")
 
 fig_differentiationYN = 
-  ggplot(dados_meta_ratios, aes(x = Diferentiation_method_YN, y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
-  labs(y = "Ratio of means", x = "Differentiated cells") + 
+  ggplot(dados_meta_ratios, aes(x = Diferentiation_method_YN, y=exp(yi), size = 1/sqrt(vi))) + 
+  geom_point(shape = 21, position =  position_jitterdodge(dodge.width = 0), stroke = 0.5, fill = "grey") + 
+  labs(y = "Cell viability (% of control)", x = "Differentiated cells") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
-  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
 
-ggsave("./Figures/fig_differentiation-ratios-sim-nao.png")
+fig_differentiationYN
+ggsave("./Figures/fig_differentiation-ratios-sim-nao.png", height = 10, width = 10, units = "cm")
+
 ```
 
 Diff. duration
@@ -357,22 +421,47 @@ meta_difduration
 mlm.variance.distribution(meta_difduration)
 ```
 
+Exact p value: `r meta_difduration$pval`
+Exact Q test p value `r meta_difduration$QEp`
+
+intercept
+Effect (% of control): `r exp(meta_difduration$b[1])`
+CI.lb (%): `r exp(meta_difduration$ci.lb[1])`
+CI.ub (%): `r exp(meta_difduration$ci.ub[1])`
+moderator:
+Effect (% of control): `r exp(meta_difduration$b[2])`
+CI.lb (%): `r exp(meta_difduration$ci.lb[2])`
+CI.ub (%): `r exp(meta_difduration$ci.ub[2])`
+
+
 Diff. duration bubble plot
 
 ```{r}
-fig_difduration = 
-  ggplot(dados_meta_ratios, aes(x = as.numeric(Diferentiation_duration_days), y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, stroke = 1) + 
-  labs(y = "Ratio of means", x = "Duration of differentiation (days)") + 
+#fig_difduration = 
+#  ggplot(dados_meta_ratios, aes(x = as.numeric(Diferentiation_duration_days), y=yi, size = 1/sqrt(vi))) + 
+#  geom_point(shape = 1, stroke = 1) + 
+#  labs(y = "Ratio of means", x = "Duration of differentiation (days)") + 
+#  theme_classic() + 
+#  scale_size_continuous(guide = "none") + 
+#  theme(legend.position = "bottom") + 
+#  scale_y_continuous(n.breaks = 7) + 
+#  scale_x_continuous(n.breaks = 7) + 
+#  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+
+#ggsave("./Figures/fig_difduration-ratios.png")
+
+fig_difduration_ = 
+  ggplot(dados_meta_ratios, aes(x = as.numeric(Diferentiation_duration_days), y=exp(yi), size = 1/sqrt(vi))) + 
+  geom_point(shape = 21, fill = "grey", stroke = 0.5) + 
+  labs(y = "Cell viability (% of control)", x = "Duration of differentiation (days)") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
   scale_x_continuous(n.breaks = 7) + 
-  geom_abline(slope = 0, linetype = "dashed", color = "grey")
-
-ggsave("./Figures/fig_difduration-ratios.png")
-
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+fig_difduration_
+ggsave("./Figures/fig_difduration-ratios-percent-scale.png", height = 10, width = 10, units = "cm")
 ```
 
 Aggregation
@@ -385,21 +474,55 @@ meta_aggregation
 mlm.variance.distribution(meta_aggregation)
 ```
 
+Exact p value: `r meta_aggregation$pval`
+Exact Q test p value `r meta_aggregation$QEp`
+
+intercept
+Effect (% of control): `r exp(meta_aggregation$b[1])`
+CI.lb (%): `r exp(meta_aggregation$ci.lb[1])`
+CI.ub (%): `r exp(meta_aggregation$ci.ub[1])`
+moderator/fibers:
+Effect (% of control): `r exp(meta_aggregation$b[2])`
+CI.lb (%): `r exp(meta_aggregation$ci.lb[2])`
+CI.ub (%): `r exp(meta_aggregation$ci.ub[2])`
+moderator/oligomers:
+Effect (% of control): `r exp(meta_aggregation$b[3])`
+CI.lb (%): `r exp(meta_aggregation$ci.lb[3])`
+CI.ub (%): `r exp(meta_aggregation$ci.ub[3])`
+moderator/unclear:
+Effect (% of control): `r exp(meta_aggregation$b[3])`
+CI.lb (%): `r exp(meta_aggregation$ci.lb[3])`
+CI.ub (%): `r exp(meta_aggregation$ci.ub[3])`
+
+
 Aggregation bubble plot
 
 ```{r}
-fig_agregation = 
-  ggplot(dados_meta_ratios, aes(x = Abeta_aggregation, y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
-  labs(y = "Ratio of means", x = "Abeta aggregation") + 
+#fig_agregation = 
+#  ggplot(dados_meta_ratios, aes(x = Abeta_aggregation, y=yi, size = 1/sqrt(vi))) + 
+#  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
+#  labs(y = "Ratio of means", x = "Abeta aggregation") + 
+#  theme_classic() + 
+#  scale_size_continuous(guide = "none") + 
+#  theme(legend.position = "bottom") + 
+#  scale_y_continuous(n.breaks = 7) + 
+#  scale_x_discrete(limits = c("Monomers", "Oligomers", "Fibers", "Unclear"))
+#  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
+  
+#ggsave("./Figures/fig_agregation-ratios.png")
+
+fig_agregation_ = 
+  ggplot(dados_meta_ratios, aes(x = Abeta_aggregation, y=exp(yi), size = 1/sqrt(vi))) + 
+  geom_point(shape = 21, fill = "grey", position =  position_jitterdodge(dodge.width = 0), stroke = 0.5) + 
+  labs(y = "Cell viability (% of control)", x = "Abeta aggregation") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
-  scale_x_discrete(limits = c("Monomers", "Oligomers", "Fibers", "Unclear"))
-  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
-  
-ggsave("./Figures/fig_agregation-ratios.png")
+  scale_x_discrete(limits = c("Monomers", "Oligomers", "Fibers", "Unclear")) +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+  fig_agregation_
+ggsave("./Figures/fig_agregation-ratios-percent-scale.png", height = 10, width = 10, units = "cm")
 ```
 
 Abeta concentration (só até 100 uM)
@@ -414,36 +537,63 @@ meta_concent
 mlm.variance.distribution(meta_concent)
 ```
 
+
+Exact p value: `r meta_concent$pval`
+Exact Q test p value `r meta_concent$QEp`
+
+intercept
+Effect (% of control): `r exp(meta_concent$b[1])`
+CI.lb (%): `r exp(meta_concent$ci.lb[1])`
+CI.ub (%): `r exp(meta_concent$ci.ub[1])`
+moderator:
+Effect (% of control): `r exp(meta_concent$b[2])`
+CI.lb (%): `r exp(meta_concent$ci.lb[2])`
+CI.ub (%): `r exp(meta_concent$ci.ub[2])`
+
+
 Abeta concentration bubble plot
 
 ```{r}
-fig_concent_c = 
-  ggplot(dados_meta_ratios_max100, aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, stroke = 1) + 
-  labs(y = "Ratio of means", x = "Abeta concentration (uM)") + 
+#fig_concent_c = 
+#  ggplot(dados_meta_ratios_max100, aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi))) + 
+#  geom_point(shape = 1, stroke = 1) + 
+#  labs(y = "Ratio of means", x = "Abeta concentration (uM)") + 
+#  theme_classic() + 
+#  scale_size_continuous(guide = "none") + 
+#  theme(legend.position = "bottom") + 
+#  scale_y_continuous(n.breaks = 7) + 
+#  scale_x_continuous(n.breaks = 7) + 
+#  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+
+#fig_concent_f = 
+#  ggplot(dados_meta_ratios_max100 %>% filter(Concentration_uM<10), aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi))) + 
+#  geom_point(shape = 1, stroke = 1) + 
+#  theme_classic() + 
+#  scale_size_continuous(guide = "none") + 
+#  theme(legend.position = "none") + 
+#  scale_y_continuous(n.breaks = 7, name = element_blank()) + 
+#  scale_x_continuous(n.breaks = 7, name = element_blank()) + 
+#  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+
+#fig_concent = 
+#  fig_concent_c + annotation_custom(ggplotGrob(fig_concent_f), xmin = 40, xmax = 80, 
+#                       ymin = -850, ymax = -300)
+
+#ggsave("./Figures/fig_concent-ratios.png")
+
+fig_concent_ = 
+  ggplot(dados_meta_ratios_max100, aes(x = Concentration_uM, y=exp(yi), size = 1/sqrt(vi))) + 
+  geom_point(shape = 21, fill = "grey", stroke = 0.5) + 
+  labs(y = "Cell viability (% of control)", x = "Abeta concentration (uM)") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
   scale_x_continuous(n.breaks = 7) + 
-  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+fig_concent_
+ggsave("./Figures/fig_concent-ratios-percent-scale.png", height = 10, width = 10, units = "cm")
 
-fig_concent_f = 
-  ggplot(dados_meta_ratios_max100 %>% filter(Concentration_uM<10), aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, stroke = 1) + 
-  theme_classic() + 
-  scale_size_continuous(guide = "none") + 
-  theme(legend.position = "none") + 
-  scale_y_continuous(n.breaks = 7, name = element_blank()) + 
-  scale_x_continuous(n.breaks = 7, name = element_blank()) + 
-  geom_abline(slope = 0, linetype = "dashed", color = "grey")
-
-fig_concent = 
-  fig_concent_c + annotation_custom(ggplotGrob(fig_concent_f), xmin = 40, xmax = 80, 
-                       ymin = -850, ymax = -300)
-
-
-ggsave("./Figures/fig_concent-ratios.png")
 ```
 
 Abeta duration of exposure
@@ -456,21 +606,46 @@ meta_duration
 mlm.variance.distribution(meta_duration)
 ```
 
+Exact p value: `r meta_duration$pval`
+Exact Q test p value `r meta_duration$QEp`
+
+intercept
+Effect (% of control): `r exp(meta_duration$b[1])`
+CI.lb (%): `r exp(meta_duration$ci.lb[1])`
+CI.ub (%): `r exp(meta_duration$ci.ub[1])`
+moderator:
+Effect (% of control): `r exp(meta_duration$b[2])`
+CI.lb (%): `r exp(meta_duration$ci.lb[2])`
+CI.ub (%): `r exp(meta_duration$ci.ub[2])`
+
 Abeta duration bubble plot
 
 ```{r}
-fig_duration =
-  ggplot(dados_meta_ratios, aes(x = as.numeric(Duration_days), y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, stroke = 1) + 
-  labs(y = "Ratio of means", x = "Abeta duration of exposure (days)") + 
+#fig_duration =
+#  ggplot(dados_meta_ratios, aes(x = as.numeric(Duration_days), y=yi, size = 1/sqrt(vi))) + 
+#  geom_point(shape = 1, stroke = 1) + 
+#  labs(y = "Ratio of means", x = "Abeta duration of exposure (days)") + 
+#  theme_classic() + 
+#  scale_size_continuous(guide = "none") + 
+#  theme(legend.position = "bottom") + 
+#  scale_y_continuous(n.breaks = 7) + 
+#  scale_x_continuous(n.breaks = 7) + 
+#  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+
+#ggsave("./Figures/fig_duration-ratios.png")
+
+fig_duration_ =
+  ggplot(dados_meta_ratios, aes(x = as.numeric(Duration_days), y=exp(yi), size = 1/sqrt(vi))) + 
+  geom_point(shape = 21, fill = "grey", stroke = 0.5) + 
+  labs(y = "Cell viability (% of control)", x = "Abeta duration of exposure (days)") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
   scale_x_continuous(n.breaks = 7) + 
-  geom_abline(slope = 0, linetype = "dashed", color = "grey")
-
-ggsave("./Figures/fig_duration-ratios.png")
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+fig_duration_
+ggsave("./Figures/fig_duration-ratios-percent-scale.png", height = 10, width = 10, units = "cm")
 ```
 
 Assay
@@ -483,21 +658,66 @@ meta_assay
 mlm.variance.distribution(meta_assay)
 ```
 
+Exact p value: `r meta_assay$pval`
+Exact Q test p value `r meta_assay$QEp`
+
+intercept
+Effect (% of control): `r exp(meta_assay$b[1])`
+CI.lb (%): `r exp(meta_assay$ci.lb[1])`
+CI.ub (%): `r exp(meta_assay$ci.ub[1])`
+moderator/cck-8:
+Effect (% of control): `r exp(meta_assay$b[2])`
+CI.lb (%): `r exp(meta_assay$ci.lb[2])`
+CI.ub (%): `r exp(meta_assay$ci.ub[2])`
+moderator/ez4u:
+Effect (% of control): `r exp(meta_assay$b[3])`
+CI.lb (%): `r exp(meta_assay$ci.lb[3])`
+CI.ub (%): `r exp(meta_assay$ci.ub[3])`
+moderator/mts:
+Effect (% of control): `r exp(meta_assay$b[4])`
+CI.lb (%): `r exp(meta_assay$ci.lb[4])`
+CI.ub (%): `r exp(meta_assay$ci.ub[4])`
+moderator/resazurin:
+Effect (% of control): `r exp(meta_assay$b[5])`
+CI.lb (%): `r exp(meta_assay$ci.lb[5])`
+CI.ub (%): `r exp(meta_assay$ci.ub[5])`
+moderator/wst:
+Effect (% of control): `r exp(meta_assay$b[6])`
+CI.lb (%): `r exp(meta_assay$ci.lb[6])`
+CI.ub (%): `r exp(meta_assay$ci.ub[6])`
+moderator/xtt:
+Effect (% of control): `r exp(meta_assay$b[7])`
+CI.lb (%): `r exp(meta_assay$ci.lb[7])`
+CI.ub (%): `r exp(meta_assay$ci.ub[7])`
+
 Assay bubble plot
 
 ```{r}
-fig_assay = 
-  ggplot(dados_meta_ratios, aes(x = Assay, y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
-  labs(y = "Ratio of means", x = "Assay") + 
+#fig_assay = 
+#  ggplot(dados_meta_ratios, aes(x = Assay, y=yi, size = 1/sqrt(vi))) + 
+#  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
+#  labs(y = "Ratio of means", x = "Assay") + 
+#  theme_classic() + 
+#  scale_size_continuous(guide = "none") + 
+#  theme(legend.position = "bottom") + 
+#  scale_y_continuous(n.breaks = 7) + 
+#  scale_x_discrete(limits = c("MTT", "WST", "CCK-8", "MTS", "XTT", "Rezasurin", "EZ4U")) + 
+#  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
+
+#ggsave("./Figures/fig_assay-ratios.png")
+
+fig_assay_ = 
+  ggplot(dados_meta_ratios, aes(x = Assay, y=exp(yi), size = 1/sqrt(vi))) + 
+  geom_point(shape = 21, fill = "grey", position =  position_jitterdodge(dodge.width = 0), stroke = 0.5) + 
+  labs(y = "Cell viability (% of control)", x = "Assay") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
-  scale_x_discrete(limits = c("MTT", "WST", "CCK-8", "MTS", "XTT", "Rezasurin", "EZ4U")) + 
-  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
-
-ggsave("./Figures/fig_assay-ratios.png")
+  scale_x_discrete(limits = c("MTT", "WST", "CCK-8", "MTS", "XTT", "Resazurin", "EZ4U")) + 
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+fig_assay_
+ggsave("./Figures/fig_assay-ratios-percent-change.png", height = 10, width = 10, units = "cm")
 ```
 
 Cell density
@@ -510,29 +730,49 @@ meta_density
 mlm.variance.distribution(meta_density)
 ```
 
+Exact p value: `r meta_density$pval`
+Exact Q test p value `r meta_density$QEp`
+
+intercept
+Effect (% of control): `r exp(meta_density$b[1])`
+CI.lb (%): `r exp(meta_density$ci.lb[1])`
+CI.ub (%): `r exp(meta_density$ci.ub[1])`
+moderator:
+Effect (% of control): `r exp(meta_density$b[2])`
+CI.lb (%): `r exp(meta_density$ci.lb[2])`
+CI.ub (%): `r exp(meta_density$ci.ub[2])`
+
+
 Cell density bubble plot
 
 ```{r}
-fig_density = 
-  ggplot(dados_meta_ratios, aes(x = as.numeric(Cell_density), y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, stroke = 1) + 
-  labs(y = "Ratio of means", x = "Cell density (log10 scale)") + 
+#fig_density = 
+#  ggplot(dados_meta_ratios, aes(x = as.numeric(Cell_density), y=yi, size = 1/sqrt(vi))) + 
+#  geom_point(shape = 1, stroke = 1) + 
+#  labs(y = "Ratio of means", x = "Cell density (log10 scale)") + 
+#  theme_classic() + 
+#  scale_size_continuous(guide = "none") + 
+#  theme(legend.position = "bottom") + 
+#  scale_y_continuous(n.breaks = 7) + 
+#  scale_x_continuous(trans = "log10") + 
+#  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+
+#ggsave("./Figures/fig_density-ratios.png")
+
+fig_density_ = 
+  ggplot(dados_meta_ratios, aes(x = as.numeric(Cell_density), y=exp(yi), size = 1/sqrt(vi))) + 
+  geom_point(shape = 21, fill = "grey", stroke = 1) + 
+  labs(y = "Cell viability (% of control)", x = "Cell density (log10 scale)") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
   scale_x_continuous(trans = "log10") + 
-  geom_abline(slope = 0, linetype = "dashed", color = "grey")
-
-ggsave("./Figures/fig_density-ratios.png")
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+fig_density_
+ggsave("./Figures/fig_density-ratios-percent-change.png", height = 10, width = 10, units = "cm")
 ```
 
-### Summary
-
-```{r}
-#cowplot::plot_grid(fig_agregation, fig_assay, fig_concent, fig_density, fig_difduration, fig_differentiation, fig_duration, labels = LETTERS)
-#ggsave("./Figures/meta-regressions-ratios.png", width = 30, height = 30, units = "cm")
-```
 
 # Multivariate Meta-regressions (3-level)
 
@@ -723,5 +963,55 @@ confint(multi_meta_reg2@objects[[1]])
 mlm.variance.distribution(multi_meta_reg2@objects[[1]])
 #Pseudo R2: 
 (sum(meta2$sigma2)-sum(multi_meta_reg2@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
+```
+
+# Mudando diferenciação para sim/não, tirando Assay; duração da diferenciação igual a zero para não diferenciados
+```{r}
+dados_uteis3 <- dados_meta_ratios_max100
+dados_uteis3 <- dados_uteis3 |> mutate(differentiation_duration_adjust = 
+                                         if_else(Diferentiation_method_YN=="Yes",
+                                                 Diferentiation_duration_days,
+                                                 0))
+
+
+dados_uteis3 <-  dados_uteis3[!apply(dados_uteis3[,c("Diferentiation_method_YN", "differentiation_duration_adjust", "Abeta_aggregation", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
+
+
+multi_meta_reg3 <- glmulti(yi ~ Diferentiation_method_YN + differentiation_duration_adjust +  Abeta_aggregation + Concentration_uM + Duration_days + Cell_density, data = dados_uteis3, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^6), plotty = F)
+```
+
+```{r}
+print(multi_meta_reg3)
+```
+Top models (within 2 IC units of best model)
+```{r}
+top <- weightable(multi_meta_reg3)
+top <- top[top$aicc <= min(top$aicc) + 2,]
+top
+```
+
+Decomposing R2 for the best model:
+
+```{r}
+dat = dados_uteis3
+meus_preditores = c("Abeta_aggregation", "Concentration_uM", "Duration_days")
+melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
+
+melhor_modelo.summary = melhor_modelo$summary 
+
+melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+melhor_modelo.summary[1,4] = anova(multi_meta_reg3@objects[[1]], btt = 2)$QMp
+melhor_modelo.summary[2,4] = anova(multi_meta_reg3@objects[[1]], btt = 3)$QMp
+melhor_modelo.summary[3,4] = anova(multi_meta_reg3@objects[[1]], btt = 4)$QMp
+```
+
+Resultados:
+
+```{r}
+multi_meta_reg3@objects[[1]]
+confint(multi_meta_reg3@objects[[1]])
+mlm.variance.distribution(multi_meta_reg3@objects[[1]])
+#Pseudo R2: 
+(sum(meta2$sigma2)-sum(multi_meta_reg3@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
 ```
 
