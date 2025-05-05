@@ -23,7 +23,6 @@ load("dados_analise.R")
 ```
 
 This script runs all analyses with Standardized Mean Difference (Hedge's g) as the effect size measure. 
-
 The original publications sometimes do not report any variation for the control group, we assumed they normalized each treated experimental unit by their own control. In these cases, we are using the S.D. of the control groups as zero for all following calculations, otherwise we take the values manually extracted.
 
 ```{r}
@@ -45,25 +44,29 @@ dados_meta_smd = rbind(dados_two_sample_smd, dados_one_sample_smd)
 ```{r}
 meta1 = rma(yi=yi, vi=vi, data = dados_meta_smd, measure = "SMD", method = "REML", slab = rayyan.key)
 summary(meta1)
-#confint(meta1)
-
-meta1$pval
-formatC(meta1$pval, format = "f", digits = 324)
+confint(meta1)
 ```
 Exact p value: `r meta1$pval`
 Exact Q test p value `r meta1$QEp`
+
+Effect (% of control): `r exp(meta1$b)`
+CI.lb (%): `r exp(meta1$ci.lb)`
+CI.ub (%): `r exp(meta1$ci.ub)`
 
 
 Orchard Plot
 
 ```{r}
-orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (Hedge's g)",
-    transfm = "none") + 
+orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (Hedge's g)") + 
   scale_color_manual(values = "black") + 
-  scale_fill_manual(values = "grey")
+  scale_fill_manual(values = "grey") + 
+  scale_y_continuous(n.breaks = 20) + 
+  theme(plot.margin = margin(0,10,0,0)) + 
+  geom_abline(intercept = 0, slope = 0, linetype = "longdash", color = "darkgreen", size = 0.70)
 
-ggsave("./Figures/orchard-smd.png", width = 30, height = 20, units = "cm")
+ggsave("./Figures/orchard-smd.png", width = 30, height = 15, units = "cm")
 ```
+
 ## Publication bias
 
 Trim-and-fill
@@ -71,6 +74,7 @@ Trim-and-fill
 ```{r}
 meta_trimfill_R = trimfill(meta1, estimator = "R0", side = "right")
 meta_trimfill_R
+
 meta_trimfill_L = trimfill(meta1, estimator = "L0", side = "right")
 meta_trimfill_L
 ```
@@ -78,13 +82,13 @@ meta_trimfill_L
 Funnel plot
 
 ```{r}
-ggplot(dados_meta_smd, aes(x = yi, y = 1/sqrt(mean_n))) +
-  geom_point() + 
-  scale_x_continuous(name = "Effect size (Hedge's g)") +
-  scale_y_continuous(trans = "reverse", name = expression(1/sqrt(N))) +
+ggplot(dados_meta_smd, aes(x = yi, y = 1/sqrt(vi))) +
+  geom_point(shape = 21, fill = "grey") + 
+  scale_x_continuous(name = "Effect size (SMD)", n.breaks = 10) +
+  scale_y_continuous(trans = "reverse", name = "1/SEM") +
   theme_classic() + 
   geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
-  geom_vline(xintercept = meta1$beta, linetype="dashed", color = "darkgreen")
+  geom_vline(xintercept = exp(meta1$beta), linetype="dashed", color = "darkgreen")
 
 ggsave("./Figures/funnel-plot-smd.png")
 
@@ -101,8 +105,14 @@ regtest(x = meta1, ni = dados_meta_smd$mean_n, predictor = "sqrtninv")
 ```{r}
 meta2 = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID)
 meta2
-#confint(meta2)
+confint(meta2)
 ```
+Exact p value: `r meta2$pval`
+Exact Q test p value `r meta2$QEp`
+
+Effect (% of control): `r exp(meta2$b)`
+CI.lb (%): `r exp(meta2$ci.lb)`
+CI.ub (%): `r exp(meta2$ci.ub)`
 
 ```{r}
 #As there is not function in the package metafor for estimating I^2 values for 3-level models, we imported the function from Mathias Harrer & David Daniel Ebert (https://raw.githubusercontent.com/MathiasHarrer/dmetar/master/R/mlm.variance.distribution.R)
@@ -236,60 +246,50 @@ mlm.variance.distribution = var.comp = function(x){
 mlm.variance.distribution(x = meta2)
 ```
 
-### excluindo n de replicatas ou outras unidades nao independentes
-
-```{r}
-kable(dados_meta_smd %>% count(n_definition))
-dados_meta_smd_independent = dados_meta_smd %>% filter(
-  n_definition=="independent determinations" | 
-  n_definition=="independent experimental measurements" |
-  n_definition=="independent experiments" |
-  n_definition=="independent repetitions" |
-  n_definition=="independent replicates" |
-  n_definition=="independent runs" |
-  n_definition=="independent sets of studies")
-```
-
-```{r}
-meta3 = rma.mv(yi=yi, V=vi, data = dados_meta_smd_independent, method = "REML", random = ~1|rayyan.key/Comparison_ID)
-meta3
-#confint(meta3)
-```
-
-```{r fig.keep='none', warning=FALSE}
-mlm.variance.distribution(x = meta3)
-```
-
-
 # Meta-regressions (3-level)
 
 Differentiation
 
 ```{r}
-meta_differentiation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Diferentiation_method), ref="No differentiation"))
+#meta_differentiation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Diferentiation_method), ref="No differentiation"))
 
-meta_differentiation
-
-mlm.variance.distribution(x = meta_differentiation)
-
+#meta_differentiation
+#mlm.variance.distribution(meta_differentiation)
 ```
+
+```{r}
+dados_meta_smd = dados_meta_smd |> mutate(Diferentiation_method_YN = if_else(
+  Diferentiation_method == "No differentiation",
+  "No",
+  "Yes"
+))
+
+meta_differentiationYN = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Diferentiation_method_YN), ref="No"))
+
+meta_differentiationYN
+
+mlm.variance.distribution(meta_differentiationYN)
+```
+
+Exact p value: `r meta_differentiationYN$pval`
+Exact Q test p value `r meta_differentiationYN$QEp`
 
 Differentiation bubble plot
 
 ```{r}
-fig_differentiation = 
-  ggplot(dados_meta_smd, aes(x = Diferentiation_method, y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
-  labs(y = "Hedge's g", x = "Differentiation method") + 
+fig_differentiationYN = 
+  ggplot(dados_meta_smd, aes(x = Diferentiation_method_YN, y=yi, size = 1/sqrt(vi))) + 
+  geom_point(shape = 21, position =  position_jitterdodge(dodge.width = 0), stroke = 0.5, fill = "grey") + 
+  labs(y = "Effect size (Hedge's g)", x = "Differentiated cells") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
-  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
 
-fig_differentiation
+fig_differentiationYN
+ggsave("./Figures/fig_differentiation-smd-sim-nao.png", height = 10, width = 10, units = "cm")
 
-ggsave("./Figures/fig_differentiation-smd.png")
 ```
 
 Diff. duration
@@ -299,28 +299,27 @@ meta_difduration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", r
 
 meta_difduration
 
-mlm.variance.distribution(x = meta_difduration)
-
+mlm.variance.distribution(meta_difduration)
 ```
+
+Exact p value: `r meta_difduration$pval`
+Exact Q test p value `r meta_difduration$QEp`
 
 Diff. duration bubble plot
 
 ```{r}
-fig_difduration = 
+fig_difduration_ = 
   ggplot(dados_meta_smd, aes(x = as.numeric(Diferentiation_duration_days), y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, stroke = 1) + 
-  labs(y = "Hedge's g", x = "Duration of differentiation (days)") + 
+  geom_point(shape = 21, fill = "grey", stroke = 0.5) + 
+  labs(y = "Effect size (Hedge's g)", x = "Duration of differentiation (days)") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
   scale_x_continuous(n.breaks = 7) + 
-  geom_abline(slope = 0, linetype = "dashed", color = "grey")
-
-fig_difduration
-
-ggsave("./Figures/fig_difduration-smd.png")
-
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+fig_difduration_
+ggsave("./Figures/fig_difduration-smd.png", height = 10, width = 10, units = "cm")
 ```
 
 Aggregation
@@ -330,27 +329,27 @@ meta_aggregation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", r
 
 meta_aggregation
 
-mlm.variance.distribution(x = meta_aggregation)
-
+mlm.variance.distribution(meta_aggregation)
 ```
+
+Exact p value: `r meta_aggregation$pval`
+Exact Q test p value `r meta_aggregation$QEp`
 
 Aggregation bubble plot
 
 ```{r}
-fig_agregation = 
+fig_agregation_ = 
   ggplot(dados_meta_smd, aes(x = Abeta_aggregation, y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
-  labs(y = "Hedge's g", x = "Abeta aggregation") + 
+  geom_point(shape = 21, fill = "grey", position =  position_jitterdodge(dodge.width = 0), stroke = 0.5) + 
+  labs(y = "Effect size (Hedge's g)", x = "Abeta aggregation") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
-  scale_x_discrete(limits = c("Monomers", "Oligomers", "Fibers", "Unclear"))
-  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
-
-  fig_agregation
-  
-ggsave("./Figures/fig_agregation-smd.png")
+  scale_x_discrete(limits = c("Monomers", "Oligomers", "Fibers", "Unclear")) +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+  fig_agregation_
+ggsave("./Figures/fig_agregation-smd-percent-scale.png", height = 10, width = 10, units = "cm")
 ```
 
 Abeta concentration (só até 100 uM)
@@ -362,41 +361,29 @@ meta_concent = rma.mv(yi=yi, V=vi, data = dados_meta_smd_max100, method = "REML"
 
 meta_concent
 
-mlm.variance.distribution(x = meta_concent)
-
+mlm.variance.distribution(meta_concent)
 ```
+
+
+Exact p value: `r meta_concent$pval`
+Exact Q test p value `r meta_concent$QEp`
 
 Abeta concentration bubble plot
 
 ```{r}
-fig_concent_c = 
+fig_concent_ = 
   ggplot(dados_meta_smd_max100, aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, stroke = 1) + 
-  labs(y = "Hedge's g", x = "Abeta concentration (uM)") + 
+  geom_point(shape = 21, fill = "grey", stroke = 0.5) + 
+  labs(y = "Effect size (Hedge's g)", x = "Abeta concentration (uM)") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
   scale_x_continuous(n.breaks = 7) + 
-  geom_abline(slope = 0, linetype = "dashed", color = "grey")
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+fig_concent_
+ggsave("./Figures/fig_concent-smd.png", height = 10, width = 10, units = "cm")
 
-fig_concent_f = 
-  ggplot(dados_meta_smd_max100 %>% filter(Concentration_uM<10), aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, stroke = 1) + 
-  theme_classic() + 
-  scale_size_continuous(guide = "none") + 
-  theme(legend.position = "none") + 
-  scale_y_continuous(n.breaks = 7, name = element_blank()) + 
-  scale_x_continuous(n.breaks = 7, name = element_blank()) + 
-  geom_abline(slope = 0, linetype = "dashed", color = "grey")
-
-fig_concent = 
-  fig_concent_c + annotation_custom(ggplotGrob(fig_concent_f), xmin = 40, xmax = 80, 
-                       ymin = -120, ymax = -50)
-
-fig_concent
-
-ggsave("./Figures/fig_concent-smd.png")
 ```
 
 Abeta duration of exposure
@@ -406,55 +393,57 @@ meta_duration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", rand
 
 meta_duration
 
-mlm.variance.distribution(x = meta_duration)
-
+mlm.variance.distribution(meta_duration)
 ```
+
+Exact p value: `r meta_duration$pval`
+Exact Q test p value `r meta_duration$QEp`
 
 Abeta duration bubble plot
 
 ```{r}
-fig_duration =
+fig_duration_ =
   ggplot(dados_meta_smd, aes(x = as.numeric(Duration_days), y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, stroke = 1) + 
-  labs(y = "Hedge's g", x = "Abeta duration of exposure (days)") + 
+  geom_point(shape = 21, fill = "grey", stroke = 0.5) + 
+  labs(y = "Effect size (Hedge's g)", x = "Abeta duration of exposure (days)") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
   scale_x_continuous(n.breaks = 7) + 
-  geom_abline(slope = 0, linetype = "dashed", color = "grey")
-
-fig_duration
-
-ggsave("./Figures/fig_duration-smd.png")
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+fig_duration_
+ggsave("./Figures/fig_duration-smd.png", height = 10, width = 10, units = "cm")
 ```
 
 Assay
 
 ```{r}
-#meta_assay = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Assay), ref="MTT"))
+meta_assay = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Assay), ref="MTT"))
 
-#meta_assay
+meta_assay
 
-#mlm.variance.distribution(x = meta_assay)
-
+mlm.variance.distribution(meta_assay)
 ```
+
+Exact p value: `r meta_assay$pval`
+Exact Q test p value `r meta_assay$QEp`
 
 Assay bubble plot
 
 ```{r}
-#fig_assay = 
+fig_assay_ = 
   ggplot(dados_meta_smd, aes(x = Assay, y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, position =  position_jitterdodge(dodge.width = 0), stroke = 1) + 
-  labs(y = "Hedge's g", x = "Assay") + 
+  geom_point(shape = 21, fill = "grey", position =  position_jitterdodge(dodge.width = 0), stroke = 0.5) + 
+  labs(y = "Effect size (Hedge's g)", x = "Assay") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
-  scale_x_discrete(limits = c("MTT", "WST", "CCK-8", "MTS", "XTT", "Rezasurin", "EZ4U")) + 
-  geom_abline(yintercept = 0, slope = 0, linetype = "dashed", color = "grey")
-
-#ggsave("./Figures/fig_assay-smd.png")
+  scale_x_discrete(limits = c("MTT", "WST", "CCK-8", "MTS", "XTT", "Resazurin", "EZ4U")) + 
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+fig_assay_
+ggsave("./Figures/fig_assay-smd.png", height = 10, width = 10, units = "cm")
 ```
 
 Cell density
@@ -464,37 +453,29 @@ meta_density = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", rando
 
 meta_density
 
-mlm.variance.distribution(x = meta_density)
-
-meta_density$beta[2]
-meta_density$ci.lb
-meta_density$ci.ub
-
+mlm.variance.distribution(meta_density)
 ```
+
+Exact p value: `r meta_density$pval`
+Exact Q test p value `r meta_density$QEp`
 
 Cell density bubble plot
 
 ```{r}
-fig_density = 
+fig_density_ = 
   ggplot(dados_meta_smd, aes(x = as.numeric(Cell_density), y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 1, stroke = 1) + 
-  labs(y = "Hedge's g", x = "Cell density (log10 scale)") + 
+  geom_point(shape = 21, fill = "grey", stroke = 1) + 
+  labs(y = "Effect size (Hedge's g)", x = "Cell density (log10 scale)") + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
   scale_y_continuous(n.breaks = 7) + 
   scale_x_continuous(trans = "log10") + 
-  geom_abline(slope = 0, linetype = "dashed", color = "grey")
-fig_density
-ggsave("./Figures/fig_density-smd.png")
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+fig_density_
+ggsave("./Figures/fig_density-smd.png", height = 10, width = 10, units = "cm")
 ```
 
-### Summary
-
-```{r}
-cowplot::plot_grid(fig_differentiation, fig_difduration, fig_agregation, fig_concent, fig_duration, fig_density, labels = LETTERS)
-ggsave("./Figures/meta-regressions-smd.png", width = 30, height = 20, units = "cm")
-```
 
 # Multivariate Meta-regressions (3-level)
 
@@ -573,13 +554,13 @@ For the multivariate analyses, we can only use the comparisons for which all var
 
 ```{r}
 dados_uteis <- dados_meta_smd_max100
-dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Diferentiation_duration_days", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
+dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Assay", "Diferentiation_duration_days", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
 ```
 
-Considering all pre-registered variables, we'd have `r nrow(dados_uteis)` experiments available (i.e. `r nrow(dados_meta_smd)-nrow(dados_uteis)` exclusions due to missing data). As we have 6 variables, we should have at least 60 comparisons - so can use all of them now. There are `r 2^6` possible models.
+Considering all pre-registered variables, we'd have `r nrow(dados_uteis)` experiments available (i.e. `r nrow(dados_meta_smd)-nrow(dados_uteis)` exclusions due to missing data). As we have 7 variables, we should have at least 70 comparisons - so can use all of them now. There are `r 2^7` possible models.
 
 ```{r}
-multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Diferentiation_duration_days + Concentration_uM + Duration_hours + Cell_density, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^6), plotty = F)
+multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Assay + Diferentiation_duration_days + Concentration_uM + Duration_hours + Cell_density, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^7), plotty = F)
 ```
 
 ```{r}
@@ -610,7 +591,7 @@ Resultados:
 
 ```{r}
 multi_meta_reg@objects[[1]]
-#confint(multi_meta_reg@objects[[1]])
+confint(multi_meta_reg@objects[[1]])
 mlm.variance.distribution(multi_meta_reg@objects[[1]])
 #Pseudo R2: 
 (sum(meta2$sigma2)-sum(multi_meta_reg@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
@@ -633,31 +614,104 @@ Resultados:
 
 ```{r}
 multi_meta_reg@objects[[2]]
-#confint(multi_meta_reg@objects[[2]])
+confint(multi_meta_reg@objects[[2]])
 mlm.variance.distribution(multi_meta_reg@objects[[2]])
 #Pseudo R2: 
 (sum(meta2$sigma2)-sum(multi_meta_reg@objects[[2]]$sigma2))/sum(meta2$sigma2)*100
+```
 
-multi_meta_reg@objects[[2]]$beta
-multi_meta_reg@objects[[2]]$ci.lb
-multi_meta_reg@objects[[2]]$ci.ub
 
+# Mudando diferenciação para sim/não, tirando Assay e duração da diferenciação
+```{r}
+dados_uteis2 <- dados_meta_smd_max100
+dados_uteis2 <-  dados_uteis2[!apply(dados_uteis2[,c("Diferentiation_method_YN", "Abeta_aggregation", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
+
+
+multi_meta_reg2 <- glmulti(yi ~ Diferentiation_method_YN + Abeta_aggregation + Concentration_uM + Duration_days + Cell_density, data = dados_uteis2, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^5), plotty = F)
 ```
 
 ```{r}
-#meta-regrassões tirando cell density
+print(multi_meta_reg2)
+```
+Top models (within 2 IC units of best model)
+```{r}
+top <- weightable(multi_meta_reg2)
+top <- top[top$aicc <= min(top$aicc) + 2,]
+top
+```
 
-dados_uteis_2 <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Diferentiation_duration_days", "Concentration_uM", "Duration_days")], 1, anyNA),]
+Decomposing R2 for the best model:
 
-nrow(dados_uteis_2) #experiments available 
-nrow(dados_meta_smd)-nrow(dados_uteis_2) #exclusions
+```{r}
+dat = dados_uteis2
+meus_preditores = c( "Abeta_aggregation", "Concentration_uM", "Duration_days")
+melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
+
+melhor_modelo.summary = melhor_modelo$summary 
+
+melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+melhor_modelo.summary[1,4] = anova(multi_meta_reg2@objects[[1]], btt = 2)$QMp
+melhor_modelo.summary[2,4] = anova(multi_meta_reg2@objects[[1]], btt = 3)$QMp
+melhor_modelo.summary[3,4] = anova(multi_meta_reg2@objects[[1]], btt = 4)$QMp
+```
+
+Resultados:
+
+```{r}
+multi_meta_reg2@objects[[1]]
+confint(multi_meta_reg2@objects[[1]])
+mlm.variance.distribution(multi_meta_reg2@objects[[1]])
+#Pseudo R2: 
+(sum(meta2$sigma2)-sum(multi_meta_reg2@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
+```
+
+# Mudando diferenciação para sim/não, tirando Assay; duração da diferenciação igual a zero para não diferenciados
+```{r}
+dados_uteis3 <- dados_meta_smd_max100
+dados_uteis3 <- dados_uteis3 |> mutate(differentiation_duration_adjust = 
+                                         if_else(Diferentiation_method_YN=="Yes",
+                                                 Diferentiation_duration_days,
+                                                 0))
+
+
+dados_uteis3 <-  dados_uteis3[!apply(dados_uteis3[,c("Diferentiation_method_YN", "differentiation_duration_adjust", "Abeta_aggregation", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
+
+
+multi_meta_reg3 <- glmulti(yi ~ Diferentiation_method_YN + differentiation_duration_adjust +  Abeta_aggregation + Concentration_uM + Duration_days + Cell_density, data = dados_uteis3, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^6), plotty = F)
 ```
 
 ```{r}
-#meta-regrassões tirando duração da diferenciação (só vale pros que diferenciam, o resto é NA)
-
-dados_uteis_3 <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
-
-nrow(dados_uteis_3) #experiments available 
-nrow(dados_meta_smd)-nrow(dados_uteis_3) #exclusions
+print(multi_meta_reg3)
 ```
+Top models (within 2 IC units of best model)
+```{r}
+top <- weightable(multi_meta_reg3)
+top <- top[top$aicc <= min(top$aicc) + 2,]
+top
+```
+
+Decomposing R2 for the best model:
+
+```{r}
+dat = dados_uteis3
+meus_preditores = c("Abeta_aggregation", "Concentration_uM", "Duration_days")
+melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
+
+melhor_modelo.summary = melhor_modelo$summary 
+
+melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+melhor_modelo.summary[1,4] = anova(multi_meta_reg3@objects[[1]], btt = 2)$QMp
+melhor_modelo.summary[2,4] = anova(multi_meta_reg3@objects[[1]], btt = 3)$QMp
+melhor_modelo.summary[3,4] = anova(multi_meta_reg3@objects[[1]], btt = 4)$QMp
+```
+
+Resultados:
+
+```{r}
+multi_meta_reg3@objects[[1]]
+confint(multi_meta_reg3@objects[[1]])
+mlm.variance.distribution(multi_meta_reg3@objects[[1]])
+#Pseudo R2: 
+(sum(meta2$sigma2)-sum(multi_meta_reg3@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
+```
+

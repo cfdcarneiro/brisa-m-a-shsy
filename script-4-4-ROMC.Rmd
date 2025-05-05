@@ -322,7 +322,7 @@ mlm.variance.distribution(x = meta2)
 ### excluindo n de replicatas ou outras unidades nao independentes
 
 ```{r}
-kable(dados_meta_ratios %>% count(n_definition))
+#kable(dados_meta_ratios %>% count(n_definition))
 dados_meta_ratios_independent = dados_meta_ratios %>% filter(
   n_definition=="independent determinations" | 
   n_definition=="independent experimental measurements" |
@@ -490,9 +490,9 @@ Effect (% of control): `r exp(meta_aggregation$b[3])`
 CI.lb (%): `r exp(meta_aggregation$ci.lb[3])`
 CI.ub (%): `r exp(meta_aggregation$ci.ub[3])`
 moderator/unclear:
-Effect (% of control): `r exp(meta_aggregation$b[3])`
-CI.lb (%): `r exp(meta_aggregation$ci.lb[3])`
-CI.ub (%): `r exp(meta_aggregation$ci.ub[3])`
+Effect (% of control): `r exp(meta_aggregation$b[4])`
+CI.lb (%): `r exp(meta_aggregation$ci.lb[4])`
+CI.ub (%): `r exp(meta_aggregation$ci.ub[4])`
 
 
 Aggregation bubble plot
