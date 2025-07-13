@@ -61,10 +61,10 @@ orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (Hedge
   scale_color_manual(values = "black") + 
   scale_fill_manual(values = "grey") + 
   scale_y_continuous(n.breaks = 20) + 
-  theme(plot.margin = margin(0,10,0,0)) + 
+  theme(plot.margin = margin(0,10,0,0), text = element_text(size = 12)) + 
   geom_abline(intercept = 0, slope = 0, linetype = "longdash", color = "darkgreen", size = 0.70)
 
-ggsave("./Figures/orchard-smd.png", width = 30, height = 15, units = "cm")
+ggsave("./Figures/orchard-smd.png", width = 20, height = 10, units = "cm")
 ```
 
 ## Publication bias
@@ -264,52 +264,60 @@ dados_meta_smd = dados_meta_smd |> mutate(Diferentiation_method_YN = if_else(
   "Yes"
 ))
 
-meta_differentiationYN = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Diferentiation_method_YN), ref="No"))
+#meta_differentiationYN = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Diferentiation_method_YN), ref="No"))
 
-meta_differentiationYN
+#meta_differentiationYN
 
-mlm.variance.distribution(meta_differentiationYN)
+#mlm.variance.distribution(meta_differentiationYN)
 ```
-
-Exact p value: `r meta_differentiationYN$pval`
-Exact Q test p value `r meta_differentiationYN$QEp`
 
 Differentiation bubble plot
 
 ```{r}
-fig_differentiationYN = 
-  ggplot(dados_meta_smd, aes(x = Diferentiation_method_YN, y=yi, size = 1/sqrt(vi))) + 
-  geom_point(shape = 21, position =  position_jitterdodge(dodge.width = 0), stroke = 0.5, fill = "grey") + 
-  labs(y = "Effect size (Hedge's g)", x = "Differentiated cells") + 
-  theme_classic() + 
-  scale_size_continuous(guide = "none") + 
-  theme(legend.position = "bottom") + 
-  scale_y_continuous(n.breaks = 7) + 
-  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+#fig_differentiationYN = 
+#  ggplot(dados_meta_smd, aes(x = Diferentiation_method_YN, y=yi, size = 1/sqrt(vi))) + 
+#  geom_point(shape = 21, position =  position_jitterdodge(dodge.width = 0), stroke = 0.5, fill = "grey") + 
+#  labs(y = "Effect size (Hedge's g)", x = "Differentiated cells") + 
+#  theme_classic() + 
+#  scale_size_continuous(guide = "none") + 
+#  theme(legend.position = "bottom") + 
+#  scale_y_continuous(n.breaks = 7) + 
+#  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
 
-fig_differentiationYN
-ggsave("./Figures/fig_differentiation-smd-sim-nao.png", height = 10, width = 10, units = "cm")
+#fig_differentiationYN
+#ggsave("./Figures/fig_differentiation-smd-sim-nao.png", height = 10, width = 10, units = "cm")
 
 ```
 
 Diff. duration
 
 ```{r}
-meta_difduration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_smd$Diferentiation_duration_days))
+dados_meta_smd = dados_meta_smd |> mutate(Diferentiation_duration_YN = if_else(
+  Diferentiation_method_YN == "No",
+  0,
+  Diferentiation_duration_days
+))
+
+meta_difduration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_smd$Diferentiation_duration_YN))
 
 meta_difduration
 
 mlm.variance.distribution(meta_difduration)
+
+#pseudo R-squared
+meta_difduration.R2 = (sum(meta2$sigma2)-sum(meta_difduration$sigma2))/sum(meta2$sigma2)*100
+meta_difduration.R2 = if_else(meta_difduration.R2<0, 0, meta_difduration.R2)
 ```
 
 Exact p value: `r meta_difduration$pval`
-Exact Q test p value `r meta_difduration$QEp`
+Exact Q test p value `r meta_difduration$QMp`
+R^2: `r meta_difduration.R2`
 
 Diff. duration bubble plot
 
 ```{r}
 fig_difduration_ = 
-  ggplot(dados_meta_smd, aes(x = as.numeric(Diferentiation_duration_days), y=yi, size = 1/sqrt(vi))) + 
+  ggplot(dados_meta_smd, aes(x = as.numeric(Diferentiation_duration_YN), y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 21, fill = "grey", stroke = 0.5) + 
   labs(y = "Effect size (Hedge's g)", x = "Duration of differentiation (days)") + 
   theme_classic() + 
@@ -325,15 +333,20 @@ ggsave("./Figures/fig_difduration-smd.png", height = 10, width = 10, units = "cm
 Aggregation
 
 ```{r}
-meta_aggregation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Abeta_aggregation), ref="Monomers"))
+meta_aggregation = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~relevel(factor(dados_meta_smd$Abeta_aggregation), ref="Unclear"))
 
 meta_aggregation
 
 mlm.variance.distribution(meta_aggregation)
+
+#pseudo R-squared
+meta_aggregation.R2 = (sum(meta2$sigma2)-sum(meta_aggregation$sigma2))/sum(meta2$sigma2)*100
+meta_aggregation.R2 = if_else(meta_aggregation.R2<0, 0, meta_aggregation.R2)
 ```
 
 Exact p value: `r meta_aggregation$pval`
-Exact Q test p value `r meta_aggregation$QEp`
+Exact Q test p value `r meta_aggregation$QMp`
+R^2: `r meta_aggregation.R2`
 
 Aggregation bubble plot
 
@@ -362,11 +375,15 @@ meta_concent = rma.mv(yi=yi, V=vi, data = dados_meta_smd_max100, method = "REML"
 meta_concent
 
 mlm.variance.distribution(meta_concent)
+
+#pseudo R-squared
+meta_concent.R2 = (sum(meta2$sigma2)-sum(meta_concent$sigma2))/sum(meta2$sigma2)*100
+meta_concent.R2 = if_else(meta_concent.R2<0, 0, meta_concent.R2)
 ```
 
-
 Exact p value: `r meta_concent$pval`
-Exact Q test p value `r meta_concent$QEp`
+Exact Q test p value `r meta_concent$QMp`
+R^2: `r meta_concent.R2`
 
 Abeta concentration bubble plot
 
@@ -394,10 +411,15 @@ meta_duration = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", rand
 meta_duration
 
 mlm.variance.distribution(meta_duration)
+
+#pseudo R-squared
+meta_duration.R2 = (sum(meta2$sigma2)-sum(meta_duration$sigma2))/sum(meta2$sigma2)*100
+meta_duration.R2 = if_else(meta_duration.R2<0, 0, meta_duration.R2)
 ```
 
 Exact p value: `r meta_duration$pval`
-Exact Q test p value `r meta_duration$QEp`
+Exact Q test p value `r meta_duration$QMp`
+R^2: `r meta_duration.R2`
 
 Abeta duration bubble plot
 
@@ -424,10 +446,15 @@ meta_assay = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random 
 meta_assay
 
 mlm.variance.distribution(meta_assay)
+
+#pseudo R-squared
+meta_assay.R2 = (sum(meta2$sigma2)-sum(meta_assay$sigma2))/sum(meta2$sigma2)*100
+meta_assay.R2 = if_else(meta_assay.R2<0, 0, meta_assay.R2)
 ```
 
 Exact p value: `r meta_assay$pval`
-Exact Q test p value `r meta_assay$QEp`
+Exact Q test p value `r meta_assay$QMp`
+R^2: `r meta_assay.R2`
 
 Assay bubble plot
 
@@ -454,10 +481,15 @@ meta_density = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", rando
 meta_density
 
 mlm.variance.distribution(meta_density)
+
+#pseudo R-squared
+meta_density.R2 = (sum(meta2$sigma2)-sum(meta_density$sigma2))/sum(meta2$sigma2)*100
+meta_density.R2 = if_else(meta_density.R2<0, 0, meta_density.R2)
 ```
 
 Exact p value: `r meta_density$pval`
-Exact Q test p value `r meta_density$QEp`
+Exact Q test p value `r meta_density$QMp`
+R^2: `r meta_density.R2`
 
 Cell density bubble plot
 
@@ -476,6 +508,40 @@ fig_density_
 ggsave("./Figures/fig_density-smd.png", height = 10, width = 10, units = "cm")
 ```
 
+Cell density x10^3
+
+```{r}
+dados_meta_smd = dados_meta_smd |> mutate(cell_density_1000 = Cell_density*(10^3))
+meta_density = rma.mv(yi=yi, V=vi, data = dados_meta_smd, method = "REML", random = ~1|rayyan.key/Comparison_ID, mods = ~as.numeric(dados_meta_smd$cell_density_1000))
+
+meta_density
+
+mlm.variance.distribution(meta_density)
+#pseudo R-squared
+meta_density.R2 = (sum(meta2$sigma2)-sum(meta_density$sigma2))/sum(meta2$sigma2)*100
+meta_density.R2 = if_else(meta_density.R2<0, 0, meta_density.R2)
+```
+
+Exact p value: `r meta_density$pval`
+Exact Q test p value `r meta_density$QMp`
+R^2: `r meta_density.R2`
+
+Cell density bubble plot
+
+```{r}
+fig_density_1000 = 
+  ggplot(dados_meta_smd, aes(x = as.numeric(cell_density_1000), y=exp(yi), size = 1/sqrt(vi))) + 
+  geom_point(shape = 21, fill = "grey", stroke = 1) + 
+  labs(y = "Cell viability (% of control)", x = "Cell density (log10 scale)") + 
+  theme_classic() + 
+  scale_size_continuous(guide = "none") + 
+  theme(legend.position = "bottom") + 
+  scale_y_continuous(n.breaks = 7) + 
+  scale_x_continuous(trans = "log10") + 
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey")
+fig_density_
+ggsave("./Figures/fig_density-ratios-percent-change-1000.png", height = 10, width = 10, units = "cm")
+```
 
 # Multivariate Meta-regressions (3-level)
 
