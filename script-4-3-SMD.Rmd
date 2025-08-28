@@ -57,14 +57,14 @@ CI.ub (%): `r exp(meta1$ci.ub)`
 Orchard Plot
 
 ```{r}
-orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (Hedge's g)") + 
+orchaRd::orchard_plot(meta1, group = "Comparison_ID", xlab = "Effect size (Hedge's g)", k.pos = "left") + 
   scale_color_manual(values = "black") + 
   scale_fill_manual(values = "grey") + 
   scale_y_continuous(n.breaks = 20) + 
   theme(plot.margin = margin(0,10,0,0), text = element_text(size = 12)) + 
   geom_abline(intercept = 0, slope = 0, linetype = "longdash", color = "darkgreen", size = 0.70)
 
-ggsave("./Figures/orchard-smd.png", width = 20, height = 10, units = "cm")
+ggsave("./Figures/orchard-smd.png", width = 15, height = 8, units = "cm")
 ```
 
 ## Publication bias
@@ -354,7 +354,7 @@ Aggregation bubble plot
 fig_agregation_ = 
   ggplot(dados_meta_smd, aes(x = Abeta_aggregation, y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 21, fill = "grey", position =  position_jitterdodge(dodge.width = 0), stroke = 0.5) + 
-  labs(y = "Effect size (Hedge's g)", x = "Abeta aggregation") + 
+  labs(y = "Effect size (Hedge's g)", x = expression("A"*beta ~ "aggregation")) + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
@@ -391,7 +391,7 @@ Abeta concentration bubble plot
 fig_concent_ = 
   ggplot(dados_meta_smd_max100, aes(x = Concentration_uM, y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 21, fill = "grey", stroke = 0.5) + 
-  labs(y = "Effect size (Hedge's g)", x = "Abeta concentration (uM)") + 
+  labs(y = "Effect size (Hedge's g)", x = expression("A"*beta ~ "concentration ("*mu*"M)")) + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
@@ -427,7 +427,7 @@ Abeta duration bubble plot
 fig_duration_ =
   ggplot(dados_meta_smd, aes(x = as.numeric(Duration_days), y=yi, size = 1/sqrt(vi))) + 
   geom_point(shape = 21, fill = "grey", stroke = 0.5) + 
-  labs(y = "Effect size (Hedge's g)", x = "Abeta duration of exposure (days)") + 
+  labs(y = "Effect size (Hedge's g)", x = expression("A"*beta ~ "duration of exposure (days)")) + 
   theme_classic() + 
   scale_size_continuous(guide = "none") + 
   theme(legend.position = "bottom") + 
@@ -619,116 +619,122 @@ get_R2_for_all_predictors_3a = function (todos_preditores) {
 For the multivariate analyses, we can only use the comparisons for which all variables of interest are reported.
 
 ```{r}
+dados_meta_smd_max100$Abeta_aggregation = factor(dados_meta_smd_max100$Abeta_aggregation, levels = c("Monomers", "Fibers", "Oligomers", "Unclear"))
+                                       
+dados_meta_smd_max100$Assay = factor(dados_meta_smd_max100$Assay, levels = c("MTT", "MTS", "WST"))
+
 dados_uteis <- dados_meta_smd_max100
 dados_uteis <-  dados_uteis[!apply(dados_uteis[,c("Diferentiation_method", "Abeta_aggregation", "Assay", "Diferentiation_duration_days", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
 ```
 
+pre-registered variables -- c("Diferentiation_method", "Abeta_aggregation", "Assay", "Diferentiation_duration_days", "Concentration_uM", "Duration_days", "Cell_density")
+
 Considering all pre-registered variables, we'd have `r nrow(dados_uteis)` experiments available (i.e. `r nrow(dados_meta_smd)-nrow(dados_uteis)` exclusions due to missing data). As we have 7 variables, we should have at least 70 comparisons - so can use all of them now. There are `r 2^7` possible models.
 
 ```{r}
-multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Assay + Diferentiation_duration_days + Concentration_uM + Duration_hours + Cell_density, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^7), plotty = F)
+#multi_meta_reg <- glmulti(yi ~ Diferentiation_method + Abeta_aggregation + Assay + Diferentiation_duration_days + Concentration_uM + Duration_hours + Cell_density, data = dados_uteis, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^7), plotty = F)
 ```
 
 ```{r}
-print(multi_meta_reg)
+#print(multi_meta_reg)
 ```
 Top models (within 2 IC units of best model)
 ```{r}
-top <- weightable(multi_meta_reg)
-top <- top[top$aicc <= min(top$aicc) + 2,]
-top
+#top <- weightable(multi_meta_reg)
+#top <- top[top$aicc <= min(top$aicc) + 2,]
+#top
 ```
 
 Decomposing R2 for the best model:
 
 ```{r}
-dat = dados_uteis
-meus_preditores = c("Concentration_uM", "Duration_hours")
-melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
+#dat = dados_uteis
+#meus_preditores = c("Concentration_uM", "Duration_hours")
+#melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
 
-melhor_modelo.summary = melhor_modelo$summary 
+#melhor_modelo.summary = melhor_modelo$summary 
 
-melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
-melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[1]], btt = 2)$QMp
-melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[1]], btt = 3)$QMp
+#melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+#melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[1]], btt = 2)$QMp
+#melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[1]], btt = 3)$QMp
 ```
 
 Resultados:
 
 ```{r}
-multi_meta_reg@objects[[1]]
-confint(multi_meta_reg@objects[[1]])
-mlm.variance.distribution(multi_meta_reg@objects[[1]])
+#multi_meta_reg@objects[[1]]
+#confint(multi_meta_reg@objects[[1]])
+#mlm.variance.distribution(multi_meta_reg@objects[[1]])
 #Pseudo R2: 
-(sum(meta2$sigma2)-sum(multi_meta_reg@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
+#(sum(meta2$sigma2)-sum(multi_meta_reg@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
 ```
 
 ```{r}
-dat = dados_uteis
-meus_preditores = c("Concentration_uM", "Duration_hours", "Cell_density")
-melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
+#dat = dados_uteis
+#meus_preditores = c("Concentration_uM", "Duration_hours", "Cell_density")
+#melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
 
-melhor_modelo.summary = melhor_modelo$summary 
+#melhor_modelo.summary = melhor_modelo$summary 
 
-melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
-melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[2]], btt = 2)$QMp
-melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[2]], btt = 3)$QMp
-melhor_modelo.summary[3,4] = anova(multi_meta_reg@objects[[2]], btt = 4)$QMp
+#melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+#melhor_modelo.summary[1,4] = anova(multi_meta_reg@objects[[2]], btt = 2)$QMp
+#melhor_modelo.summary[2,4] = anova(multi_meta_reg@objects[[2]], btt = 3)$QMp
+#melhor_modelo.summary[3,4] = anova(multi_meta_reg@objects[[2]], btt = 4)$QMp
 ```
 
 Resultados:
 
 ```{r}
-multi_meta_reg@objects[[2]]
-confint(multi_meta_reg@objects[[2]])
-mlm.variance.distribution(multi_meta_reg@objects[[2]])
+#multi_meta_reg@objects[[2]]
+#confint(multi_meta_reg@objects[[2]])
+#mlm.variance.distribution(multi_meta_reg@objects[[2]])
 #Pseudo R2: 
-(sum(meta2$sigma2)-sum(multi_meta_reg@objects[[2]]$sigma2))/sum(meta2$sigma2)*100
+#(sum(meta2$sigma2)-sum(multi_meta_reg@objects[[2]]$sigma2))/sum(meta2$sigma2)*100
 ```
 
 
 # Mudando diferenciação para sim/não, tirando Assay e duração da diferenciação
 ```{r}
-dados_uteis2 <- dados_meta_smd_max100
-dados_uteis2 <-  dados_uteis2[!apply(dados_uteis2[,c("Diferentiation_method_YN", "Abeta_aggregation", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
+#dados_uteis2 <- dados_meta_smd_max100
+#dados_uteis2 <-  dados_uteis2[!apply(dados_uteis2[,c("Diferentiation_method_YN", "Abeta_aggregation", "Concentration_uM", "Duration_days", "Cell_density")], 1, anyNA),]
 
 
-multi_meta_reg2 <- glmulti(yi ~ Diferentiation_method_YN + Abeta_aggregation + Concentration_uM + Duration_days + Cell_density, data = dados_uteis2, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^5), plotty = F)
+#multi_meta_reg2 <- glmulti(yi ~ Diferentiation_method_YN + Abeta_aggregation + Concentration_uM + Duration_days + Cell_density, data = dados_uteis2, level=1, fitfunction=rma.mv.glmulti, crit="aicc", confsetsize=(2^5), plotty = F)
 ```
 
 ```{r}
-print(multi_meta_reg2)
+#print(multi_meta_reg2)
 ```
 Top models (within 2 IC units of best model)
 ```{r}
-top <- weightable(multi_meta_reg2)
-top <- top[top$aicc <= min(top$aicc) + 2,]
-top
+#top <- weightable(multi_meta_reg2)
+#top <- top[top$aicc <= min(top$aicc) + 2,]
+#top
 ```
 
 Decomposing R2 for the best model:
 
 ```{r}
-dat = dados_uteis2
-meus_preditores = c( "Abeta_aggregation", "Concentration_uM", "Duration_days")
-melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
+#dat = dados_uteis2
+#meus_preditores = c( "Abeta_aggregation", "Concentration_uM", "Duration_days")
+#melhor_modelo = get_R2_for_all_predictors_3a(meus_preditores)
 
-melhor_modelo.summary = melhor_modelo$summary 
+#melhor_modelo.summary = melhor_modelo$summary 
 
-melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
-melhor_modelo.summary[1,4] = anova(multi_meta_reg2@objects[[1]], btt = 2)$QMp
-melhor_modelo.summary[2,4] = anova(multi_meta_reg2@objects[[1]], btt = 3)$QMp
-melhor_modelo.summary[3,4] = anova(multi_meta_reg2@objects[[1]], btt = 4)$QMp
+#melhor_modelo.summary = melhor_modelo.summary %>% mutate(pvalor=0)
+#melhor_modelo.summary[1,4] = anova(multi_meta_reg2@objects[[1]], btt = 2)$QMp
+#melhor_modelo.summary[2,4] = anova(multi_meta_reg2@objects[[1]], btt = 3)$QMp
+#melhor_modelo.summary[3,4] = anova(multi_meta_reg2@objects[[1]], btt = 4)$QMp
 ```
 
 Resultados:
 
 ```{r}
-multi_meta_reg2@objects[[1]]
-confint(multi_meta_reg2@objects[[1]])
-mlm.variance.distribution(multi_meta_reg2@objects[[1]])
+#multi_meta_reg2@objects[[1]]
+#confint(multi_meta_reg2@objects[[1]])
+#mlm.variance.distribution(multi_meta_reg2@objects[[1]])
 #Pseudo R2: 
-(sum(meta2$sigma2)-sum(multi_meta_reg2@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
+#(sum(meta2$sigma2)-sum(multi_meta_reg2@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
 ```
 
 # Mudando diferenciação para sim/não, tirando Assay; duração da diferenciação igual a zero para não diferenciados
@@ -777,6 +783,10 @@ Resultados:
 multi_meta_reg3@objects[[1]]
 confint(multi_meta_reg3@objects[[1]])
 mlm.variance.distribution(multi_meta_reg3@objects[[1]])
+```
+
+R2:
+```{r}
 #Pseudo R2: 
 (sum(meta2$sigma2)-sum(multi_meta_reg3@objects[[1]]$sigma2))/sum(meta2$sigma2)*100
 ```
