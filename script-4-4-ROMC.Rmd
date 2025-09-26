@@ -111,6 +111,19 @@ ggsave("./Figures/Fig-3.png")
 ```
 
 ```{r}
+ggplot(dados_meta_ratios, aes(x = 100*(exp(yi)), y = 1/sqrt(mean_n))) +
+  geom_point(shape = 21, fill = "grey") + 
+  scale_x_continuous(name = expression("Cell viability in the A"*beta ~ "group (% of control)"), n.breaks = 10) +
+  scale_y_continuous(trans = "reverse", name = expression(1/sqrt("Mean N"))) +
+  theme_classic() + 
+  geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
+  geom_vline(xintercept = 100*(exp(meta1$beta)), linetype="dashed", color = "darkgreen")
+
+ggsave("./Figures/Fig-3-altern.png")
+
+```
+
+```{r}
 funnel.rma(meta1, yaxis = "seinv", pch = 1, pch.fill = 17)
 ```
 

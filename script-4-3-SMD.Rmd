@@ -94,6 +94,19 @@ ggsave("./Figures/funnel-plot-smd.png")
 
 ```
 
+```{r}
+ggplot(dados_meta_smd, aes(x = yi, y = 1/sqrt(mean_n))) +
+  geom_point(shape = 21, fill = "grey") + 
+  scale_x_continuous(name = "Effect size (SMD)", n.breaks = 10) +
+  scale_y_continuous(trans = "reverse", name = expression(1/sqrt("Mean N"))) +
+  theme_classic() + 
+  geom_vline(xintercept = 0, linetype="dashed", color = "grey") + 
+  geom_vline(xintercept = exp(meta1$beta), linetype="dashed", color = "darkgreen")
+
+ggsave("./Figures/funnel-plot-smd-N.png")
+
+```
+
 Egger's regression
 
 ```{r}
